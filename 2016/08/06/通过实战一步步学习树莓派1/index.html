@@ -1,0 +1,527 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>通过实战一步步学习树莓派1——零基础安装树莓派操作系统 | 演练场</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="R_Richie">
+    
+
+    
+    <meta name="description" content="序言最近买了个树莓派想学习一下 Linux，所以去淘宝买了一些硬件就尝试起来，买个树莓派板子，一个壳子，一个电源线，如果想连显示器，就买转换头，树莓派3带 HDMI接口，一个SD卡，一个读卡器。至于为什么想起来要买这个，其实是我想学些linux相关，但公司环境也不好用来自己学习用，怕会搞坏环境，于是想自己搭一个可以随时访问的自己的环境，经过一番搜索就找到了它，价格也便宜，于是就开始了。我买的最新出">
+<meta name="keywords" content="raspberry pi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过实战一步步学习树莓派1——零基础安装树莓派操作系统">
+<meta property="og:url" content="http://yoursite.com/2016/08/06/通过实战一步步学习树莓派1/index.html">
+<meta property="og:site_name" content="演练场">
+<meta property="og:description" content="序言最近买了个树莓派想学习一下 Linux，所以去淘宝买了一些硬件就尝试起来，买个树莓派板子，一个壳子，一个电源线，如果想连显示器，就买转换头，树莓派3带 HDMI接口，一个SD卡，一个读卡器。至于为什么想起来要买这个，其实是我想学些linux相关，但公司环境也不好用来自己学习用，怕会搞坏环境，于是想自己搭一个可以随时访问的自己的环境，经过一番搜索就找到了它，价格也便宜，于是就开始了。我买的最新出">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-02-07T12:41:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过实战一步步学习树莓派1——零基础安装树莓派操作系统">
+<meta name="twitter:description" content="序言最近买了个树莓派想学习一下 Linux，所以去淘宝买了一些硬件就尝试起来，买个树莓派板子，一个壳子，一个电源线，如果想连显示器，就买转换头，树莓派3带 HDMI接口，一个SD卡，一个读卡器。至于为什么想起来要买这个，其实是我想学些linux相关，但公司环境也不好用来自己学习用，怕会搞坏环境，于是想自己搭一个可以随时访问的自己的环境，经过一番搜索就找到了它，价格也便宜，于是就开始了。我买的最新出">
+
+    
+    <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="演练场" title="演练场"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="演练场">演练场</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/06/通过实战一步步学习树莓派1/" title="通过实战一步步学习树莓派1——零基础安装树莓派操作系统" itemprop="url">通过实战一步步学习树莓派1——零基础安装树莓派操作系统</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-06T08:16:40.000Z" itemprop="datePublished"> Published 2016-08-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#序言"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-number">2.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背景知识"><span class="toc-number">3.</span> <span class="toc-text">背景知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析问题"><span class="toc-number">4.</span> <span class="toc-text">分析问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题解决过程"><span class="toc-number">5.</span> <span class="toc-text">问题解决过程</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>最近买了个树莓派想学习一下 Linux，所以去淘宝买了一些硬件就尝试起来，买个树莓派板子，一个壳子，一个电源线，如果想连显示器，就买转换头，树莓派3带 HDMI接口，一个SD卡，一个读卡器。<br>至于为什么想起来要买这个，其实是我想学些linux相关，但公司环境也不好用来自己学习用，怕会搞坏环境，于是想自己搭一个可以随时访问的自己的环境，经过一番搜索就找到了它，价格也便宜，于是就开始了。<br>我买的最新出的树莓派3。</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>想要启动树莓派，现在硬件是齐全了，那要怎么安装系统呢，问题来了<strong>树莓派如何安装系统</strong></p>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>Raspberry Pi，缩写RPi或者RasPi，中文译名为“树莓派”，是一个信用卡大小的、基于Linux的“卡片电脑”（Single-board Computer，单板机），是为学生计算机编程教育而设计，由英国剑桥某实验室历经6年的研制，于 2012年2月29日公开发布并接受预定。负责Raspberry P(树莓派)i这个项目运作的是树莓派基金会（Raspberry Pi Foundation），该基金会主任是Eben Upton（埃本·阿普顿），在媒体前有着非常高的曝光率。<br>探究Raspberry Pi的命名，一种广为接受的说法是：“Raspberry（树莓）”来源于剑桥以水果命名的老传统，”Pi”则为Python的缩写，意为Python将做为Raspberry Pi应用主要编程语言之一。<br>2012年3月，英国剑桥大学埃本·阿普顿（Eben Epton）正式发售世界上最小的台式机，又称卡片式电脑，外形只有信用卡大小，却具有电脑的所有基本功能，这就是Raspberry Pi电脑板，中文译名”树莓派”！这一基金会以提升学校计算机科学及相关学科的教育，让计算机变得有趣为宗旨。基金会期望这 一款电脑无论是在发展中国家还是在发达国家，会有更多的其它应用不断被开发出来，并应用到更多领域。</p>
+<h2 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h2><p>现在的我其实树莓派硬件等各个方面基本不懂，软件也是以前碰过的半吊子的Linux，顶多装装Ubuntu，但都没怎么使用过。<br>我要做的就是先安装系统，让树莓派启动起来。<br>既然都不了解，就先看比人的教程，树莓派要先将SD中写入系统，然后安装在树莓派上，就可以启动了，看起来很简单。</p>
+<h2 id="问题解决过程"><a href="#问题解决过程" class="headerlink" title="问题解决过程"></a>问题解决过程</h2><ol>
+<li>我电脑可以读SD卡，然后用转换器，把SD卡插到电脑上，我使用SDFormatter格式化 SD卡</li>
+<li>然后用在官网上下载好的系统，这个系统我选择官网的Raspbian，由于了解不多，所以用官方最简单上手的。接着使用工具win32 Disk Imager把img文件写到sd卡上。（我电脑是win7,据说32G以上sdka不能用这个工具）</li>
+<li>将SD卡插入到树莓派上那个sd卡插槽，然后插上电源即可。</li>
+<li>现在这个阶段，如果正常的话会看到两个灯，一个红灯常亮，一个会闪烁，黄红切换。如果不用其他外设，暂时只能看到这些，并不能知道系统是不是启动正常，如果又显示器，插上显示器可以看到，或者使用串口（这个略复杂，我暂时不清楚使用方法），后面我会继续尝试使用，来确实是否安装系统成功。这次的应该是试验成功的步骤，下篇教程继续。</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/树莓派/">树莓派</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/raspberry-pi/">raspberry pi</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/08/06/通过实战一步步学习树莓派1/" data-title="通过实战一步步学习树莓派1——零基础安装树莓派操作系统 | 演练场" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/02/07/学习方法/" title="理解费曼技术与整体学习法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  理解费曼技术与整体学习法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/13/spring-boot-history/"  title="Spring Boot发展考察">
+ <strong>下一篇：</strong><br/> 
+ <span>Spring Boot发展考察
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#序言"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-number">2.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背景知识"><span class="toc-number">3.</span> <span class="toc-text">背景知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析问题"><span class="toc-number">4.</span> <span class="toc-text">分析问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题解决过程"><span class="toc-number">5.</span> <span class="toc-text">问题解决过程</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Java语言基础/" title="Java语言基础">Java语言基础<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/成长/" title="成长">成长<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/树莓派/" title="树莓派">树莓派<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/监控/" title="监控">监控<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/闲谈/" title="闲谈">闲谈<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Annotation/" title="Annotation">Annotation<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Spring-Boot/" title="Spring Boot">Spring Boot<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/telegraf/" title="telegraf">telegraf<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/jvm/" title="jvm">jvm<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/成长/" title="成长">成长<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/raspberry-pi/" title="raspberry pi">raspberry pi<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="R_Richie">R_Richie</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
