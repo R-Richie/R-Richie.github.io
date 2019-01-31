@@ -4,24 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>新的旅程的开始 | 演练场</title>
+    <title>puppeteer 之chromium版本问题 | 演练场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="R_Richie">
     
 
     
-    <meta name="description" content="在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。   我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。   闲话不多说了，旅程开始！">
+    <meta name="description" content="最近使用puppeteer模拟用户操作，填了不少的坑，写出来分享一下。 puppeteer包使用npm i puppeteer来下载puppeteer的时候，会自动下载依赖的chromium，但因为众所周知的原因，很难下载，那能不能先下载好再直接引入呢，也可以移植使用。 官方提供2个包一个puppeteer，另外一个是puppeteer-core。puppeteer-core不会自动下载chrom">
+<meta name="keywords" content="自动化测试,puppeteer,headless">
 <meta property="og:type" content="article">
-<meta property="og:title" content="新的旅程的开始">
-<meta property="og:url" content="http://yoursite.com/2015/07/18/2015-7-18-first-article/index.html">
+<meta property="og:title" content="puppeteer 之chromium版本问题">
+<meta property="og:url" content="http://yoursite.com/2019/01/29/puppeteer之chromium版本问题/index.html">
 <meta property="og:site_name" content="演练场">
-<meta property="og:description" content="在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。   我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。   闲话不多说了，旅程开始！">
+<meta property="og:description" content="最近使用puppeteer模拟用户操作，填了不少的坑，写出来分享一下。 puppeteer包使用npm i puppeteer来下载puppeteer的时候，会自动下载依赖的chromium，但因为众所周知的原因，很难下载，那能不能先下载好再直接引入呢，也可以移植使用。 官方提供2个包一个puppeteer，另外一个是puppeteer-core。puppeteer-core不会自动下载chrom">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2015-07-18T12:42:56.000Z">
+<meta property="og:updated_time" content="2019-01-31T05:57:49.221Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="新的旅程的开始">
-<meta name="twitter:description" content="在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。   我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。   闲话不多说了，旅程开始！">
+<meta name="twitter:title" content="puppeteer 之chromium版本问题">
+<meta name="twitter:description" content="最近使用puppeteer模拟用户操作，填了不少的坑，写出来分享一下。 puppeteer包使用npm i puppeteer来下载puppeteer的时候，会自动下载依赖的chromium，但因为众所周知的原因，很难下载，那能不能先下载好再直接引入呢，也可以移植使用。 官方提供2个包一个puppeteer，另外一个是puppeteer-core。puppeteer-core不会自动下载chrom">
 
     
     <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
@@ -81,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/18/2015-7-18-first-article/" title="新的旅程的开始" itemprop="url">新的旅程的开始</a>
+      <a href="/2019/01/29/puppeteer之chromium版本问题/" title="puppeteer 之chromium版本问题" itemprop="url">puppeteer 之chromium版本问题</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-18T06:52:56.000Z" itemprop="datePublished"> Published 2015-07-18</time>
+    <time datetime="2019-01-29T06:04:07.000Z" itemprop="datePublished"> Published 2019-01-29</time>
     
   </p>
 </header>
@@ -97,13 +98,17 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#puppeteer包"><span class="toc-number">1.</span> <span class="toc-text">puppeteer包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chromium版本"><span class="toc-number">2.</span> <span class="toc-text">Chromium版本</span></a></li></ol>
 		
 		</div>
 		
-		<p>  在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。</p>
-<p>  我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。</p>
-<p>  闲话不多说了，旅程开始！</p>
+		<p>最近使用puppeteer模拟用户操作，填了不少的坑，写出来分享一下。</p>
+<h2 id="puppeteer包"><a href="#puppeteer包" class="headerlink" title="puppeteer包"></a>puppeteer包</h2><p>使用<code>npm i puppeteer</code>来下载puppeteer的时候，会自动下载依赖的chromium，但因为众所周知的原因，很难下载，那能不能先下载好再直接引入呢，也可以移植使用。</p>
+<p>官方提供2个包一个puppeteer，另外一个是puppeteer-core。puppeteer-core不会自动下载chromium，以及PUPPETEER_* 环境变了都不起效。这个就是我们想要的包。官方提供两个包的差别<a href="https://pptr.dev/#?product=Puppeteer&amp;version=master&amp;show=api-puppeteer-vs-puppeteer-core" target="_blank" rel="noopener">puppeteer vs puppeteer-core</a>。</p>
+<p>执行<code>npm i puppeteer-core</code><br>下面是使用的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const puppeteer = require(&apos;puppeteer-core&apos;);</span><br><span class="line">async () =&gt; &#123;</span><br><span class="line">    const browserPath = &apos;../../../chrome-mac/Chromium.app/Contents/MacOS/Chromium&apos;</span><br><span class="line">    const browser = await puppeteer.launch(</span><br><span class="line">      &#123;    </span><br><span class="line">        headless: false,</span><br><span class="line">        slowMo: 250,</span><br><span class="line">        devtools: true,</span><br><span class="line">        executablePath: browserPath,</span><br><span class="line">        args: [&apos;--no-sandbox&apos;, &apos;--disable-setuid-sandbox&apos;]</span><br><span class="line">    &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中一个我遇到比较大的容易错的地方就是executablePath是一个相对地址，当时怎么执行都不行，因为写了一个绝对路径。<br>这里mac的Chromium要指向Chromium.app/Contents/MacOS/Chromium，也是很容易出错。</p>
+<h2 id="Chromium版本"><a href="#Chromium版本" class="headerlink" title="Chromium版本"></a>Chromium版本</h2><p>  我还遇到一个问题，如果不同操作系统的部署nodejs，网络情况不能自动下载chromium，我随便系统找个版本是不是就行了？<br>  我也试过了，我本来想在树莓派上部署，但树莓派的linux是32位的，上面的chromium也是很长时间之前的的，花了很长时间搞环境，发现不支持puppeteer，每个版本的puppeteer需要绑定版本的chromium，当时真的很崩溃，所以我决定提前下好chromium，按版本放到不同系统里，这样就统一的chromium版本，不会出现不见兼容的问题。<br>  chromium版本查看package.json里的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;puppeteer&quot;: &#123;</span><br><span class="line">    &quot;chromium_revision&quot;: &quot;609904&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
+<p>这个里面就是依赖的版本号。然后去<a href="https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html" target="_blank" rel="noopener">chromium发布库</a>，输入版本号‘609904’，去搜索，这个网站很慢，会从第一个版本一点点搜索，我看了一下请求，每个请求100个数组，一点点遍历数据。<br>下载好不同系统的同一个版本的chromium后，通过上面的executablePath参数来引入chromium运行。不同操作系统的运行程序不太一样，需要找到对应的执行文件。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -111,9 +116,14 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/闲谈/">闲谈</a>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
 </div>
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/自动化测试/">自动化测试</a><a href="/tags/puppeteer/">puppeteer</a><a href="/tags/headless/">headless</a>
+  </div>
 
 </div>
 
@@ -121,7 +131,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/18/2015-7-18-first-article/" data-title="新的旅程的开始 | 演练场" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2019/01/29/puppeteer之chromium版本问题/" data-title="puppeteer 之chromium版本问题 | 演练场" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -134,14 +144,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/10/02/Java-annotation入门/" title="Java annotation入门">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Java annotation入门</span>
+
+<div class="next">
+<a href="/2018/09/02/telegraf-jvm/"  title="telegraf 采集项分析【JVM】">
+ <strong>下一篇：</strong><br/> 
+ <span>telegraf 采集项分析【JVM】
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -153,7 +163,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#puppeteer包"><span class="toc-number">1.</span> <span class="toc-text">puppeteer包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chromium版本"><span class="toc-number">2.</span> <span class="toc-text">Chromium版本</span></a></li></ol>
  
   </div>
 
