@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/03/31/arts-2019-02-31-review/</loc>
+    
+    <lastmod>2019-03-31T11:01:28.284Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/03/31/arts-2019-02-31-share/</loc>
     
-    <lastmod>2019-03-31T10:50:49.494Z</lastmod>
+    <lastmod>2019-03-31T11:00:20.251Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>http://yoursite.com/2019/03/31/arts-2019-02-31-algorithm/</loc>
     
     <lastmod>2019-03-31T10:50:09.377Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/03/22/arts-2019-02-31-review/</loc>
-    
-    <lastmod>2019-03-31T10:47:17.306Z</lastmod>
     
   </url>
   
