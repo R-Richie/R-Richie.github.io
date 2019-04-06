@@ -4,25 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Java annotation入门 | 演练场</title>
+    <title>Vue 学习笔记2 | 演练场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="R_Richie">
     
 
     
-    <meta name="description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
-<meta name="keywords" content="Annotation,Java">
+    <meta name="description" content="最近真的没有怎么实际写后端代码了，主要都是写一些简单的前端，而且不懂了也很少弄懂，真的很不好。这周要分享的也很水，可以说算得上一个失败的经历。 在实现导航栏跳转的时候，类似视频网站多个tab切换，使用父子路由实现，子路由的页面几乎一直，所以css也差不多，因为都是全局的css，所以有些css重复了，我想做一个互相不影响的，隔离的css作用域，发现vue有一个scoped的概念，在style标签里加">
+<meta name="keywords" content="vue,编程技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java annotation入门">
-<meta property="og:url" content="http://yoursite.com/2015/10/02/Java-annotation入门/index.html">
+<meta property="og:title" content="Vue 学习笔记2">
+<meta property="og:url" content="http://yoursite.com/2019/04/06/arts-2019-4-5-tip/index.html">
 <meta property="og:site_name" content="演练场">
-<meta property="og:description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
+<meta property="og:description" content="最近真的没有怎么实际写后端代码了，主要都是写一些简单的前端，而且不懂了也很少弄懂，真的很不好。这周要分享的也很水，可以说算得上一个失败的经历。 在实现导航栏跳转的时候，类似视频网站多个tab切换，使用父子路由实现，子路由的页面几乎一直，所以css也差不多，因为都是全局的css，所以有些css重复了，我想做一个互相不影响的，隔离的css作用域，发现vue有一个scoped的概念，在style标签里加">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-02-07T12:41:55.000Z">
+<meta property="og:updated_time" content="2019-04-06T07:18:11.606Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java annotation入门">
-<meta name="twitter:description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
+<meta name="twitter:title" content="Vue 学习笔记2">
+<meta name="twitter:description" content="最近真的没有怎么实际写后端代码了，主要都是写一些简单的前端，而且不懂了也很少弄懂，真的很不好。这周要分享的也很水，可以说算得上一个失败的经历。 在实现导航栏跳转的时候，类似视频网站多个tab切换，使用父子路由实现，子路由的页面几乎一直，所以css也差不多，因为都是全局的css，所以有些css重复了，我想做一个互相不影响的，隔离的css作用域，发现vue有一个scoped的概念，在style标签里加">
 
     
     <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
@@ -82,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/10/02/Java-annotation入门/" title="Java annotation入门" itemprop="url">Java annotation入门</a>
+      <a href="/2019/04/06/arts-2019-4-5-tip/" title="Vue 学习笔记2" itemprop="url">Vue 学习笔记2</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
 		
   <p class="article-time">
-    <time datetime="2015-10-02T05:49:07.000Z" itemprop="datePublished"> Published 2015-10-02</time>
+    <time datetime="2019-04-06T07:13:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
     
   </p>
 </header>
@@ -98,28 +98,12 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中常见注解"><span class="toc-number">1.</span> <span class="toc-text">Java中常见注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解的分类"><span class="toc-number">2.</span> <span class="toc-text">注解的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义注解"><span class="toc-number">3.</span> <span class="toc-text">自定义注解</span></a></li></ol>
+			
 		
 		</div>
 		
-		<p><strong> 注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据 </strong></p>
-<h2 id="Java中常见注解"><a href="#Java中常见注解" class="headerlink" title="Java中常见注解"></a>Java中常见注解</h2><p>@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。<br>@Deprescated：被弃用的方法<br>@SuppressWarnings：关闭不当的编译器警告信息。</p>
-<h2 id="注解的分类"><a href="#注解的分类" class="headerlink" title="注解的分类"></a>注解的分类</h2><p>按照运行机制分：源码注解，编译时注解，运行时注解<br>按照来源分：来自JDK的注解，来着第三方的注解，我们自己定义注解</p>
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><strong>定义注解</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用#interface声明注解，成员以无参无异常方式声明，可以用default为成员指定默认值，成员类型是受限的，合法的类型包括原始类型及String，Class，Annotation，Enumeration以及以上类型的数组。如果注解只有一个成员，则成员名必须取名为value（）,在使用时可以忽略成员名和赋值号。</p>
-<p><strong>元注解</strong></p>
-<hr>
-<p>@Target   ：               表示该注解可以用于什么地方。ElementType参数包括：<br>                        CONSTRUCTOR：构造器的声明<br>                        FIELD：域声明（包括enum实例）<br>                        LOCAL_VARIABLE：局部变量声明<br>                        METHOD：方法声明<br>                        PACKAGE：包声明<br>                        PARAMETER：参数声明<br>                         TYPE：类、接口（包括注解类型）或enum声明</p>
-<hr>
-<p>@Retention     ：         表示需要在什么级别保存该注解信息。可选的RetentionPolicy参数包括<br>                         SOURCE：注解将被编译器丢弃<br>                         CLASS：注解在class文件中可用，但会被VM丢弃<br>                         RUNTIME：VM将在运行期也保留注解，因此可以通过反射机制读取注解的信息。</p>
-<hr>
-<p>@Documented       ： 将此注解包含在Javadoc中</p>
-<hr>
-<p>@Inherited       ：        允许子类继承父类中的注解</p>
-<p><strong>使用注解</strong><br>@&lt;注解名&gt;(&lt;成员名1&gt;=&lt;成员值1&gt;,&lt;成员名2&gt;=&lt;成员值2&gt;,…)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Description(desc=&quot;I am eyeColor&quot;,author=&quot;Mooc boy&quot;,age=18)</span><br><span class="line">public Sring eyeColor()&#123;</span><br><span class="line">    return &quot;red&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>编写注解处理器</strong><br>通过反射获取类、函数或成员上的运行时注解信息，从而实现动态控制程序运行的逻辑。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class UseCaseTracker &#123;</span><br><span class="line">    public static void trackUseCases(List&lt;Integer&gt; useCases,Class&lt;?&gt; cl)&#123;</span><br><span class="line">        for(Method m : cl.getDeclaredMethods())&#123;</span><br><span class="line">            UseCase uc = m.getAnnotation(UseCase.class);</span><br><span class="line">            if(uc!=null)&#123;</span><br><span class="line">                System.out.println(&quot;Found use case:&quot;+uc.id()+&quot; &quot;+uc.description());</span><br><span class="line">                useCases.remove(new Integer(uc.id()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i : useCases)&#123;</span><br><span class="line">            System.out.println(&quot;Warning: Missing use case:&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; useCases = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        Collections.addAll(useCases, 47,48,49,50);</span><br><span class="line">        trackUseCases(useCases, PasswordUtils.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注解定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+		<p>最近真的没有怎么实际写后端代码了，主要都是写一些简单的前端，而且不懂了也很少弄懂，真的很不好。<br>这周要分享的也很水，可以说算得上一个失败的经历。</p>
+<p>在实现导航栏跳转的时候，类似视频网站多个tab切换，使用父子路由实现，子路由的页面几乎一直，所以css也差不多，因为都是全局的css，所以有些css重复了，我想做一个互相不影响的，隔离的css作用域，发现vue有一个scoped的概念，在style标签里加上scoped，编译的时候就会加上唯一的编号类似 class-123132，这样，那么就是全局唯一的了。<br>但是我尝试加上postcss，就和bootstrap-vue起了冲突，解决了一阵未果，没有继续尝试了。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -127,13 +111,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Java语言基础/">Java语言基础</a>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Annotation/">Annotation</a><a href="/tags/Java/">Java</a>
+  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
   </div>
 
 </div>
@@ -142,7 +126,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/10/02/Java-annotation入门/" data-title="Java annotation入门 | 演练场" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2019/04/06/arts-2019-4-5-tip/" data-title="Vue 学习笔记2 | 演练场" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,19 +139,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/03/13/spring-boot-history/" title="Spring Boot发展考察">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Spring Boot发展考察</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/07/18/2015-7-18-first-article/"  title="新的旅程的开始">
+<a href="/2019/04/06/arts-2019-4-5-share/"  title="《7up》第二遍观后感1">
  <strong>下一篇：</strong><br/> 
- <span>新的旅程的开始
+ <span>《7up》第二遍观后感1
 </span>
 </a>
 </div>
@@ -182,7 +158,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中常见注解"><span class="toc-number">1.</span> <span class="toc-text">Java中常见注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解的分类"><span class="toc-number">2.</span> <span class="toc-text">注解的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义注解"><span class="toc-number">3.</span> <span class="toc-text">自定义注解</span></a></li></ol>
+ 
  
   </div>
 
