@@ -4,25 +4,20 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Java annotation入门 | 演练场</title>
+    <title>演练场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="R_Richie">
     
 
     
-    <meta name="description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
-<meta name="keywords" content="Annotation,Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java annotation入门">
-<meta property="og:url" content="http://yoursite.com/2015/10/02/Java-annotation入门/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="演练场">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="演练场">
-<meta property="og:description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-02-07T12:41:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java annotation入门">
-<meta name="twitter:description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
+<meta name="twitter:title" content="演练场">
 
     
     <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
@@ -76,10 +71,107 @@
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/13/spring-boot-history/" title="Spring Boot发展考察" itemprop="url">Spring Boot发展考察</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2016-03-13T08:06:12.000Z" itemprop="datePublished"> Published 2016-03-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><em>目标</em><br>为了介绍spring boot的简单入门，而且讲明白为什么要使用它，它的特点。<br><em>手段</em><br>通过介绍spring boot的发展历史，诞生当时的历史现状，诞生的原因，发展，来说明<br><em>资料</em><br>官方简介：<br>Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can “just run”. We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need very little Spring configuration.</p>
+<p><strong>Features</strong></p>
+<ul>
+<li>Create stand-alone Spring applications</li>
+<li>Embed Tomcat, Jetty or Undertow directly (no need to deploy WAR files)</li>
+<li>Provide opinionated ‘starter’ POMs to simplify your Maven configuration</li>
+<li>Automatically configure Spring whenever possible</li>
+<li>Provide production-ready features such as metrics, health checks and externalized configuration</li>
+<li>Absolutely no code generation and no requirement for XML configuration</li>
+</ul>
+<p><strong>Spring的发展情况</strong></p>
+<p>When Spring 1.0 hit the scene, it completely changed how we develop enterprise Java applications. Spring dependency injection and declarative transactions meant no more tight coupling of components and no more heavyweight EJB s. It couldn’t get any better.</p>
+<p>With Spring 2.0 we could use custom  XML namespaces for configuration, making Spring itself even easier to use with smaller and easier to understand configuration files. It couldn’t get any better.</p>
+<p>Spring 2.5 gave us a much more elegant annotation-oriented dependency-injection model with the  @Component and  @Autowired annotations, as well as an annotation-oriented Spring  MVC programming model. No more explicit declaration of application components, and no more subclassing one of several base controller classes. It couldn’t get any better.</p>
+<p>Then with Spring 3.0 we were given a new Java-based configuration alternative to XML that was improved further in Spring 3.1 with a variety of  @Enable -prefixed annotations. For the first time, it become realistic to write a complete Spring application with no  XML configuration whatsoever. It couldn’t get any better.</p>
+<p>Spring 4.0 unleashed support for conditional configuration, where runtime decisions would determine which configuration would be used and which would be ignored based on the application’s classpath, environment, and other factors. We no longer needed to write scripts to make those decisions at build time and pick which configuration should be included in the deployment. How could it possibly get any better?</p>
+<p><strong>spring boot起源</strong></p>
+<p>Spring的jira上提的需求，揭示了spring boot的起源<br><a href="https://jira.spring.io/browse/SPR-9888" target="_blank" rel="noopener">https://jira.spring.io/browse/SPR-9888</a><br>描述：<br>As the enterprise development landscape grows more diverse the simpler the application framework the more likely developers are to adopt the framework. Developers with existing knowledge of previously common frameworks like the Servlet container are becoming more rare. Spring’s dependence on frameworks and containers outside of Spring’s component model increases the learning curve of new developers attempting to create and maintain spring web applications.<br>Traditionally Spring web applications have been embedded in a servlet container. This was useful in the past when the majority of enterprise applications ran in and depended on the servlet container for deployment and configuration. However, a servlet container comes with learning curve that we cannot assume new developers will have already overcome. The learning curve includes things such as:<br>web.xml and other Servlet oriented configuration concepts<br>.war directory structure<br>Container implementation specific items (e.g. ports, thread pools, etc.)<br>Complex Classloading hierarchies<br>Monitoring and management facilities configured outside of the application<br>Logging facilities<br>Configuration of application context roots<br>So forth<br>All of the above items are configured in inconsistent non-unified ways requiring a development team to learn these for the container their using in addition to Spring’s own configuration model.<br>I think that Spring’s web application architecture can be significantly simplified if it were to provided tools and a reference architecture that leveraged the Spring component and configuration model from top to bottom. Embedding and unifying the configuration of those common web container services within a Spring Container bootstrapped from a simple main() method.<br>Though there are many frameworks and platforms today that no longer require a container I think inspiration can be drawn most from DropWizard (<a href="http://dropwizard.codahale.com/)" target="_blank" rel="noopener">http://dropwizard.codahale.com/)</a>.<br>Another project I’ve seen inspired by DropWizard but leveraging Spring is HalfPipe (<a href="https://github.com/32degrees/halfpipe)" target="_blank" rel="noopener">https://github.com/32degrees/halfpipe)</a>. Though I don’t think HalfPipe goes far enough. I think to truly provide simplification the entire architecture, wherever reasonable, must be embedded within the Spring container rather than without. Though it does have several other interesting ideas.<br>I believe that a Spring driven containerless web application architecture could provide benefits like:<br>Provide a single unified component model requiring no knowledge of the Servlet Component models.<br>Unified configuration of everything allowing developers to only have to learn one Spring configuration model for both component and app configuration.<br>Execution from a void main will simplify application startup and shutdown.<br>A much simpler pure java classloading hierarchy.<br>Simpler development tooling. Instead of needing a complex IDE to construct a war and deploy it to a dev container simply execute the applications Main class.<br>For such an architecture to be successful this architecture will also need new and simple ways to configure common Spring tools, such as Spring MVC and Spring Security, that have traditionally been configured through the servlet container.<br>To accomplish this simplification I don’t think Spring would need to create a brand new http engine. It could simply utilize an embedded servlet container like Jetty. Though it would need to abstract away as much configuration as possible.<br>I think a reference app would also be unnecessary to set an example of how to structure, develop and configure such an application in a pure spring manner.<br>翻译描述：<br>开发人员越来越多的采用更简单的框架。会以前通用框架的相关知识，像Servlet容器的开发者越来越少了，Spring应用以来容器，提高了新的开发者尝试创建和使用spring web 应用。<br>传统spring web应用嵌入在servlet容器中。大多数企业应用的部署和配置，依赖和运行在servlet容器上，这在过去是有效的。<br>然而，一个servlet容器自带的学习曲线，我们不能承担新的开发者已经克服。<br>学习曲线包含：</p>
+<ol>
+<li>web.xml和其他 Servlet面向配置的概念</li>
+<li>.war目录结构</li>
+<li>容器内具体的项目（端口，线程池等）</li>
+<li>复杂的类加载结构</li>
+<li>监控和管理设施要配置的应用程序之外</li>
+<li>日志设施</li>
+<li>应用上下文根配置<br>8.等等<br>上述所有项目都在要求开发团队学习这些他们除了使用Spring的自己的配置模型容器不一致的不统一配置方式。</li>
+</ol>
+<p>我认为Spring的web应用程序架构可以显著简化，如果它是提供工具和参考架构 从上到下的连通Spring组件和配置模型。嵌入和统一的配置 这些共同Web容器服务的配置 可以从Spring容器一个简单的main（）方法中的。<br>我相信，一个Spring驱动无容器的Web应用架构可以提供下列好处：</p>
+<ol>
+<li>提供一个统一的组件模型，无需在Servlet组件模型的知识</li>
+<li>人的一切都允许开发统一的配置，只需要学习一种Spring配置模型为组件和应用配置。</li>
+<li>用从一个空的main简化应用程序的启动和关闭。</li>
+<li>一个更简单的纯Java类加载层次</li>
+<li>更简单的开发工具。而不是需要一个复杂的IDE来构建一个战争并将其部署到一个开发容器只需执行应用程序主类。</li>
+</ol>
+<p>对于这样的体系结构，为了成功这个架构也需要新的和简单的方式来配置公共Spring工具，如Spring MVC和Spring Security，即传统上一直通过servlet容器构造。<br>要做到这一点简单化，我不认为Spring需要创建一个全新的HTTP引擎。它可以简单地利用像Jetty一个嵌入式servlet容器。尽管这将需要抽象掉尽可能多的配置成为可能。<br>我想引用的应用程序也将是不需要设置如何构建一个例子，开发和配置在纯Spring的方式这样的应用程序。</p>
+<h2 id="可以看出，spring为了实现无容器依赖，减小开发者的学习曲线，更快的开发web应用，开发出了spring-boot，spring-boot就是为了简化web开发体验。"><a href="#可以看出，spring为了实现无容器依赖，减小开发者的学习曲线，更快的开发web应用，开发出了spring-boot，spring-boot就是为了简化web开发体验。" class="headerlink" title="可以看出，spring为了实现无容器依赖，减小开发者的学习曲线，更快的开发web应用，开发出了spring boot，spring boot就是为了简化web开发体验。"></a>可以看出，spring为了实现无容器依赖，减小开发者的学习曲线，更快的开发web应用，开发出了spring boot，spring boot就是为了简化web开发体验。</h2>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Spring/">Spring</a>
+</div>
+
+
+  <div class="article-tags">
   
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
+  <span></span> <a href="/tags/Java/">Java</a><a href="/tags/Spring-Boot/">Spring Boot</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2015/10/02/Java-annotation入门/" title="Java annotation入门" itemprop="url">Java annotation入门</a>
@@ -93,16 +185,9 @@
     
   </p>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中常见注解"><span class="toc-number">1.</span> <span class="toc-text">Java中常见注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解的分类"><span class="toc-number">2.</span> <span class="toc-text">注解的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义注解"><span class="toc-number">3.</span> <span class="toc-text">自定义注解</span></a></li></ol>
-		
-		</div>
-		
-		<p><strong> 注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据 </strong></p>
+    <div class="article-content">
+        
+        <p><strong> 注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据 </strong></p>
 <h2 id="Java中常见注解"><a href="#Java中常见注解" class="headerlink" title="Java中常见注解"></a>Java中常见注解</h2><p>@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。<br>@Deprescated：被弃用的方法<br>@SuppressWarnings：关闭不当的编译器警告信息。</p>
 <h2 id="注解的分类"><a href="#注解的分类" class="headerlink" title="注解的分类"></a>注解的分类</h2><p>按照运行机制分：源码注解，编译时注解，运行时注解<br>按照来源分：来自JDK的注解，来着第三方的注解，我们自己定义注解</p>
 <h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><strong>定义注解</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -120,9 +205,14 @@
 <p><strong>编写注解处理器</strong><br>通过反射获取类、函数或成员上的运行时注解信息，从而实现动态控制程序运行的逻辑。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class UseCaseTracker &#123;</span><br><span class="line">    public static void trackUseCases(List&lt;Integer&gt; useCases,Class&lt;?&gt; cl)&#123;</span><br><span class="line">        for(Method m : cl.getDeclaredMethods())&#123;</span><br><span class="line">            UseCase uc = m.getAnnotation(UseCase.class);</span><br><span class="line">            if(uc!=null)&#123;</span><br><span class="line">                System.out.println(&quot;Found use case:&quot;+uc.id()+&quot; &quot;+uc.description());</span><br><span class="line">                useCases.remove(new Integer(uc.id()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i : useCases)&#123;</span><br><span class="line">            System.out.println(&quot;Warning: Missing use case:&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; useCases = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        Collections.addAll(useCases, 47,48,49,50);</span><br><span class="line">        trackUseCases(useCases, PasswordUtils.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注解定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-  
-	</div>
-		<footer class="article-footer clearfix">
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
@@ -140,51 +230,85 @@
 
 
 
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yoursite.com/2015/10/02/Java-annotation入门/" data-title="Java annotation入门 | 演练场" data-tsina="" class="share clearfix">
-	  </div>
-	
-	</div>
 
+<div class="comments-count">
+	
+</div>
 
 </footer>
 
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/03/13/spring-boot-history/" title="Spring Boot发展考察">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Spring Boot发展考察</span>
-</a>
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/18/2015-7-18-first-article/" title="新的旅程的开始" itemprop="url">新的旅程的开始</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-18T06:52:56.000Z" itemprop="datePublished"> Published 2015-07-18</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>  在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。</p>
+<p>  我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。</p>
+<p>  闲话不多说了，旅程开始！</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/闲谈/">闲谈</a>
 </div>
 
 
-<div class="next">
-<a href="/2015/07/18/2015-7-18-first-article/"  title="新的旅程的开始">
- <strong>下一篇：</strong><br/> 
- <span>新的旅程的开始
-</span>
-</a>
 </div>
 
-</nav>
 
+
+
+<div class="comments-count">
 	
+</div>
 
-</div>  
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+</div>
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中常见注解"><span class="toc-number">1.</span> <span class="toc-text">Java中常见注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解的分类"><span class="toc-number">2.</span> <span class="toc-text">注解的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义注解"><span class="toc-number">3.</span> <span class="toc-text">自定义注解</span></a></li></ol>
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
@@ -451,89 +575,12 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
 
 
 
@@ -604,4 +651,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
-</html>
+ </html>

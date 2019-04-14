@@ -4,25 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Java annotation入门 | 演练场</title>
+    <title>java集合-ArrayList | 演练场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="R_Richie">
     
 
     
-    <meta name="description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
-<meta name="keywords" content="Annotation,Java">
+    <meta name="description" content="ArryList实现接口List, RandomAccess, Cloneable, java.io.Serializable基础的数据结构是数组，根据存储数据的多少动态扩容。 123456789101112131415161718192021222324252627282930/** * Default initial capacity. */private static final int D">
+<meta name="keywords" content="编程技巧,java,集合">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java annotation入门">
-<meta property="og:url" content="http://yoursite.com/2015/10/02/Java-annotation入门/index.html">
+<meta property="og:title" content="java集合-ArrayList">
+<meta property="og:url" content="http://yoursite.com/2019/04/06/arts-2019-04-14-tips/index.html">
 <meta property="og:site_name" content="演练场">
-<meta property="og:description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
+<meta property="og:description" content="ArryList实现接口List, RandomAccess, Cloneable, java.io.Serializable基础的数据结构是数组，根据存储数据的多少动态扩容。 123456789101112131415161718192021222324252627282930/** * Default initial capacity. */private static final int D">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-02-07T12:41:55.000Z">
+<meta property="og:updated_time" content="2019-04-14T05:58:16.131Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java annotation入门">
-<meta name="twitter:description" content="注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据  Java中常见注解@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。@Deprescated：被弃用的方法@SuppressWarnings：关闭不当的编译器警告信息。 注解的分类按照运行机制分：源码注解，编译时注解，运行时注解按照来源分">
+<meta name="twitter:title" content="java集合-ArrayList">
+<meta name="twitter:description" content="ArryList实现接口List, RandomAccess, Cloneable, java.io.Serializable基础的数据结构是数组，根据存储数据的多少动态扩容。 123456789101112131415161718192021222324252627282930/** * Default initial capacity. */private static final int D">
 
     
     <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
@@ -82,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/10/02/Java-annotation入门/" title="Java annotation入门" itemprop="url">Java annotation入门</a>
+      <a href="/2019/04/06/arts-2019-04-14-tips/" title="java集合-ArrayList" itemprop="url">java集合-ArrayList</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
 		
   <p class="article-time">
-    <time datetime="2015-10-02T05:49:07.000Z" itemprop="datePublished"> Published 2015-10-02</time>
+    <time datetime="2019-04-06T07:13:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
     
   </p>
 </header>
@@ -98,28 +98,21 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中常见注解"><span class="toc-number">1.</span> <span class="toc-text">Java中常见注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解的分类"><span class="toc-number">2.</span> <span class="toc-text">注解的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义注解"><span class="toc-number">3.</span> <span class="toc-text">自定义注解</span></a></li></ol>
+			
 		
 		</div>
 		
-		<p><strong> 注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据 </strong></p>
-<h2 id="Java中常见注解"><a href="#Java中常见注解" class="headerlink" title="Java中常见注解"></a>Java中常见注解</h2><p>@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。<br>@Deprescated：被弃用的方法<br>@SuppressWarnings：关闭不当的编译器警告信息。</p>
-<h2 id="注解的分类"><a href="#注解的分类" class="headerlink" title="注解的分类"></a>注解的分类</h2><p>按照运行机制分：源码注解，编译时注解，运行时注解<br>按照来源分：来自JDK的注解，来着第三方的注解，我们自己定义注解</p>
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><strong>定义注解</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用#interface声明注解，成员以无参无异常方式声明，可以用default为成员指定默认值，成员类型是受限的，合法的类型包括原始类型及String，Class，Annotation，Enumeration以及以上类型的数组。如果注解只有一个成员，则成员名必须取名为value（）,在使用时可以忽略成员名和赋值号。</p>
-<p><strong>元注解</strong></p>
-<hr>
-<p>@Target   ：               表示该注解可以用于什么地方。ElementType参数包括：<br>                        CONSTRUCTOR：构造器的声明<br>                        FIELD：域声明（包括enum实例）<br>                        LOCAL_VARIABLE：局部变量声明<br>                        METHOD：方法声明<br>                        PACKAGE：包声明<br>                        PARAMETER：参数声明<br>                         TYPE：类、接口（包括注解类型）或enum声明</p>
-<hr>
-<p>@Retention     ：         表示需要在什么级别保存该注解信息。可选的RetentionPolicy参数包括<br>                         SOURCE：注解将被编译器丢弃<br>                         CLASS：注解在class文件中可用，但会被VM丢弃<br>                         RUNTIME：VM将在运行期也保留注解，因此可以通过反射机制读取注解的信息。</p>
-<hr>
-<p>@Documented       ： 将此注解包含在Javadoc中</p>
-<hr>
-<p>@Inherited       ：        允许子类继承父类中的注解</p>
-<p><strong>使用注解</strong><br>@&lt;注解名&gt;(&lt;成员名1&gt;=&lt;成员值1&gt;,&lt;成员名2&gt;=&lt;成员值2&gt;,…)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Description(desc=&quot;I am eyeColor&quot;,author=&quot;Mooc boy&quot;,age=18)</span><br><span class="line">public Sring eyeColor()&#123;</span><br><span class="line">    return &quot;red&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>编写注解处理器</strong><br>通过反射获取类、函数或成员上的运行时注解信息，从而实现动态控制程序运行的逻辑。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class UseCaseTracker &#123;</span><br><span class="line">    public static void trackUseCases(List&lt;Integer&gt; useCases,Class&lt;?&gt; cl)&#123;</span><br><span class="line">        for(Method m : cl.getDeclaredMethods())&#123;</span><br><span class="line">            UseCase uc = m.getAnnotation(UseCase.class);</span><br><span class="line">            if(uc!=null)&#123;</span><br><span class="line">                System.out.println(&quot;Found use case:&quot;+uc.id()+&quot; &quot;+uc.description());</span><br><span class="line">                useCases.remove(new Integer(uc.id()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i : useCases)&#123;</span><br><span class="line">            System.out.println(&quot;Warning: Missing use case:&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; useCases = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        Collections.addAll(useCases, 47,48,49,50);</span><br><span class="line">        trackUseCases(useCases, PasswordUtils.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注解定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+		<p>ArryList实现接口List<e>, RandomAccess, Cloneable, java.io.Serializable<br>基础的数据结构是数组，根据存储数据的多少动态扩容。</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Default initial capacity.</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 10;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shared empty array instance used for empty instances.</span><br><span class="line"> */</span><br><span class="line">private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shared empty array instance used for default sized empty instances. We</span><br><span class="line"> * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when</span><br><span class="line"> * first element is added.</span><br><span class="line"> */</span><br><span class="line">private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The array buffer into which the elements of the ArrayList are stored.</span><br><span class="line"> * The capacity of the ArrayList is the length of this array buffer. Any</span><br><span class="line"> * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><br><span class="line"> * will be expanded to DEFAULT_CAPACITY when the first element is added.</span><br><span class="line"> */</span><br><span class="line">transient Object[] elementData</span><br><span class="line">/**</span><br><span class="line"> * The size of the ArrayList (the number of elements it contains).</span><br><span class="line"> *</span><br><span class="line"> * @serial</span><br><span class="line"> */</span><br><span class="line">private int size;</span><br></pre></td></tr></table></figure>
+<p>elementData是实际存储数据的数组。DEFAULT_CAPACITY是默认的容量，如果没有指定数组的大小。DEFAULTCAPACITY_EMPTY_ELEMENTDATA 与EMPTY_ELEMENTDATA都是 空的初始数组，DEFAULTCAPACITY_EMPTY_ELEMENTDATA是用来判断是不是通过默认方法创建的空数组，而不是删除后才空的。如果指定了数组大小，就用EMPTY_ELEMENTDATA作为默认空数组。</p>
+<p>扩容是在添加元素的时候进行，这样不会初始化没有数据的情况下就占据空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加方法很简单，先去内部扩容，然后在最后一个添加值，看扩容的内部实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ensureExplicitCapacity(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureExplicitCapacity(int minCapacity) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * Increases the capacity to ensure that it can hold at least the</span><br><span class="line"> * number of elements specified by the minimum capacity argument.</span><br><span class="line"> *</span><br><span class="line"> * @param minCapacity the desired minimum capacity</span><br><span class="line"> */</span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ensureCapacityInternal 先是一个判断数组是怎么创建，如果是默认空参数的构造器创建，就使用默认的初始大小10作为最小容量，这样就能避免不能手动创建更小数组的问题。<br>主要扩容是grow方法，可以看出 newCapacity是扩容0.5倍大小，到原来的1.5倍。<br>还有就是容器上下限的判断。扩容就是迁移数组newCapacity的大小的数组里。<br>归根到底，就是将数组扩容1.5倍，旧数组搬迁到新数组。<br>里面还有几个内部类，一个Itr，实现了Iterator接口，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private class Itr implements Iterator&lt;E&gt; &#123;</span><br><span class="line">    int cursor;       // index of next element to return</span><br><span class="line">    int lastRet = -1; // index of last element returned; -1 if no such</span><br><span class="line">    int expectedModCount = modCount;</span><br></pre></td></tr></table></figure></p>
+<p>ListItr 实现了 ListIterator，可以前后访问遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private class ListItr extends Itr implements ListIterator&lt;E&gt; &#123;</span><br><span class="line">    ListItr(int index) &#123;</span><br><span class="line">        super();</span><br><span class="line">        cursor = index;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>ArrayList使用遍历接口，都是使用内部类实现的，重新记录状态，这部分还有些不太懂的，后面继续补充。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -127,13 +120,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Java语言基础/">Java语言基础</a>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Annotation/">Annotation</a><a href="/tags/Java/">Java</a>
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
   </div>
 
 </div>
@@ -142,7 +135,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/10/02/Java-annotation入门/" data-title="Java annotation入门 | 演练场" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2019/04/06/arts-2019-04-14-tips/" data-title="java集合-ArrayList | 演练场" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -156,18 +149,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/03/13/spring-boot-history/" title="Spring Boot发展考察">
+ <a href="/2019/04/14/arts-2019-04-14-algorithm/" title="找到 K 个最接近的元素">
   <strong>上一篇：</strong><br/>
   <span>
-  Spring Boot发展考察</span>
+  找到 K 个最接近的元素</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/07/18/2015-7-18-first-article/"  title="新的旅程的开始">
+<a href="/2019/04/06/arts-2019-4-5-tip/"  title="Vue 学习笔记2">
  <strong>下一篇：</strong><br/> 
- <span>新的旅程的开始
+ <span>Vue 学习笔记2
 </span>
 </a>
 </div>
@@ -182,7 +175,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中常见注解"><span class="toc-number">1.</span> <span class="toc-text">Java中常见注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解的分类"><span class="toc-number">2.</span> <span class="toc-text">注解的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义注解"><span class="toc-number">3.</span> <span class="toc-text">自定义注解</span></a></li></ol>
+ 
  
   </div>
 
