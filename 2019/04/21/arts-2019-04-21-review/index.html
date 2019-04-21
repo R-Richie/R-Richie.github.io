@@ -4,25 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Vue 学习笔记1 | 演练场</title>
+    <title>Fallacies of Distributed Computing Explained 学习笔记 | 演练场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="R_Richie">
     
 
     
-    <meta name="description" content="使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。就像Vue学习的初期，官方文档也提醒尽量">
-<meta name="keywords" content="vue,编程技巧">
+    <meta name="description" content="阅读 8个分布式系统的谬误  The network is reliable. Latency is zero. Bandwidth is infinite. The network is secure. Topology doesn’t change. There is one administrator.  Transport cost is zero. The network is homo">
+<meta name="keywords" content="分布式,架构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue 学习笔记1">
-<meta property="og:url" content="http://yoursite.com/2019/03/31/arts-2019-02-31-tip/index.html">
+<meta property="og:title" content="Fallacies of Distributed Computing Explained 学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/04/21/arts-2019-04-21-review/index.html">
 <meta property="og:site_name" content="演练场">
-<meta property="og:description" content="使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。就像Vue学习的初期，官方文档也提醒尽量">
+<meta property="og:description" content="阅读 8个分布式系统的谬误  The network is reliable. Latency is zero. Bandwidth is infinite. The network is secure. Topology doesn’t change. There is one administrator.  Transport cost is zero. The network is homo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-31T10:46:44.728Z">
+<meta property="og:updated_time" content="2019-04-21T08:16:55.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue 学习笔记1">
-<meta name="twitter:description" content="使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。就像Vue学习的初期，官方文档也提醒尽量">
+<meta name="twitter:title" content="Fallacies of Distributed Computing Explained 学习笔记">
+<meta name="twitter:description" content="阅读 8个分布式系统的谬误  The network is reliable. Latency is zero. Bandwidth is infinite. The network is secure. Topology doesn’t change. There is one administrator.  Transport cost is zero. The network is homo">
 
     
     <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
@@ -82,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2019/03/31/arts-2019-02-31-tip/" title="Vue 学习笔记1" itemprop="url">Vue 学习笔记1</a>
+      <a href="/2019/04/21/arts-2019-04-21-review/" title="Fallacies of Distributed Computing Explained 学习笔记" itemprop="url">Fallacies of Distributed Computing Explained 学习笔记</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
 		
   <p class="article-time">
-    <time datetime="2019-03-31T10:45:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
+    <time datetime="2019-04-21T07:49:07.000Z" itemprop="datePublished"> Published 2019-04-21</time>
     
   </p>
 </header>
@@ -102,7 +102,19 @@
 		
 		</div>
 		
-		<p>使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。<br>当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。<br>就像Vue学习的初期，官方文档也提醒尽量不用cli去创建项目，包括东西太多，很多还是跟打包有关，你既然要学习vue，就应该只学习重点，不然干扰项打扰，不然会影响效果。<br>最近在做页面间的跳转，其实我的需求很简单，就是一个视频网站，点击后能跳到播放和详情页。用了一些vue的跳转没有成功，后面使用了nuxt.js推荐的<nuxt-link> 标签，可以跳转了，而且这个标签还支持传参数。<br>看到编译后的标签，是一个a标签，然后看文档，这个支持前进和后退功能，相当于自己做了一个浏览器的堆栈保存访问的地址。<br>现在还有一个问题，就是我想做 播放页点击其他视频，再重新加载，但由于是同一个页面导致不能加载，还没有方法解决。</nuxt-link></p>
+		<p>阅读 8个分布式系统的谬误</p>
+<ol>
+<li>The network is reliable.</li>
+<li>Latency is zero.</li>
+<li>Bandwidth is infinite.</li>
+<li>The network is secure.</li>
+<li>Topology doesn’t change.</li>
+<li>There is one administrator. </li>
+<li>Transport cost is zero.</li>
+<li>The network is homogeneous.</li>
+</ol>
+<p>阅读了1遍发现没什么深刻的印象，私自总结一下，<br>首先分布式网络是不可靠的，不安全的，异构的，拓扑是可能改变的，传输消耗不是0，延迟不是0，带宽不是无限的，主要分布在网络上，<br>在非分布式网络下，情况可能是单一的，特殊的，但扩散到分布式下，网络的各种情况都会遇到，所以不能轻易假设，网络是我们预期的那样简单。<br>其他事管理员可能不止一个人。</p>
+<p>分布式就是要考虑各种各样的网络特殊情况，防止这些疏忽导致的系统异常。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -110,13 +122,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/前端/">前端</a>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
   </div>
 
 </div>
@@ -125,7 +137,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2019/03/31/arts-2019-02-31-tip/" data-title="Vue 学习笔记1 | 演练场" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2019/04/21/arts-2019-04-21-review/" data-title="Fallacies of Distributed Computing Explained 学习笔记 | 演练场" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -138,19 +150,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2019/03/31/arts-2019-02-31-review/" title="scalability availability &amp; stability patterns 学习笔记">
-  <strong>上一篇：</strong><br/>
-  <span>
-  scalability availability &amp; stability patterns 学习笔记</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2019/03/31/arts-2019-02-31-algorithm/"  title="设计循环队列">
+<a href="/2019/04/21/arts-2019-04-21-share/"  title="关于这段时间学习的分析">
  <strong>下一篇：</strong><br/> 
- <span>设计循环队列
+ <span>关于这段时间学习的分析
 </span>
 </a>
 </div>

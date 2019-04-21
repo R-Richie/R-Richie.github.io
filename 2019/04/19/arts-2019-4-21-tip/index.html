@@ -4,25 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Vue 学习笔记1 | 演练场</title>
+    <title>java集合-CopyOnWriteArrayList | 演练场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="R_Richie">
     
 
     
-    <meta name="description" content="使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。就像Vue学习的初期，官方文档也提醒尽量">
-<meta name="keywords" content="vue,编程技巧">
+    <meta name="description" content="实现List, RandomAccess, Cloneable, java.io.Serializable 接口 12345/** The lock protecting all mutators */ final transient ReentrantLock lock = new ReentrantLock(); /** The array, accessed only via getArra">
+<meta name="keywords" content="编程技巧,java,集合">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue 学习笔记1">
-<meta property="og:url" content="http://yoursite.com/2019/03/31/arts-2019-02-31-tip/index.html">
+<meta property="og:title" content="java集合-CopyOnWriteArrayList">
+<meta property="og:url" content="http://yoursite.com/2019/04/19/arts-2019-4-21-tip/index.html">
 <meta property="og:site_name" content="演练场">
-<meta property="og:description" content="使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。就像Vue学习的初期，官方文档也提醒尽量">
+<meta property="og:description" content="实现List, RandomAccess, Cloneable, java.io.Serializable 接口 12345/** The lock protecting all mutators */ final transient ReentrantLock lock = new ReentrantLock(); /** The array, accessed only via getArra">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-31T10:46:44.728Z">
+<meta property="og:updated_time" content="2019-04-21T08:18:30.408Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue 学习笔记1">
-<meta name="twitter:description" content="使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。就像Vue学习的初期，官方文档也提醒尽量">
+<meta name="twitter:title" content="java集合-CopyOnWriteArrayList">
+<meta name="twitter:description" content="实现List, RandomAccess, Cloneable, java.io.Serializable 接口 12345/** The lock protecting all mutators */ final transient ReentrantLock lock = new ReentrantLock(); /** The array, accessed only via getArra">
 
     
     <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
@@ -82,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2019/03/31/arts-2019-02-31-tip/" title="Vue 学习笔记1" itemprop="url">Vue 学习笔记1</a>
+      <a href="/2019/04/19/arts-2019-4-21-tip/" title="java集合-CopyOnWriteArrayList" itemprop="url">java集合-CopyOnWriteArrayList</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
 		
   <p class="article-time">
-    <time datetime="2019-03-31T10:45:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
+    <time datetime="2019-04-19T01:56:07.000Z" itemprop="datePublished"> Published 2019-04-19</time>
     
   </p>
 </header>
@@ -102,7 +102,14 @@
 		
 		</div>
 		
-		<p>使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。<br>当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。<br>就像Vue学习的初期，官方文档也提醒尽量不用cli去创建项目，包括东西太多，很多还是跟打包有关，你既然要学习vue，就应该只学习重点，不然干扰项打扰，不然会影响效果。<br>最近在做页面间的跳转，其实我的需求很简单，就是一个视频网站，点击后能跳到播放和详情页。用了一些vue的跳转没有成功，后面使用了nuxt.js推荐的<nuxt-link> 标签，可以跳转了，而且这个标签还支持传参数。<br>看到编译后的标签，是一个a标签，然后看文档，这个支持前进和后退功能，相当于自己做了一个浏览器的堆栈保存访问的地址。<br>现在还有一个问题，就是我想做 播放页点击其他视频，再重新加载，但由于是同一个页面导致不能加载，还没有方法解决。</nuxt-link></p>
+		<p>实现List<e>, RandomAccess, Cloneable, java.io.Serializable 接口</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/** The lock protecting all mutators */</span><br><span class="line"> final transient ReentrantLock lock = new ReentrantLock();</span><br><span class="line"></span><br><span class="line"> /** The array, accessed only via getArray/setArray. */</span><br><span class="line"> private transient volatile Object[] array;</span><br></pre></td></tr></table></figure>
+<p>主要的成员变量有2个，一个ReentrantLock，一个是内部存值的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &#123;@code true&#125; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        int len = elements.length;</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + 1);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>Add方法，先是前后两个lock与unlock，保证安全性。<br>实现实际上是复制一个原来数组，将新值添加到新数组的最后一位，内部变量指向新的数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">static final class COWIterator&lt;E&gt; implements ListIterator&lt;E&gt; &#123;</span><br><span class="line">    /** Snapshot of the array */</span><br><span class="line">    private final Object[] snapshot;</span><br><span class="line">    /** Index of element to be returned by subsequent call to next.  */</span><br><span class="line">    private int cursor;</span><br><span class="line"></span><br><span class="line">    private COWIterator(Object[] elements, int initialCursor) &#123;</span><br><span class="line">        cursor = initialCursor;</span><br><span class="line">        snapshot = elements;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>内部的遍历，其实是将原来数组进行一个快照，这样即使数组变化了，不影响快照的遍历。</p>
+<p>CopyOnWriteArrayList 的添加元素很消耗资源，因为每次都要新建一个数组，然后复制所有数据，只适用于读远大于写的情况，如果写比较多，性能会很差。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -110,13 +117,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/前端/">前端</a>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
   </div>
 
 </div>
@@ -125,7 +132,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2019/03/31/arts-2019-02-31-tip/" data-title="Vue 学习笔记1 | 演练场" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2019/04/19/arts-2019-4-21-tip/" data-title="java集合-CopyOnWriteArrayList | 演练场" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -139,18 +146,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2019/03/31/arts-2019-02-31-review/" title="scalability availability &amp; stability patterns 学习笔记">
+ <a href="/2019/04/21/arts-2019-04-21-algorithm/" title="删除二叉搜索树中的节点">
   <strong>上一篇：</strong><br/>
   <span>
-  scalability availability &amp; stability patterns 学习笔记</span>
+  删除二叉搜索树中的节点</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2019/03/31/arts-2019-02-31-algorithm/"  title="设计循环队列">
+<a href="/2019/04/14/arts-2019-04-14-review/"  title="An introduction to distributed systems 学习笔记2">
  <strong>下一篇：</strong><br/> 
- <span>设计循环队列
+ <span>An introduction to distributed systems 学习笔记2
 </span>
 </a>
 </div>
