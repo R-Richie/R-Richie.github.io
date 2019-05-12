@@ -4,24 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>新的旅程的开始 | 演练场</title>
+    <title>jjava锁-CountDownLatch | 演练场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="R_Richie">
     
 
     
-    <meta name="description" content="在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。   我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。   闲话不多说了，旅程开始！">
+    <meta name="description" content="内部类Sync继承AbstractQueuedSynchronizer12345678910111213141516171819202122232425262728293031/** * Synchronization control For CountDownLatch. * Uses AQS state to represent count. */private static final cl">
+<meta name="keywords" content="编程技巧,java,锁">
 <meta property="og:type" content="article">
-<meta property="og:title" content="新的旅程的开始">
-<meta property="og:url" content="http://yoursite.com/2015/07/18/2015-7-18-first-article/index.html">
+<meta property="og:title" content="jjava锁-CountDownLatch">
+<meta property="og:url" content="http://yoursite.com/2019/05/11/arts-2019-05-12-tip/index.html">
 <meta property="og:site_name" content="演练场">
-<meta property="og:description" content="在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。   我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。   闲话不多说了，旅程开始！">
+<meta property="og:description" content="内部类Sync继承AbstractQueuedSynchronizer12345678910111213141516171819202122232425262728293031/** * Synchronization control For CountDownLatch. * Uses AQS state to represent count. */private static final cl">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2015-07-18T12:42:56.000Z">
+<meta property="og:updated_time" content="2019-05-12T09:21:40.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="新的旅程的开始">
-<meta name="twitter:description" content="在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。   我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。   闲话不多说了，旅程开始！">
+<meta name="twitter:title" content="jjava锁-CountDownLatch">
+<meta name="twitter:description" content="内部类Sync继承AbstractQueuedSynchronizer12345678910111213141516171819202122232425262728293031/** * Synchronization control For CountDownLatch. * Uses AQS state to represent count. */private static final cl">
 
     
     <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
@@ -81,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/18/2015-7-18-first-article/" title="新的旅程的开始" itemprop="url">新的旅程的开始</a>
+      <a href="/2019/05/11/arts-2019-05-12-tip/" title="jjava锁-CountDownLatch" itemprop="url">jjava锁-CountDownLatch</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-18T06:52:56.000Z" itemprop="datePublished"> Published 2015-07-18</time>
+    <time datetime="2019-05-11T14:31:00.000Z" itemprop="datePublished"> Published 2019-05-11</time>
     
   </p>
 </header>
@@ -101,9 +102,13 @@
 		
 		</div>
 		
-		<p>  在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。</p>
-<p>  我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。</p>
-<p>  闲话不多说了，旅程开始！</p>
+		<p>内部类Sync继承AbstractQueuedSynchronizer<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Synchronization control For CountDownLatch.</span><br><span class="line"> * Uses AQS state to represent count.</span><br><span class="line"> */</span><br><span class="line">private static final class Sync extends AbstractQueuedSynchronizer &#123;</span><br><span class="line">    private static final long serialVersionUID = 4982264981922014374L;</span><br><span class="line"></span><br><span class="line">    Sync(int count) &#123;</span><br><span class="line">        setState(count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int getCount() &#123;</span><br><span class="line">        return getState();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected int tryAcquireShared(int acquires) &#123;</span><br><span class="line">        return (getState() == 0) ? 1 : -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected boolean tryReleaseShared(int releases) &#123;</span><br><span class="line">        // Decrement count; signal when transition to zero</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            int c = getState();</span><br><span class="line">            if (c == 0)</span><br><span class="line">                return false;</span><br><span class="line">            int nextc = c-1;</span><br><span class="line">            if (compareAndSetState(c, nextc))</span><br><span class="line">                return nextc == 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过构造器传入state的数值。<br>tryAcquireShared 非独占加锁，实现如果state不是0，就返回-1，小于0。等于0，就返回1，大于0<br>tryReleaseShare 非独占解锁，自旋，如果状态等于0，就是解锁失败。每次解锁大小减1，如果等于0，则解锁成功，其他则失败</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public CountDownLatch(int count) &#123;</span><br><span class="line">    if (count &lt; 0) throw new IllegalArgumentException(&quot;count &lt; 0&quot;);</span><br><span class="line">    this.sync = new Sync(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造器传入count，赋值给state<br>添加await方法，用于加锁<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public void await() throws InterruptedException &#123;</span><br><span class="line">    sync.acquireSharedInterruptibly(1);</span><br><span class="line">&#125;</span><br><span class="line">public final void acquireSharedInterruptibly(int arg)</span><br><span class="line">        throws InterruptedException &#123;</span><br><span class="line">    if (Thread.interrupted())</span><br><span class="line">        throw new InterruptedException();</span><br><span class="line">    if (tryAcquireShared(arg) &lt; 0)</span><br><span class="line">        doAcquireSharedInterruptibly(arg);</span><br><span class="line">&#125;</span><br><span class="line">private void doAcquireSharedInterruptibly(int arg)</span><br><span class="line">    throws InterruptedException &#123;</span><br><span class="line">    final Node node = addWaiter(Node.SHARED);</span><br><span class="line">    boolean failed = true;</span><br><span class="line">    try &#123;</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            final Node p = node.predecessor();</span><br><span class="line">            if (p == head) &#123;</span><br><span class="line">                int r = tryAcquireShared(arg);</span><br><span class="line">                if (r &gt;= 0) &#123;</span><br><span class="line">                    setHeadAndPropagate(node, r);</span><br><span class="line">                    p.next = null; // help GC</span><br><span class="line">                    failed = false;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;</span><br><span class="line">                parkAndCheckInterrupt())</span><br><span class="line">                throw new InterruptedException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (failed)</span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>除非state减为0，其他情况，tryAcquireShared都小于0，要进doAcquireSharedInterruptibly方法<br>doAcquireSharedInterruptibly方法，先非独占的加入队列，然后判断前序节点是不是头节点，<br>如果是前序节点是头节点，判断tryAcquireShared结果，在state减为0前，这个都是不进入r》=0的条件里，后面就会wait等待 前面执行完，后唤醒。<br>不断自旋，只有在前序是头节点，同时state是0 时，才会继续执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public void countDown() &#123;</span><br><span class="line">    sync.releaseShared(1);</span><br><span class="line">&#125;</span><br><span class="line">public final boolean releaseShared(int arg) &#123;</span><br><span class="line">    if (tryReleaseShared(arg)) &#123;</span><br><span class="line">        doReleaseShared();</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>countDown，每次减1，在每到0，之前返回都是false。</p>
+<p>总结：基于模版AbstractQueuedSynchronizer，通过tryAcquireShared 加锁，countDown 不断减少state，直到等于0，再解锁，可以实现，单个线程等待其他多个线程的功能。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -111,9 +116,14 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/闲谈/">闲谈</a>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
 </div>
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/锁/">锁</a>
+  </div>
 
 </div>
 
@@ -121,7 +131,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/18/2015-7-18-first-article/" data-title="新的旅程的开始 | 演练场" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2019/05/11/arts-2019-05-12-tip/" data-title="jjava锁-CountDownLatch | 演练场" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -135,13 +145,21 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/10/02/Java-annotation入门/" title="Java annotation入门">
+ <a href="/2019/05/12/arts-2019-05-12-share/" title="《全球科技史纲》吴军-读后感1">
   <strong>上一篇：</strong><br/>
   <span>
-  Java annotation入门</span>
+  《全球科技史纲》吴军-读后感1</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/2019/05/05/arts-2019-05-05-review/"  title="Distributed Systems Principles and Paradigms 学习笔记1">
+ <strong>下一篇：</strong><br/> 
+ <span>Distributed Systems Principles and Paradigms 学习笔记1
+</span>
+</a>
+</div>
 
 </nav>
 
