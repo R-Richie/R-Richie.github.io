@@ -4,25 +4,25 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>《7up》第一遍观后感 | 演练场</title>
+    <title>39. 组合总和 | 演练场</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="R_Richie">
     
 
     
-    <meta name="description" content="第一遍看这部纪录片，纪录片分别从英国找到一群不同阶层的孩子，从7岁开始，每隔7年采访，看这些人的成长与变化。片子是按时间顺序，我们横向对比，第一点教育很重要，穷人家的孩子都不太重视教育，没有眼界，不清楚怎么规划未来，有的连大学是什么都不知道，自然比别人要慢很多，或者生活格局要低很多。Nick一个害羞的男孩，通过考取牛津，成功翻身。第二点，父母、家庭对孩子影响很大，片中paul从小就父母离婚在福利院">
-<meta name="keywords" content="感悟,纪录片">
+    <meta name="description" content="题目给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。说明：  所有数字（包括 target）都是正整数。 解集不能包含重复的组合。示例 1:输入: candidates = [2,3,6,7], target = 7,所求解集为:[[7],[2,">
+<meta name="keywords" content="算法,回溯思维">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《7up》第一遍观后感">
-<meta property="og:url" content="http://yoursite.com/2019/03/31/arts-2019-02-31-share/index.html">
+<meta property="og:title" content="39. 组合总和">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/arts-2019-05-26-algorithm/index.html">
 <meta property="og:site_name" content="演练场">
-<meta property="og:description" content="第一遍看这部纪录片，纪录片分别从英国找到一群不同阶层的孩子，从7岁开始，每隔7年采访，看这些人的成长与变化。片子是按时间顺序，我们横向对比，第一点教育很重要，穷人家的孩子都不太重视教育，没有眼界，不清楚怎么规划未来，有的连大学是什么都不知道，自然比别人要慢很多，或者生活格局要低很多。Nick一个害羞的男孩，通过考取牛津，成功翻身。第二点，父母、家庭对孩子影响很大，片中paul从小就父母离婚在福利院">
+<meta property="og:description" content="题目给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。说明：  所有数字（包括 target）都是正整数。 解集不能包含重复的组合。示例 1:输入: candidates = [2,3,6,7], target = 7,所求解集为:[[7],[2,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-31T11:00:20.251Z">
+<meta property="og:updated_time" content="2019-05-26T07:52:40.334Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《7up》第一遍观后感">
-<meta name="twitter:description" content="第一遍看这部纪录片，纪录片分别从英国找到一群不同阶层的孩子，从7岁开始，每隔7年采访，看这些人的成长与变化。片子是按时间顺序，我们横向对比，第一点教育很重要，穷人家的孩子都不太重视教育，没有眼界，不清楚怎么规划未来，有的连大学是什么都不知道，自然比别人要慢很多，或者生活格局要低很多。Nick一个害羞的男孩，通过考取牛津，成功翻身。第二点，父母、家庭对孩子影响很大，片中paul从小就父母离婚在福利院">
+<meta name="twitter:title" content="39. 组合总和">
+<meta name="twitter:description" content="题目给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。说明：  所有数字（包括 target）都是正整数。 解集不能包含重复的组合。示例 1:输入: candidates = [2,3,6,7], target = 7,所求解集为:[[7],[2,">
 
     
     <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
@@ -82,14 +82,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2019/03/31/arts-2019-02-31-share/" title="《7up》第一遍观后感" itemprop="url">《7up》第一遍观后感</a>
+      <a href="/2019/05/26/arts-2019-05-26-algorithm/" title="39. 组合总和" itemprop="url">39. 组合总和</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
 		
   <p class="article-time">
-    <time datetime="2019-03-31T08:15:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
+    <time datetime="2019-05-26T08:51:00.000Z" itemprop="datePublished"> Published 2019-05-26</time>
     
   </p>
 </header>
@@ -98,25 +98,30 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解题思路"><span class="toc-number">2.</span> <span class="toc-text">解题思路</span></a></li></ol>
 		
 		</div>
 		
-		<p>第一遍看这部纪录片，纪录片分别从英国找到一群不同阶层的孩子，从7岁开始，每隔7年采访，看这些人的成长与变化。<br>片子是按时间顺序，我们横向对比，<br>第一点教育很重要，穷人家的孩子都不太重视教育，没有眼界，不清楚怎么规划未来，有的连大学是什么都不知道，自然比别人要慢很多，或者生活格局要低很多。Nick一个害羞的男孩，通过考取牛津，成功翻身。<br>第二点，父母、家庭对孩子影响很大，片中paul从小就父母离婚在福利院长大，缺乏自信，一生都会怀疑自己，幸好娶了一个积极的老婆。Symon来自单亲家庭，缺少父爱，很小就比较迷茫。Suzy在14岁，父母离婚，对她打击很大，对婚姻失去希望。<br>第三点，大部门人都经历了离婚，越晚结婚，婚姻越稳定，婚姻很大程度影响一个人。<br>第四点，癌症的发病率很高，在那个时候的英国，很多人的父母都是死于癌症，越到老越能体会，身体健康是最重要的。<br>第五点，片子的立意在于说明英国存在阶级，对于里面的每个人的报道有些节选，不能代表全部，富人区的孩子成功与自身的奋斗也是离不开，穷人区的人穷，有些自己说自己很懒。阶级是客观存在的，但自身努力是可以突破的，但自身努力不代表能完成一切。</p>
-  
+		<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>candidates 中的数字可以无限制重复被选取。<br>说明：</p>
+<ul>
+<li>所有数字（包括 target）都是正整数。</li>
+<li>解集不能包含重复的组合。<br>示例 1:<br>输入: candidates = [2,3,6,7], target = 7,<br>所求解集为:<br>[<br>[7],<br>[2,2,3]<br>]<br>示例 2:<br>输入: candidates = [2,3,5], target = 8,<br>所求解集为:<br>[<br>[2,2,2,2],<br>[2,3,3],<br>[3,5]<br>]</li>
+</ul>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>关键是结束条件，每次遍历target-candidates[I]，传入下一个递归，如何等于0 ，结束，如果小于最小值也结束<br>深度遍历，可以重复，如果返回，则删除最后一位添加的，继续下一个的计算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List list;</span><br><span class="line">    List item;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) &#123;</span><br><span class="line">        list = new ArrayList&lt;&gt;();</span><br><span class="line">        item = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        if(candidates == null || candidates.length == 0)&#123;</span><br><span class="line">            return list;</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        backTracing(0,candidates,target);      </span><br><span class="line">        return list;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    private void backTracing(int index ,int[] candidates , int target)&#123;</span><br><span class="line">        if(target == 0)&#123;</span><br><span class="line">            list.add(new ArrayList&lt;&gt;(item));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(target &lt; candidates[0])&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        for(int i = index ; i&lt; candidates.length ; i++)&#123;</span><br><span class="line">            int targetDelete = target - candidates[i];</span><br><span class="line">            item.add(candidates[i]);</span><br><span class="line">            backTracing(i, candidates, targetDelete);</span><br><span class="line">            item.remove(item.size()-1);</span><br><span class="line">        &#125;</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/纪录片/">纪录片</a>
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/回溯思维/">回溯思维</a>
   </div>
 
 </div>
@@ -125,7 +130,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2019/03/31/arts-2019-02-31-share/" data-title="《7up》第一遍观后感 | 演练场" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2019/05/26/arts-2019-05-26-algorithm/" data-title="39. 组合总和 | 演练场" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -138,19 +143,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2019/03/31/arts-2019-02-31-algorithm/" title="设计循环队列">
-  <strong>上一篇：</strong><br/>
-  <span>
-  设计循环队列</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2019/03/22/arts-2019-02-22-algorithm/"  title="合并两个有序链表">
+<a href="/2019/05/26/arts-2019-05-26-tip/"  title="线程池-ThreadPoolExecutor初探1">
  <strong>下一篇：</strong><br/> 
- <span>合并两个有序链表
+ <span>线程池-ThreadPoolExecutor初探1
 </span>
 </a>
 </div>
@@ -165,7 +162,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解题思路"><span class="toc-number">2.</span> <span class="toc-text">解题思路</span></a></li></ol>
  
   </div>
 
