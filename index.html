@@ -79,6 +79,126 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/06/09/arts-2019-06-09-share/" title="RPC初探1" itemprop="url">RPC初探1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-09T06:22:00.000Z" itemprop="datePublished"> Published 2019-06-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>看了一遍《分布式服务框架-原理与实践》这本书，大致浏览了一遍有了一些初略的印象。<br>RPC应用在分布式部署服务，互相需要调用的情况下，原来是在同一个进程间互相调用，互相通信，但不同进程，多机器就不能用原来的进程间调用的方法，但又想跟原来进程间一样简单，这样RPC就诞生了。<br>RPC分为几个部分，序列化与反序列化，网络框架，协议栈。简单来说就是先序列化，然后网络传输，然后再反序列化。<br>那这个服务框架的好坏可以再细分了序列化的好坏，网络模型的好坏，网络协议的好坏。<br>一个问题的研究，需要将这个问题拆分成小的问题，再每个问题深入研究，最后合成一个整体考虑。我们把RPC进行拆分，一个表象的问题，最终会拆分成基础的问题，网络问题，与网络传输序列化问题 。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/06/09/arts-2019-06-09-tip/" title="关于学习的思考" itemprop="url">关于学习的思考</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-09T06:04:00.000Z" itemprop="datePublished"> Published 2019-06-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近再复习各种计算机相关的，有些知识比如计算机原理，网络、操作系统，我也知道这些知识很重要是根本的东西，但工作上不是那么继续，时间有限，这些东西总会往后拖，拖到现在工作来6年了，这些知识还是没有体系。<br>最近再想想是不是要考研，一个方面是自己工作到了一个瓶颈，想想怎么能向上走，另外一方面，正好趁着考试，把这些科班需要的知识体系补全，这样我的计算机方面的知识体系就全面。即使考试没成功，知识体系也补全了，能有一个目标去努力一些不那么急切需要的东西很不容易。<br>但我有考虑，这种为了考试的学习，是不是能真正掌握知识，还是只是精通考试，这个很重要，我不是为了考试，但为了达到目标，可能会偏离初心，所以学习过程很重要，过程大于目标。如果还像之前学习辅修那样补习，即使课程学习完成，还是收获很小，那次学习得到了结果，但没有过程，对于未来起到的作用很小，所以这次考试我要以正确的方式去学习，那怎样才能算正确的过程学习？<br>分析之前的学习经验，在大学，学习了很多全面的知识体系，但那个时候不知道为什么学习这些，只知道有这些，然后不断做题训练，在离开书本后一无所知，虽然知识学了很多，但不知道怎么使用，学习知识很枯燥，导致了很快失去了兴趣，后面只是机械的学习，这是之前导致失败的原因。与之不同的工作后的学习，大部分是应用，快速的使用别人的东西，马上上手，很快应用，知识碎片化，表象化。很多东西都会，但遇到需要分析的细节就是一脸懵逼，没有理解细节，只是随机试错，效率很低，关键问题不知道该如何下手。<br>分析这两种不同的学习经验，发现走了2个极端，理论与实践，两个互相混合，才能理解，现实原因决定理论发展，理论发展加快现实的进度。懂得系统的知识可以让你站在巨人的肩膀上进步，起点比较高，不用重新趟别人错过的坑，加快进步的速度，但知道知识会让人迷茫，脱离实际，理论不能应用在实际情况上就毫无意义。<br>那实际学习中要如何结合呢，光靠课本是达不到这点的，要我们自己去找食物。要先找到构建这门学科的人，找到他是如何建立基础概念的，过程是怎么样的，不能单单看他构建的知识，要看他为什么这么构建，怎么构建，中间经历过什么错误，从历史中学习，但这些材料可能不好查找。这么做的目的就是将概念与实际现实结合起来，从实际中学习概念是如何建立，学习整个知识体系的构建过程，不单单是知道有这些知识，能讲出来概念的由来，这样你就能很好的理论联系实际。然后是学习概念的细节内涵，如果以考试为目的，那就需要大量的训练，记忆，但不能经历错误的过程，建立知识体系，理论结合实际是我们的初心，大量训练是为了熟练，考试结果也只是结果。如果只达到了结果，跟原来的辅修的结果可能差不多，要为了更长远的利益达成。<br>准备复习考研的方法，第一遍，以理解概念为主，找历史记录，找知识体系构建者的建立概念的过程为主，以理解为主，小量训练为辅，构建知识体系。<br>第二遍，开始大量训练，找到知识体系漏洞，记录错题，修正错误理解。<br>第三遍，以错题，与考试大纲为主，构建体系与查缺补漏。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/06/01/arts-2019-06-01-tip/" title="ThreadLocal初探1" itemprop="url">ThreadLocal初探1</a>
   </h1>
   <p class="article-author">By
@@ -117,7 +237,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/并发集合/">并发集合</a>
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/并发集合/">并发集合</a>
   </div>
 
 </div>
@@ -377,7 +497,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/并发集合/">并发集合</a>
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/并发集合/">并发集合</a>
   </div>
 
 </div>
@@ -583,135 +703,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/并发集合/">并发集合</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/05/18/arts-2019-05-18-algorithm1/" title="208.实现 Trie (前缀树)" itemprop="url">208.实现 Trie (前缀树)</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-05-18T14:17:07.000Z" itemprop="datePublished"> Published 2019-05-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。<br>示例:<br>Trie trie = new Trie();<br>trie.insert(“apple”);<br>trie.search(“apple”);   // 返回 true<br>trie.search(“app”);     // 返回 false<br>trie.startsWith(“app”); // 返回 true<br>trie.insert(“app”);<br>trie.search(“app”);     // 返回 true<br>说明:<br>你可以假设所有的输入都是由小写字母 a-z 构成的。<br>保证所有输入均为非空字符串。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>开始是root不存储数据<br>然后引入一个小写字母数组<br>每个数组里面的对象包含自己和数组还有是否是叶子结点<br>内部类 TreeNode，包含字符，TreeNode数组，叶子结点标示<br>每次一个字符，一次遍历查下去<br>abcde fghij klmno pqrst uvwxy z<br>字符数组的大小一直错<br>Trie树的实现<br>插入没有就新建，有的继续遍历<br>搜索跟新建相似，最后介绍不是叶子结点就返回false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">class Trie &#123;</span><br><span class="line">    private TreeNode root;</span><br><span class="line">    public static class TreeNode&#123;</span><br><span class="line">        private char data;</span><br><span class="line">        private TreeNode[] child = new TreeNode[26];</span><br><span class="line">        private boolean isEndingChar = false;</span><br><span class="line">        public TreeNode(char data)&#123;</span><br><span class="line">            this.data = data;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    /** Initialize your data structure here. */</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        root = new TreeNode(&apos;/&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Inserts a word into the trie. */</span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        TreeNode node = root;</span><br><span class="line">        char[] array = word.toCharArray();</span><br><span class="line">        for(int i = 0 ; i &lt; array.length ; i++)&#123;</span><br><span class="line">            int index = array[i] - &apos;a&apos;;</span><br><span class="line">            if(node.child[index] == null)&#123;</span><br><span class="line">                node.child[index] = new TreeNode(array[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.child[index];</span><br><span class="line">        &#125;</span><br><span class="line">        node.isEndingChar = true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Returns if the word is in the trie. */</span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        TreeNode node = root;</span><br><span class="line">        char[] array = word.toCharArray();</span><br><span class="line">        for(int i = 0 ; i &lt; array.length ; i++)&#123;</span><br><span class="line">            int index = array[i] - &apos;a&apos;;</span><br><span class="line">            if(node.child[index] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.child[index];</span><br><span class="line">        &#125;</span><br><span class="line">        if(!node.isEndingChar)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Returns if there is any word in the trie that starts with the given prefix. */</span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        TreeNode node = root;</span><br><span class="line">        char[] array = prefix.toCharArray();</span><br><span class="line">        for(int i = 0 ; i &lt; array.length ; i++)&#123;</span><br><span class="line">            int index = array[i] - &apos;a&apos;;</span><br><span class="line">            if(node.child[index] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.child[index];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your Trie object will be instantiated and called as such:</span><br><span class="line"> * Trie obj = new Trie();</span><br><span class="line"> * obj.insert(word);</span><br><span class="line"> * boolean param_2 = obj.search(word);</span><br><span class="line"> * boolean param_3 = obj.startsWith(prefix);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/Trie树/">Trie树</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/05/18/arts-2019-05-18-tip1/" title="Java并发集合-DelayQueue" itemprop="url">Java并发集合-DelayQueue</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-05-18T14:14:00.000Z" itemprop="datePublished"> Published 2019-05-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>基于优先级队列的无界队列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Creates a new &#123;@code DelayQueue&#125; that is initially empty.</span><br><span class="line"> */</span><br><span class="line">public DelayQueue() &#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>构造器为空</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private final transient ReentrantLock lock = new ReentrantLock();</span><br><span class="line">private final PriorityQueue&lt;E&gt; q = new PriorityQueue&lt;E&gt;();</span><br><span class="line">private Thread leader = null;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Condition signalled when a newer element becomes available</span><br><span class="line"> * at the head of the queue or a new thread may need to</span><br><span class="line"> * become leader.</span><br><span class="line"> */</span><br><span class="line">private final Condition available = lock.newCondition();</span><br></pre></td></tr></table></figure>
-<p>一个内部的锁，一个存储用的优先级队列，存储对象E，要继承Delayed，一个leader用于当前优先级最高要执行的线程。available用于等待的线程。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Inserts the specified element into this delay queue.</span><br><span class="line"> *</span><br><span class="line"> * @param e the element to add</span><br><span class="line"> * @return &#123;@code true&#125;</span><br><span class="line"> * @throws NullPointerException if the specified element is null</span><br><span class="line"> */</span><br><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        q.offer(e);</span><br><span class="line">        if (q.peek() == e) &#123;</span><br><span class="line">            leader = null;</span><br><span class="line">            available.signal();</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主要的插入的方法是offer，使用lock锁住，存取使用同一个锁，将新元素添加之前的优先级队列中，如果添加的新元素根据优先级排列在第一位，就要清空原来要执行leader线程，不然你没法作为优先级最好的去执行，然后随便唤醒一个线程就可以执行优先级最高的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Retrieves and removes the head of this queue, waiting if necessary</span><br><span class="line"> * until an element with an expired delay is available on this queue.</span><br><span class="line"> *</span><br><span class="line"> * @return the head of this queue</span><br><span class="line"> * @throws InterruptedException &#123;@inheritDoc&#125;</span><br><span class="line"> */</span><br><span class="line">public E take() throws InterruptedException &#123;</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lockInterruptibly();</span><br><span class="line">    try &#123;</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            E first = q.peek();</span><br><span class="line">            if (first == null)</span><br><span class="line">                available.await();</span><br><span class="line">            else &#123;</span><br><span class="line">                long delay = first.getDelay(NANOSECONDS);</span><br><span class="line">                if (delay &lt;= 0)</span><br><span class="line">                    return q.poll();</span><br><span class="line">                first = null; // don&apos;t retain ref while waiting</span><br><span class="line">                if (leader != null)</span><br><span class="line">                    available.await();</span><br><span class="line">                else &#123;</span><br><span class="line">                    Thread thisThread = Thread.currentThread();</span><br><span class="line">                    leader = thisThread;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        available.awaitNanos(delay);</span><br><span class="line">                    &#125; finally &#123;</span><br><span class="line">                        if (leader == thisThread)</span><br><span class="line">                            leader = null;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (leader == null &amp;&amp; q.peek() != null)</span><br><span class="line">            available.signal();</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Take是获取到时间的元素，不断自旋，进来先取出优先级队列的第一个，如果优先级队列是空，就在available变量里等待。<br>如果队列里有元素，就计算纳秒的延迟时间。如果这个时间小于0，就弹出元素，然后返回，这个是推出自旋的出口。<br>如果还没到延迟时间，就看leader是不是有值，代表只不是有其他正要执行的线程，如果有就等待，如果没有，就将当前线程作为执行线程，同时等待延迟时间，到时间后唤醒，重新自旋，判断是否退出。<br>这个主要问题就是插入优先级高于正要执行的当前线程，就需要重置leader重新判断哪个实现执行。<br>最后没有leader线程再执行，就再唤醒下一个available的等待线程<br>总结：基于优先级队列，需要自己继承Delay，实现比较、计算延迟时间的方法。通过等待与唤醒来按时间执行。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/并发集合/">并发集合</a>
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/并发集合/">并发集合</a>
   </div>
 
 </div>
@@ -735,7 +727,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -766,7 +758,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>11</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>12</sup></a></li>
 		  
 		
 		  
@@ -774,7 +766,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>9</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>10</sup></a></li>
 		  
 		
 		  
@@ -807,11 +799,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>11</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>11</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>12</sup></a></li>
 			
 		
 			
@@ -819,15 +811,15 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>9</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>9</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/架构/" title="架构">架构<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>8</sup></a></li>
 			
 		
 			
@@ -843,10 +835,6 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
@@ -855,15 +843,11 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>1</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Annotation/" title="Annotation">Annotation<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/二叉树/" title="二叉树">二叉树<sup>1</sup></a></li>
+				<li><a href="/tags/锁/" title="锁">锁<sup>1</sup></a></li>
 			
 		
 			
@@ -871,11 +855,7 @@
 			
 		
 			
-				<li><a href="/tags/成长/" title="成长">成长<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/队列/" title="队列">队列<sup>1</sup></a></li>
+				<li><a href="/tags/图/" title="图">图<sup>1</sup></a></li>
 			
 		
 			
@@ -883,7 +863,19 @@
 			
 		
 			
-				<li><a href="/tags/二分查找/" title="二分查找">二分查找<sup>1</sup></a></li>
+				<li><a href="/tags/Annotation/" title="Annotation">Annotation<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/队列/" title="队列">队列<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/链表/" title="链表">链表<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/回溯思维/" title="回溯思维">回溯思维<sup>1</sup></a></li>
 			
 		
 		</ul>

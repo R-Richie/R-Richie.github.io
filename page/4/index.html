@@ -79,6 +79,148 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/04/14/arts-2019-04-14-algorithm/" title="找到 K 个最接近的元素" itemprop="url">找到 K 个最接近的元素</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-14T05:13:07.000Z" itemprop="datePublished"> Published 2019-04-14</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个排序好的数组，两个整数 k 和 x，从数组中找到最靠近 x（两数之差最小）的 k 个数。返回的结果必须要是按升序排好的。如果有两个数与 x 的差值一样，优先选择数值较小的那个数。<br>示例 1:<br>输入: [1,2,3,4,5], k=4, x=3<br>输出: [1,2,3,4]</p>
+<p>示例 2:<br>输入: [1,2,3,4,5], k=4, x=-1<br>输出: [1,2,3,4]</p>
+<p>说明:</p>
+<ol>
+<li>k 的值为正数，且总是小于给定排序数组的长度。</li>
+<li>数组不为空，且长度不超过 104</li>
+<li>数组里的每个元素与 x 的绝对值不超过 104</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先这是一个有序的数组，那就可以先二分法查找x，然后返回对于的索引，这个分几种情况<br>1）找到等于x的值，直接返回索引<br>2）找不到具体等于x的值，就只能找到离x最近且最小的索引值</p>
+<p>根据上面返回的索引值，作为第二步的初始索引。分别判断前后的是不是到上下边界了，<br>1）没到边界，分别找前后离x最近的边界，左或右移一位<br>2）到边界，只能反向移动，左移或右移动一位</p>
+<p>结束条件是k，每次移动边界，k递减</p>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"> public int binarySearch(int[] arr,int x)&#123;</span><br><span class="line">        int left = 0;</span><br><span class="line">        int right = arr.length -1;</span><br><span class="line">        while(left &lt;= right)&#123;</span><br><span class="line">            int index = (right -left)/2+left;</span><br><span class="line">            int value = arr[index];</span><br><span class="line">            </span><br><span class="line">            if(value == x)&#123;</span><br><span class="line">                return index;</span><br><span class="line">            &#125;else if(value &gt; x)&#123;</span><br><span class="line">                right = index - 1;</span><br><span class="line">            &#125;else if(value &lt; x)&#123;</span><br><span class="line">                if(index + 1 &lt; (arr.length -1))&#123;</span><br><span class="line">                    int next = arr[index+1];</span><br><span class="line">                    if(next &lt; x)&#123;</span><br><span class="line">                        left = index + 1;</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125;</span><br><span class="line">                    int comp = (next - x) - (x - value);</span><br><span class="line">                    if(comp &gt;= 0)&#123;</span><br><span class="line">                        return index;</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        return index+1;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    return index;</span><br><span class="line">                &#125;</span><br><span class="line">                  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;Integer&gt; findClosestElements(int[] arr, int k, int x) &#123;</span><br><span class="line">        int flag = binarySearch(arr,x);</span><br><span class="line">        if(flag == -1)&#123;</span><br><span class="line">            List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">            for(int i = 0 ; i&lt;k;i++)&#123;</span><br><span class="line">                list.add(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            return list;</span><br><span class="line">        &#125;</span><br><span class="line">        int nums = k-1;</span><br><span class="line">        int left = flag;</span><br><span class="line">        int right = flag;</span><br><span class="line">        int size = arr.length;</span><br><span class="line">        while(nums != 0)&#123;</span><br><span class="line">            int innerLeft = left;</span><br><span class="line">            int innerRight = right;</span><br><span class="line">            if(right + 1 &gt; size -1)&#123;</span><br><span class="line">                left = innerLeft -1;</span><br><span class="line">                nums--;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;else if(left -1 &lt; 0)&#123;</span><br><span class="line">                right = innerRight + 1;</span><br><span class="line">                nums--;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if( right + 1 &lt;= size - 1 )&#123;</span><br><span class="line">                    innerRight = innerRight + 1;</span><br><span class="line">                &#125;</span><br><span class="line">                if(left -1 &gt;= 0)&#123;</span><br><span class="line">                    innerLeft = innerLeft -1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;        </span><br><span class="line">            int leftValue = arr[innerLeft];</span><br><span class="line">            int rightValue = arr[innerRight];</span><br><span class="line">            int leftDiv = x - leftValue;</span><br><span class="line">            int rightDiv = rightValue - x;</span><br><span class="line">            if(leftDiv &lt;= rightDiv)&#123;</span><br><span class="line">                left = innerLeft;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                right = innerRight;</span><br><span class="line">            &#125;           </span><br><span class="line">            nums--;       </span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        for(int i = left ; i&lt;= right;i++)&#123;</span><br><span class="line">            list2.add(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return list2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比较容易出错的有几点<br>1.二分查找不光要找出等于的值，也要查找离的最近最小的值<br>2.第二次进行查询的时候，可能会有相等数字重复多次的情况，也要考虑<br>3.第二次查找，比较大小左右边界移动的判断条件很复杂，很容易出错。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/二分查找/">二分查找</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/06/arts-2019-04-14-tips/" title="java集合-ArrayList" itemprop="url">java集合-ArrayList</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-06T07:13:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>ArryList实现接口List<e>, RandomAccess, Cloneable, java.io.Serializable<br>基础的数据结构是数组，根据存储数据的多少动态扩容。</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Default initial capacity.</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 10;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shared empty array instance used for empty instances.</span><br><span class="line"> */</span><br><span class="line">private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shared empty array instance used for default sized empty instances. We</span><br><span class="line"> * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when</span><br><span class="line"> * first element is added.</span><br><span class="line"> */</span><br><span class="line">private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The array buffer into which the elements of the ArrayList are stored.</span><br><span class="line"> * The capacity of the ArrayList is the length of this array buffer. Any</span><br><span class="line"> * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><br><span class="line"> * will be expanded to DEFAULT_CAPACITY when the first element is added.</span><br><span class="line"> */</span><br><span class="line">transient Object[] elementData</span><br><span class="line">/**</span><br><span class="line"> * The size of the ArrayList (the number of elements it contains).</span><br><span class="line"> *</span><br><span class="line"> * @serial</span><br><span class="line"> */</span><br><span class="line">private int size;</span><br></pre></td></tr></table></figure>
+<p>elementData是实际存储数据的数组。DEFAULT_CAPACITY是默认的容量，如果没有指定数组的大小。DEFAULTCAPACITY_EMPTY_ELEMENTDATA 与EMPTY_ELEMENTDATA都是 空的初始数组，DEFAULTCAPACITY_EMPTY_ELEMENTDATA是用来判断是不是通过默认方法创建的空数组，而不是删除后才空的。如果指定了数组大小，就用EMPTY_ELEMENTDATA作为默认空数组。</p>
+<p>扩容是在添加元素的时候进行，这样不会初始化没有数据的情况下就占据空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加方法很简单，先去内部扩容，然后在最后一个添加值，看扩容的内部实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ensureExplicitCapacity(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureExplicitCapacity(int minCapacity) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * Increases the capacity to ensure that it can hold at least the</span><br><span class="line"> * number of elements specified by the minimum capacity argument.</span><br><span class="line"> *</span><br><span class="line"> * @param minCapacity the desired minimum capacity</span><br><span class="line"> */</span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ensureCapacityInternal 先是一个判断数组是怎么创建，如果是默认空参数的构造器创建，就使用默认的初始大小10作为最小容量，这样就能避免不能手动创建更小数组的问题。<br>主要扩容是grow方法，可以看出 newCapacity是扩容0.5倍大小，到原来的1.5倍。<br>还有就是容器上下限的判断。扩容就是迁移数组newCapacity的大小的数组里。<br>归根到底，就是将数组扩容1.5倍，旧数组搬迁到新数组。<br>里面还有几个内部类，一个Itr，实现了Iterator接口，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private class Itr implements Iterator&lt;E&gt; &#123;</span><br><span class="line">    int cursor;       // index of next element to return</span><br><span class="line">    int lastRet = -1; // index of last element returned; -1 if no such</span><br><span class="line">    int expectedModCount = modCount;</span><br></pre></td></tr></table></figure></p>
+<p>ListItr 实现了 ListIterator，可以前后访问遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private class ListItr extends Itr implements ListIterator&lt;E&gt; &#123;</span><br><span class="line">    ListItr(int index) &#123;</span><br><span class="line">        super();</span><br><span class="line">        cursor = index;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>ArrayList使用遍历接口，都是使用内部类实现的，重新记录状态，这部分还有些不太懂的，后面继续补充。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/集合/">集合</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/04/06/arts-2019-4-5-tip/" title="Vue 学习笔记2" itemprop="url">Vue 学习笔记2</a>
   </h1>
   <p class="article-author">By
@@ -112,7 +254,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/vue/">vue</a>
   </div>
 
 </div>
@@ -512,7 +654,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/vue/">vue</a>
   </div>
 
 </div>
@@ -672,136 +814,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/22/arts-2019-02-22-algorithm/" title="合并两个有序链表" itemprop="url">合并两个有序链表</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-22T07:49:07.000Z" itemprop="datePublished"> Published 2019-03-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
-<p>示例：</p>
-<p>输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4<br>输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</p>
-<p>算法思路：<br>一个总和链表，一个头指针，一个当前指针，比较原来两个链表哪个小，小的就加到当前链表后面，<br>如果一个链表结束了，就将另外一个链表后面添加进来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode mergeTwoLists(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode newList = new ListNode(0);</span><br><span class="line">        ListNode current = newList;</span><br><span class="line">        while(l1 != null &amp;&amp; l2 != null)&#123;</span><br><span class="line">            int one = l1.val;</span><br><span class="line">            int two = l2.val;</span><br><span class="line">            if(one &lt;= two )&#123;</span><br><span class="line">                current.next = l1;            </span><br><span class="line">                l1 = l1.next;</span><br><span class="line">                current = current.next;</span><br><span class="line">               </span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                current.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(l1 != null)&#123;</span><br><span class="line">            current.next = l1;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if(l2 != null)&#123;</span><br><span class="line">            current.next = l2;</span><br><span class="line">        &#125;</span><br><span class="line">        return newList.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/22/arts-2019-02-22-review/" title="Scalable Web Architecture and Distributed Systems 学习笔记" itemprop="url">Scalable Web Architecture and Distributed Systems 学习笔记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-22T06:49:07.000Z" itemprop="datePublished"> Published 2019-03-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>原版文章 [<a href="https://www.aosabook.org/en/distsys.html]" target="_blank" rel="noopener">https://www.aosabook.org/en/distsys.html]</a></p>
-<p>文章主要分为3个部分，讲了可扩展的分布式系统的设计方法。</p>
-<h2 id="网络分布式系统的设计原则"><a href="#网络分布式系统的设计原则" class="headerlink" title="网络分布式系统的设计原则"></a>网络分布式系统的设计原则</h2><p>6个提到的主要原则<br>availablity，（可用性）：对于一些电商等网站，只要有一阵不能访问，就会损失很多收益，保证可用性很重要。<br>performance，（性能）：保证访问性能，让用户体验更好。<br>reliablity，（可靠性）：保证每个请求都有返回。<br>scalability，（可扩展性）：如果有大流量能保证可以方便的扩展性能。<br>managebility，（管理性）：要易于管理，不然这块成本也很高。<br>cost，（费用）：分布式本身需要很多机器，这块的成本也要考虑。</p>
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>基础的分布式设计方法，<br>services，（服务化）<br>redundancy，（冗余）<br>partitions，（分区）<br>handling failure，（处理错误）<br>举了一个例子，图片网盘，用户可以上传图片，然后读取图片。<br>首先服务化，将读与写的服务，分开单独优化，因为两边优化的方式不同。<br>然后冗余处理，将存储的数据，冗余备份，服务冗余。<br>然后将数据分区，读取不同分区的数据，减少单个的压力。</p>
-<h2 id="快速可扩展的数据访问块"><a href="#快速可扩展的数据访问块" class="headerlink" title="快速可扩展的数据访问块"></a>快速可扩展的数据访问块</h2><p>这块主要将如何加快数据的访问，5个方面<br>Caches，global cache，Distributed Cache，<br>proxies，<br>Indexes，<br>load balancers，<br>queues，<br>首先是缓存，这个还分为，本地缓存，全局缓存，分布式缓存。<br>第二部分是代理，这个可以重定向请求。<br>第三个是索引，类似数据库索引，可以加快数据的访问。<br>第四个是负载均衡，可以分散请求的压力<br>第五个是消息队列，可以异步处理，将每个单独调用的任务执行，解耦到消息队列里面，慢慢处理，压力不在后端。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
   </nav>
 
 </div>
@@ -832,7 +847,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>11</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>12</sup></a></li>
 		  
 		
 		  
@@ -840,7 +855,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>9</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>10</sup></a></li>
 		  
 		
 		  
@@ -873,11 +888,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>11</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>11</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>12</sup></a></li>
 			
 		
 			
@@ -885,15 +900,15 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>9</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>9</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/架构/" title="架构">架构<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>8</sup></a></li>
 			
 		
 			
@@ -909,10 +924,6 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
@@ -921,15 +932,11 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>1</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Annotation/" title="Annotation">Annotation<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/二叉树/" title="二叉树">二叉树<sup>1</sup></a></li>
+				<li><a href="/tags/锁/" title="锁">锁<sup>1</sup></a></li>
 			
 		
 			
@@ -937,11 +944,7 @@
 			
 		
 			
-				<li><a href="/tags/成长/" title="成长">成长<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/队列/" title="队列">队列<sup>1</sup></a></li>
+				<li><a href="/tags/图/" title="图">图<sup>1</sup></a></li>
 			
 		
 			
@@ -949,7 +952,19 @@
 			
 		
 			
-				<li><a href="/tags/二分查找/" title="二分查找">二分查找<sup>1</sup></a></li>
+				<li><a href="/tags/Annotation/" title="Annotation">Annotation<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/队列/" title="队列">队列<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/链表/" title="链表">链表<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/回溯思维/" title="回溯思维">回溯思维<sup>1</sup></a></li>
 			
 		
 		</ul>
