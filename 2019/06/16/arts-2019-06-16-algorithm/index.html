@@ -1,0 +1,584 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>743. 网络延迟时间 | 演练场</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="R_Richie">
+    
+
+    
+    <meta name="description" content="题目有 N 个网络节点，标记为 1 到 N。给定一个列表 times，表示信号经过有向边的传递时间。 times[i] = (u, v, w)，其中 u 是源节点，v 是目标节点， w 是一个信号从源节点传递到目标节点的时间。现在，我们向当前的节点 K 发送了一个信号。需要多久才能使所有节点都收到信号？如果不能使所有节点收到信号，返回 -1。注意:N 的范围在 [1, 100] 之间。K 的范围在">
+<meta name="keywords" content="算法,最短路径">
+<meta property="og:type" content="article">
+<meta property="og:title" content="743. 网络延迟时间">
+<meta property="og:url" content="http://yoursite.com/2019/06/16/arts-2019-06-16-algorithm/index.html">
+<meta property="og:site_name" content="演练场">
+<meta property="og:description" content="题目有 N 个网络节点，标记为 1 到 N。给定一个列表 times，表示信号经过有向边的传递时间。 times[i] = (u, v, w)，其中 u 是源节点，v 是目标节点， w 是一个信号从源节点传递到目标节点的时间。现在，我们向当前的节点 K 发送了一个信号。需要多久才能使所有节点都收到信号？如果不能使所有节点收到信号，返回 -1。注意:N 的范围在 [1, 100] 之间。K 的范围在">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-16T14:57:08.085Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="743. 网络延迟时间">
+<meta name="twitter:description" content="题目有 N 个网络节点，标记为 1 到 N。给定一个列表 times，表示信号经过有向边的传递时间。 times[i] = (u, v, w)，其中 u 是源节点，v 是目标节点， w 是一个信号从源节点传递到目标节点的时间。现在，我们向当前的节点 K 发送了一个信号。需要多久才能使所有节点都收到信号？如果不能使所有节点收到信号，返回 -1。注意:N 的范围在 [1, 100] 之间。K 的范围在">
+
+    
+    <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="演练场" title="演练场"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="演练场">演练场</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/06/16/arts-2019-06-16-algorithm/" title="743. 网络延迟时间" itemprop="url">743. 网络延迟时间</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-16T13:45:00.000Z" itemprop="datePublished"> Published 2019-06-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解题思路"><span class="toc-number">2.</span> <span class="toc-text">解题思路</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有 N 个网络节点，标记为 1 到 N。<br>给定一个列表 times，表示信号经过有向边的传递时间。 times[i] = (u, v, w)，其中 u 是源节点，v 是目标节点， w 是一个信号从源节点传递到目标节点的时间。<br>现在，我们向当前的节点 K 发送了一个信号。需要多久才能使所有节点都收到信号？如果不能使所有节点收到信号，返回 -1。<br>注意:<br>N 的范围在 [1, 100] 之间。<br>K 的范围在 [1, N] 之间。<br>times 的长度在 [1, 6000] 之间。<br>所有的边 times[i] = (u, v, w) 都有 1 &lt;= u, v &lt;= N 且 0 &lt;= w &lt;= 100。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>最短路径，DisjKstra算法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    private int v;</span><br><span class="line">    boolean[] inqueue;</span><br><span class="line">    private LinkedList&lt;Edge&gt; adj[];</span><br><span class="line">    PriorityQueue[] queue;</span><br><span class="line">    private class Vertex&#123;</span><br><span class="line">        private int id;</span><br><span class="line">        private int dist;</span><br><span class="line">        public Vertex(int id ,int dist)&#123;</span><br><span class="line">            this.id = id;</span><br><span class="line">            this.dist =dist;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private class Edge&#123;</span><br><span class="line">        private int src;</span><br><span class="line">        private int dst;</span><br><span class="line">        private int dist;</span><br><span class="line">        public Edge(int src ,int dst ,int dist)&#123;</span><br><span class="line">            this.src =src;</span><br><span class="line">            this.dst = dst;</span><br><span class="line">            this.dist = dist;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    class PriorityQueue&#123;</span><br><span class="line">        private Vertex[] nodes;</span><br><span class="line">        private int count;</span><br><span class="line">        private int n;</span><br><span class="line">        public PriorityQueue(int v)&#123;</span><br><span class="line">            this.nodes = new Vertex[v+1];</span><br><span class="line">            this.count =0;</span><br><span class="line">            this.n = v;</span><br><span class="line">        &#125;</span><br><span class="line">        public void add(Vertex ver) &#123;</span><br><span class="line">            if(count&gt;=n)&#123;return;&#125;</span><br><span class="line">            nodes[++count]=ver;</span><br><span class="line">            int i=count;</span><br><span class="line">            while(i/2&gt;0&amp;&amp;nodes[i/2].dist&gt;nodes[i].dist) &#123;</span><br><span class="line">                Vertex temp=nodes[i/2];</span><br><span class="line">                nodes[i/2]=nodes[i];</span><br><span class="line">                nodes[i]=temp;</span><br><span class="line">                i=i/2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        public Vertex poll() &#123;</span><br><span class="line">            if(count&lt;1)&#123;return null;&#125;</span><br><span class="line">            Vertex temp=nodes[1];</span><br><span class="line">            nodes[1]=nodes[count];</span><br><span class="line">            nodes[count] = null;</span><br><span class="line">            count--;</span><br><span class="line">            heaplify(nodes,count,1);</span><br><span class="line">            return temp;</span><br><span class="line">        &#125;</span><br><span class="line">        private void heaplify(Vertex[] a,int n,int i) &#123;</span><br><span class="line">            if(n&lt;1)&#123;return;&#125;</span><br><span class="line">            int min=i;</span><br><span class="line">            while(true) &#123;</span><br><span class="line">                //找到子节点比该结点小的中较小的</span><br><span class="line">                if(2*i&lt;=n&amp;&amp;a[2*i].dist&lt;a[min].dist) &#123;</span><br><span class="line">                    min = 2 * i;</span><br><span class="line">                &#125;</span><br><span class="line">                if(2*i+1&lt;=n&amp;&amp;a[2*i+1].dist&lt;a[min].dist)&#123;min=2*i+1;&#125;</span><br><span class="line">                //该节点比子节点大堆化完毕</span><br><span class="line">                if(min==i)&#123;	return;&#125;</span><br><span class="line">                //交换两节点</span><br><span class="line">                Vertex temp=a[min];</span><br><span class="line">                a[min]=a[i];</span><br><span class="line">                a[i]=temp;</span><br><span class="line">                i=min;//迭代条件</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">public void update(Vertex vertex) &#123;</span><br><span class="line">    int i=1;</span><br><span class="line">    boolean exist = false;</span><br><span class="line">    for(;i&lt;=n;i++) &#123;</span><br><span class="line">        if(nodes[i]!= null &amp;&amp; nodes[i].id==vertex.id)&#123;</span><br><span class="line">            exist = true;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(!exist)&#123;</span><br><span class="line">       add(vertex);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        nodes[i].dist=vertex.dist;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    heaplify(nodes,count,i);</span><br><span class="line">&#125;</span><br><span class="line">        public boolean isEmpty() &#123;</span><br><span class="line">            if(count&lt;1)return true;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        private void treeifyUp(int k)&#123;</span><br><span class="line">            if(k &gt; count +1)&#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            int i = k;</span><br><span class="line">            while(i &lt; 1)&#123;</span><br><span class="line">                i = k/2;</span><br><span class="line">                if(nodes[i].dist &gt; nodes[k].dist)&#123;</span><br><span class="line">                    Vertex temp = nodes[i];</span><br><span class="line">                    nodes[i] = nodes[k];</span><br><span class="line">                    nodes[k] = temp;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        private void treeifyDown(int k)&#123;</span><br><span class="line">            int i = k;</span><br><span class="line">            while(i &lt; count/2)&#123;</span><br><span class="line">                int left = i*2;</span><br><span class="line">                int right = i*2+1;</span><br><span class="line">                if(nodes[left].dist &lt; nodes[i].dist)&#123;</span><br><span class="line">                    Vertex tmp = nodes[i];</span><br><span class="line">                    nodes[i] = nodes[left];</span><br><span class="line">                    nodes[left] = tmp;</span><br><span class="line">                    i = left;</span><br><span class="line">                &#125;else if(nodes[right].dist &lt; nodes[i].dist)&#123;</span><br><span class="line">                    Vertex tmp = nodes[i];</span><br><span class="line">                    nodes[i] = nodes[right];</span><br><span class="line">                    nodes[right] = tmp;</span><br><span class="line">                    i = right;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public int networkDelayTime(int[][] times, int N, int K) &#123;</span><br><span class="line">        this.v = N;</span><br><span class="line">        Vertex[] vertexs = new Vertex[v+1];</span><br><span class="line">        this.inqueue = new boolean[v+1];</span><br><span class="line">        this.queue = new PriorityQueue[v];</span><br><span class="line">        int first = times.length;</span><br><span class="line">        int second = times[0].length;</span><br><span class="line">        adj = new LinkedList[N+1];</span><br><span class="line">        for(int l= 0 ; l &lt; N+1 ; l++)&#123;</span><br><span class="line">            adj[l] = new LinkedList&lt;Edge&gt;();</span><br><span class="line">            if(l != 0)&#123;</span><br><span class="line">                vertexs[l] = new Vertex(l,Integer.MAX_VALUE);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int m = 0 ; m&lt; first ; m++)&#123;</span><br><span class="line">            int src = times[m][0];</span><br><span class="line">            adj[src].add(new Edge(times[m][0],times[m][1],times[m][2]));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        PriorityQueue queue = new PriorityQueue(this.v);</span><br><span class="line">        vertexs[K].dist = 0;</span><br><span class="line">        queue.add(vertexs[K]);</span><br><span class="line">        inqueue[K] = true;</span><br><span class="line">        while(!queue.isEmpty())&#123;</span><br><span class="line">            Vertex minVertex = queue.poll();</span><br><span class="line">            int minVertexId = minVertex.id;</span><br><span class="line">            LinkedList&lt;Edge&gt; list = adj[minVertexId];</span><br><span class="line">            for(int i = 0 ; i&lt; list.size() ; i++)&#123;</span><br><span class="line">                Edge edge = list.get(i);</span><br><span class="line">                Vertex nextVertex = vertexs[edge.dst];</span><br><span class="line">                if(nextVertex.dist &gt; edge.dist + minVertex.dist)&#123;</span><br><span class="line">                    nextVertex.dist = edge.dist + minVertex.dist;</span><br><span class="line">                    if(inqueue[nextVertex.id])&#123;</span><br><span class="line">                        queue.update(nextVertex);</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        queue.add(nextVertex);</span><br><span class="line">                        inqueue[nextVertex.id] = true;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        int d = 0;</span><br><span class="line">        for(int q = 1 ; q &lt;= N ; q++)&#123;</span><br><span class="line">            if(vertexs[q].dist == Integer.MAX_VALUE)&#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">            if(d &lt; vertexs[q].dist)&#123;</span><br><span class="line">                d = vertexs[q].dist;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return d;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好不容易通过测试，找到临接表，从顶点开始，依次便利顶点相连的所有节点，将每个节点的vertex放入最小堆里面，然后弹出最小的值的节点，继续重复上面的循环，知道最小堆为空。有一个数组保存已经访问过的数据，保证不重复访问。如果堆里有，就更新数据，重新对花堆化。<br>我不能说完全明白，但经过一个星期的思考，从完全懵逼到入门了。还需要继续深入理解。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/最短路径/">最短路径</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2019/06/16/arts-2019-06-16-algorithm/" data-title="743. 网络延迟时间 | 演练场" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/06/15/arts-2019-06-16-tip/"  title="RPC初探2">
+ <strong>下一篇：</strong><br/> 
+ <span>RPC初探2
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解题思路"><span class="toc-number">2.</span> <span class="toc-text">解题思路</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Java语言基础/" title="Java语言基础">Java语言基础<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/人文/" title="人文">人文<sup>13</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/前端/" title="前端">前端<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/后端/" title="后端">后端<sup>11</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/成长/" title="成长">成长<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/树莓派/" title="树莓派">树莓派<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/监控/" title="监控">监控<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/闲谈/" title="闲谈">闲谈<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>13</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>13</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/架构/" title="架构">架构<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/纪录片/" title="纪录片">纪录片<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/吴军/" title="吴军">吴军<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/二分查找/" title="二分查找">二分查找<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/二叉树/" title="二叉树">二叉树<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/堆/" title="堆">堆<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/图/" title="图">图<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Annotation/" title="Annotation">Annotation<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/锁/" title="锁">锁<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/队列/" title="队列">队列<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="R_Richie">R_Richie</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
