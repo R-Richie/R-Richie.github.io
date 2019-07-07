@@ -79,6 +79,136 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/05/05/arts-2019-05-05-review/" title="Distributed Systems Principles and Paradigms 学习笔记1" itemprop="url">Distributed Systems Principles and Paradigms 学习笔记1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-05-05T08:22:07.000Z" itemprop="datePublished"> Published 2019-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>五一假期，学习时间比平时还要少，看得很少，先写一部分吧。</p>
+<h2 id="分布式系统的定义"><a href="#分布式系统的定义" class="headerlink" title="分布式系统的定义"></a>分布式系统的定义</h2><p>A distributed system is a collection of independent computers that appears to its users as a single coherent system.<br>分布式系统是一堆独立的电脑的集合，使用者使用的像是单一系统一样。</p>
+<h2 id="分布式系统的目标"><a href="#分布式系统的目标" class="headerlink" title="分布式系统的目标"></a>分布式系统的目标</h2><ol>
+<li>Making Resources Accessible</li>
+<li>Distribution Transparency</li>
+<li>Openness</li>
+<li>Scalability</li>
+<li>Pitfalls</li>
+</ol>
+<p>第一个是让分散在各地的资源可以简单被访问。<br>第二个是分配透明度，隐藏资源分布在各地。<br>第三个是开放式分布式系统是根据标准规则提供服务的系统，这些规则描述了这些服务的语法和语义。<br>第四个是可扩展性<br>第五个是一些陷阱，7大分布式谬论</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/05/05/arts-2019-05-05-algorithm/" title="克隆图" itemprop="url">克隆图</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-05-05T03:42:07.000Z" itemprop="datePublished"> Published 2019-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定无向连通图中一个节点的引用，返回该图的深拷贝（克隆）。图中的每个节点都包含它的值&nbsp;val（Int） 和其邻居的列表（list[Node]）。<br>示例：<img src="evernotecid://BA9A3242-C386-4E68-A9D1-1193A9AF4350/appyinxiangcom/11402844/ENResource/p911" alt="7b2bfd1590ab9401ab6d2eb6d985b68a.png"><br>输入：{“$id”:”1”,”neighbors”:[{“$id”:”2”,”neighbors”:[{“$ref”:”1”},{“$id”:”3”,”neighbors”:[{“$ref”:”2”},{“$id”:”4”,”neighbors”:[{“$ref”:”3”},{“$ref”:”1”}],”val”:4}],”val”:3}],”val”:2},{“$ref”:”4”}],”val”:1}解释：节点 1 的值是 1，它有两个邻居：节点 2 和 4 。节点 2 的值是 2，它有两个邻居：节点 1 和 3 。节点 3 的值是 3，它有两个邻居：节点 2 和 4 。节点 4 的值是 4，它有两个邻居：节点 1 和 3 。提示：节点数介于 1 到 100 之间。无向图是一个简单图，这意味着图中没有重复的边，也没有自环。由于图是无向的，如果节点&nbsp;p&nbsp;是节点&nbsp;q&nbsp;的邻居，那么节点&nbsp;q&nbsp;也必须是节点&nbsp;p&nbsp;的邻居。必须将给定节点的拷贝作为对克隆图的引用返回。</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>深度遍历+深浅克隆<br>Map用于存放访问过的点，如果访问过直接返回<br>递归遍历neighbors<br>结束条件是，所有节点都访问过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">// Definition for a Node.</span><br><span class="line">class Node &#123;</span><br><span class="line">    public int val;</span><br><span class="line">    public List&lt;Node&gt; neighbors;</span><br><span class="line"></span><br><span class="line">    public Node() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    public Node(int _val,List&lt;Node&gt; _neighbors) &#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        neighbors = _neighbors;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">*/</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public Node cloneGraph(Node node) &#123;</span><br><span class="line">        Map&lt;Integer,Node&gt; map = new HashMap&lt;Integer,Node&gt;();</span><br><span class="line">        return deepClone(node,map);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public Node deepClone(Node node,Map&lt;Integer,Node&gt; map)&#123;</span><br><span class="line">        Node newNode;</span><br><span class="line">        if(map.containsKey(node.val))&#123;</span><br><span class="line">            newNode = map.get(node.val);</span><br><span class="line">            return newNode;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            newNode = new Node(node.val,null);</span><br><span class="line">            map.put(node.val,newNode);</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Node&gt; nei = new ArrayList&lt;Node&gt;();</span><br><span class="line">        if(node.neighbors != null)&#123;</span><br><span class="line">            for(Node n : node.neighbors)&#123;</span><br><span class="line">                nei.add(deepClone(n,map));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        newNode.neighbors = nei;</span><br><span class="line">        return newNode;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/图/">图</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/05/05/arts-2019-05-05-share/" title="纪念高中同桌-张迪" itemprop="url">纪念高中同桌-张迪</a>
   </h1>
   <p class="article-author">By
@@ -600,145 +730,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/04/21/arts-2019-04-21-algorithm/" title="删除二叉搜索树中的节点" itemprop="url">删除二叉搜索树中的节点</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-21T05:13:07.000Z" itemprop="datePublished"> Published 2019-04-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。<br>一般来说，删除节点可分为两个步骤：</p>
-<ol>
-<li>首先找到需要删除的节点；</li>
-<li>如果找到了，删除它。<br>说明： 要求算法时间复杂度为 O(h)，h 为树的高度。<br>示例:<br>root = [5,3,6,2,4,null,7]<br>key = 3<br> 5<br>/ \<br>3   6<br>/ \   \<br>2   4   7<br>给定需要删除的节点值是 3，所以我们首先找到 3 这个节点，然后删除它。<br>一个正确的答案是 [5,4,6,2,null,null,7], 如下图所示。<br> 5<br>/ \<br>4   6<br>/     \<br>2       7<br>另一个正确答案是 [5,2,6,null,4,null,7]。<br> 5<br>/ \<br>2   6<br>\   \<br> 4   7</li>
-</ol>
-<h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>分几种情况<br>1.没有左右子树，直接删除<br>2.只有一个子树，将父指向子，直接删除<br>3.如果是有父子节点，找到右子树最小的节点，替换</p>
-<h3 id="犯错点"><a href="#犯错点" class="headerlink" title="犯错点"></a>犯错点</h3><p>1.只有一个元素的时候，删除没考虑好<br>2.删除根节点没有处理好</p>
-<h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p>参考别人的算法，自己在后面处理没写好，别人的算法是通过递归的，主要好处就不用找父节点了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode deleteNode(TreeNode root, int key) &#123;</span><br><span class="line">        if(root == null)return null;</span><br><span class="line">        if(root.val &gt; key)&#123;</span><br><span class="line">            root.left =  deleteNode(root.left, key);</span><br><span class="line">            return root;</span><br><span class="line">        &#125;else if(root.val &lt; key)&#123;</span><br><span class="line">            root.right = deleteNode(root.right, key);</span><br><span class="line">            return root;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            if(root.left == null)&#123;</span><br><span class="line">                return root.right;</span><br><span class="line">            &#125;else if(root.right == null)&#123;</span><br><span class="line">                return root.left;</span><br><span class="line">            &#125;else&#123;           </span><br><span class="line">                TreeNode successor = minNode(root.right);   </span><br><span class="line">                successor.right = deleteMin(root.right);</span><br><span class="line">                successor.left = root.left;</span><br><span class="line">                return successor;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private TreeNode minNode(TreeNode node)&#123;</span><br><span class="line">        if(node.left == null)&#123;          </span><br><span class="line">            return node;</span><br><span class="line">        &#125;</span><br><span class="line">        return minNode(node.left);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    private TreeNode deleteMin(TreeNode node)&#123;</span><br><span class="line">        if(node.left == null)&#123;</span><br><span class="line">            return node.right;</span><br><span class="line">        &#125;</span><br><span class="line">        node.left =  deleteMin(node.left);   </span><br><span class="line">        return node;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过递归的方式<br>1.如果node值大于 key，则递归左子树，返回值覆给左子树<br>2.如果node值小于key，则递归右子树，返回值覆给右子树<br>3.相等情况比较复杂<br>3.1 如果node值等于key，并且左子树为空，那么直接返回右子树，这样就删除了该node。<br>3.2 如果node值等于key，并且右子树为空，那么直接返回右子树，这样就删除了该node。<br>3.3 如果node等于key，同时左右都不为空<br>3.3.1 获取该子树最小的node，命名为successor<br>3.3.2 将右子树删除最小值，并且将最新的右子树赋值给successor的右子树<br>3.3.3 将之前节点的左子树赋值给successor的左子树<br>3.3.4 返回新构建的节点</p>
-<p>minNode是返回某个子树的最小值，也就是找最左节点</p>
-<p>deleteMin是删除子树的最小值，递归的方式<br>退出条件是某个节点的左节点是空，则返回右节点，其他情况递归左子树</p>
-<p>主要使用了递归的手段， 这种手段可以避免找父节点，但我还不是很熟悉，需要继续熟悉递归的思维方式。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/二叉树/">二叉树</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/04/19/arts-2019-4-21-tip/" title="java集合-CopyOnWriteArrayList" itemprop="url">java集合-CopyOnWriteArrayList</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-19T01:56:07.000Z" itemprop="datePublished"> Published 2019-04-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>实现List<e>, RandomAccess, Cloneable, java.io.Serializable 接口</e></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/** The lock protecting all mutators */</span><br><span class="line"> final transient ReentrantLock lock = new ReentrantLock();</span><br><span class="line"></span><br><span class="line"> /** The array, accessed only via getArray/setArray. */</span><br><span class="line"> private transient volatile Object[] array;</span><br></pre></td></tr></table></figure>
-<p>主要的成员变量有2个，一个ReentrantLock，一个是内部存值的数组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &#123;@code true&#125; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        int len = elements.length;</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + 1);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>Add方法，先是前后两个lock与unlock，保证安全性。<br>实现实际上是复制一个原来数组，将新值添加到新数组的最后一位，内部变量指向新的数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">static final class COWIterator&lt;E&gt; implements ListIterator&lt;E&gt; &#123;</span><br><span class="line">    /** Snapshot of the array */</span><br><span class="line">    private final Object[] snapshot;</span><br><span class="line">    /** Index of element to be returned by subsequent call to next.  */</span><br><span class="line">    private int cursor;</span><br><span class="line"></span><br><span class="line">    private COWIterator(Object[] elements, int initialCursor) &#123;</span><br><span class="line">        cursor = initialCursor;</span><br><span class="line">        snapshot = elements;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>内部的遍历，其实是将原来数组进行一个快照，这样即使数组变化了，不影响快照的遍历。</p>
-<p>CopyOnWriteArrayList 的添加元素很消耗资源，因为每次都要新建一个数组，然后复制所有数据，只适用于读远大于写的情况，如果写比较多，性能会很差。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
@@ -768,11 +759,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>15</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>16</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>15</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>16</sup></a></li>
 		  
 		
 		  
@@ -813,15 +804,15 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/算法/" title="算法">算法<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>16</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>15</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>15</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>15</sup></a></li>
 			
 		
 			
@@ -841,7 +832,7 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>4</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
@@ -857,7 +848,7 @@
 			
 		
 			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
@@ -865,7 +856,7 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 			
@@ -873,15 +864,11 @@
 			
 		
 			
-				<li><a href="/tags/吴军/" title="吴军">吴军<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/图/" title="图">图<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/二分查找/" title="二分查找">二分查找<sup>1</sup></a></li>
+				<li><a href="/tags/吴军/" title="吴军">吴军<sup>1</sup></a></li>
 			
 		
 			
@@ -890,6 +877,10 @@
 		
 			
 				<li><a href="/tags/二叉树/" title="二叉树">二叉树<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/队列/" title="队列">队列<sup>1</sup></a></li>
 			
 		
 		</ul>
