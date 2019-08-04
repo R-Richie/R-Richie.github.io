@@ -79,6 +79,274 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2018/09/02/telegraf-jvm/" title="telegraf 采集项分析【JVM】" itemprop="url">telegraf 采集项分析【JVM】</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2018-09-02T13:18:07.000Z" itemprop="datePublished"> Published 2018-09-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="采集参数范围"><a href="#采集参数范围" class="headerlink" title="采集参数范围"></a>采集参数范围</h2><ol>
+<li>java_buffer_pool </li>
+<li>java_class_loading </li>
+<li>java_garbage_collector </li>
+<li>java_memory </li>
+<li>java_runtime </li>
+<li>java_system </li>
+<li>java_thread </li>
+</ol>
+<h2 id="具体参数示意"><a href="#具体参数示意" class="headerlink" title="具体参数示意"></a>具体参数示意</h2><p>参数都是通过Mbean获取，可以根据java官方文档获取值，或者自定义。</p>
+<h3 id="name-java-buffer-pool"><a href="#name-java-buffer-pool" class="headerlink" title="name: java_buffer_pool"></a>name: java_buffer_pool</h3><p>fieldKey            | fieldType<br>Count               | float<br>MemoryUsed  |  float<br>TotalCapacity  |  float </p>
+<p>参数区别官方文档：[<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/BufferPoolMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/BufferPoolMXBean.html]</a></p>
+<p>MemoryUsed是返回虚拟机用于缓冲池用于内存的估计值。<br>Count是返回池中缓冲区数的估计值。<br>TotalCapacity是返回池中缓冲区总量的估计值。</p>
+<p>其中有2个tag的key，”mapped buffer pool” and “direct buffer pool”,<br>Stackoverflow的解释[<a href="https://stackoverflow.com/questions/15657837/what-is-mapped-buffer-pool-direct-buffer-pool-and-how-to-increase-their-size]" target="_blank" rel="noopener">https://stackoverflow.com/questions/15657837/what-is-mapped-buffer-pool-direct-buffer-pool-and-how-to-increase-their-size]</a><br>direct buffer pool是Java与系统io子系统交互的内存区，比如disk读写或者收到socket请求，直接用更快。<br>mapped buffer pool是java FileChannel 实例使用的。</p>
+<h3 id="name-java-class-loading"><a href="#name-java-class-loading" class="headerlink" title="name: java_class_loading"></a>name: java_class_loading</h3><p>fieldKey                              | fieldType<br>LoadedClassCount           |  float<br>TotalLoadedClassCount   | float<br>UnloadedClassCount       | float </p>
+<p>官方文档：[<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/ClassLoadingMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/ClassLoadingMXBean.html]</a></p>
+<p>LoadedClassCount返回当前虚拟机中加载类的数量。<br>TotalLoadedClassCount返回虚拟机开始执行以来已加载的类的数量。<br>UnloadedClassCount返回虚拟机开始执行以来卸载的类的数量。</p>
+<h3 id="name-java-garbage-collector"><a href="#name-java-garbage-collector" class="headerlink" title="name:java_garbage_collector"></a>name:java_garbage_collector</h3><p>fieldKey               | fieldType<br>CollectionCount | float<br>CollectionTime   | float<br>官方文档：[<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/GarbageCollectorMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/GarbageCollectorMXBean.html]</a><br>CollectionCount已经进行的垃圾回收的次数<br>CollectionTime返回累计的垃圾回收时间（以毫秒为单位）</p>
+<h3 id="name-java-memory"><a href="#name-java-memory" class="headerlink" title="name: java_memory"></a>name: java_memory</h3><p>fieldKey                                                 | fieldType<br>HeapMemoryUsage.committed         |  float<br>HeapMemoryUsage.init                      | float<br>HeapMemoryUsage.max                    | float<br>HeapMemoryUsage.used                    | float<br>NonHeapMemoryUsage.committed   |  float<br>NonHeapMemoryUsage.init                | float<br>NonHeapMemoryUsage.max              | float<br>NonHeapMemoryUsage.used             | float<br>ObjectPendingFinalizationCount         | float </p>
+<p>官方文档：[<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryMXBean.html]</a></p>
+<p>HeapMemory和NonHeapMemory的区别<br>1.堆<br>Java虚拟机有一个堆，它是运行时数据区，从中分配所有类实例和数组的内存。它是在Java虚拟机启动时创建的。对象的堆内存由自动内存管理系统回收，该系统 为垃圾收集器。<br>堆可以是固定大小的，也可以是扩展和收缩的。堆的内存不需要是连续的。</p>
+<p>2.非堆内存<br>Java虚拟机管理堆以外的内存（称为非堆内存）。<br>Java虚拟机具有在所有线程之间共享的方法区域。方法区域属于非堆内存。它存储每类结构，例如运行时常量池，字段和方法数据，以及方法和构造函数的代码。它是在Java虚拟机启动时创建的。</p>
+<p>方法区域在逻辑上是堆的一部分，但Java虚拟机实现可以选择不垃圾收集或压缩它。与堆类似，方法区域可以是固定大小的，也可以是扩展和收缩的。方法区域的内存不需要是连续的。</p>
+<p>除了方法区域之外，Java虚拟机实现可能需要用于内部处理或优化的存储器，其也属于非堆存储器。例如，JIT编译器需要用于存储从Java虚拟机代码转换的本机机器代码的存储器以获得高性能。</p>
+<p>MemoryUsage 官方文档[ <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryUsage.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryUsage.html</a> ]</p>
+<p>MemoryUsage对象包含四个值：</p>
+<ul>
+<li>init表示Java虚拟机在启动期间从操作系统请求内存管理的初始内存量（以字节为单位）。 Java虚拟机可以从操作系统请求额外的内存，并且还可以随时间向系统释放内存。 init的值可能未定义。</li>
+<li>used表示当前使用的内存量（以字节为单位）。</li>
+<li>committed表示保证可供Java虚拟机使用的内存量（以字节为单位）。提交的内存量可能会随着时间的推移而变化（增加或减少）。 Java虚拟机可能会向系统释放内存，并且已提交的内存可能少于init。已提交将始终大于或等于使用。</li>
+<li>max表示可用于内存管理的最大内存量（以字节为单位）。它的价值可能是不确定的。如果已定义，最大内存量可能会随时间而变化。如果定义了max，则使用和提交的内存量将始终小于或等于max。如果内存分配尝试增加已使用的内存，则可能会失败，即使已使用&gt;已提交&lt;= max仍然为真（例如，当系统虚拟内存不足时）。</li>
+</ul>
+<pre><code>+----------------------------------------------+
++////////////////           |                  +
++////////////////           |                  +
++----------------------------------------------+
+
+|--------|
+   init
+|---------------|
+       used
+|---------------------------|
+          committed
+|----------------------------------------------|
+                    max
+</code></pre><h3 id="name-java-memory-pool"><a href="#name-java-memory-pool" class="headerlink" title="name: java_memory_pool"></a>name: java_memory_pool</h3><p>fieldKey                                   |  fieldType<br>CollectionUsage.committed | float<br>CollectionUsage.init              | float<br>CollectionUsage.max            | float<br>CollectionUsage.used           | float<br>PeakUsage.committed          | float<br>PeakUsage.init                       | float<br>PeakUsage.max                     | float<br>PeakUsage.used                    | float<br>Usage.committed                  | float<br>Usage.init                                | float<br>Usage.max                              | float<br>Usage.used                             | float </p>
+<ol>
+<li><p>Memory Usage<br>getUsage（）方法提供对内存池当前使用情况的估计。 对于垃圾收集的内存池，已用内存量包括池中所有对象占用的内存，包括可访问和不可访问的对象。<br>通常，此方法是一种轻量级操作，用于获取大致的内存使用量。 对于某些内存池，例如，当对象未连续打包时，此方法可能是一项昂贵的操作，需要一些计算来确定当前的内存使用情况。 在这种情况下，实现应该记录。</p>
+</li>
+<li><p>Peak Memory Usage<br>自虚拟机启动或重置峰值以来，Java虚拟机维护内存池的峰值内存使用量。 峰值内存使用量由getPeakUsage（）方法返回，并通过调用resetPeakUsage（）方法重置。</p>
+</li>
+<li><p>Usage Threshold<br>每个内存池都有一个称为使用阈值的可管理属性，该属性具有Java虚拟机提供的默认值。默认值取决于平台。可以通过setUsageThreshold方法设置使用率阈值。如果阈值设置为正值，则在此内存池中启用使用阈值交叉检查。如果使用阈值设置为零，则禁用对此内存池的使用率阈值交叉检查。 isUsageThresholdSupported（）方法可用于确定是否支持此功能。<br>Java虚拟机在其最佳适当时间（通常在垃圾收集时）执行基于内存池的使用阈值交叉检查。每个内存池都维护一个使用阈值计数，当Java虚拟机检测到内存池使用率超过阈值时，该计数将逐渐增加。</p>
+</li>
+</ol>
+<p>此可管理的使用阈值属性旨在以较低的开销监视内存使用量的增加趋势。使用率阈值可能不适合某些内存池。例如，世代垃圾收集器（在许多Java虚拟机实现中使用的常见垃圾收集算法）管理两个或更多代按年龄隔离对象。大多数对象都分配在最年轻的一代（比如一个托儿所内存池）。托儿所内存池旨在填充并收集托儿所内存池将释放其大部分内存空间，因为它预计包含大多数短期对象，并且大部分在垃圾收集时无法访问。在这种情况下，托儿所内存池更不适合不支持使用阈值。此外，如果一个内存池中的对象分配成本非常低（例如，只是原子指针交换），那么Java虚拟机可能不会支持该内存池的使用率阈值，因为在比较使用情况时的开销是阈值高于对象分配的成本。</p>
+<ol start="4">
+<li>Collection Usage Threshold<br>垃圾回收阈值是一个可管理的属性，仅适用于某些垃圾收集的内存池。在Java虚拟机通过在垃圾收集时回收内存池中的未使用对象来花费回收内存空间之后，收集的内存池中的一些字节仍将被使用。集合使用阈值允许为此字节数设置一个值，以便在超过阈值时，MemoryMXBean将发出超出集合使用阈值的通知。此外，收集使用阈值计数将增加。</li>
+</ol>
+<h3 id="name-java-runtime"><a href="#name-java-runtime" class="headerlink" title="name: java_runtime"></a>name: java_runtime</h3><p>fieldKey     | fieldType<br>StartTime  | float<br>Uptime       | float </p>
+<p>官方文档 [<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/RuntimeMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/RuntimeMXBean.html]</a></p>
+<p>Uptime是java虚拟机启动的时间（以毫秒为单位），StartTime是java虚拟机最开始开启的时间（以毫秒为单位）</p>
+<h3 id="name-java-system"><a href="#name-java-system" class="headerlink" title="name: java_system"></a>name: java_system</h3><p>fieldKey                                | fieldType<br>ProcessCpuLoad                | float<br>SystemCpuLoad                 | float<br>TotalPhysicalMemorySize  | float </p>
+<p>官方文档 [[]<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/OperatingSystemMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/OperatingSystemMXBean.html]</a><br>SystemCpuLoad返回系统每分钟的负载。系统负载平均值是排队到可用处理器的可运行实体数量与在一段时间内平均可用处理器上运行的可运行实体数量之和。 计算负载平均值的方式是特定于操作系统，但通常是与时间相关的阻尼。<br>其他参数未找到。</p>
+<h3 id="name-java-thread"><a href="#name-java-thread" class="headerlink" title="name: java_thread"></a>name: java_thread</h3><p>fieldKey                               |  fieldType<br>DaemonThreadCount        | float<br>PeakThreadCount              | float<br>ThreadCount                      | float<br>TotalStartedThreadCount | float<br>官方文档 [<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/ThreadMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/ThreadMXBean.html]</a></p>
+<p>DaemonThreadCount 返回当前活动守护程序线程的数量。<br>PeakThreadCount 返回自Java虚拟机启动或峰值重置以来的峰值活动线程数。<br>ThreadCount   返回当前活动线程数，包括守护程序和非守护程序线程。<br>TotalStartedThreadCount 返回自Java虚拟机启动以来创建和启动的线程总数。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/监控/">监控</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/telegraf/">telegraf</a><a href="/tags/jvm/">jvm</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/08/05/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2018-08-05T06:10:15.613Z" itemprop="datePublished"> Published 2018-08-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/02/07/学习方法/" title="理解费曼技术与整体学习法" itemprop="url">理解费曼技术与整体学习法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2017-02-07T12:33:07.000Z" itemprop="datePublished"> Published 2017-02-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近在反思自己的学习方法，总感觉自己好像缺少一些东西，虽然表面上一直自认为很努力的样子，但没有什么效果，表面上用了很多时间，但并没有什么实际产出，想回头看看之前斯考特·杨写得《如何高效学习》，看着看着又想起之前自己看过的在缓慢思考公众号里戴汩提到的费曼方法。</p>
+<h2 id="费曼技术"><a href="#费曼技术" class="headerlink" title="费曼技术"></a>费曼技术</h2><p>费曼方法很简单，总共3步，</p>
+<ol>
+<li>教给孩子<br> 先用一张纸，写下你要讲解的概念，然后试图讲给一个8岁的孩子，而不是一个成年人，不要用术语，而是用简单朴素的语言。人们经常被复杂的术语和概念迷惑，使用术语而忽视实际是否已经掌握。</li>
+<li>回顾<br> 看看哪个地方没有讲通，那个就是你知识的边界，回到原始资料，重新学习你不会的概念</li>
+<li>组织和简化<br> 重新梳理成一个连贯的故事</li>
+<li>发送（可选）<br>费曼技术是费曼学习的方法，让你比别人更快更深刻的理解概念和事物，从根本上讲费曼方法是认为智力是可以增长的，这是成长型思维和表现型思维的差异。如何才能比别人了解的都深刻呢，就是放弃复杂的术语和概念，让自己从更基础的方式去思考，复杂的术语和概念容易让人迷糊，以为自己已经懂得了。<br>另外还隐藏一个内容就是教是最好的学习，通过教别人，让自己也理清关系。</li>
+</ol>
+<p>总结起来包括两个，一：教是最好的学习方法，二：通过降低对方的知识水平倒逼自己理解清楚整个概念，从最基础的概念入手，弄清楚所有的知识脉络。</p>
+<p>费曼技术有点像一种检验的方法，从反面去检查自己是否把知识学明白，还能找到自己哪个点没有学明白，这个很厉害。</p>
+<h2 id="整体性学习法"><a href="#整体性学习法" class="headerlink" title="整体性学习法"></a>整体性学习法</h2><p>这个分为获取，理解，拓展，修正，应用，测试。整体性学习方法基础是认为大脑更好的记忆方式是通过知识的连接，而不是像计算机一样的复制就能处理信息。这一点可能还不能用科学方式完全证明，所以这套理论还停留在理论阶段，但这个就像冥想一样虽然早些时候还没有科学的方法证明，但它的方法却实实在在的有效，所以大家都在实践。这套理论也是作者根据自身的作为总结的。</p>
+<p>既然大脑记忆知识的方法通过不断连接更有效的记忆，那我们就要从这个角度下手去梳理知识，让记忆的存储更高效的提取，如果提取的方式都是混乱的，那很难提取就不是没有道理的。整体学习法的存储方式是通过方式</p>
+<ol>
+<li>结构：知识的大厦<br> 结构是知识的全部，你不断的建立大楼来整合知识。</li>
+<li>模型：结构的种子<br> 模型是结构的缩影，归根结底是信息的压缩，将核心的概念进行缩减，构建一个小型结构，对于学习新的概念作用很大。</li>
+<li>高速公路：连接结构和模型<br> 哪种知识更容易提取，是四通八达的大楼还是只有一条泥泞小路的喽，连通越多，知识的提取越方便越快捷<br>通过以上结构来完善你的知识存储，知识的存储是理解和应用的基础。</li>
+</ol>
+<p>理解了存储，那整体学习的框架是什么，整体的流程是怎么样的呢？</p>
+<ol>
+<li>获取：通过各种渠道获得知识</li>
+<li>理解：了解内容的意思</li>
+<li>拓展：扩展知识的内涵和外延</li>
+<li>纠错：修正错误的高速公路</li>
+<li>应用：将知识使用到实际中去</li>
+<li>测试：检验知识的正确性<br>作者将整个学习过程，分解成具体的几个步骤，然后每个步骤击破，用具体的技术完善每一个步骤，提高效率，这里先不讲具体的方法，先分清楚每个步骤的意义。<br>获取：输入，输入的目标包括：简化，速度，容量。优化输入，让你获取更多的知识，更高效。<br>理解：就是明白表面的意义，更快的抓住重点。<br>拓展：是处理信息最难的一步，包括深度拓展：背景知识的了解，有助于记忆内容。横向拓展：相关内容的了解，周边知识的理解让你扩展知识面。纵向拓展：这个最具创造性，通过相似性，找到不同大厦之间的高速通道，打破知识的边界，真正连通不同的模型、结构。<br>纠错：如果高速公路的连接错误，就纠正错误，让知识间的连接更正确的连接<br>应用：信息处理包含3个层次：理解，拓展和应用。到了应用是最好层次，让它在实际生活中有用处，改变生活。<br>测试：可以融合在每一步中，检验知识的正确性。我个人认为费曼技巧就是一种相当棒的测试方法，测试你的知识是否理解正确，还能找到哪个地方不足。</li>
+</ol>
+<p>实际使用中，一整套框架的顺序是不定的，顺序是可以颠倒的，但要理解整体的流程，每个部分的意义都要体现。整套框架配合费曼技巧，从正反两个方面对知识进行学习、校验，十分实用。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/成长/">成长</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/成长/">成长</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/08/06/通过实战一步步学习树莓派1/" title="通过实战一步步学习树莓派1——零基础安装树莓派操作系统" itemprop="url">通过实战一步步学习树莓派1——零基础安装树莓派操作系统</a>
   </h1>
   <p class="article-author">By
@@ -215,7 +483,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Java/">Java</a><a href="/tags/Spring-Boot/">Spring Boot</a>
+  <span></span> <a href="/tags/Spring-Boot/">Spring Boot</a><a href="/tags/Java/">Java</a>
   </div>
 
 </div>
@@ -292,7 +560,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Annotation/">Annotation</a><a href="/tags/Java/">Java</a>
+  <span></span> <a href="/tags/Java/">Java</a><a href="/tags/Annotation/">Annotation</a>
   </div>
 
 </div>
@@ -400,11 +668,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>19</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>19</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>20</sup></a></li>
 		  
 		
 		  
@@ -412,7 +680,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>16</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>17</sup></a></li>
 		  
 		
 		  
@@ -445,15 +713,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>19</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>20</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>19</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>20</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>18</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>19</sup></a></li>
 			
 		
 			
@@ -477,11 +745,19 @@
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>4</sup></a></li>
 			
 		
 			
@@ -493,23 +769,7 @@
 			
 		
 			
-				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 			
@@ -517,11 +777,19 @@
 			
 		
 			
-				<li><a href="/tags/锁/" title="锁">锁<sup>1</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/二分查找/" title="二分查找">二分查找<sup>1</sup></a></li>
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/二分法/" title="二分法">二分法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/回溯思维/" title="回溯思维">回溯思维<sup>1</sup></a></li>
 			
 		
 		</ul>
