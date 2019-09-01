@@ -79,6 +79,126 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/09/01/arts-2019-09-01-share/" title="开发感悟" itemprop="url">开发感悟</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-09-01T08:57:00.000Z" itemprop="datePublished"> Published 2019-09-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近基于jhipster脚手架开发spring cloud的项目，突然感觉软件工程真的是很复杂的东西，从上倒下都要了解一点，如果那部分一点不懂，出了问题就不能搞定，要花很多时间试错，无法思考解决方法，只能简单的试错，这次就是gradle拉包有问题，有一个同事搞了一个星期，还有些没搞定，看着他一点点从边缘摸索试错，这就是编译工具不了解，导致遇到这部分一点都没法思考，连找问题都不知道怎么找。<br>最近也再思考职业规划，发现真的到了瓶颈了，虽然也有很多东西可以继续学习，但如果再找不到真正缺失的东西，会再多也不能突破瓶颈，原来以为自己已经不错了，框架上的东西自己也能做，但这么长时间看来，还是井底之蛙了，与那些在大公司起点就很高的人，有着天壤之别。之前以为自己基础好了就可以了，所以一点点开始复习基础，但现实一次次打脸，基础是内功，让你成长很快，走的很深很远，但公司是要生产力，你用时间换钱，工作这么长时间来了还不能干活，很多东西不会用，你都工作这么长时间，也没什么突出项，连常用工具都不会，我还会找你？要看清本质，大公司想要能干活的人太多了，所以才要求基础，起码招来的人更好，后面能走的更远。<br>但从另外一个角度看，不能市面上出了一个新技术你就去学习，那样也是很低效的，新东西层出不穷，你的时间有限，还是要从底层从抽象学起，这样才高效，不会被时间淘汰。即使有了新技术有以前的抽象基础，不会过时，只要对比学习差异就行。现在我太多分布式的基础不会，不说原理不会，连用都没用过，这也是我总结之前失败的原因。<br>要有自己的作品，开源的项目，或者能参与过开源的项目。<br>要知识体系全面，会流行的技术，同时懂得基础。既能干活，又能分析问题。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/软件工程/">软件工程</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/09/01/arts-2019-09-01-review/" title="《深入理解计算机系统》7" itemprop="url">《深入理解计算机系统》7</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-09-01T08:55:00.000Z" itemprop="datePublished"> Published 2019-09-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>总结第三章，程序的机器级表示<br>介绍了C语言抽象层下面的机器级结构<br>主要分为几部分，数据分为整数与浮点数，两者分别有不同的寄存器，原理相同<br>以整数介绍为主<br>数据的格式，字节，字，双字，四字<br>然后是访问信息，对于数据的访问与加载，有操作数指示符，寄存器，内存，直接数的表示方法<br>传送指令 mov，压入和弹出栈指令pop，push（这个为后面过程铺垫）<br>接着是算术与逻辑，一元，二元操作，移位等。<br>接着是控制，几个条件判断的寄存器，命令访问条件码，跳转命令jump，2种实现条件分支的方法，一种是条件控制，类似jump，goto，一种是用条件传送，第二种更符合现在处理器高效的风格，因为不需要跳转，局部性原理，效率更高，但只有部分符合条件，不是所有情况都能适用。<br>然后就是控制的实现，一种是do-while，while，for等循环，1个是switch的实现。<br>下一部分是过程，如果寄存器不够或者的方法间互相调用，就会用到过程。主要分为三部分，传递控制，传递数据，和分配和释放内存。<br>使用%rsp栈指针，$rip来指示栈帧的位置，是用call和ret转移控制。<br>下一部分是数组，主要是指针的处理，嵌套数组，定长数组，变长数组<br>然后是异构数据结构，结构struct，联合Union<br>最后一部分是浮点数，与整数原理相通。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/08/25/arts-2019-08-25-algorithm/" title="12. 整数转罗马数字" itemprop="url">12. 整数转罗马数字</a>
   </h1>
   <p class="article-author">By
@@ -577,127 +697,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/09/arts-2019-08-11-share/" title="《火线第四季》观感1" itemprop="url">《火线第四季》观感1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-09T11:25:00.000Z" itemprop="datePublished"> Published 2019-08-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>第四季<br>这一季的视角在教育系统，学校里的孩子。<br>一方面交代卡凯提竞选市长，表现了政客的方方面面，他凭借证人被杀为话题，拉现在市长下马，过程一波三折，最后如愿当上了市长，他开始是想做一些事情的，但很快他发现，市长每天面对很多难题，里面有个比喻就是每天吃屎。刚想在警察届去改观，教育预算出现了5千万的缺口，不得不拆东墙补西墙。竞争对手的互相诋毁，政客的两面三刀，活灵活现。<br>学校里的孩子，大部分都是学习很差的，他们最终都是要去街头的，学校是一个小的社会，提前演习。中间穿插着科尔文跟大学教授的研究项目，每个班调出几个特别有问题的孩子，组成特别班。几个孩子各不相同，蓝迪脑子很灵活，自己在学校卖一些小零食赚钱，他看到了马洛团伙的杀入方法，告诉了警察，被说成告密者，养母也因为这个受伤。麦克是个沉默寡言的孩子，拒绝别人的好处，拒绝马洛的钱，拒绝拳击教练的帮助，后面他父亲回来了，他出现了空前的敌意，甚至请马洛去让他消失，种种表现表明他可能童年受过伤害，所以才这样，他加入了马洛团伙，成了一个杀手，管理了一个街角。还是一个孩子是瑞贝的孩子，但实在不是混街头的料，最后被科尔文收养。<br>马洛团伙这边两个主要杀手，将人带到空置的房屋内杀害，然后封死门，表面风平浪静，其实已经死了很多人，最后秘密被发现，成立专案组。<br>巴布斯这边，他开始用小推车自己卖一些东西赚钱，带着一个小弟，想好好教他，但后面小弟翘课逃走了。一个混混一直抢他钱，他想找警察，但马吉去了凶杀组，交给赫克，但他啥也没发现。他想用氰化氢装做毒品，毒死抢劫者，但被小弟偷吸，间接害死了小弟。巴布斯精神崩溃。<br>博迪因为与麦克一起坐车走了，被杀了，他本想举报马洛，因为他们没有原则。<br>警察这边赫克，因为之前撞见市长的丑事而升官了，想通过监视马洛，查出问题，但过几天摄像机丢了，而且他也没走正常流程，他还编瞎话是线人给的线索，总想抄近路，这一季很多事都是他搞坏了，转看卡夫，在被卡尔文谈话后，警务水平上升，街头混混一清二楚，两个人开始差不多，现在差距很大，一个人走了捷径，但后面吃苦很多，一个人稳扎稳打，情况越来越好。<br>看清事物要理解其本质，科尔文发现学校的本质，一个小型社会，孩子的表现是去社会上的预演，孩子不傻，用不到的东西不学。警察抓人是数字游戏，政策变来变去是利益的权衡。不同人有不同的发展，赫克和卡夫开始觉得没人重用他们，他们自己没发现自己与别人的差距，有实力的人，即使短暂遇到挫折，但大部分时间还是很需要这样的人，这样的人随时可以东山再起，比如福瑞们，虽然被雪藏10年，但出现出手不凡，一下就被重用了。多从自身找问题，要足够实力，不抄近路，实打实的完成每件事。<br>要懂游戏规则，奥马尔一直抢最棘手的毒贩，因为有原则，精明，有耐心，这才能成大事。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/电视剧/">电视剧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/04/arts-2019-08-04-tip/" title="《深入理解计算机系统》4" itemprop="url">《深入理解计算机系统》4</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-04T08:28:00.000Z" itemprop="datePublished"> Published 2019-08-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>这周看完了全部，将剩余的系统级I/O，网络编程，并发编程都看完了，还是囫囵吞枣都看一遍，细节不纠，很多也没看懂</p>
-<p>这3部分是整部书的第三部分，讲的是程序间的交互与通信，这部分与上层的关系其他挺大的，但C语言不太会，不能跟着写脚本，所以C语言是必备，对于下面继续学习是必要的。弄懂这几部分，就算得上学习了高级部分了。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -731,7 +730,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>23</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>24</sup></a></li>
 		  
 		
 		  
@@ -739,7 +738,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>20</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>21</sup></a></li>
 		  
 		
 		  
@@ -772,15 +771,15 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>24</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>23</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/算法/" title="算法">算法<sup>23</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>23</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>22</sup></a></li>
 			
 		
 			
@@ -796,11 +795,11 @@
 			
 		
 			
-				<li><a href="/tags/纪录片/" title="纪录片">纪录片<sup>7</sup></a></li>
+				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>6</sup></a></li>
+				<li><a href="/tags/纪录片/" title="纪录片">纪录片<sup>7</sup></a></li>
 			
 		
 			
@@ -812,6 +811,10 @@
 			
 		
 			
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
@@ -820,11 +823,11 @@
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 			
@@ -836,15 +839,11 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/字符串/" title="字符串">字符串<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
