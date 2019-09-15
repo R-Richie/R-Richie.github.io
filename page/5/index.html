@@ -79,6 +79,66 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/06/09/arts-2019-06-09-share/" title="RPC初探1" itemprop="url">RPC初探1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-09T06:22:00.000Z" itemprop="datePublished"> Published 2019-06-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>看了一遍《分布式服务框架-原理与实践》这本书，大致浏览了一遍有了一些初略的印象。<br>RPC应用在分布式部署服务，互相需要调用的情况下，原来是在同一个进程间互相调用，互相通信，但不同进程，多机器就不能用原来的进程间调用的方法，但又想跟原来进程间一样简单，这样RPC就诞生了。<br>RPC分为几个部分，序列化与反序列化，网络框架，协议栈。简单来说就是先序列化，然后网络传输，然后再反序列化。<br>那这个服务框架的好坏可以再细分了序列化的好坏，网络模型的好坏，网络协议的好坏。<br>一个问题的研究，需要将这个问题拆分成小的问题，再每个问题深入研究，最后合成一个整体考虑。我们把RPC进行拆分，一个表象的问题，最终会拆分成基础的问题，网络问题，与网络传输序列化问题 。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/06/09/arts-2019-06-09-tip/" title="关于学习的思考" itemprop="url">关于学习的思考</a>
   </h1>
   <p class="article-author">By
@@ -665,70 +725,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/05/18/arts-2019-05-18-algorithm1/" title="208.实现 Trie (前缀树)" itemprop="url">208.实现 Trie (前缀树)</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-05-18T14:17:07.000Z" itemprop="datePublished"> Published 2019-05-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。<br>示例:<br>Trie trie = new Trie();<br>trie.insert(“apple”);<br>trie.search(“apple”);   // 返回 true<br>trie.search(“app”);     // 返回 false<br>trie.startsWith(“app”); // 返回 true<br>trie.insert(“app”);<br>trie.search(“app”);     // 返回 true<br>说明:<br>你可以假设所有的输入都是由小写字母 a-z 构成的。<br>保证所有输入均为非空字符串。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>开始是root不存储数据<br>然后引入一个小写字母数组<br>每个数组里面的对象包含自己和数组还有是否是叶子结点<br>内部类 TreeNode，包含字符，TreeNode数组，叶子结点标示<br>每次一个字符，一次遍历查下去<br>abcde fghij klmno pqrst uvwxy z<br>字符数组的大小一直错<br>Trie树的实现<br>插入没有就新建，有的继续遍历<br>搜索跟新建相似，最后介绍不是叶子结点就返回false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">class Trie &#123;</span><br><span class="line">    private TreeNode root;</span><br><span class="line">    public static class TreeNode&#123;</span><br><span class="line">        private char data;</span><br><span class="line">        private TreeNode[] child = new TreeNode[26];</span><br><span class="line">        private boolean isEndingChar = false;</span><br><span class="line">        public TreeNode(char data)&#123;</span><br><span class="line">            this.data = data;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    /** Initialize your data structure here. */</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        root = new TreeNode(&apos;/&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Inserts a word into the trie. */</span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        TreeNode node = root;</span><br><span class="line">        char[] array = word.toCharArray();</span><br><span class="line">        for(int i = 0 ; i &lt; array.length ; i++)&#123;</span><br><span class="line">            int index = array[i] - &apos;a&apos;;</span><br><span class="line">            if(node.child[index] == null)&#123;</span><br><span class="line">                node.child[index] = new TreeNode(array[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.child[index];</span><br><span class="line">        &#125;</span><br><span class="line">        node.isEndingChar = true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Returns if the word is in the trie. */</span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        TreeNode node = root;</span><br><span class="line">        char[] array = word.toCharArray();</span><br><span class="line">        for(int i = 0 ; i &lt; array.length ; i++)&#123;</span><br><span class="line">            int index = array[i] - &apos;a&apos;;</span><br><span class="line">            if(node.child[index] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.child[index];</span><br><span class="line">        &#125;</span><br><span class="line">        if(!node.isEndingChar)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Returns if there is any word in the trie that starts with the given prefix. */</span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        TreeNode node = root;</span><br><span class="line">        char[] array = prefix.toCharArray();</span><br><span class="line">        for(int i = 0 ; i &lt; array.length ; i++)&#123;</span><br><span class="line">            int index = array[i] - &apos;a&apos;;</span><br><span class="line">            if(node.child[index] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.child[index];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your Trie object will be instantiated and called as such:</span><br><span class="line"> * Trie obj = new Trie();</span><br><span class="line"> * obj.insert(word);</span><br><span class="line"> * boolean param_2 = obj.search(word);</span><br><span class="line"> * boolean param_3 = obj.startsWith(prefix);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/Trie树/">Trie树</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
   </nav>
 
 </div>
@@ -759,7 +758,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>25</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>26</sup></a></li>
 		  
 		
 		  
@@ -800,7 +799,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>25</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>26</sup></a></li>
 			
 		
 			
@@ -840,7 +839,7 @@
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -848,19 +847,11 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
 			
 		
 			
@@ -872,11 +863,19 @@
 			
 		
 			
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>2</sup></a></li>
 			
 		
 		</ul>
