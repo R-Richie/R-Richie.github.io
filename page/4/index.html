@@ -79,6 +79,197 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/07/07/arts-2019-0707-share/" title="读《七堂极简的物理课》有感" itemprop="url">读《七堂极简的物理课》有感</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-07-07T08:38:00.000Z" itemprop="datePublished"> Published 2019-07-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>读这本书是为了了解自牛顿后的物理学巨变<br>牛顿之后，发现了电磁场，但力学定律与麦克斯韦方程组有冲突，爱因斯坦发现了时空关系，时间和空间不再是独立的。<br>后面发现了量子，世界不再是连续的，是一份份的。微观世界趋向于概率性的，不确定的。不再是牛顿时代的，一切都是根据确定的公式确定的。<br>爱因斯坦统一时间与空间，引力与电磁场，质量与能量。引发了核物理，量子力学。<br>读了一遍还是一知半解。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/物理学/">物理学</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/06/29/arts-2019-06-29-algorithm1/" title="206. 反转链表" itemprop="url">206. 反转链表</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-29T14:10:00.000Z" itemprop="datePublished"> Published 2019-06-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>反转一个单链表。</p>
+<p>示例:</p>
+<p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL<br>进阶:<br>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-linked-list" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-linked-list</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>迭代和递归方式</p>
+<p>迭代<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode reverseList(ListNode head) &#123;</span><br><span class="line">        ListNode node = head;</span><br><span class="line">        ListNode pre = null;</span><br><span class="line">        if(node == null)return head;</span><br><span class="line">        ListNode next = node.next;</span><br><span class="line">        while(node != null &amp;&amp; next!=null)&#123;</span><br><span class="line">            node.next = pre;</span><br><span class="line">            pre = node;</span><br><span class="line">            node = next;</span><br><span class="line">            next = node.next;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        node.next = pre;</span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>递归<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode reverseList(ListNode head) &#123;</span><br><span class="line">        if(head==null)return head;</span><br><span class="line">        return reverse(head,null);</span><br><span class="line">    &#125;</span><br><span class="line">    public ListNode reverse(ListNode node,ListNode exist)&#123;</span><br><span class="line">        ListNode next = node.next;</span><br><span class="line">        if(next == null)&#123;</span><br><span class="line">            node.next = exist;</span><br><span class="line">            return node;</span><br><span class="line">        &#125;</span><br><span class="line">        node.next = exist;</span><br><span class="line">        return reverse(next,node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>官方解法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">   public ListNode reverseList(ListNode head) &#123;</span><br><span class="line">        if (head == null || head.next == null) return head;</span><br><span class="line">        ListNode p = reverseList(head.next);</span><br><span class="line">        head.next.next = head;</span><br><span class="line">        head.next = null;</span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/06/29/arts-2019-06-29-algorithm2/" title="92. 反转链表 II" itemprop="url">92. 反转链表 II</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-29T14:10:00.000Z" itemprop="datePublished"> Published 2019-06-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。<br>说明:<br>1 ≤ m ≤ n ≤ 链表长度。<br>示例:<br>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m = 2, n = 4<br>输出: 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;NULL<br>来源：力扣（LeetCode）</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-linked-list-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>4个主要节点，一个m-1之前，m-n反转链表，一个n+1，</p>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode reverseBetween(ListNode head, int m, int n) &#123;</span><br><span class="line">        ListNode dummy = new ListNode(-1);</span><br><span class="line">        dummy.next = head;</span><br><span class="line">        ListNode node = dummy;</span><br><span class="line">        if(node == null)return head;</span><br><span class="line">        int begin = m-1;</span><br><span class="line">        int end = n+1;</span><br><span class="line">        int index = 0;</span><br><span class="line">        ListNode preBegin = null;</span><br><span class="line">        ListNode nextEnd = null;</span><br><span class="line">        ListNode reverse = new ListNode(-1);</span><br><span class="line">        ListNode reverseLast = reverse;</span><br><span class="line">        while(node!= null)&#123;</span><br><span class="line">            </span><br><span class="line">            if(index == begin)&#123;</span><br><span class="line">                preBegin = node;</span><br><span class="line">            &#125;</span><br><span class="line">            if(index == end)&#123;</span><br><span class="line">                nextEnd = node;</span><br><span class="line">            &#125;</span><br><span class="line">            if(index &gt; begin &amp;&amp; index &lt; end)&#123;</span><br><span class="line">                ListNode newNode = new ListNode(node.val);</span><br><span class="line">                ListNode next = reverse.next;</span><br><span class="line">                reverse.next = newNode;</span><br><span class="line">                newNode.next = next;</span><br><span class="line">                if(index == m)&#123;</span><br><span class="line">                    reverseLast = newNode;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            index++;</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        preBegin.next = reverse.next;</span><br><span class="line">        reverseLast.next = nextEnd;</span><br><span class="line">        return dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果<br>执行用时 :1 ms, 在所有 Java 提交中击败了87.25%的用户<br>内存消耗 :35.2 MB, 在所有 Java 提交中击败了48.42%的用户</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/06/29/arts-2019-06-29-share/" title="《牛顿，最后的炼金术士》观后感" itemprop="url">《牛顿，最后的炼金术士》观后感</a>
   </h1>
   <p class="article-author">By
@@ -539,205 +730,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/06/15/arts-2019-06-16-tip/" title="RPC初探2" itemprop="url">RPC初探2</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-06-15T15:47:00.000Z" itemprop="datePublished"> Published 2019-06-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="分布式服务器框架"><a href="#分布式服务器框架" class="headerlink" title="分布式服务器框架"></a>分布式服务器框架</h3><p>通信框架，序列化与反序列化，协议栈，服务路由，集群容错，服务调用，服务注册中心，服务发布和引用，服务灰度发布，参数传递，服务多版本，流量控制，服务降级，服务优先级调度，服务治理，分布式消息跟踪，可靠性设计，</p>
-<h3 id="分布式服务架构设计"><a href="#分布式服务架构设计" class="headerlink" title="分布式服务架构设计"></a>分布式服务架构设计</h3><p>抽象三层<br>RPC层，Filter Chain层，Service层<br>功能上还有服务治理中心，服务注册中心</p>
-<h3 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h3><p>服务订阅发布：配置化发布和引用，服务自动化发现机制，服务在线注册和去注册<br>服务路由：默认提供随机路由、轮询、基于权重的路由策略等，黏滞连接，路由定制<br>集群容错：failover，failback，failfast<br>服务调用：同步调用，异步调用，并行调用<br>多协议：私有协议、公有协议<br>序列化方式：二进制类序列化，文本类序列化<br>统一配置：本地静态配置，基于配置中心的动态配置</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/06/15/arts-2019-06-15-share/" title="《全球科技通史》第一遍观后感" itemprop="url">《全球科技通史》第一遍观后感</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-06-15T15:32:00.000Z" itemprop="datePublished"> Published 2019-06-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>通读一遍书籍，写一下第一遍概览<br>几个章节</p>
-<h2 id="远古科技"><a href="#远古科技" class="headerlink" title="远古科技"></a>远古科技</h2><h3 id="黎明之前："><a href="#黎明之前：" class="headerlink" title="黎明之前："></a>黎明之前：</h3><p>从用石头砸开坚果开始、告别茹毛饮血、从山洞到茅屋、虱子与衣服、最早的武器、善于说话者胜</p>
-<h3 id="文明曙光："><a href="#文明曙光：" class="headerlink" title="文明曙光："></a>文明曙光：</h3><p>存储太阳能、驯化水稻、陶器的出现、美索不达米亚的水渠、轮子与帆船、从1到10、开始记录一切、星辰的轨迹</p>
-<h2 id="古代科技"><a href="#古代科技" class="headerlink" title="古代科技"></a>古代科技</h2><h3 id="农耕文明："><a href="#农耕文明：" class="headerlink" title="农耕文明："></a>农耕文明：</h3><p>青铜与铁、解决粮食问题、纺织，瓷器与玻璃、城市的胜利</p>
-<h3 id="文明复兴："><a href="#文明复兴：" class="headerlink" title="文明复兴："></a>文明复兴：</h3><p>古希腊人的贡献、纸张与文明、从雕版印刷到活字印刷、阿拉伯文明的黄金时代、大学的诞生、漫长的中世纪、美第奇与佛罗伦萨的穹顶、日心说：冲破教会束缚</p>
-<h2 id="近代科技"><a href="#近代科技" class="headerlink" title="近代科技"></a>近代科技</h2><h3 id="科学启蒙："><a href="#科学启蒙：" class="headerlink" title="科学启蒙："></a>科学启蒙：</h3><p>科学方法论，近代医学的诞生，开启大航海时代，神说、让牛顿说吧！，炼金术士还是化学家</p>
-<h3 id="工业革命："><a href="#工业革命：" class="headerlink" title="工业革命："></a>工业革命：</h3><p>月光社与工业革命，蒸汽船与火车，机器思维的胜利，永动机不存在，细胞学说与进化论，电的发现与存储，直流电与交流电，通信以光速进行</p>
-<h3 id="新工业："><a href="#新工业：" class="headerlink" title="新工业："></a>新工业：</h3><p>石油：工业的血液，化学工业助力农业，给轮子上加上内燃机，飞上篮天，杀伤力跃迁，洪堡与教育改革</p>
-<h2 id="现代科技"><a href="#现代科技" class="headerlink" title="现代科技"></a>现代科技</h2><h3 id="原子时代："><a href="#原子时代：" class="headerlink" title="原子时代："></a>原子时代：</h3><p>突破物理学危机，了不起的原子能，雷达的本质，制药业突飞猛进</p>
-<h3 id="信息时代："><a href="#信息时代：" class="headerlink" title="信息时代："></a>信息时代：</h3><p>新数学和新方法论，从算盘到机械计算机，电子计算机的诞生，摩尔定律的动力，互联网，移动通信之路，太空竞赛，从豌豆杂交开始的基因技术</p>
-<h3 id="未来世界："><a href="#未来世界：" class="headerlink" title="未来世界："></a>未来世界：</h3><p>癌症的预测性检测，基因编辑，可控核聚变，“新生产关系”区块链，量子通信实现数据安全，</p>
-<p>历史总是反反复复， 但科技一直向前，科技是唯一可叠加的进步。近代科技之前，人类发展缓慢，在掌握了科学方法之后，科技水平飞速发展，而且之后会越来越快。<br>虽然人类科技已经进化了很多次，但人如果不接受教育，还保留着原始人基因的特性，很多方法与原始人很相近，要想能接近社会的平均水平，就要学习人类的历史，不去重复之前的错误，用最新的研究成果，才能起点就很高。<br>每一个历史节点都需要细细拆解，明白里面的原理，反观自己。<br>我一直想知道怎么才能了解历史，怎么去查资料，现在还是吃别人的食物，要自己去找食物，现在还不知道，吴军老师是怎么查资料的。有个思路就是查他的附录，里面有很多引用，可以深入学习。<br>看完再来重新回顾，突然感觉有了一种更高的视野，原来一切就是这样。<br>掌握思维方法最重要，机械思维，不确定思维，控制论、信息轮、系统论。掌握的更先进。</p>
-<p>反观很多人连机械思维还没拥有，还用原始大脑去思考，那必然会落后于时代。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/历史/">历史</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/06/14/arts-2019-06-15-review/" title="Implementing Remote Procedure Calls学习笔记1" itemprop="url">Implementing Remote Procedure Calls学习笔记1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-06-14T15:37:00.000Z" itemprop="datePublished"> Published 2019-06-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>扩展单个电脑单个程序的过程调用，到多台电脑上</p>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>简单，干净的语义，高效，通用型。</p>
-<h3 id="设计系统需要的问题，"><a href="#设计系统需要的问题，" class="headerlink" title="设计系统需要的问题，"></a>设计系统需要的问题，</h3><p>面对机器和通信失败时的精确语义<br>包含地址参数在缺少共享地址时的语义<br>将远程调用集成到现有系统中<br>绑定，调用者怎么决定哪个地址和标识的被调用者<br>在调用者和被调用者之间传输和控制数据的合适的协议<br>如何在开发的网络中提供完整性和开发性</p>
-<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>最主要的目的是简化分布式计算，以前这个工作通常需要经验丰富的专家，很难做。<br>希望像本地访问，移除不必要的困难，只留下构建分布式系统的基本困难：时序，组件的独立故障以及独立执行环境的共存。<br>次要目的是，RPC沟通是高效的<br>另外，RPC 包的语义尽可能强大，不失简单和高效。<br>最后的目标是建立安全的连接。<br>共享内存有2个潜在的问题<br>首先，远程地址的表示是否可以集成到我们的编程语言（可能还有底层的机器架构）中，而不会产生过度的剧变;<br>第二，是否可以实现可接受的效率。</p>
-<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>user ，user-stub，RPCRuntime，server-stub，server</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通读了论文全部，然后再细读，论文包含了，NDREW D. BIRRELL and BRUCE JAY NELSON 对整个系统设计时的思考，能清楚的知道怎么做，以及为什么这么做，设计</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
@@ -767,11 +759,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>23</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>24</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>26</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>27</sup></a></li>
 		  
 		
 		  
@@ -779,7 +771,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>22</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>23</sup></a></li>
 		  
 		
 		  
@@ -812,15 +804,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>26</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>27</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>24</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>25</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>23</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>24</sup></a></li>
 			
 		
 			
@@ -868,11 +860,19 @@
 			
 		
 			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>2</sup></a></li>
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 			
@@ -881,14 +881,6 @@
 		
 			
 				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>2</sup></a></li>
 			
 		
 		</ul>

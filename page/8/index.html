@@ -79,6 +79,196 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/04/19/arts-2019-4-21-tip/" title="java集合-CopyOnWriteArrayList" itemprop="url">java集合-CopyOnWriteArrayList</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-19T01:56:07.000Z" itemprop="datePublished"> Published 2019-04-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>实现List<e>, RandomAccess, Cloneable, java.io.Serializable 接口</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/** The lock protecting all mutators */</span><br><span class="line"> final transient ReentrantLock lock = new ReentrantLock();</span><br><span class="line"></span><br><span class="line"> /** The array, accessed only via getArray/setArray. */</span><br><span class="line"> private transient volatile Object[] array;</span><br></pre></td></tr></table></figure>
+<p>主要的成员变量有2个，一个ReentrantLock，一个是内部存值的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &#123;@code true&#125; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        int len = elements.length;</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + 1);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>Add方法，先是前后两个lock与unlock，保证安全性。<br>实现实际上是复制一个原来数组，将新值添加到新数组的最后一位，内部变量指向新的数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">static final class COWIterator&lt;E&gt; implements ListIterator&lt;E&gt; &#123;</span><br><span class="line">    /** Snapshot of the array */</span><br><span class="line">    private final Object[] snapshot;</span><br><span class="line">    /** Index of element to be returned by subsequent call to next.  */</span><br><span class="line">    private int cursor;</span><br><span class="line"></span><br><span class="line">    private COWIterator(Object[] elements, int initialCursor) &#123;</span><br><span class="line">        cursor = initialCursor;</span><br><span class="line">        snapshot = elements;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>内部的遍历，其实是将原来数组进行一个快照，这样即使数组变化了，不影响快照的遍历。</p>
+<p>CopyOnWriteArrayList 的添加元素很消耗资源，因为每次都要新建一个数组，然后复制所有数据，只适用于读远大于写的情况，如果写比较多，性能会很差。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/14/arts-2019-04-14-review/" title="An introduction to distributed systems 学习笔记2" itemprop="url">An introduction to distributed systems 学习笔记2</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-14T08:30:07.000Z" itemprop="datePublished"> Published 2019-04-14</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>原文地址：<a href="https://github.com/aphyr/distsys-class" target="_blank" rel="noopener">https://github.com/aphyr/distsys-class</a></p>
+<p>这周没怎么看，周末临时抱佛脚看了看。<br>还是关注广度，跟其他的分布式介绍对比了一下。一部分是知道为什么会需要分布式，接着两个主要方面就是扩展性和可用性。<br>应该主要3方面，高可用，高性能，高扩展性。<br>理解清楚CAP，从理论上清楚。<br>然后就是具体的每个方面，不同的实际技术。东西很多，但要把握脉络。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/14/arts-2019-04-14-share/" title="《7up》第二遍观后感2" itemprop="url">《7up》第二遍观后感2</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-14T07:32:07.000Z" itemprop="datePublished"> Published 2019-04-14</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="打算从事什么工作"><a href="#打算从事什么工作" class="headerlink" title="打算从事什么工作"></a>打算从事什么工作</h2><p>大部分人在21岁的时候很迷茫，接下来要从学生时代到工作了，多少有些不知所措，如果你从来没想过，规划过，更是如此。<br>如果能提前想好阶段，即使时间不固定，也能更好的处理接下来的变化，而不是随波逐流。<br>自然界的事物都是符合熵增的，就是不断的变得更混乱，只有人为的注入的能量，才能有秩序。比如nick说的那句话，只有不断努力才能维持停滞不前，只有突破自己，才能进行改变。</p>
+<h2 id="你对政治的看法"><a href="#你对政治的看法" class="headerlink" title="你对政治的看法"></a>你对政治的看法</h2><p>要关心社会的发展，历史的进程，虽然自己很努力，但如果一个东西被历史淘汰，你再努力也是白费，比如林赛后面干了很久的图书馆，被强制淘汰了，这个不是她的错，但社会淘汰了你。</p>
+<h2 id="未来你害怕什么"><a href="#未来你害怕什么" class="headerlink" title="未来你害怕什么"></a>未来你害怕什么</h2><p>知道自己的边界，自己的短板很重要</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/纪录片/">纪录片</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/04/14/arts-2019-04-14-algorithm/" title="找到 K 个最接近的元素" itemprop="url">找到 K 个最接近的元素</a>
   </h1>
   <p class="article-author">By
@@ -151,67 +341,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2019/04/06/arts-2019-4-5-tip/" title="Vue 学习笔记2" itemprop="url">Vue 学习笔记2</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-06T07:13:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近真的没有怎么实际写后端代码了，主要都是写一些简单的前端，而且不懂了也很少弄懂，真的很不好。<br>这周要分享的也很水，可以说算得上一个失败的经历。</p>
-<p>在实现导航栏跳转的时候，类似视频网站多个tab切换，使用父子路由实现，子路由的页面几乎一直，所以css也差不多，因为都是全局的css，所以有些css重复了，我想做一个互相不影响的，隔离的css作用域，发现vue有一个scoped的概念，在style标签里加上scoped，编译的时候就会加上唯一的编号类似 class-123132，这样，那么就是全局唯一的了。<br>但是我尝试加上postcss，就和bootstrap-vue起了冲突，解决了一阵未果，没有继续尝试了。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/前端/">前端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2019/04/06/arts-2019-04-14-tips/" title="java集合-ArrayList" itemprop="url">java集合-ArrayList</a>
   </h1>
   <p class="article-author">By
@@ -255,6 +384,67 @@
   <div class="article-tags">
   
   <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/06/arts-2019-4-5-tip/" title="Vue 学习笔记2" itemprop="url">Vue 学习笔记2</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-06T07:13:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近真的没有怎么实际写后端代码了，主要都是写一些简单的前端，而且不懂了也很少弄懂，真的很不好。<br>这周要分享的也很水，可以说算得上一个失败的经历。</p>
+<p>在实现导航栏跳转的时候，类似视频网站多个tab切换，使用父子路由实现，子路由的页面几乎一直，所以css也差不多，因为都是全局的css，所以有些css重复了，我想做一个互相不影响的，隔离的css作用域，发现vue有一个scoped的概念，在style标签里加上scoped，编译的时候就会加上唯一的编号类似 class-123132，这样，那么就是全局唯一的了。<br>但是我尝试加上postcss，就和bootstrap-vue起了冲突，解决了一阵未果，没有继续尝试了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
   </div>
 
 </div>
@@ -616,204 +806,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/31/arts-2019-02-31-tip/" title="Vue 学习笔记1" itemprop="url">Vue 学习笔记1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-31T10:45:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。<br>当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。<br>就像Vue学习的初期，官方文档也提醒尽量不用cli去创建项目，包括东西太多，很多还是跟打包有关，你既然要学习vue，就应该只学习重点，不然干扰项打扰，不然会影响效果。<br>最近在做页面间的跳转，其实我的需求很简单，就是一个视频网站，点击后能跳到播放和详情页。用了一些vue的跳转没有成功，后面使用了nuxt.js推荐的<nuxt-link> 标签，可以跳转了，而且这个标签还支持传参数。<br>看到编译后的标签，是一个a标签，然后看文档，这个支持前进和后退功能，相当于自己做了一个浏览器的堆栈保存访问的地址。<br>现在还有一个问题，就是我想做 播放页点击其他视频，再重新加载，但由于是同一个页面导致不能加载，还没有方法解决。</nuxt-link></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/前端/">前端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/31/arts-2019-02-31-algorithm/" title="设计循环队列" itemprop="url">设计循环队列</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-31T08:16:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>设计你的循环队列实现。 循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。<br>循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。<br>你的实现应该支持如下操作：</p>
-<ul>
-<li>MyCircularQueue(k): 构造器，设置队列长度为 k 。</li>
-<li>Front: 从队首获取元素。如果队列为空，返回 -1 。</li>
-<li>Rear: 获取队尾元素。如果队列为空，返回 -1 。</li>
-<li>enQueue(value): 向循环队列插入一个元素。如果成功插入则返回真。</li>
-<li>deQueue(): 从循环队列中删除一个元素。如果成功删除则返回真。</li>
-<li>isEmpty(): 检查循环队列是否为空。</li>
-<li>isFull(): 检查循环队列是否已满。<br>示例：<br>MyCircularQueue circularQueue = new MycircularQueue(3); // 设置长度为 3<br>circularQueue.enQueue(1);  // 返回 true<br>circularQueue.enQueue(2);  // 返回 true<br>circularQueue.enQueue(3);  // 返回 true<br>circularQueue.enQueue(4);  // 返回 false，队列已满<br>circularQueue.Rear();  // 返回 3<br>circularQueue.isFull();  // 返回 true<br>circularQueue.deQueue();  // 返回 true<br>circularQueue.enQueue(4);  // 返回 true<br>circularQueue.Rear();  // 返回 4<br>提示：</li>
-<li>所有的值都在 0 至 1000 的范围内；</li>
-<li>操作数将在 1 至 1000 的范围内；</li>
-<li>请不要使用内置的队列库。</li>
-</ul>
-<p>原题目地址：<a href="https://leetcode-cn.com/problems/design-circular-queue/submissions/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/design-circular-queue/submissions/</a></p>
-<h2 id="思考思路"><a href="#思考思路" class="headerlink" title="思考思路"></a>思考思路</h2><p>队列实现有2种选择，一种是数组实现，一种是链表实现。<br>这个题目长度是固定的，用数组实现更合适。</p>
-<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">class MyCircularQueue &#123;</span><br><span class="line">    private int head;</span><br><span class="line">    private int tail;</span><br><span class="line">    private int size;</span><br><span class="line">    private int currentSize;</span><br><span class="line">    int[] queue;</span><br><span class="line">    //顺序队列</span><br><span class="line">    </span><br><span class="line">    /** Initialize your data structure here. Set the size of the queue to be k. */</span><br><span class="line">    public MyCircularQueue(int k) &#123;</span><br><span class="line">        this.size = k;</span><br><span class="line">        queue = new int[size];</span><br><span class="line">        head = 0;</span><br><span class="line">        tail = 0;</span><br><span class="line">        currentSize = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Insert an element into the circular queue. Return true if the operation is successful. */</span><br><span class="line">    public boolean enQueue(int value) &#123;</span><br><span class="line">        if(currentSize == size)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        if(currentSize == 0)&#123;</span><br><span class="line">            head = (head+1)%size;   </span><br><span class="line">        &#125;</span><br><span class="line">        tail = (tail+1)%size;</span><br><span class="line">        </span><br><span class="line">        queue[tail] = value;</span><br><span class="line">        currentSize++;</span><br><span class="line">        return true;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  /** Delete an element from the circular queue. Return true if the operation is successful. */</span><br><span class="line">    public boolean deQueue() &#123;</span><br><span class="line">        if(currentSize == 0)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        currentSize--;</span><br><span class="line"> if(currentSize != 0)&#123;</span><br><span class="line">            head = (head + 1)%size;  </span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Get the front item from the queue. */</span><br><span class="line">    public int Front() &#123;</span><br><span class="line">        if(currentSize == 0)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return queue[head];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Get the last item from the queue. */</span><br><span class="line">    public int Rear() &#123;</span><br><span class="line">        if(currentSize== 0)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return queue[tail];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  /** Checks whether the circular queue is empty or not. */</span><br><span class="line">    public boolean isEmpty() &#123;</span><br><span class="line">        if(currentSize == 0)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Checks whether the circular queue is full or not. */</span><br><span class="line">    public boolean isFull() &#123;</span><br><span class="line">        if(currentSize == size)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>思路1，head头指针，tail尾指针，size数组整个大小，currentSize当前数组大小，用于判断边界条件。<br>head和tail都是真的有数据位，isFull和ieEmpty根据currentSize判断即可，rear直接去tail，font直接取头。<br>循环存值的方法，就是（当前值+1）%数组长度，保证数组到头，可以从头再来 。<br>难点在enqueue和dequeue<br>enqueue时，通过currentSize==size判断是不是队列满了，其实可以调用isFull，没有想到功能的复用。<br>正常情况，压数据入队列尾，数据存在tail+1的位置，currentSize+1<br>特殊情况，队列是空的情况，head，tail同时后移1位，这种处理后面发现会浪费一个空间，当时没想到。<br>dequeue，先判断是不是空队列<br>正常情况，head+1跟size取余<br>如果currentSize==0，则什么都不多，防止指针变成负值<br>总结<br>难点1，如果保证存储数组可以循环<br>难点2，队列是空的是，头尾指针的判断</p>
-<h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">class MyCircularQueue &#123;</span><br><span class="line">    private Integer[] queue;</span><br><span class="line">    private int head;</span><br><span class="line">    private int tail;</span><br><span class="line">    /** Initialize your data structure here. Set the size of the queue to be k. */</span><br><span class="line">    public MyCircularQueue(int k) &#123;</span><br><span class="line">        queue = new Integer[k];</span><br><span class="line">        head = 0;</span><br><span class="line">        tail = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Insert an element into the circular queue. Return true if the operation is successful. */</span><br><span class="line">    public boolean enQueue(int value) &#123;</span><br><span class="line">        if(isFull())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        queue[tail] = value;</span><br><span class="line">        tail = (tail + 1) % queue.length;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"> /** Delete an element from the circular queue. Return true if the operation is successful. */</span><br><span class="line">    public boolean deQueue() &#123;</span><br><span class="line">        if(isEmpty())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        queue[head] = null;</span><br><span class="line">        head = (head + 1) % queue.length;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Get the front item from the queue. */</span><br><span class="line">    public int Front() &#123;</span><br><span class="line">        if(isEmpty())&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return queue[head];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Get the last item from the queue. */</span><br><span class="line">    public int Rear() &#123;</span><br><span class="line">        if(isEmpty())&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(tail!=0)return queue[tail-1];</span><br><span class="line">        else return queue[queue.length-1];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Checks whether the circular queue is empty or not. */</span><br><span class="line">    public boolean isEmpty() &#123;</span><br><span class="line">        if(tail == head &amp;&amp; queue[tail] == null)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">   /** Checks whether the circular queue is full or not. */</span><br><span class="line">    public boolean isFull() &#123;</span><br><span class="line">        if(head == tail &amp;&amp; queue[tail] != null)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * Your MyCircularQueue object will be instantiated and called as such:</span><br><span class="line"> * MyCircularQueue obj = new MyCircularQueue(k);</span><br><span class="line"> * boolean param_1 = obj.enQueue(value);</span><br><span class="line"> * boolean param_2 = obj.deQueue();</span><br><span class="line"> * int param_3 = obj.Front();</span><br><span class="line"> * int param_4 = obj.Rear();</span><br><span class="line"> * boolean param_5 = obj.isEmpty();</span><br><span class="line"> * boolean param_6 = obj.isFull();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
-<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>思路2，看别人的分享有的思路<br>只需要头，尾指针，和数组<br>head指针存有数据，tail是最后一个有数据的位的下一个，是一个空指针<br>队列满，用tail==head，tail！=null，<br>队列空，tail== head，tail ==null<br>满或空的都是通过，头尾指针重合，如果尾指针是不是空来判断，这样要保证数据可以存空值<br>deQueue和deQueue都比较好处理，不用判断特殊的条件<br>rear要取前一个值，这个要特殊注意。<br>总结<br>难点1，通过tail指针指向空的下一个位，来让队列的满或空，很好判断，不会出现特殊位置的判断，很巧妙</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/队列/">队列</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/31/arts-2019-02-31-share/" title="《7up》第一遍观后感" itemprop="url">《7up》第一遍观后感</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-31T08:15:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>第一遍看这部纪录片，纪录片分别从英国找到一群不同阶层的孩子，从7岁开始，每隔7年采访，看这些人的成长与变化。<br>片子是按时间顺序，我们横向对比，<br>第一点教育很重要，穷人家的孩子都不太重视教育，没有眼界，不清楚怎么规划未来，有的连大学是什么都不知道，自然比别人要慢很多，或者生活格局要低很多。Nick一个害羞的男孩，通过考取牛津，成功翻身。<br>第二点，父母、家庭对孩子影响很大，片中paul从小就父母离婚在福利院长大，缺乏自信，一生都会怀疑自己，幸好娶了一个积极的老婆。Symon来自单亲家庭，缺少父爱，很小就比较迷茫。Suzy在14岁，父母离婚，对她打击很大，对婚姻失去希望。<br>第三点，大部门人都经历了离婚，越晚结婚，婚姻越稳定，婚姻很大程度影响一个人。<br>第四点，癌症的发病率很高，在那个时候的英国，很多人的父母都是死于癌症，越到老越能体会，身体健康是最重要的。<br>第五点，片子的立意在于说明英国存在阶级，对于里面的每个人的报道有些节选，不能代表全部，富人区的孩子成功与自身的奋斗也是离不开，穷人区的人穷，有些自己说自己很懒。阶级是客观存在的，但自身努力是可以突破的，但自身努力不代表能完成一切。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/纪录片/">纪录片</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/7/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/">Next<span></span></a>
@@ -843,11 +835,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>23</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>24</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>26</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>27</sup></a></li>
 		  
 		
 		  
@@ -855,7 +847,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>22</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>23</sup></a></li>
 		  
 		
 		  
@@ -888,15 +880,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>26</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>27</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>24</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>25</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>23</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>24</sup></a></li>
 			
 		
 			
@@ -944,11 +936,19 @@
 			
 		
 			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>2</sup></a></li>
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 			
@@ -957,14 +957,6 @@
 		
 			
 				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>2</sup></a></li>
 			
 		
 		</ul>
