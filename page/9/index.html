@@ -79,6 +79,173 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/04/05/arts-2019-4-5-algorithm/" title="LRU缓存机制" itemprop="url">LRU缓存机制</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-05T08:16:07.000Z" itemprop="datePublished"> Published 2019-04-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。<br>获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。<br>写入数据 put(key, value) - 如果密钥不存在，则写入其数据值。当缓存容量达到上限时，它应该在写入新数据之前删除最近最少使用的数据值，从而为新的数据值留出空间。<br>进阶:<br>你是否可以在 O(1) 时间复杂度内完成这两种操作？<br>示例:<br>LRUCache cache = new LRUCache( 2 /<em> 缓存容量 </em>/ );<br>cache.put(1, 1);<br>cache.put(2, 2);<br>cache.get(1);       // 返回  1<br>cache.put(3, 3);    // 该操作会使得密钥 2 作废<br>cache.get(2);       // 返回 -1 (未找到)<br>cache.put(4, 4);    // 该操作会使得密钥 1 作废<br>cache.get(1);       // 返回 -1 (未找到)<br>cache.get(3);       // 返回  3<br>cache.get(4);       // 返回  4</p>
+<p>原题地址 <a href="https://leetcode-cn.com/problems/lru-cache" target="_blank" rel="noopener">https://leetcode-cn.com/problems/lru-cache</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用linkedhashmap实现，问题在于初始大小小于16，默认会用16，后面的大小是2^n,需要自己控制大小，<br>容量超过最大，需要用迭代取最老的值删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class LRUCache &#123;</span><br><span class="line">    private LinkedHashMap&lt;Integer,Integer&gt; map;</span><br><span class="line">    private int capacity;</span><br><span class="line"></span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        map = new LinkedHashMap&lt;Integer,Integer&gt;(capacity,0.75f,true);</span><br><span class="line">        this.capacity = capacity;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int get(int key) &#123;</span><br><span class="line">        Integer value = map.get(key);</span><br><span class="line">        if(value == null)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void put(int key, int value) &#123;</span><br><span class="line">        if(map.containsKey(key))&#123;</span><br><span class="line">            map.remove(key);</span><br><span class="line">        &#125;</span><br><span class="line">        if(map.size() &gt;= capacity)&#123;</span><br><span class="line">            map.remove(map.keySet().iterator().next());</span><br><span class="line">        &#125;</span><br><span class="line">        map.put(key,value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>哈希表+双向链表<br>一个hashmap存储key，快速访问，capacity容量记录大小，一个head，tail指针用于添加和删除。<br>注意点：</p>
+<ol>
+<li>hashmap是key+Node，不然取不出node。</li>
+<li>get方法</li>
+</ol>
+<ul>
+<li>空表处理</li>
+<li>存在就删除这个结点，放到head上，要判断head和tail为空的情况</li>
+</ul>
+<ol start="3">
+<li>put</li>
+</ol>
+<ul>
+<li>小于容量，看是否存在，存在删除，直接放在head</li>
+<li>等于容量，看是否存在，存在删除，直接放在head</li>
+<li>不存在，删除tail，放在head</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">class LRUCache &#123;</span><br><span class="line">    private int capacity;</span><br><span class="line">    private Map&lt;Integer,Node&gt; map;</span><br><span class="line">    private Node head;</span><br><span class="line">    private Node tail;</span><br><span class="line">    </span><br><span class="line">    class Node&#123;</span><br><span class="line">        int key;</span><br><span class="line">        int value;</span><br><span class="line">        Node pre;</span><br><span class="line">        Node next;</span><br><span class="line">        public Node(int key,int value)&#123;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        map = new HashMap&lt;Integer,Node&gt;();</span><br><span class="line">        this.capacity = capacity;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">     public int get(int key) &#123;</span><br><span class="line">        //空表处理</span><br><span class="line">        Node node = map.get(key);</span><br><span class="line">        if(node == null)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        //存在就删除这个结点，放到head上，要判断head和tail为空的情况</span><br><span class="line">        removeNode(node);</span><br><span class="line">        insertHead(node);</span><br><span class="line">        return node.value;</span><br><span class="line">    &#125;</span><br><span class="line">     private void removeNode(Node node)&#123;</span><br><span class="line">         //存在就删除这个结点，放到head上，要判断head和tail为空的情况</span><br><span class="line">        Node pre = node.pre;</span><br><span class="line">        Node next = node.next;</span><br><span class="line">      </span><br><span class="line">        if(node == tail &amp;&amp; node == head)&#123;</span><br><span class="line">            head = tail = null;</span><br><span class="line">        &#125;else if(node == tail)&#123;</span><br><span class="line">          </span><br><span class="line">            pre.next = null;</span><br><span class="line">            tail = pre;</span><br><span class="line">            </span><br><span class="line">        &#125;else if(node == head)&#123;</span><br><span class="line">          </span><br><span class="line">            next.pre =  null;</span><br><span class="line">            head = next;</span><br><span class="line">            </span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          </span><br><span class="line">            pre.next = next;</span><br><span class="line">            next.pre = pre;</span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">        map.remove(node.key);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">     private void insertHead(Node node)&#123;</span><br><span class="line">        //插入头部要判断head的空问题</span><br><span class="line">        if(head == null)&#123;</span><br><span class="line">            head = node;</span><br><span class="line">            tail = node;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            Node oldHead = head;</span><br><span class="line">            node.next = oldHead;</span><br><span class="line">            oldHead.pre = node;</span><br><span class="line">            head = node;</span><br><span class="line">        &#125;</span><br><span class="line">        map.put(node.key,node);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    private void removeTail()&#123;</span><br><span class="line">        </span><br><span class="line">        if(tail == null)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">      </span><br><span class="line">        map.remove(tail.key);</span><br><span class="line">        if(tail.pre == null)&#123;</span><br><span class="line">            tail = head = null;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            tail = tail.pre;</span><br><span class="line">            tail.next = null;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    public void put(int key, int value) &#123;</span><br><span class="line">        Node node = map.get(key);</span><br><span class="line"></span><br><span class="line">        if(map.size() &lt; capacity)&#123;       </span><br><span class="line">            if(node != null)&#123;</span><br><span class="line">                removeNode(node);          </span><br><span class="line">            &#125;</span><br><span class="line">            Node newNode = new Node(key,value);</span><br><span class="line">            insertHead(newNode);</span><br><span class="line">            map.put(key,newNode);</span><br><span class="line">        &#125;else if(map.size() == capacity)&#123;</span><br><span class="line">            if(node != null)&#123;</span><br><span class="line">                removeNode(node);  </span><br><span class="line">                insertHead(new Node(key,value));</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                removeTail();  </span><br><span class="line">                Node newNode = new Node(key,value);</span><br><span class="line">                insertHead(newNode);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //小于容量，看是否存在，存在删除，直接放在head</span><br><span class="line">        //等于容量，看是否存在，存在删除，直接放在head</span><br><span class="line">        //不存在，删除tail，放在head</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="曾经错误点"><a href="#曾经错误点" class="headerlink" title="曾经错误点"></a>曾经错误点</h3><p>1.头尾都是一个结点删除结点错误</p>
+<h3 id="思路3"><a href="#思路3" class="headerlink" title="思路3"></a>思路3</h3><p>哈希表，+带前后哨兵的双向链表，为了简化头尾空的判断。思路2的主要容易错的点是头尾空的情况，那是不是可以用哨兵简化判断，都头尾都是空的结点，没有实际值就不会出现判断空值的特殊情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">class LRUCache &#123;</span><br><span class="line">    private int capacity;</span><br><span class="line">    private Map&lt;Integer,Node&gt; map;</span><br><span class="line">    //dummy</span><br><span class="line">    private Node head;</span><br><span class="line">    private Node tail;</span><br><span class="line">    </span><br><span class="line">    class Node&#123;</span><br><span class="line">        int key;</span><br><span class="line">        int value;</span><br><span class="line">        Node pre;</span><br><span class="line">        Node next;</span><br><span class="line">        public Node(int key, int value)&#123;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">        &#125;</span><br><span class="line">        public Node()&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        this.capacity = capacity;</span><br><span class="line">        map = new HashMap&lt;Integer,Node&gt;();</span><br><span class="line">        head = new Node();</span><br><span class="line">        tail = new Node();</span><br><span class="line">        head.next = tail;</span><br><span class="line">        tail.pre = head;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int get(int key) &#123;</span><br><span class="line">        Node node = map.get(key);</span><br><span class="line">        if(node == null)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        removeNode(node);</span><br><span class="line">        insertHeadNode(node);</span><br><span class="line">        return node.value;</span><br><span class="line">    &#125;</span><br><span class="line">     public void put(int key, int value) &#123;</span><br><span class="line">        int size = map.size();</span><br><span class="line">        Node node = map.get(key);</span><br><span class="line">        if(node == null)&#123;</span><br><span class="line">            if(size == capacity)&#123;</span><br><span class="line">                removeTail();</span><br><span class="line">            &#125;         </span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            </span><br><span class="line">            removeNode(node);</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        Node newNode = new Node(key,value);</span><br><span class="line">        insertHeadNode(newNode);</span><br><span class="line">    &#125;</span><br><span class="line">    private void removeTail()&#123;</span><br><span class="line">        Node preNode = tail.pre;</span><br><span class="line">      </span><br><span class="line">        if(preNode == head)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        Node node = preNode.pre;</span><br><span class="line">        node.next = tail;</span><br><span class="line">        tail.pre = node;</span><br><span class="line">        map.remove(preNode.key);</span><br><span class="line">    &#125;</span><br><span class="line">    private void removeNode(Node node)&#123;</span><br><span class="line">        Node pre = node.pre;</span><br><span class="line">        Node next = node.next;</span><br><span class="line">        map.remove(node.key);</span><br><span class="line">        </span><br><span class="line">        pre.next = next;</span><br><span class="line">        next.pre = pre;</span><br><span class="line">    &#125;</span><br><span class="line">     private void insertHeadNode(Node node)&#123;</span><br><span class="line">        Node oldNext = head.next;</span><br><span class="line">        </span><br><span class="line">        node.next = oldNext;</span><br><span class="line">        head.next = node;</span><br><span class="line">        </span><br><span class="line">        node.pre = head;</span><br><span class="line">        oldNext.pre = node;</span><br><span class="line">        </span><br><span class="line">        map.put(node.key,node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="曾经错误点-1"><a href="#曾经错误点-1" class="headerlink" title="曾经错误点"></a>曾经错误点</h3><p>1.在put方法内，已经存在的值，重新put的时候，出现了错误，这个时候，不管容量是不是达到最大，也都是要删除该结点重新插入。这个很难发现，测试用例是30上的那个发现的，我几乎不能人力复现，测试用例真的很重要，要是我自己构建测试用例，估计很难发现这个问题。这也是我一直缺失的质量问题。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>可以效仿linkedHashmap去实现，它已经预设了实现lru的方法，使用双线链表方便删除与添加，使用hashmap快速查找是否存储，时间复杂度是O（1），空间复杂度是O（n），双向链表和hash表还是比较耗费空间的，但也在允许范围内。哨兵可以简化头尾的判断，减少空值的情况，但会多耗费2个空间。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/哈希表/">哈希表</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/31/arts-2019-02-31-review/" title="scalability availability &amp; stability patterns 学习笔记" itemprop="url">scalability availability &amp; stability patterns 学习笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-03-31T10:49:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>原文地址 <a href="https://www.slideshare.net/jboner/scalability-availability-stability-patterns" target="_blank" rel="noopener">https://www.slideshare.net/jboner/scalability-availability-stability-patterns</a></p>
+<p>这个ppt总结真的很全面，从可扩展性，可用性，稳定性，3个方面分别讲了达到每个目的，以及有什么手段，什么方法来解决这个问题。<br>没看文章前，我是有一些零碎的概念的，但看了文章后，我突然有一些理解分布式了，架构的目的是达到现实目标，要达到哪方面目的，就用哪些技术。（第一遍读还有很多，不懂的地方，先做一个粗略的总结）</p>
+<h2 id="可用性（availability）"><a href="#可用性（availability）" class="headerlink" title="可用性（availability）"></a>可用性（availability）</h2><p>达到可用性，有2种手段，故障转移（Fail-over）和冗余备份（Replication）</p>
+<h3 id="Fail-over"><a href="#Fail-over" class="headerlink" title="Fail-over"></a>Fail-over</h3><p>故障转移，表面上看是只要有失败就转移到其他正常的服务上去，然后再回写同步数据。但实际情况要复杂的多，可能出现各种失败的情况。</p>
+<h3 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h3><p>备份分为几种：master-slave，tree-replication，master-master，Buddy replication</p>
+<p>同步方式：<br>active replication：push<br>passive replication： pull</p>
+<h2 id="稳定性（stability）"><a href="#稳定性（stability）" class="headerlink" title="稳定性（stability）"></a>稳定性（stability）</h2><h3 id="Timeouts"><a href="#Timeouts" class="headerlink" title="Timeouts"></a>Timeouts</h3><p>保证每个调用都有超时时间，不会无限期假死。</p>
+<h3 id="Circuit-Breaker"><a href="#Circuit-Breaker" class="headerlink" title="Circuit Breaker"></a>Circuit Breaker</h3><p>将失败作为一种正常的状态，而不是维护正常的状态。出现异常，尽早发现，采取其他处理。</p>
+<h3 id="Let-it-crash"><a href="#Let-it-crash" class="headerlink" title="Let-it-crash"></a>Let-it-crash</h3><p>如果服务出现异常，不用尽力恢复，尽早发现，及时止损。</p>
+<h3 id="Fail-fast"><a href="#Fail-fast" class="headerlink" title="Fail-fast"></a>Fail-fast</h3><p>跟上一个有点像</p>
+<h3 id="Bulkheads"><a href="#Bulkheads" class="headerlink" title="Bulkheads"></a>Bulkheads</h3><p>有点像线程池，将一些资源放在一个池子里，与其他进行隔离，即使出问题，也不会导致全局卡死，也保护了资源。</p>
+<h3 id="Steady-State"><a href="#Steady-State" class="headerlink" title="Steady State"></a>Steady State</h3><p>清理状态，时刻保持可用。</p>
+<h3 id="Throttling"><a href="#Throttling" class="headerlink" title="Throttling"></a>Throttling</h3><p>限流，比如控制请求的数量</p>
+<h2 id="可扩展性（scalability）"><a href="#可扩展性（scalability）" class="headerlink" title="可扩展性（scalability）"></a>可扩展性（scalability）</h2><p>可扩展性主要是为了管理过载，分两种内容：状态与行为。<br>状态：分布式缓存，数据网格，服务状态，HTTP缓存，CAP，同步，分区，备份<br>行为：计算网格，事件驱动架构，负载均衡，并行计算</p>
+<p>对于可扩展的一般的建议<br><strong>默认不可变<br>引用透明（函数式编程）<br>懒加载<br>考虑数据存储</strong></p>
+<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><h3 id="性能-vs-可扩展"><a href="#性能-vs-可扩展" class="headerlink" title="性能 vs 可扩展"></a>性能 vs 可扩展</h3><p><strong>如何确定性能问题</strong><br>单用户很慢，<br><strong>如何确定可扩展问题</strong><br>单用户很快，压力大就慢</p>
+<h3 id="延迟-vs-吞吐"><a href="#延迟-vs-吞吐" class="headerlink" title="延迟 vs 吞吐"></a>延迟 vs 吞吐</h3><p>最大的吞吐量，加上可接受的延迟</p>
+<h3 id="可用性-vs-一致性"><a href="#可用性-vs-一致性" class="headerlink" title="可用性 vs 一致性"></a>可用性 vs 一致性</h3><p><strong>CAP</strong><br>consistency<br>availability<br>Partition<br><strong>ACID</strong><br>Atomic<br>Consistency<br>Isolated<br>Durable</p>
+<p>什么时候需要强一致性，什么时候需要最终一致性</p>
+<h2 id="Status（状态管理）"><a href="#Status（状态管理）" class="headerlink" title="Status（状态管理）"></a>Status（状态管理）</h2><p>Partitioning，<br>HTTP caching：reverse proxy，cdn，<br>，Data Grids，<br>Service of record:RDBMS sharing，NOSQL(key-value,Column,document,graph,datastructure)<br>Distrbuted caching:write-through,write-behind,eviction policites,replication,peer to peer<br>Concurrency:Shared-state, message-passing,dataflow,software transactional memory</p>
+<h2 id="behavior（行为管理）"><a href="#behavior（行为管理）" class="headerlink" title="behavior（行为管理）"></a>behavior（行为管理）</h2><p>Event-Driven Archietecture（<br>Domian events，Event sourcing, command and Query Responsiblity Segregation(CQRS)pattern,<br>Event Stream Processing,Messaging(Publish-Subscribe,Point-to-point,Store-forward,Request-Reply),Enterprice Service Bus ,Actors,Enterprice Integration Architecture(EIA)<br>）<br>Compute Grids<br>Load-balancing<br>Parallel computing</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/03/31/arts-2019-02-31-tip/" title="Vue 学习笔记1" itemprop="url">Vue 学习笔记1</a>
   </h1>
   <p class="article-author">By
@@ -111,7 +278,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/vue/">vue</a>
   </div>
 
 </div>
@@ -650,150 +817,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/08/05/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2018-08-05T06:10:15.613Z" itemprop="datePublished"> Published 2018-08-05</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/02/07/学习方法/" title="理解费曼技术与整体学习法" itemprop="url">理解费曼技术与整体学习法</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2017-02-07T12:33:07.000Z" itemprop="datePublished"> Published 2017-02-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近在反思自己的学习方法，总感觉自己好像缺少一些东西，虽然表面上一直自认为很努力的样子，但没有什么效果，表面上用了很多时间，但并没有什么实际产出，想回头看看之前斯考特·杨写得《如何高效学习》，看着看着又想起之前自己看过的在缓慢思考公众号里戴汩提到的费曼方法。</p>
-<h2 id="费曼技术"><a href="#费曼技术" class="headerlink" title="费曼技术"></a>费曼技术</h2><p>费曼方法很简单，总共3步，</p>
-<ol>
-<li>教给孩子<br> 先用一张纸，写下你要讲解的概念，然后试图讲给一个8岁的孩子，而不是一个成年人，不要用术语，而是用简单朴素的语言。人们经常被复杂的术语和概念迷惑，使用术语而忽视实际是否已经掌握。</li>
-<li>回顾<br> 看看哪个地方没有讲通，那个就是你知识的边界，回到原始资料，重新学习你不会的概念</li>
-<li>组织和简化<br> 重新梳理成一个连贯的故事</li>
-<li>发送（可选）<br>费曼技术是费曼学习的方法，让你比别人更快更深刻的理解概念和事物，从根本上讲费曼方法是认为智力是可以增长的，这是成长型思维和表现型思维的差异。如何才能比别人了解的都深刻呢，就是放弃复杂的术语和概念，让自己从更基础的方式去思考，复杂的术语和概念容易让人迷糊，以为自己已经懂得了。<br>另外还隐藏一个内容就是教是最好的学习，通过教别人，让自己也理清关系。</li>
-</ol>
-<p>总结起来包括两个，一：教是最好的学习方法，二：通过降低对方的知识水平倒逼自己理解清楚整个概念，从最基础的概念入手，弄清楚所有的知识脉络。</p>
-<p>费曼技术有点像一种检验的方法，从反面去检查自己是否把知识学明白，还能找到自己哪个点没有学明白，这个很厉害。</p>
-<h2 id="整体性学习法"><a href="#整体性学习法" class="headerlink" title="整体性学习法"></a>整体性学习法</h2><p>这个分为获取，理解，拓展，修正，应用，测试。整体性学习方法基础是认为大脑更好的记忆方式是通过知识的连接，而不是像计算机一样的复制就能处理信息。这一点可能还不能用科学方式完全证明，所以这套理论还停留在理论阶段，但这个就像冥想一样虽然早些时候还没有科学的方法证明，但它的方法却实实在在的有效，所以大家都在实践。这套理论也是作者根据自身的作为总结的。</p>
-<p>既然大脑记忆知识的方法通过不断连接更有效的记忆，那我们就要从这个角度下手去梳理知识，让记忆的存储更高效的提取，如果提取的方式都是混乱的，那很难提取就不是没有道理的。整体学习法的存储方式是通过方式</p>
-<ol>
-<li>结构：知识的大厦<br> 结构是知识的全部，你不断的建立大楼来整合知识。</li>
-<li>模型：结构的种子<br> 模型是结构的缩影，归根结底是信息的压缩，将核心的概念进行缩减，构建一个小型结构，对于学习新的概念作用很大。</li>
-<li>高速公路：连接结构和模型<br> 哪种知识更容易提取，是四通八达的大楼还是只有一条泥泞小路的喽，连通越多，知识的提取越方便越快捷<br>通过以上结构来完善你的知识存储，知识的存储是理解和应用的基础。</li>
-</ol>
-<p>理解了存储，那整体学习的框架是什么，整体的流程是怎么样的呢？</p>
-<ol>
-<li>获取：通过各种渠道获得知识</li>
-<li>理解：了解内容的意思</li>
-<li>拓展：扩展知识的内涵和外延</li>
-<li>纠错：修正错误的高速公路</li>
-<li>应用：将知识使用到实际中去</li>
-<li>测试：检验知识的正确性<br>作者将整个学习过程，分解成具体的几个步骤，然后每个步骤击破，用具体的技术完善每一个步骤，提高效率，这里先不讲具体的方法，先分清楚每个步骤的意义。<br>获取：输入，输入的目标包括：简化，速度，容量。优化输入，让你获取更多的知识，更高效。<br>理解：就是明白表面的意义，更快的抓住重点。<br>拓展：是处理信息最难的一步，包括深度拓展：背景知识的了解，有助于记忆内容。横向拓展：相关内容的了解，周边知识的理解让你扩展知识面。纵向拓展：这个最具创造性，通过相似性，找到不同大厦之间的高速通道，打破知识的边界，真正连通不同的模型、结构。<br>纠错：如果高速公路的连接错误，就纠正错误，让知识间的连接更正确的连接<br>应用：信息处理包含3个层次：理解，拓展和应用。到了应用是最好层次，让它在实际生活中有用处，改变生活。<br>测试：可以融合在每一步中，检验知识的正确性。我个人认为费曼技巧就是一种相当棒的测试方法，测试你的知识是否理解正确，还能找到哪个地方不足。</li>
-</ol>
-<p>实际使用中，一整套框架的顺序是不定的，顺序是可以颠倒的，但要理解整体的流程，每个部分的意义都要体现。整套框架配合费曼技巧，从正反两个方面对知识进行学习、校验，十分实用。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/成长/">成长</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/成长/">成长</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/8/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next<span></span></a>
@@ -827,7 +850,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>27</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>28</sup></a></li>
 		  
 		
 		  
@@ -835,7 +858,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>23</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>24</sup></a></li>
 		  
 		
 		  
@@ -868,11 +891,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>27</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>28</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>25</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>26</sup></a></li>
 			
 		
 			
@@ -880,7 +903,7 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>13</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>14</sup></a></li>
 			
 		
 			
@@ -908,10 +931,6 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
@@ -920,7 +939,7 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -928,15 +947,11 @@
 			
 		
 			
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 			
@@ -944,7 +959,15 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 		</ul>
