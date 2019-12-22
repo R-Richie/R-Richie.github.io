@@ -79,6 +79,284 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/06/29/arts-2019-06-29-tip/" title="spring cloud各组件服务概览1" itemprop="url">spring cloud各组件服务概览1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-29T12:20:00.000Z" itemprop="datePublished"> Published 2019-06-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>先纵览spring cloud各个组件，只是大致了解一下各个功能，要明白每一个组件的主要原理，不能只会使用</p>
+<h2 id="Spring-Cloud-Config"><a href="#Spring-Cloud-Config" class="headerlink" title="Spring Cloud Config"></a>Spring Cloud Config</h2><p>配置中心，将系统中用到的一些配置信息存储到配置中心，方便维护，不用每次修改配置都重启服务。用的比较多的配置中心还有etcd、携程的 Apollo、Disconf 。</p>
+<h2 id="Spring-Cloud-Netflix"><a href="#Spring-Cloud-Netflix" class="headerlink" title="Spring Cloud Netflix"></a>Spring Cloud Netflix</h2><p>Netflix OSS 是一组开源的框架和组件库，是Netflix公司开发出来解决分布式系统的一些有趣的可扩展类库。Spring Cloud 把他们都放到 Spring Cloud Netflix 下，这是一个框架集合，它包括 Eureka 、Ribbon、Zuul、Hystrix 等。</p>
+<h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><p>服务中心，这可以说是微服务架构的核心功能了，微服务部署之后，一定要有服务注册和发现的能力，Eureka 就是担任这个角色的。如果你用过 dubbo 的话，那一定知道 dubbo 中服务注册和发现的功能是用 zookeeper 来实现的。<br>目前官方已停止升级，如果你的项目中还没有使用并且打算使用注册中心的话，可以直接使用 Spring Cloud Consul。</p>
+<h3 id="Ribbon"><a href="#Ribbon" class="headerlink" title="Ribbon"></a>Ribbon</h3><p>提供客户端负责均衡功能，例如一个服务提供者部署了 3 个实例，那么使用 Ribbon 可以指定负载均衡算法请求其中一个实例，Ribbon 如果配合 Eureka ，使用起来非常简单。</p>
+<h3 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h3><p>熔断器，假设有 3 个服务提供实例，其中有一个实例由于某中原因挂掉了，那么当再有请求进来的时候，如果还是向这个实例上发请求，那将会导致请求积压阻塞，这个时候，熔断器就要发挥它的作用，将这个有问题的实例下线，这样一来，再有新的请求进来，就不会再发到这个有问题的实例上了。</p>
+<h3 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h3><p>服务网关。主要实现了路由转发和过滤器功能，对于处理一些数据聚合、鉴权、监控、统计类的功能非常好用。</p>
+<h3 id="Gateway"><a href="#Gateway" class="headerlink" title="Gateway"></a>Gateway</h3><p>也是服务网关，可以认为它是 Zuul 的下一代，无论从易用性和性能方便都有所提高，如果你的系统中还没有使用 Zuul ，并且准备上网关，可以直接选择 Gateway 。</p>
+<h2 id="Spring-Cloud-Consul"><a href="#Spring-Cloud-Consul" class="headerlink" title="Spring Cloud Consul"></a>Spring Cloud Consul</h2><p>Consul 让服务注册和服务发现（通过 DNS 和 HTTP 接口）更加简单，甚至对于外部服务（例如SaaS）注册也一样。Spring Cloud Consul 可替代已有的 Spring Cloud Eureka。Eureka 2.x 版本也已经停止开发，并且 Spring Cloud 官方也建议用 Spring Cloud Consul 来替代，当然如果已经用了 Eureka 在项目中也没有关系，Eureka 已经足够稳定，正常使用没有任何问题。</p>
+<h2 id="Spring-Cloud-Stream"><a href="#Spring-Cloud-Stream" class="headerlink" title="Spring Cloud Stream"></a>Spring Cloud Stream</h2><p>Spring Cloud Stream 是消息中间件组件，它集成了 kafka 和 rabbitmq 。如果你的系统中打算集成 kafka 或 rabbitmq，可以考虑使用 Stream 。</p>
+<h2 id="Spring-Cloud-Bus"><a href="#Spring-Cloud-Bus" class="headerlink" title="Spring Cloud Bus"></a>Spring Cloud Bus</h2><p>消息总线，用于在集群（例如，配置变化事件）中传播状态变化，可与Spring Cloud Config联合实现热部署。集成了 Rabbitmq 和 kafka 。刚刚上面说到的 Stream 好像也是这个功能。没错，我们可以认为 Bus 是 Stream 的进一步封装，使用更简单。而 Stream 的灵活性更高。 </p>
+<h2 id="Spring-Cloud-Feign"><a href="#Spring-Cloud-Feign" class="headerlink" title="Spring Cloud Feign"></a>Spring Cloud Feign</h2><p>Feign是一种声明式、模板化的HTTP客户端。它可以用注解的方式简化 HTTP 请求，可以快速简单的请求服务提供接口。如果你还在使用 restTemplate 或者其他方式，不妨考虑一下 Feign。 </p>
+<h2 id="Spring-Cloud-Sleuth"><a href="#Spring-Cloud-Sleuth" class="headerlink" title="Spring Cloud Sleuth"></a>Spring Cloud Sleuth</h2><p>服务日志收集和链路追踪模块，封装了 Dapper 和 log-based 追踪以及 Zipkin 和 HTrace 操作。与之功能相同的框架还有 skywalking、Pinpoint，另外国内还有美团开源的 CAT，只不过 CAT 属于代码侵入的，需要开发人员在系统中做代码埋点，不过也更加灵活，更加精细。 </p>
+<h2 id="Spring-Cloud-Security"><a href="#Spring-Cloud-Security" class="headerlink" title="Spring Cloud Security"></a>Spring Cloud Security</h2><p>可用做授权服务、单点登录等。如果服务需要做权限控制，那除非你自己实现。不然用到最多的就是 shiro 和 Spring Security 。Spring Boot 中用的比较多的就是 Security，众多授权机制中属于 OAuth2 最为流行。Spring Cloud Security 就是将 Security、OAuth2 做了集成，方便使用。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/spring-cloud/">spring cloud</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/06/23/arts-2019-06-23-algorithm/" title="2. 两数相加" itemprop="url">2. 两数相加</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-23T08:42:00.000Z" itemprop="datePublished"> Published 2019-06-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。<br>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。<br>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。<br>示例：<br>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/add-two-numbers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>依次两个链表相加，主要分几种情况，一种是两个链表同时结束，一个是某个链表长<br>然后就是进位的处理，有可能链表结束了，但还要继续进位增加一个节点。<br>自己解法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode first = new ListNode(0);</span><br><span class="line">        ListNode node = first;</span><br><span class="line">        while(l1 != null || l2 != null || node != null)&#123;</span><br><span class="line">            int sum = node.val;</span><br><span class="line">            if(l1 != null)&#123;</span><br><span class="line">                sum += l1.val;</span><br><span class="line">            &#125;</span><br><span class="line">            if(l2!= null)&#123;</span><br><span class="line">                sum +=l2.val;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            //System.out.println(&quot;sum&quot;+sum);</span><br><span class="line">            if(sum&gt;=10)&#123;</span><br><span class="line">                node.val = sum%10; </span><br><span class="line">                node.next = new ListNode(sum/10);</span><br><span class="line">                //System.out.println(node.val);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                node.val = sum;</span><br><span class="line">                 //System.out.println(node.val);</span><br><span class="line">            &#125;</span><br><span class="line">            if(l1 != null)&#123;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            if(l2 !=null)&#123;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">if(node.next == null &amp;&amp; (l1 !=null || l2!=null))&#123;</span><br><span class="line">                node.next = new ListNode(0);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            node = node.next;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">        return first;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考答案解法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode dummyHead = new ListNode(0);</span><br><span class="line">        ListNode node = dummyHead;</span><br><span class="line">        int carry = 0;</span><br><span class="line">        while(l1 != null || l2 != null)&#123;</span><br><span class="line">            </span><br><span class="line">            int l1Val = l1 !=null ? l1.val : 0;</span><br><span class="line">            int l2Val = l2 != null ? l2.val :0;</span><br><span class="line">            int sum = l1Val +l2Val + carry;</span><br><span class="line">            carry = sum/10;</span><br><span class="line">            node.next = new ListNode(sum%10);</span><br><span class="line">            node = node.next;</span><br><span class="line">            if(l1 != null)&#123;</span><br><span class="line">                l1 = l1.next;         </span><br><span class="line">            &#125;</span><br><span class="line">            if(l2 !=null)&#123;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        if(carry &gt; 0)&#123;</span><br><span class="line">            node.next = new ListNode(carry);</span><br><span class="line">        &#125;</span><br><span class="line">        return dummyHead.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/06/22/arts-2019-06-22-tip/" title="jhipster初探1" itemprop="url">jhipster初探1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-22T09:44:00.000Z" itemprop="datePublished"> Published 2019-06-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>jhipster是一种生产微服务的脚手架，最近想入门spring cloud，但很多组建无从下手，正好找到一个脚手架，这样快速搭建，才能快速上手。</p>
+<h2 id="jhipster官网上的核心工作"><a href="#jhipster官网上的核心工作" class="headerlink" title="jhipster官网上的核心工作"></a>jhipster官网上的核心工作</h2><h3 id="creating-an-application"><a href="#creating-an-application" class="headerlink" title="creating an application"></a>creating an application</h3><p>创建应用类型4种</p>
+<ul>
+<li>Monolithic application: this a classical, one-size-fits-all application. It’s easier to use and develop, and is our recommended default.</li>
+<li>Microservice application: in a microservices architecture, this is one of the services.</li>
+<li>Microservice gateway: in a microservices architecture, this is an edge server that routes and secures requests.</li>
+<li>JHipster UAA server: in a microservices architecture, this is an OAuth2 authentication server that secures microservices. Refer to the JHipster UAA documentation for more information.</li>
+</ul>
+<p>这里将应用简单的打包成4种，第一种是单体应用，第二种是微服务应用，第三种是微服务的网关，第四种是认证授权服务器。将服务抽象成这四种。</p>
+<p>4种安全的方式</p>
+<ol>
+<li>JSON Web Tokens (JWT)</li>
+<li>Session-based authentication</li>
+<li>OAuth2 and OpenID Connect</li>
+<li>JHipster User Account and Authentication (UAA) </li>
+</ol>
+<h3 id="creating-an-entity"><a href="#creating-an-entity" class="headerlink" title="creating  an entity"></a>creating  an entity</h3><p>生成字段，有自定义的UML等，可以生成字段脚本等，可以验证字段等</p>
+<h3 id="creating-a-spring-controller"><a href="#creating-a-spring-controller" class="headerlink" title="creating a spring controller"></a>creating a spring controller</h3><p>生成访问路由，rest controller还有api swagger等</p>
+<h4 id="creating-a-spring-service"><a href="#creating-a-spring-service" class="headerlink" title="creating a spring service"></a>creating a spring service</h4><p>生成后端服务，提供服务</p>
+<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><p>主要组件的包含技术<br>gateway：Zuul，Ribbon，Access-controll with UAA，front-end<br>register：Eureka server，Config server<br>microservice：spring boot<br>UAA</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/spring-cloud/">spring cloud</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/06/22/arts-2019-06-22-share/" title="《全球科技通史》第二遍观后感1" itemprop="url">《全球科技通史》第二遍观后感1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-22T07:23:00.000Z" itemprop="datePublished"> Published 2019-06-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>第二遍阅读，我变成主动探索阅读，探索几次科学界引起的思维的变化，比如笛卡尔科学方法论，到牛顿的机械思维，到后面的量子力学引起不确定性，掌握不同的思维模式，科学的思考。</p>
+<h2 id="科学方法论"><a href="#科学方法论" class="headerlink" title="科学方法论"></a>科学方法论</h2><p>科学方法论起源笛卡尔<br>大胆假设，小心求证，怀疑时智慧的源头<br>笛卡尔的方法论讲诉的是科学研究从感知到新知所应该遵循的过程。他认为，这个过程的起点是感知，通过感知得到抽象的认识，并总结出抽象的概念，这些是科学的基础。<br>《方法论》Discourse on the method<br>揭示了科学研究和发明创造的普适方法，并概括成4个步骤。<br>第一，不盲从，不接受任何自己不清楚的真理。<br>第二，对于复杂的问题，尽量分解成多个简单的小问题来研究。<br>第三，解决这些小问题时，应该按照先易后难的次序，逐步解决。<br>第四，解决每个小问题后，再综合起来，看看是否彻底解决了原来的问题。<br>实验+逻辑，成为实验科学的基础。<br>笛卡尔将科学发展的规律总结为：（1）提出问题；（2）进行实验；（3）从实验中得到结论并解释；（4）将结论推广并普遍化；（5）在实践中提出新的问题。如此循环往复。<br>笛卡尔总结出完整的科学方法，即科学研究时通过正确的论据（和前提条件），进行正确的推理，得到正确的结论的过程。</p>
+<h2 id="机械思维"><a href="#机械思维" class="headerlink" title="机械思维"></a>机械思维</h2><p>牛顿<br>构建了近代三大科学体系，即以微积分为核心的近代数学，牛顿三定律为基础的经典物理学，以万有引力定律为基础的天文学<br>其他建立数学体系的，欧几里得、笛卡尔和柯西，物理，爱因斯坦、玻尔<br>通过科学成就，改变了人们对世界的认识<br>在数学方面，牛顿最大的贡献是发明了微积分，是今天高等数学的基础。在微积分的背后，这个发明的意义更大。在微积分出现之前，数学家研究的对象和解决的问题都是静态的，而牛顿关注到了精确而瞬时的动态计算问题，以及对一个变量长期变化的积累效应的追踪问题。微积分便是解决这两个动态问题的数学工具。此外，牛顿还看到了追求瞬间动态和长期积累效应之间的关系，从而将微分和积分的理论统一起来。从静态到动态，从孤立到统一，数学从微积分开始，由初等数学进入高等数学阶段，这也是人类在认识上的一个飞跃。<br>在物理学方面，牛顿是经典力学的奠基人，他的力学三定律是整个力学的基础。牛顿是建立起严密的物理学体系的人。而建立一个学科体系，首要的任务是定义清楚各种基本概念。牛顿定义了经典物理学中的这些最基本的概念，比如质量、力、惯性、动能等，然后在此基础上，提出了力学三定律，进而搭起了经典力学的大厦。</p>
+<p>后面继续深入机械思维，去看看牛顿的生平。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/历史/">历史</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/06/20/arts-2019-06-22.review/" title="Implementing Remote Procedure Calls学习笔记2" itemprop="url">Implementing Remote Procedure Calls学习笔记2</a>
   </h1>
   <p class="article-author">By
@@ -241,7 +519,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a>
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
   </div>
 
 </div>
@@ -438,260 +716,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/06/09/arts-2019-06-09-tip/" title="关于学习的思考" itemprop="url">关于学习的思考</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-06-09T06:04:00.000Z" itemprop="datePublished"> Published 2019-06-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近再复习各种计算机相关的，有些知识比如计算机原理，网络、操作系统，我也知道这些知识很重要是根本的东西，但工作上不是那么继续，时间有限，这些东西总会往后拖，拖到现在工作来6年了，这些知识还是没有体系。<br>最近再想想是不是要考研，一个方面是自己工作到了一个瓶颈，想想怎么能向上走，另外一方面，正好趁着考试，把这些科班需要的知识体系补全，这样我的计算机方面的知识体系就全面。即使考试没成功，知识体系也补全了，能有一个目标去努力一些不那么急切需要的东西很不容易。<br>但我有考虑，这种为了考试的学习，是不是能真正掌握知识，还是只是精通考试，这个很重要，我不是为了考试，但为了达到目标，可能会偏离初心，所以学习过程很重要，过程大于目标。如果还像之前学习辅修那样补习，即使课程学习完成，还是收获很小，那次学习得到了结果，但没有过程，对于未来起到的作用很小，所以这次考试我要以正确的方式去学习，那怎样才能算正确的过程学习？<br>分析之前的学习经验，在大学，学习了很多全面的知识体系，但那个时候不知道为什么学习这些，只知道有这些，然后不断做题训练，在离开书本后一无所知，虽然知识学了很多，但不知道怎么使用，学习知识很枯燥，导致了很快失去了兴趣，后面只是机械的学习，这是之前导致失败的原因。与之不同的工作后的学习，大部分是应用，快速的使用别人的东西，马上上手，很快应用，知识碎片化，表象化。很多东西都会，但遇到需要分析的细节就是一脸懵逼，没有理解细节，只是随机试错，效率很低，关键问题不知道该如何下手。<br>分析这两种不同的学习经验，发现走了2个极端，理论与实践，两个互相混合，才能理解，现实原因决定理论发展，理论发展加快现实的进度。懂得系统的知识可以让你站在巨人的肩膀上进步，起点比较高，不用重新趟别人错过的坑，加快进步的速度，但知道知识会让人迷茫，脱离实际，理论不能应用在实际情况上就毫无意义。<br>那实际学习中要如何结合呢，光靠课本是达不到这点的，要我们自己去找食物。要先找到构建这门学科的人，找到他是如何建立基础概念的，过程是怎么样的，不能单单看他构建的知识，要看他为什么这么构建，怎么构建，中间经历过什么错误，从历史中学习，但这些材料可能不好查找。这么做的目的就是将概念与实际现实结合起来，从实际中学习概念是如何建立，学习整个知识体系的构建过程，不单单是知道有这些知识，能讲出来概念的由来，这样你就能很好的理论联系实际。然后是学习概念的细节内涵，如果以考试为目的，那就需要大量的训练，记忆，但不能经历错误的过程，建立知识体系，理论结合实际是我们的初心，大量训练是为了熟练，考试结果也只是结果。如果只达到了结果，跟原来的辅修的结果可能差不多，要为了更长远的利益达成。<br>准备复习考研的方法，第一遍，以理解概念为主，找历史记录，找知识体系构建者的建立概念的过程为主，以理解为主，小量训练为辅，构建知识体系。<br>第二遍，开始大量训练，找到知识体系漏洞，记录错题，修正错误理解。<br>第三遍，以错题，与考试大纲为主，构建体系与查缺补漏。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/06/01/arts-2019-06-01-tip/" title="ThreadLocal初探1" itemprop="url">ThreadLocal初探1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-06-01T07:24:00.000Z" itemprop="datePublished"> Published 2019-06-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>一个线程单独的开放寻址探测的hashmap，本地存储变量，每个线程不共享变量，就没有了并发问题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">private final int threadLocalHashCode = nextHashCode();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The next hash code to be given out. Updated atomically. Starts at</span><br><span class="line"> * zero.</span><br><span class="line"> */</span><br><span class="line">private static AtomicInteger nextHashCode =</span><br><span class="line">    new AtomicInteger();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The difference between successively generated hash codes - turns</span><br><span class="line"> * implicit sequential thread-local IDs into near-optimally spread</span><br><span class="line"> * multiplicative hash values for power-of-two-sized tables.</span><br><span class="line"> */</span><br><span class="line">private static final int HASH_INCREMENT = 0x61c88647;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Returns the next hash code.</span><br><span class="line"> */</span><br><span class="line">private static int nextHashCode() &#123;</span><br><span class="line">    return nextHashCode.getAndAdd(HASH_INCREMENT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>ThreadLocal里面有这个几个内部变量，threadLocalHashCode是这个线程本地的hashCode值，这个值是取nextHashCode这个原子变量，初始值是0，每次递增HASH_INCREMENT。就是说每个线程从创建依次递增0x61c88647，这个数据很有来头，是32位有符号数字的黄金比例，为了让hash值能更好的分散，不出现冲突。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public T get() &#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    if (map != null) &#123;</span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(this);</span><br><span class="line">        if (e != null) &#123;</span><br><span class="line">            @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">            T result = (T)e.value;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return setInitialValue();</span><br><span class="line">&#125;</span><br><span class="line">ThreadLocalMap getMap(Thread t) &#123;</span><br><span class="line">    return t.threadLocals;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>每个线程thread里有一个变量是threadLocals，通过当前threadlocal对象为key，获取存储的ThreadLocalMap，里面的value，就是我们存储的变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void set(T value) &#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    if (map != null)</span><br><span class="line">        map.set(this, value);</span><br><span class="line">    else</span><br><span class="line">        createMap(t, value);</span><br><span class="line">&#125;</span><br><span class="line">void createMap(Thread t, T firstValue) &#123;</span><br><span class="line">    t.threadLocals = new ThreadLocalMap(this, firstValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Set方法跟get原理差不多，主要是这个ThreadLocalMap</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">static class ThreadLocalMap &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * The entries in this hash map extend WeakReference, using</span><br><span class="line">     * its main ref field as the key (which is always a</span><br><span class="line">     * ThreadLocal object).  Note that null keys (i.e. entry.get()</span><br><span class="line">     * == null) mean that the key is no longer referenced, so the</span><br><span class="line">     * entry can be expunged from table.  Such entries are referred to</span><br><span class="line">     * as &quot;stale entries&quot; in the code that follows.</span><br><span class="line">     */</span><br><span class="line">    static class Entry extends WeakReference&lt;ThreadLocal&lt;?&gt;&gt; &#123;</span><br><span class="line">        /** The value associated with this ThreadLocal. */</span><br><span class="line">        Object value;</span><br><span class="line"></span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</span><br><span class="line">            super(k);</span><br><span class="line">            value = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * The initial capacity -- MUST be a power of two.</span><br><span class="line">     */</span><br><span class="line">    private static final int INITIAL_CAPACITY = 16;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * The table, resized as necessary.</span><br><span class="line">     * table.length MUST always be a power of two.</span><br><span class="line">     */</span><br><span class="line">    private Entry[] table;</span><br></pre></td></tr></table></figure>
-<p>可以看出来这个ThreadLocal的内部类ThreadLocalMap，里面有一个Entry是弱引用ThreadLocal，Entry强引用value。ThreadLocalMap是使用数组作为底层的存储结构。我当时还想为什么没有继承hashmap，原来是hash算法不一致，hashmap使用拉链法解决冲突，而这里使用的开放寻址法，这种算法在大量冲突的时候，效率比较低，但我们前面提到的hashcode算法，有效的让hash值不特别冲突，而且本地变量应该与hashmap这样的数据结构不一样，没有那么大的存储量级，所以这样效率更高。</p>
-<p>总结：基于数组存储的，开放寻址法的哈希散列。每个散列值存储在线程本地，通过ThreadLocal代理去线程内获取变量。<br>这次先看总的结构，还有些里面的清理方法没有完全看懂，下次继续。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/并发集合/">并发集合</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/05/31/arts-2019-06-01-share/" title="《7up》第二遍观后感6" itemprop="url">《7up》第二遍观后感6</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-05-31T03:32:00.000Z" itemprop="datePublished"> Published 2019-05-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="日本版-观看感受"><a href="#日本版-观看感受" class="headerlink" title="日本版 观看感受"></a>日本版 观看感受</h1><p>我只看到了28岁的日本版，抛开对个人的评论， 说一个总体的影响，日本也是有一个多个民族融合的问题，美国占领，建军事基地。俄罗斯的领土问题，与中国人口的融合。<br>日本整体老龄化严重，有些僻远的地方没有年轻人，只有老年人，人数越来越少。<br>大城市人口越来越多，人的生存压力很大，工作家庭很难两全。<br>社会整体是下降的，年轻人找不到上升的阶梯，但还是有一些人把握住了机会，能靠自己做成一些事情。<br>与英国的社会有差异，但也有共性问题。</p>
-<h1 id="南非版-观看感受"><a href="#南非版-观看感受" class="headerlink" title="南非版 观看感受"></a>南非版 观看感受</h1><p>南非是民族问题很严重的一个地方，白人与黑人，开始还有种族隔离问题，暴力流血随处可见，在曼德拉上台后有好转。<br>白人的生活很惬意，黑人大部分还在生存边缘挣扎。<br>战争，艾滋病影响着人们的生存，这些是日本和英国没有的。情况在逐渐好转，但治安问题还是大家所担心的。没有工作，也是黑人所担心的，没有好的教育，没有挣钱能力才是贫穷的根源。<br>28岁时有3个孩子去世了，1个是因为医疗落后，2个是因为艾滋病。<br>白人与黑人，种族不同，没有本质的差别，主要差别在于是否接受过良好的教育，几个有钱的黑人家庭，给孩子良好的教育，未来也都很好。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/纪录片/">纪录片</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/05/31/arts-2019-06-01-algorithm/" title="139. 单词拆分" itemprop="url">139. 单词拆分</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-05-31T03:30:00.000Z" itemprop="datePublished"> Published 2019-05-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。<br>说明：</p>
-<ul>
-<li>拆分时可以重复使用字典中的单词。</li>
-<li>你可以假设字典中没有重复的单词。<br>示例 1：<br>输入: s = “leetcode”, wordDict = [“leet”, “code”]<br>输出: true<br>解释: 返回 true 因为 “leetcode” 可以被拆分成 “leet code”。<br>示例 2：<br>输入: s = “applepenapple”, wordDict = [“apple”, “pen”]<br>输出: true<br>解释: 返回 true 因为 “applepenapple” 可以被拆分成 “apple pen apple”。<br>   注意你可以重复使用字典中的单词。<br>示例 3：<br>输入: s = “catsandog”, wordDict = [“cats”, “dog”, “sand”, “and”, “cat”]<br>输出: false</li>
-</ul>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>先将wordDict根据首字母分类<br>然后先从s的第一个字母找起，有一个比s长一位的布尔数组，递归判断如果 最后一个是true，则代表能完全找到<br>这个布尔数据记录能找到匹配的最后一位<br>到达最后一个要结束，没有找到匹配的要结束，如果是true的要结束。<br>这道题算我动态规划自己做出来的第一道题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">        boolean[] exist;</span><br><span class="line">        Map&lt;Character,List&lt;Integer&gt;&gt; map;</span><br><span class="line">        List&lt;String&gt; wordDict;</span><br><span class="line">        char[] sArray;</span><br><span class="line">    public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123;</span><br><span class="line">        exist = new boolean[s.length()+1];</span><br><span class="line">        map = new HashMap&lt;Character,List&lt;Integer&gt;&gt;();</span><br><span class="line">        this.wordDict = wordDict;</span><br><span class="line">        for(int i = 0 ; i&lt; wordDict.size() ; i++)&#123;</span><br><span class="line">            Character first =wordDict.get(i).charAt(0);</span><br><span class="line">            if(!map.containsKey(first))&#123;</span><br><span class="line">                List list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">                list.add(i);</span><br><span class="line">                map.put(first,list);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                List&lt;Integer&gt; oldList = map.get(first);</span><br><span class="line">                oldList.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sArray =  s.toCharArray();</span><br><span class="line">        innerCheck(0);</span><br><span class="line">        return exist[s.length()];</span><br><span class="line">    &#125;</span><br><span class="line">    public void innerCheck(int i)&#123;</span><br><span class="line">        if(i == sArray.length)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        char n = sArray[i];</span><br><span class="line">        List&lt;Integer&gt; nList = map.get(n);</span><br><span class="line">        if(nList == null)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">outer:</span><br><span class="line">        for(Integer num: nList)&#123;</span><br><span class="line">            String match = wordDict.get(num);</span><br><span class="line">            char[] matchArray = match.toCharArray();</span><br><span class="line">            for(int j = 0 ;j &lt; matchArray.length ; j++)&#123;</span><br><span class="line">                if(i+j &gt;= sArray.length || sArray[i+j] != matchArray[j] )&#123;</span><br><span class="line">                    continue outer;</span><br><span class="line">                &#125;   </span><br><span class="line">            &#125;</span><br><span class="line">            if(exist[i+matchArray.length])&#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            exist[i+matchArray.length] = true;</span><br><span class="line">            innerCheck(i+matchArray.length);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>动态规划还有点难掌握，需要多练习，现在的感觉是主要是能利用之前的状态。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/动态规划/">动态规划</a>
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
   </div>
 
 </div>
@@ -742,11 +767,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>24</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>28</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>29</sup></a></li>
 		  
 		
 		  
@@ -754,7 +779,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>24</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>25</sup></a></li>
 		  
 		
 		  
@@ -770,7 +795,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>10</sup></a></li>
+			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>11</sup></a></li>
 		  
 		
 		  
@@ -787,19 +812,19 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>28</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>29</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>26</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>27</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>24</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>25</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>14</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>15</sup></a></li>
 			
 		
 			
@@ -807,7 +832,7 @@
 			
 		
 			
-				<li><a href="/tags/架构/" title="架构">架构<sup>11</sup></a></li>
+				<li><a href="/tags/架构/" title="架构">架构<sup>12</sup></a></li>
 			
 		
 			
@@ -839,11 +864,7 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>4</sup></a></li>
 			
 		
 			
@@ -851,7 +872,11 @@
 			
 		
 			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 			
@@ -859,11 +884,11 @@
 			
 		
 			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 		</ul>

@@ -79,6 +79,258 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/08/11/arts-2019-08-11-tip/" title="《深入理解计算机系统》5" itemprop="url">《深入理解计算机系统》5</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-08-11T04:38:00.000Z" itemprop="datePublished"> Published 2019-08-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="第3章-程序的机器级表示"><a href="#第3章-程序的机器级表示" class="headerlink" title="第3章 程序的机器级表示"></a>第3章 程序的机器级表示</h1><p>这章主要是讲程序编译成汇编是什么样的，各种不同指令是如何对应的，如何与硬件交互的<br>掌握汇编就是掌握了C语言的底层能力，是c语言如何操作底层硬件的基础，可以很好的理解c语言的行为，从根源上理解不同的操作，如果遇到不能理解的C语言行为，可以检查汇编，从底层去解释，这个也是唯一能从更深层次了解C语言的方法。<br>了解汇编也是了解计算机组成的开端<br>汇编指令分为几种</p>
+<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><em>操作数指示符</em><br><em>数据传送指令</em><br><em>压入和弹出栈数据</em></p>
+<p>一共16个存储64位值的通用目的寄存器<br>63            31        15        7        0<br>%rax    %eax    %ax    %al               返回值<br>%rbx    %ebx   %bx    %bl              被调用者保存<br>%rcx    %ecx    %cx    %cl               第4个参数<br>%rdx    %edx    %dx    %dl              第3个参数<br>%rsi     %esi      %si     %sil              第2个参数<br>%rdi     %edi      %di    %dil             第1个参数<br>%rbp    %ebp    %bp   %bpl            被调用者保存<br>%rsp    %esp    %sp    %spl            栈指针<br>%r8      %r8d     %r8w  %r8b           第5个参数<br>%r9      %r9d    %r9w   %r9b            第6个参数<br>%r10    %r10d   %r10w  %r10b       调用者保存<br>%r11    %r11d    %r11w    %r11b    调用者保存<br>%r12    %r12d    %r12w    %r12b    被调用者保存<br>%r13    %r13d    %r13w    %r13b    被调用者保存<br>%r14    %r14d    %r14w    %r14b    被调用者保存<br>%r15     %r15d    %r15w   %r15b   被调用者保存<br>操作数被分为3种，立即数（immediate），寄存器（register），内存引用<br>内存引用，又有绝对寻址、间接寻址、变址寻址，基址寻址，比例变址寻址<br>传送指令：movb，movw，movl，movq，movabsq<br>零扩展：movzbw，movzbl，movzwl，movzbq，movzwq<br>符号扩展：movsbw，movsbl，movswl，movsbq，movswq，movslq，cltq<br>压入和弹出栈：pushq，popq<br>算术和逻辑操作<br>加载有效地址<br>一元和二元操作<br>移位操作<br>特殊的算术操作<br>加载有效地址：leaq S，D<br>一元：INC D，DEC D，NEG D，NOT D<br>二元：ADD S,D       SUB S,D    IMUL S,D     XOR S,D  OR S,D  AND S,D<br>移位：SAL k,D       SHL k,D   SAR k,D       SHR k,D</p>
+<h2 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h2><p><strong>条件码<br>访问条件码<br>跳转指令<br>用条件控制来实现条件分支<br>用条件传送实现条件分支<br>循环<br>switch语言</strong></p>
+<p>条件码<br>CF：进位标志<br>ZF：零标志<br>SF：符号标志<br>OF：溢出标志<br>CMP S1, S2<br>cmpb,cmpw,cmpl,cmpq<br>TEST S1,S2<br>testb,testw,testl,testq<br>访问条件码<br>sete D，setne D，sets D，setns D，setg D，setge D，setl D，setle D，seta，setae，setb，setbe<br>跳转指令<br>jmp，je，jne，js，jns，jg，jge，jl，jle，ja，jae，jb，jbe<br>条件控制实现条件分支：goto风格<br>条件传送实现条件分支：计算各个分支结构，根据数据返回结果，有限制，但效率高<br>循环<br>do-while：条件+goto<br>while：jump to middle，guarded-do<br>for：同while<br>switch：跳转表（jump table）</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p><strong>运行时栈<br>转移控制<br>数据传送<br>栈上的局部存储<br>寄存器中的局部存储空间<br>递归过程<br>转移控制</strong></p>
+<p>call Label，call * Operand ，ret<br>数据传送，最大6个，使用寄存器，其他使用栈帧</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/08/09/arts-2019-08-11-algorithm/" title="46. 全排列" itemprop="url">46. 全排列</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-08-09T11:29:00.000Z" itemprop="datePublished"> Published 2019-08-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个没有重复数字的序列，返回其所有可能的全排列。<br>示例:<br>输入: [1,2,3]<br>输出:<br>[<br>  [1,2,3],<br>  [1,3,2],<br>  [2,1,3],<br>  [2,3,1],<br>  [3,1,2],<br>  [3,2,1]<br>]</p>
+<p>回溯思维，深度遍历+剪枝<br>一度是原来数组的长度<br>返回条件是到达数组的长度<br>一度是存储的数字，<br>剪枝是判断在原来的空间里</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>思路1，看参考答案<br>先遍历first，first依次与其他位进行交换，然后遍历数组下一位，first+1，直到结束<br><code>执行用时 :7 ms, 在所有 Java 提交中击败了19.51%的用户
+内存消耗 :39 MB, 在所有 Java 提交中击败了50.24%的用户</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int first = 0;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">        for(int num : nums)&#123;</span><br><span class="line">            list.add(num);</span><br><span class="line">        &#125;      </span><br><span class="line">        backtrace(n,first,list,result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    public void backtrace(int n,int first,List&lt;Integer&gt; list , List&lt;List&lt;Integer&gt;&gt; result)&#123;</span><br><span class="line">        if(first == n)&#123;</span><br><span class="line">            result.add(new ArrayList&lt;&gt;(list));</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = first ; i&lt; n ; i++)&#123;</span><br><span class="line">            Collections.swap(list,first,i);</span><br><span class="line">            backtrace(n,first+1,list,result);</span><br><span class="line">            Collections.swap(list,first,i);</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p>思路就是回溯，传入要遍历的数组<br><code>执行用时 :4 ms, 在所有 Java 提交中击败了64.83%的用户
+内存消耗 :38.6 MB, 在所有 Java 提交中击败了62.61%的用户</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;</span><br><span class="line">        List&lt;Integer&gt; list =new ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; input = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        for (int i : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            input.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        backtrack(input,list,nums.length);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    public void backtrack(List&lt;Integer&gt; input,List&lt;Integer&gt; list,int length)&#123;</span><br><span class="line">        if(list.size() == length)&#123;</span><br><span class="line">            result.add(new ArrayList&lt;&gt;(list));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 0 ; i&lt; input.size() ; i++)&#123;</span><br><span class="line">            Integer one = input.get(i);</span><br><span class="line">            list.add(one);</span><br><span class="line">            List&lt;Integer&gt; newList = new ArrayList(input);</span><br><span class="line">            newList.remove(i);</span><br><span class="line">            backtrack(newList,list,length);</span><br><span class="line">            list.remove(list.size()-1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/树/">树</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/08/09/arts-2019-08-11-share/" title="《火线第四季》观感1" itemprop="url">《火线第四季》观感1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-08-09T11:25:00.000Z" itemprop="datePublished"> Published 2019-08-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>第四季<br>这一季的视角在教育系统，学校里的孩子。<br>一方面交代卡凯提竞选市长，表现了政客的方方面面，他凭借证人被杀为话题，拉现在市长下马，过程一波三折，最后如愿当上了市长，他开始是想做一些事情的，但很快他发现，市长每天面对很多难题，里面有个比喻就是每天吃屎。刚想在警察届去改观，教育预算出现了5千万的缺口，不得不拆东墙补西墙。竞争对手的互相诋毁，政客的两面三刀，活灵活现。<br>学校里的孩子，大部分都是学习很差的，他们最终都是要去街头的，学校是一个小的社会，提前演习。中间穿插着科尔文跟大学教授的研究项目，每个班调出几个特别有问题的孩子，组成特别班。几个孩子各不相同，蓝迪脑子很灵活，自己在学校卖一些小零食赚钱，他看到了马洛团伙的杀入方法，告诉了警察，被说成告密者，养母也因为这个受伤。麦克是个沉默寡言的孩子，拒绝别人的好处，拒绝马洛的钱，拒绝拳击教练的帮助，后面他父亲回来了，他出现了空前的敌意，甚至请马洛去让他消失，种种表现表明他可能童年受过伤害，所以才这样，他加入了马洛团伙，成了一个杀手，管理了一个街角。还是一个孩子是瑞贝的孩子，但实在不是混街头的料，最后被科尔文收养。<br>马洛团伙这边两个主要杀手，将人带到空置的房屋内杀害，然后封死门，表面风平浪静，其实已经死了很多人，最后秘密被发现，成立专案组。<br>巴布斯这边，他开始用小推车自己卖一些东西赚钱，带着一个小弟，想好好教他，但后面小弟翘课逃走了。一个混混一直抢他钱，他想找警察，但马吉去了凶杀组，交给赫克，但他啥也没发现。他想用氰化氢装做毒品，毒死抢劫者，但被小弟偷吸，间接害死了小弟。巴布斯精神崩溃。<br>博迪因为与麦克一起坐车走了，被杀了，他本想举报马洛，因为他们没有原则。<br>警察这边赫克，因为之前撞见市长的丑事而升官了，想通过监视马洛，查出问题，但过几天摄像机丢了，而且他也没走正常流程，他还编瞎话是线人给的线索，总想抄近路，这一季很多事都是他搞坏了，转看卡夫，在被卡尔文谈话后，警务水平上升，街头混混一清二楚，两个人开始差不多，现在差距很大，一个人走了捷径，但后面吃苦很多，一个人稳扎稳打，情况越来越好。<br>看清事物要理解其本质，科尔文发现学校的本质，一个小型社会，孩子的表现是去社会上的预演，孩子不傻，用不到的东西不学。警察抓人是数字游戏，政策变来变去是利益的权衡。不同人有不同的发展，赫克和卡夫开始觉得没人重用他们，他们自己没发现自己与别人的差距，有实力的人，即使短暂遇到挫折，但大部分时间还是很需要这样的人，这样的人随时可以东山再起，比如福瑞们，虽然被雪藏10年，但出现出手不凡，一下就被重用了。多从自身找问题，要足够实力，不抄近路，实打实的完成每件事。<br>要懂游戏规则，奥马尔一直抢最棘手的毒贩，因为有原则，精明，有耐心，这才能成大事。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/电视剧/">电视剧</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/08/04/arts-2019-08-04-tip/" title="《深入理解计算机系统》4" itemprop="url">《深入理解计算机系统》4</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-08-04T08:28:00.000Z" itemprop="datePublished"> Published 2019-08-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>这周看完了全部，将剩余的系统级I/O，网络编程，并发编程都看完了，还是囫囵吞枣都看一遍，细节不纠，很多也没看懂</p>
+<p>这3部分是整部书的第三部分，讲的是程序间的交互与通信，这部分与上层的关系其他挺大的，但C语言不太会，不能跟着写脚本，所以C语言是必备，对于下面继续学习是必要的。弄懂这几部分，就算得上学习了高级部分了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/08/04/arts-2019-08-04-share/" title="《火线第三季》观感1" itemprop="url">《火线第三季》观感1</a>
   </h1>
   <p class="article-author">By
@@ -460,254 +712,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/07/21/arts-2019-07-21-share/" title="《火线》观感2" itemprop="url">《火线》观感2</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-07-21T06:49:00.000Z" itemprop="datePublished"> Published 2019-07-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>这一季从迪奥的杀人审判案说起，讲警方与艾文贩毒团伙的周旋，不算一个新故事，但故事却很吸引人。出场人物众多，但都有不同的性格，在整体的大环境下，各自发展，先有人物后有剧情，不按观众喜好安排剧情。每个角色都有自己的性格，大部分人随着大势走，部分人制造混乱，逆势而行，这样既有序，又有惊喜。<br>这一季出现几个团体的人员，<br>警察组，警察作为公务人员，很多人都是一心向上攀，副局长想从政，怕得罪参议员，主动结束案件的深入调查，很多人不出力，只上班打卡，整体颓废，这是警察的大势。其中的个例，主角麦克纳提，是一个好警察，但生活一团糟，为了达到目的不择手段，他将艾文集团越级上报给法官，才引发了对这个大毒枭的调查，但也得罪很多人。缉毒组，丹尼斯督查及其组员，因此牵涉其中，开始他也只想应付，但后年看清楚案件的性质，逐渐负责，主动替下属担下责任。这一小撮人是警察届的清流，负责认真的查案。<br>毒贩组，艾文集团，老大艾文多疑，心狠手辣，但重视家人，帮侄子迪奥，买通证人，翻案。老二，斯丁格，智囊团，读着大学，融入到正常社会里，在团里很特别。老大的侄子迪奥是一个正直的人，但被迫卷入家族产业中，经历了几次团伙残忍杀入行为后，想要脱离那里，但被迫进监狱顶罪。底层毒贩，平房区的人，都一些未成年人，有些也是生活所迫，卷入这场洪流中。<br>奥马尔算是毒贩里的奇葩，专门打劫毒贩，凭借智慧，有点罗宾汉的意思，有原则，不恃强凌弱。因为抢劫艾文的货，与艾文结仇，手下相继被杀，单人与艾文集团周旋。<br>警察的线人，巴布斯，靠小偷小摸换毒品，看到伙伴被毒贩打伤，做了线人，帮警察掌握毒贩信息。想戒毒，但因为格雷斯被枪击，又重入。</p>
-<p>整个事件从麦克纳提向法官告状开始，他也许只想调查这个隐秘的毒贩，但他越级报告，触犯了上级，上级不关心毒贩，只想做做样子，前期一直阻挠，不给资源，不让多调查。经过重案组的不懈努力，发现重大线索，他们监视平房区的迪奥，监听电话，弄清楚了毒贩的行动，毒贩与政客勾结，再度阻挠调查，最终艾文被抓，迪奥厌倦了这样的生活，供出整个团伙，但最终因为家庭的考虑，顶了罪。罪犯虽然被抓，但罪很轻。麦克纳提被调到水警组，丹尼尔斯被调到证物组，正义没有成功，反而收到了打击。生活是关联的，剧集深入探讨社会问题，很多问题没有那么简单明了，很多因素纠缠在一起，毒贩与参议员，参议员与局长，局长与警长，一环扣一环。毒贩也不是一无是处，甚至比警察看起来更像好人，警察腐败。 就像迪奥，开始很想参与家族业务，但看到因为自己，证人被杀，只因为看见了他，他没有做假证。很多人因为一点事就被杀，他的小弟是他崩溃的最后一根稻草，他不想参与其中，但逃不掉还是被卷入其中。麦克纳提做事没有底线，得罪上司，与其他人偷情，为了查案不择手段，是一个好警察，但生活一塌糊涂。相反奥马尔，虽然是毒贩，但却又底线，反而被大家认可。做人做事要有底线，它让你不会错得太离谱。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/电视剧/">电视剧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/07/21/arts-2019-07-21-algorithm/" title="33. 搜索旋转排序数组" itemprop="url">33. 搜索旋转排序数组</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-07-21T06:41:00.000Z" itemprop="datePublished"> Published 2019-07-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。<br>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。<br>搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。<br>你可以假设数组中不存在重复的元素。<br>你的算法时间复杂度必须是 O(log n) 级别。<br>示例 1:<br>输入: nums = [4,5,6,7,0,1,2], target = 0<br>输出: 4<br>示例 2:<br>输入: nums = [4,5,6,7,0,1,2], target = 3<br>输出: -1<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array" target="_blank" rel="noopener">https://leetcode-cn.com/problems/search-in-rotated-sorted-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>思路1<br>二次二分查找，一次找最小点，一次查找数据是否存在</p>
-<p>执行用时 :2 ms, 在所有 Java 提交中击败了85.70%的用户<br>内存消耗 :36 MB, 在所有 Java 提交中击败了86.28%的用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int search(int[] nums, int target) &#123;</span><br><span class="line">        if(nums == null || nums.length == 0)return -1;</span><br><span class="line">        if(nums.length == 1)&#123;</span><br><span class="line">            if(nums[0] == target)&#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int min = getMin(nums);</span><br><span class="line">        int result = -1;</span><br><span class="line">        if(min == 0)&#123;</span><br><span class="line">            result = binarySearch(nums,0,nums.length-1,target);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            if(target &lt; nums[0])&#123;</span><br><span class="line">                result = binarySearch(nums,min,nums.length-1,target);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                result = binarySearch(nums,0,min -1,target);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"> public int getMin(int[] nums)&#123;</span><br><span class="line">        int left = 0;</span><br><span class="line">        int right = nums.length-1;</span><br><span class="line">        if(nums[left]&lt; nums[right])&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        while(left&lt;= right)&#123;</span><br><span class="line">            int pivot = (right - left)/2+left;</span><br><span class="line">            if(nums[pivot] &gt; nums[pivot + 1])&#123;</span><br><span class="line">                return pivot + 1;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(nums[pivot] &lt; nums[left])&#123;</span><br><span class="line">                    right = pivot - 1;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    left = pivot + 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">public int binarySearch(int[] nums,int left, int right,int target)&#123;</span><br><span class="line">        if(target &lt; nums[left] || target &gt; nums[right])return -1;</span><br><span class="line">        while(left &lt;= right)&#123;</span><br><span class="line">            int pivot = (right-left)/2 + left;</span><br><span class="line">            if(nums[pivot] == target)&#123;</span><br><span class="line">                </span><br><span class="line">                return pivot;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(nums[pivot] &gt; target)&#123;</span><br><span class="line">                    right = pivot - 1;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    left = pivot + 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/二分法/">二分法</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/07/14/arts-2019-07-14-review/" title="《深入理解计算机系统》1" itemprop="url">《深入理解计算机系统》1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-07-14T01:39:00.000Z" itemprop="datePublished"> Published 2019-07-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>看了第一章的计算机系统漫游和第二章的信息的表示和处理。</p>
-<p>第一章很有意思，讲述了“hello world”这个简单程序的生命周期。<br>先是讲解程序的编译过程，源文件hello.c经过预处理器，插入一些头文件，编成了hello.i,经过编译器编译成汇编hello.s,再经过汇编器编程成机器码，最后经过链接器，链接全局库文件，成为可以运行文件。</p>
-<p>然后是计算机如何执行二进制文件的，cpu读取键盘输入IO到内存，然后，cpu通过总线，加载磁盘IO，读取二进制文件到主存，再读取到暂存，操作系统执行程序，最后将结果返回给显示IO，给屏幕显示。</p>
-<p>其中有几个概念很有趣，文件是对IO的抽象，虚拟内存是对主存、IO的抽象，进程是对CPU，主存，IO的抽象。生动简单明了。</p>
-<p>信息处理主要是数学与计算机表示的转换，进制转换，程序语言中数字的处理等。</p>
-<p>继续深入学习，这本书有点厚，但挺有意思的。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/07/14/arts-2019-07-14-share/" title="《火线》观感1" itemprop="url">《火线》观感1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-07-14T01:22:00.000Z" itemprop="datePublished"> Published 2019-07-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>第一季<br>视角从迪奥杀人案谈起，他叔叔后面买通证人，轻松翻案，麦克纳提把贩毒高楼的掌控者越级上报法官，法官给副局长施压成立专案组，专抓艾文。<br>凶杀组和DEA成立专案组，麦克纳提两头不是人，惹了上级，被警长穿小鞋。<br>副局只是快速给法官一个交代，开始很敷衍，给的人都是老弱病残，警督开始给人的印象是想往上走，所以比较官僚的，听上面指令打压麦克，但他也在不断争取权益，要到有用的人，和上面抗争增加调查力度和时间。<br>每个人很立体，面临各种复杂的抉择。<br>他们开始监听平房区的电话，逐渐了解到了贩毒人员的组成。开始一盘散沙的人员也逐渐有了凝聚力。其中穿插了奥马尔抢劫毒贩的剧情，奥马尔抢劫了迪奥的毒品，艾文大怒，悬赏他们的人头，奥马尔的伙伴和小弟相继被杀，奥马尔怒了，与警方合作，逐渐摸清楚毒贩的组织。先抓住了博德。<br>其中有很多选择很让人印象深刻，迪奥在平房区看到小弟们下棋，用国际象棋中的棋子比喻他们身边的人，王是艾文，大家都保护他，斯丁格是皇后，处理大小事务。毒品房是车，不断更换位置。他们是小兵，随时可能牺牲，但要是到了底线就能成为王。<br>在警察的几个小弟喝了酒半夜去高房区闹事，被烧车， 打瞎一个孩子的眼睛，丹尼尔斯面临2中选择，1是承认是自己让他们去的，替下属顶锅，2是让下属承担罪行，撇清自己。 他选择帮下属顶下责任，这个人既想向上爬，又有责任感不放弃下属。<br>福瑞蒙之前当警察调查一个案子牵扯出一个高管的亲属贩毒，本可以放过，但他还是告了他，得罪了上司，被流放到证物组，他雕微缩家具来打发时间，跟麦克纳提的行为很相似。<br>人物很有特点，一组是毒贩组，老大艾文，隐秘，多疑拥有很多财产。斯丁格，代理人，处理大小事务。几个打手。这是毒贩高层。迪奥，老大的外甥，开始因为杀人去法庭打官司翻案，看到证人因为自己被杀，心存怜悯，还有一丝的良知，看到吸毒人员拿假钱，自己也没处理，但手下就是一顿毒打，他是这一季的切入点，后面他被分配到平房区管理那里，在平房区还有一些手下。<br>奥尔马，打劫毒贩，有自己的原则，不杀害无辜者，令毒贩闻风丧胆，但因为打劫艾文，被悬赏，同伴，手下被杀。他与警方合作，复仇。<br>警察组，凶杀专案科，麦克纳提，酗酒，离婚，与前妻关系不好，但对自己的孩子很好，生活一团糟，但破案能力很强，为了破案，越级上报法官，虽然成事，但自己里外不是人，得罪了很多人。邦克，麦克纳提的答案，破案好手。警长一心仕途，政绩，对下属不关心。<br>缉毒组，副局长，一心政治。丹尼尔斯也想往上爬，同时对下属很好，主动顶罪。基玛，拉拉女警察，破案能力强。福瑞蒙破案高手，也是刚正不啊，导致被流放到证物组。普兰兹兰斯基，高层的女婿，但经常惹祸，但接触了监听破译，有了突破，让人刮目相看。还有两个想退休的酒鬼警察。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/电视剧/">电视剧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -737,11 +741,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>24</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>28</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>29</sup></a></li>
 		  
 		
 		  
@@ -749,7 +753,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>24</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>25</sup></a></li>
 		  
 		
 		  
@@ -765,7 +769,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>10</sup></a></li>
+			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>11</sup></a></li>
 		  
 		
 		  
@@ -782,19 +786,19 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>28</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>29</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>26</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>27</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>24</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>25</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>14</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>15</sup></a></li>
 			
 		
 			
@@ -802,7 +806,7 @@
 			
 		
 			
-				<li><a href="/tags/架构/" title="架构">架构<sup>11</sup></a></li>
+				<li><a href="/tags/架构/" title="架构">架构<sup>12</sup></a></li>
 			
 		
 			
@@ -834,11 +838,7 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>4</sup></a></li>
 			
 		
 			
@@ -846,7 +846,11 @@
 			
 		
 			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 			
@@ -854,11 +858,11 @@
 			
 		
 			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 		</ul>
