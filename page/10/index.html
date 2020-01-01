@@ -79,6 +79,267 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/03/31/arts-2019-02-31-tip/" title="Vue 学习笔记1" itemprop="url">Vue 学习笔记1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-03-31T10:45:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>使用一些大而全的框架，可能上手很快，但很快你就陷入出了问题不知所措，一顿搜索解决问题，但还是不明所以的状态。<br>当初学习spring的时候有，现在使用nuxt.js也有，nuxt.js支持后台渲染页面和单页面，也规定了一些项目目录结构，开始还是很娱乐的，轻松启动。但遇到问题，虽然是原生的vue，但找的解决方法还是不能应用，就好像用了假Vue一样，理解原理很重要。<br>就像Vue学习的初期，官方文档也提醒尽量不用cli去创建项目，包括东西太多，很多还是跟打包有关，你既然要学习vue，就应该只学习重点，不然干扰项打扰，不然会影响效果。<br>最近在做页面间的跳转，其实我的需求很简单，就是一个视频网站，点击后能跳到播放和详情页。用了一些vue的跳转没有成功，后面使用了nuxt.js推荐的<nuxt-link> 标签，可以跳转了，而且这个标签还支持传参数。<br>看到编译后的标签，是一个a标签，然后看文档，这个支持前进和后退功能，相当于自己做了一个浏览器的堆栈保存访问的地址。<br>现在还有一个问题，就是我想做 播放页点击其他视频，再重新加载，但由于是同一个页面导致不能加载，还没有方法解决。</nuxt-link></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/31/arts-2019-02-31-algorithm/" title="设计循环队列" itemprop="url">设计循环队列</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-03-31T08:16:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>设计你的循环队列实现。 循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。<br>循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。<br>你的实现应该支持如下操作：</p>
+<ul>
+<li>MyCircularQueue(k): 构造器，设置队列长度为 k 。</li>
+<li>Front: 从队首获取元素。如果队列为空，返回 -1 。</li>
+<li>Rear: 获取队尾元素。如果队列为空，返回 -1 。</li>
+<li>enQueue(value): 向循环队列插入一个元素。如果成功插入则返回真。</li>
+<li>deQueue(): 从循环队列中删除一个元素。如果成功删除则返回真。</li>
+<li>isEmpty(): 检查循环队列是否为空。</li>
+<li>isFull(): 检查循环队列是否已满。<br>示例：<br>MyCircularQueue circularQueue = new MycircularQueue(3); // 设置长度为 3<br>circularQueue.enQueue(1);  // 返回 true<br>circularQueue.enQueue(2);  // 返回 true<br>circularQueue.enQueue(3);  // 返回 true<br>circularQueue.enQueue(4);  // 返回 false，队列已满<br>circularQueue.Rear();  // 返回 3<br>circularQueue.isFull();  // 返回 true<br>circularQueue.deQueue();  // 返回 true<br>circularQueue.enQueue(4);  // 返回 true<br>circularQueue.Rear();  // 返回 4<br>提示：</li>
+<li>所有的值都在 0 至 1000 的范围内；</li>
+<li>操作数将在 1 至 1000 的范围内；</li>
+<li>请不要使用内置的队列库。</li>
+</ul>
+<p>原题目地址：<a href="https://leetcode-cn.com/problems/design-circular-queue/submissions/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/design-circular-queue/submissions/</a></p>
+<h2 id="思考思路"><a href="#思考思路" class="headerlink" title="思考思路"></a>思考思路</h2><p>队列实现有2种选择，一种是数组实现，一种是链表实现。<br>这个题目长度是固定的，用数组实现更合适。</p>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">class MyCircularQueue &#123;</span><br><span class="line">    private int head;</span><br><span class="line">    private int tail;</span><br><span class="line">    private int size;</span><br><span class="line">    private int currentSize;</span><br><span class="line">    int[] queue;</span><br><span class="line">    //顺序队列</span><br><span class="line">    </span><br><span class="line">    /** Initialize your data structure here. Set the size of the queue to be k. */</span><br><span class="line">    public MyCircularQueue(int k) &#123;</span><br><span class="line">        this.size = k;</span><br><span class="line">        queue = new int[size];</span><br><span class="line">        head = 0;</span><br><span class="line">        tail = 0;</span><br><span class="line">        currentSize = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Insert an element into the circular queue. Return true if the operation is successful. */</span><br><span class="line">    public boolean enQueue(int value) &#123;</span><br><span class="line">        if(currentSize == size)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        if(currentSize == 0)&#123;</span><br><span class="line">            head = (head+1)%size;   </span><br><span class="line">        &#125;</span><br><span class="line">        tail = (tail+1)%size;</span><br><span class="line">        </span><br><span class="line">        queue[tail] = value;</span><br><span class="line">        currentSize++;</span><br><span class="line">        return true;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  /** Delete an element from the circular queue. Return true if the operation is successful. */</span><br><span class="line">    public boolean deQueue() &#123;</span><br><span class="line">        if(currentSize == 0)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        currentSize--;</span><br><span class="line"> if(currentSize != 0)&#123;</span><br><span class="line">            head = (head + 1)%size;  </span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Get the front item from the queue. */</span><br><span class="line">    public int Front() &#123;</span><br><span class="line">        if(currentSize == 0)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return queue[head];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Get the last item from the queue. */</span><br><span class="line">    public int Rear() &#123;</span><br><span class="line">        if(currentSize== 0)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return queue[tail];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  /** Checks whether the circular queue is empty or not. */</span><br><span class="line">    public boolean isEmpty() &#123;</span><br><span class="line">        if(currentSize == 0)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Checks whether the circular queue is full or not. */</span><br><span class="line">    public boolean isFull() &#123;</span><br><span class="line">        if(currentSize == size)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>思路1，head头指针，tail尾指针，size数组整个大小，currentSize当前数组大小，用于判断边界条件。<br>head和tail都是真的有数据位，isFull和ieEmpty根据currentSize判断即可，rear直接去tail，font直接取头。<br>循环存值的方法，就是（当前值+1）%数组长度，保证数组到头，可以从头再来 。<br>难点在enqueue和dequeue<br>enqueue时，通过currentSize==size判断是不是队列满了，其实可以调用isFull，没有想到功能的复用。<br>正常情况，压数据入队列尾，数据存在tail+1的位置，currentSize+1<br>特殊情况，队列是空的情况，head，tail同时后移1位，这种处理后面发现会浪费一个空间，当时没想到。<br>dequeue，先判断是不是空队列<br>正常情况，head+1跟size取余<br>如果currentSize==0，则什么都不多，防止指针变成负值<br>总结<br>难点1，如果保证存储数组可以循环<br>难点2，队列是空的是，头尾指针的判断</p>
+<h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">class MyCircularQueue &#123;</span><br><span class="line">    private Integer[] queue;</span><br><span class="line">    private int head;</span><br><span class="line">    private int tail;</span><br><span class="line">    /** Initialize your data structure here. Set the size of the queue to be k. */</span><br><span class="line">    public MyCircularQueue(int k) &#123;</span><br><span class="line">        queue = new Integer[k];</span><br><span class="line">        head = 0;</span><br><span class="line">        tail = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Insert an element into the circular queue. Return true if the operation is successful. */</span><br><span class="line">    public boolean enQueue(int value) &#123;</span><br><span class="line">        if(isFull())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        queue[tail] = value;</span><br><span class="line">        tail = (tail + 1) % queue.length;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"> /** Delete an element from the circular queue. Return true if the operation is successful. */</span><br><span class="line">    public boolean deQueue() &#123;</span><br><span class="line">        if(isEmpty())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        queue[head] = null;</span><br><span class="line">        head = (head + 1) % queue.length;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Get the front item from the queue. */</span><br><span class="line">    public int Front() &#123;</span><br><span class="line">        if(isEmpty())&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        return queue[head];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Get the last item from the queue. */</span><br><span class="line">    public int Rear() &#123;</span><br><span class="line">        if(isEmpty())&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(tail!=0)return queue[tail-1];</span><br><span class="line">        else return queue[queue.length-1];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /** Checks whether the circular queue is empty or not. */</span><br><span class="line">    public boolean isEmpty() &#123;</span><br><span class="line">        if(tail == head &amp;&amp; queue[tail] == null)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">   /** Checks whether the circular queue is full or not. */</span><br><span class="line">    public boolean isFull() &#123;</span><br><span class="line">        if(head == tail &amp;&amp; queue[tail] != null)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * Your MyCircularQueue object will be instantiated and called as such:</span><br><span class="line"> * MyCircularQueue obj = new MyCircularQueue(k);</span><br><span class="line"> * boolean param_1 = obj.enQueue(value);</span><br><span class="line"> * boolean param_2 = obj.deQueue();</span><br><span class="line"> * int param_3 = obj.Front();</span><br><span class="line"> * int param_4 = obj.Rear();</span><br><span class="line"> * boolean param_5 = obj.isEmpty();</span><br><span class="line"> * boolean param_6 = obj.isFull();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>思路2，看别人的分享有的思路<br>只需要头，尾指针，和数组<br>head指针存有数据，tail是最后一个有数据的位的下一个，是一个空指针<br>队列满，用tail==head，tail！=null，<br>队列空，tail== head，tail ==null<br>满或空的都是通过，头尾指针重合，如果尾指针是不是空来判断，这样要保证数据可以存空值<br>deQueue和deQueue都比较好处理，不用判断特殊的条件<br>rear要取前一个值，这个要特殊注意。<br>总结<br>难点1，通过tail指针指向空的下一个位，来让队列的满或空，很好判断，不会出现特殊位置的判断，很巧妙</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/队列/">队列</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/31/arts-2019-02-31-share/" title="《7up》第一遍观后感" itemprop="url">《7up》第一遍观后感</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-03-31T08:15:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>第一遍看这部纪录片，纪录片分别从英国找到一群不同阶层的孩子，从7岁开始，每隔7年采访，看这些人的成长与变化。<br>片子是按时间顺序，我们横向对比，<br>第一点教育很重要，穷人家的孩子都不太重视教育，没有眼界，不清楚怎么规划未来，有的连大学是什么都不知道，自然比别人要慢很多，或者生活格局要低很多。Nick一个害羞的男孩，通过考取牛津，成功翻身。<br>第二点，父母、家庭对孩子影响很大，片中paul从小就父母离婚在福利院长大，缺乏自信，一生都会怀疑自己，幸好娶了一个积极的老婆。Symon来自单亲家庭，缺少父爱，很小就比较迷茫。Suzy在14岁，父母离婚，对她打击很大，对婚姻失去希望。<br>第三点，大部门人都经历了离婚，越晚结婚，婚姻越稳定，婚姻很大程度影响一个人。<br>第四点，癌症的发病率很高，在那个时候的英国，很多人的父母都是死于癌症，越到老越能体会，身体健康是最重要的。<br>第五点，片子的立意在于说明英国存在阶级，对于里面的每个人的报道有些节选，不能代表全部，富人区的孩子成功与自身的奋斗也是离不开，穷人区的人穷，有些自己说自己很懒。阶级是客观存在的，但自身努力是可以突破的，但自身努力不代表能完成一切。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/纪录片/">纪录片</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/03/22/arts-2019-02-22-algorithm/" title="合并两个有序链表" itemprop="url">合并两个有序链表</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-03-22T07:49:07.000Z" itemprop="datePublished"> Published 2019-03-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
+<p>示例：</p>
+<p>输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4<br>输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</p>
+<p>算法思路：<br>一个总和链表，一个头指针，一个当前指针，比较原来两个链表哪个小，小的就加到当前链表后面，<br>如果一个链表结束了，就将另外一个链表后面添加进来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode mergeTwoLists(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode newList = new ListNode(0);</span><br><span class="line">        ListNode current = newList;</span><br><span class="line">        while(l1 != null &amp;&amp; l2 != null)&#123;</span><br><span class="line">            int one = l1.val;</span><br><span class="line">            int two = l2.val;</span><br><span class="line">            if(one &lt;= two )&#123;</span><br><span class="line">                current.next = l1;            </span><br><span class="line">                l1 = l1.next;</span><br><span class="line">                current = current.next;</span><br><span class="line">               </span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                current.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(l1 != null)&#123;</span><br><span class="line">            current.next = l1;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if(l2 != null)&#123;</span><br><span class="line">            current.next = l2;</span><br><span class="line">        &#125;</span><br><span class="line">        return newList.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/03/22/arts-2019-02-22-review/" title="Scalable Web Architecture and Distributed Systems 学习笔记" itemprop="url">Scalable Web Architecture and Distributed Systems 学习笔记</a>
   </h1>
   <p class="article-author">By
@@ -533,307 +794,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/08/06/通过实战一步步学习树莓派1/" title="通过实战一步步学习树莓派1——零基础安装树莓派操作系统" itemprop="url">通过实战一步步学习树莓派1——零基础安装树莓派操作系统</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2016-08-06T08:16:40.000Z" itemprop="datePublished"> Published 2016-08-06</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>最近买了个树莓派想学习一下 Linux，所以去淘宝买了一些硬件就尝试起来，买个树莓派板子，一个壳子，一个电源线，如果想连显示器，就买转换头，树莓派3带 HDMI接口，一个SD卡，一个读卡器。<br>至于为什么想起来要买这个，其实是我想学些linux相关，但公司环境也不好用来自己学习用，怕会搞坏环境，于是想自己搭一个可以随时访问的自己的环境，经过一番搜索就找到了它，价格也便宜，于是就开始了。<br>我买的最新出的树莓派3。</p>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>想要启动树莓派，现在硬件是齐全了，那要怎么安装系统呢，问题来了<strong>树莓派如何安装系统</strong></p>
-<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>Raspberry Pi，缩写RPi或者RasPi，中文译名为“树莓派”，是一个信用卡大小的、基于Linux的“卡片电脑”（Single-board Computer，单板机），是为学生计算机编程教育而设计，由英国剑桥某实验室历经6年的研制，于 2012年2月29日公开发布并接受预定。负责Raspberry P(树莓派)i这个项目运作的是树莓派基金会（Raspberry Pi Foundation），该基金会主任是Eben Upton（埃本·阿普顿），在媒体前有着非常高的曝光率。<br>探究Raspberry Pi的命名，一种广为接受的说法是：“Raspberry（树莓）”来源于剑桥以水果命名的老传统，”Pi”则为Python的缩写，意为Python将做为Raspberry Pi应用主要编程语言之一。<br>2012年3月，英国剑桥大学埃本·阿普顿（Eben Epton）正式发售世界上最小的台式机，又称卡片式电脑，外形只有信用卡大小，却具有电脑的所有基本功能，这就是Raspberry Pi电脑板，中文译名”树莓派”！这一基金会以提升学校计算机科学及相关学科的教育，让计算机变得有趣为宗旨。基金会期望这 一款电脑无论是在发展中国家还是在发达国家，会有更多的其它应用不断被开发出来，并应用到更多领域。</p>
-<h2 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h2><p>现在的我其实树莓派硬件等各个方面基本不懂，软件也是以前碰过的半吊子的Linux，顶多装装Ubuntu，但都没怎么使用过。<br>我要做的就是先安装系统，让树莓派启动起来。<br>既然都不了解，就先看比人的教程，树莓派要先将SD中写入系统，然后安装在树莓派上，就可以启动了，看起来很简单。</p>
-<h2 id="问题解决过程"><a href="#问题解决过程" class="headerlink" title="问题解决过程"></a>问题解决过程</h2><ol>
-<li>我电脑可以读SD卡，然后用转换器，把SD卡插到电脑上，我使用SDFormatter格式化 SD卡</li>
-<li>然后用在官网上下载好的系统，这个系统我选择官网的Raspbian，由于了解不多，所以用官方最简单上手的。接着使用工具win32 Disk Imager把img文件写到sd卡上。（我电脑是win7,据说32G以上sdka不能用这个工具）</li>
-<li>将SD卡插入到树莓派上那个sd卡插槽，然后插上电源即可。</li>
-<li>现在这个阶段，如果正常的话会看到两个灯，一个红灯常亮，一个会闪烁，黄红切换。如果不用其他外设，暂时只能看到这些，并不能知道系统是不是启动正常，如果又显示器，插上显示器可以看到，或者使用串口（这个略复杂，我暂时不清楚使用方法），后面我会继续尝试使用，来确实是否安装系统成功。这次的应该是试验成功的步骤，下篇教程继续。</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/树莓派/">树莓派</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/raspberry-pi/">raspberry pi</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/03/13/spring-boot-history/" title="Spring Boot发展考察" itemprop="url">Spring Boot发展考察</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2016-03-13T08:06:12.000Z" itemprop="datePublished"> Published 2016-03-13</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><em>目标</em><br>为了介绍spring boot的简单入门，而且讲明白为什么要使用它，它的特点。<br><em>手段</em><br>通过介绍spring boot的发展历史，诞生当时的历史现状，诞生的原因，发展，来说明<br><em>资料</em><br>官方简介：<br>Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can “just run”. We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need very little Spring configuration.</p>
-<p><strong>Features</strong></p>
-<ul>
-<li>Create stand-alone Spring applications</li>
-<li>Embed Tomcat, Jetty or Undertow directly (no need to deploy WAR files)</li>
-<li>Provide opinionated ‘starter’ POMs to simplify your Maven configuration</li>
-<li>Automatically configure Spring whenever possible</li>
-<li>Provide production-ready features such as metrics, health checks and externalized configuration</li>
-<li>Absolutely no code generation and no requirement for XML configuration</li>
-</ul>
-<p><strong>Spring的发展情况</strong></p>
-<p>When Spring 1.0 hit the scene, it completely changed how we develop enterprise Java applications. Spring dependency injection and declarative transactions meant no more tight coupling of components and no more heavyweight EJB s. It couldn’t get any better.</p>
-<p>With Spring 2.0 we could use custom  XML namespaces for configuration, making Spring itself even easier to use with smaller and easier to understand configuration files. It couldn’t get any better.</p>
-<p>Spring 2.5 gave us a much more elegant annotation-oriented dependency-injection model with the  @Component and  @Autowired annotations, as well as an annotation-oriented Spring  MVC programming model. No more explicit declaration of application components, and no more subclassing one of several base controller classes. It couldn’t get any better.</p>
-<p>Then with Spring 3.0 we were given a new Java-based configuration alternative to XML that was improved further in Spring 3.1 with a variety of  @Enable -prefixed annotations. For the first time, it become realistic to write a complete Spring application with no  XML configuration whatsoever. It couldn’t get any better.</p>
-<p>Spring 4.0 unleashed support for conditional configuration, where runtime decisions would determine which configuration would be used and which would be ignored based on the application’s classpath, environment, and other factors. We no longer needed to write scripts to make those decisions at build time and pick which configuration should be included in the deployment. How could it possibly get any better?</p>
-<p><strong>spring boot起源</strong></p>
-<p>Spring的jira上提的需求，揭示了spring boot的起源<br><a href="https://jira.spring.io/browse/SPR-9888" target="_blank" rel="noopener">https://jira.spring.io/browse/SPR-9888</a><br>描述：<br>As the enterprise development landscape grows more diverse the simpler the application framework the more likely developers are to adopt the framework. Developers with existing knowledge of previously common frameworks like the Servlet container are becoming more rare. Spring’s dependence on frameworks and containers outside of Spring’s component model increases the learning curve of new developers attempting to create and maintain spring web applications.<br>Traditionally Spring web applications have been embedded in a servlet container. This was useful in the past when the majority of enterprise applications ran in and depended on the servlet container for deployment and configuration. However, a servlet container comes with learning curve that we cannot assume new developers will have already overcome. The learning curve includes things such as:<br>web.xml and other Servlet oriented configuration concepts<br>.war directory structure<br>Container implementation specific items (e.g. ports, thread pools, etc.)<br>Complex Classloading hierarchies<br>Monitoring and management facilities configured outside of the application<br>Logging facilities<br>Configuration of application context roots<br>So forth<br>All of the above items are configured in inconsistent non-unified ways requiring a development team to learn these for the container their using in addition to Spring’s own configuration model.<br>I think that Spring’s web application architecture can be significantly simplified if it were to provided tools and a reference architecture that leveraged the Spring component and configuration model from top to bottom. Embedding and unifying the configuration of those common web container services within a Spring Container bootstrapped from a simple main() method.<br>Though there are many frameworks and platforms today that no longer require a container I think inspiration can be drawn most from DropWizard (<a href="http://dropwizard.codahale.com/)" target="_blank" rel="noopener">http://dropwizard.codahale.com/)</a>.<br>Another project I’ve seen inspired by DropWizard but leveraging Spring is HalfPipe (<a href="https://github.com/32degrees/halfpipe)" target="_blank" rel="noopener">https://github.com/32degrees/halfpipe)</a>. Though I don’t think HalfPipe goes far enough. I think to truly provide simplification the entire architecture, wherever reasonable, must be embedded within the Spring container rather than without. Though it does have several other interesting ideas.<br>I believe that a Spring driven containerless web application architecture could provide benefits like:<br>Provide a single unified component model requiring no knowledge of the Servlet Component models.<br>Unified configuration of everything allowing developers to only have to learn one Spring configuration model for both component and app configuration.<br>Execution from a void main will simplify application startup and shutdown.<br>A much simpler pure java classloading hierarchy.<br>Simpler development tooling. Instead of needing a complex IDE to construct a war and deploy it to a dev container simply execute the applications Main class.<br>For such an architecture to be successful this architecture will also need new and simple ways to configure common Spring tools, such as Spring MVC and Spring Security, that have traditionally been configured through the servlet container.<br>To accomplish this simplification I don’t think Spring would need to create a brand new http engine. It could simply utilize an embedded servlet container like Jetty. Though it would need to abstract away as much configuration as possible.<br>I think a reference app would also be unnecessary to set an example of how to structure, develop and configure such an application in a pure spring manner.<br>翻译描述：<br>开发人员越来越多的采用更简单的框架。会以前通用框架的相关知识，像Servlet容器的开发者越来越少了，Spring应用以来容器，提高了新的开发者尝试创建和使用spring web 应用。<br>传统spring web应用嵌入在servlet容器中。大多数企业应用的部署和配置，依赖和运行在servlet容器上，这在过去是有效的。<br>然而，一个servlet容器自带的学习曲线，我们不能承担新的开发者已经克服。<br>学习曲线包含：</p>
-<ol>
-<li>web.xml和其他 Servlet面向配置的概念</li>
-<li>.war目录结构</li>
-<li>容器内具体的项目（端口，线程池等）</li>
-<li>复杂的类加载结构</li>
-<li>监控和管理设施要配置的应用程序之外</li>
-<li>日志设施</li>
-<li>应用上下文根配置<br>8.等等<br>上述所有项目都在要求开发团队学习这些他们除了使用Spring的自己的配置模型容器不一致的不统一配置方式。</li>
-</ol>
-<p>我认为Spring的web应用程序架构可以显著简化，如果它是提供工具和参考架构 从上到下的连通Spring组件和配置模型。嵌入和统一的配置 这些共同Web容器服务的配置 可以从Spring容器一个简单的main（）方法中的。<br>我相信，一个Spring驱动无容器的Web应用架构可以提供下列好处：</p>
-<ol>
-<li>提供一个统一的组件模型，无需在Servlet组件模型的知识</li>
-<li>人的一切都允许开发统一的配置，只需要学习一种Spring配置模型为组件和应用配置。</li>
-<li>用从一个空的main简化应用程序的启动和关闭。</li>
-<li>一个更简单的纯Java类加载层次</li>
-<li>更简单的开发工具。而不是需要一个复杂的IDE来构建一个战争并将其部署到一个开发容器只需执行应用程序主类。</li>
-</ol>
-<p>对于这样的体系结构，为了成功这个架构也需要新的和简单的方式来配置公共Spring工具，如Spring MVC和Spring Security，即传统上一直通过servlet容器构造。<br>要做到这一点简单化，我不认为Spring需要创建一个全新的HTTP引擎。它可以简单地利用像Jetty一个嵌入式servlet容器。尽管这将需要抽象掉尽可能多的配置成为可能。<br>我想引用的应用程序也将是不需要设置如何构建一个例子，开发和配置在纯Spring的方式这样的应用程序。</p>
-<h2 id="可以看出，spring为了实现无容器依赖，减小开发者的学习曲线，更快的开发web应用，开发出了spring-boot，spring-boot就是为了简化web开发体验。"><a href="#可以看出，spring为了实现无容器依赖，减小开发者的学习曲线，更快的开发web应用，开发出了spring-boot，spring-boot就是为了简化web开发体验。" class="headerlink" title="可以看出，spring为了实现无容器依赖，减小开发者的学习曲线，更快的开发web应用，开发出了spring boot，spring boot就是为了简化web开发体验。"></a>可以看出，spring为了实现无容器依赖，减小开发者的学习曲线，更快的开发web应用，开发出了spring boot，spring boot就是为了简化web开发体验。</h2>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Spring/">Spring</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Java/">Java</a><a href="/tags/Spring-Boot/">Spring Boot</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/10/02/Java-annotation入门/" title="Java annotation入门" itemprop="url">Java annotation入门</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2015-10-02T05:49:07.000Z" itemprop="datePublished"> Published 2015-10-02</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><strong> 注解（也被称为元数据）为我们在代码中添加信息提供一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据 </strong></p>
-<h2 id="Java中常见注解"><a href="#Java中常见注解" class="headerlink" title="Java中常见注解"></a>Java中常见注解</h2><p>@Override ：表示当前的方法定义将覆盖超类中的方法。如果有错误，编译器将发出错误提示。<br>@Deprescated：被弃用的方法<br>@SuppressWarnings：关闭不当的编译器警告信息。</p>
-<h2 id="注解的分类"><a href="#注解的分类" class="headerlink" title="注解的分类"></a>注解的分类</h2><p>按照运行机制分：源码注解，编译时注解，运行时注解<br>按照来源分：来自JDK的注解，来着第三方的注解，我们自己定义注解</p>
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><strong>定义注解</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用#interface声明注解，成员以无参无异常方式声明，可以用default为成员指定默认值，成员类型是受限的，合法的类型包括原始类型及String，Class，Annotation，Enumeration以及以上类型的数组。如果注解只有一个成员，则成员名必须取名为value（）,在使用时可以忽略成员名和赋值号。</p>
-<p><strong>元注解</strong></p>
-<hr>
-<p>@Target   ：               表示该注解可以用于什么地方。ElementType参数包括：<br>                        CONSTRUCTOR：构造器的声明<br>                        FIELD：域声明（包括enum实例）<br>                        LOCAL_VARIABLE：局部变量声明<br>                        METHOD：方法声明<br>                        PACKAGE：包声明<br>                        PARAMETER：参数声明<br>                         TYPE：类、接口（包括注解类型）或enum声明</p>
-<hr>
-<p>@Retention     ：         表示需要在什么级别保存该注解信息。可选的RetentionPolicy参数包括<br>                         SOURCE：注解将被编译器丢弃<br>                         CLASS：注解在class文件中可用，但会被VM丢弃<br>                         RUNTIME：VM将在运行期也保留注解，因此可以通过反射机制读取注解的信息。</p>
-<hr>
-<p>@Documented       ： 将此注解包含在Javadoc中</p>
-<hr>
-<p>@Inherited       ：        允许子类继承父类中的注解</p>
-<p><strong>使用注解</strong><br>@&lt;注解名&gt;(&lt;成员名1&gt;=&lt;成员值1&gt;,&lt;成员名2&gt;=&lt;成员值2&gt;,…)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Description(desc=&quot;I am eyeColor&quot;,author=&quot;Mooc boy&quot;,age=18)</span><br><span class="line">public Sring eyeColor()&#123;</span><br><span class="line">    return &quot;red&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>编写注解处理器</strong><br>通过反射获取类、函数或成员上的运行时注解信息，从而实现动态控制程序运行的逻辑。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class UseCaseTracker &#123;</span><br><span class="line">    public static void trackUseCases(List&lt;Integer&gt; useCases,Class&lt;?&gt; cl)&#123;</span><br><span class="line">        for(Method m : cl.getDeclaredMethods())&#123;</span><br><span class="line">            UseCase uc = m.getAnnotation(UseCase.class);</span><br><span class="line">            if(uc!=null)&#123;</span><br><span class="line">                System.out.println(&quot;Found use case:&quot;+uc.id()+&quot; &quot;+uc.description());</span><br><span class="line">                useCases.remove(new Integer(uc.id()));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i : useCases)&#123;</span><br><span class="line">            System.out.println(&quot;Warning: Missing use case:&quot;+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; useCases = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        Collections.addAll(useCases, 47,48,49,50);</span><br><span class="line">        trackUseCases(useCases, PasswordUtils.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注解定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">public @interface UseCase &#123;</span><br><span class="line">    public int id();</span><br><span class="line">    public String description() default &quot;no description&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Java语言基础/">Java语言基础</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Annotation/">Annotation</a><a href="/tags/Java/">Java</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/18/2015-7-18-first-article/" title="新的旅程的开始" itemprop="url">新的旅程的开始</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-18T06:52:56.000Z" itemprop="datePublished"> Published 2015-07-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>  在github上搭个博客前后也花了点时间，这周总算是搞定了，可以开始一次全新的旅程了。以前的博客写的拖拖拉拉，想把东西总结好了再写出了，然后就是一直没总结，一直不敢下笔写，效率太低。互联网时代这种方式已经跟不上节奏了，所以今天开始进行快速学习。</p>
-<p>  我是想总结一个技能树，不断补充枝叶，希望最后能结出一些果实。</p>
-<p>  闲话不多说了，旅程开始！</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/闲谈/">闲谈</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/9/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+    <a class="extend prev" rel="prev" href="/page/9/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">Next<span></span></a>
   </nav>
 
 </div>
@@ -860,11 +823,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>25</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>26</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>29</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>30</sup></a></li>
 		  
 		
 		  
@@ -872,7 +835,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>25</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>26</sup></a></li>
 		  
 		
 		  
@@ -888,7 +851,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>11</sup></a></li>
+			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>12</sup></a></li>
 		  
 		
 		  
@@ -905,27 +868,27 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>29</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>30</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>27</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>28</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>25</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>26</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>15</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/架构/" title="架构">架构<sup>13</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/架构/" title="架构">架构<sup>12</sup></a></li>
 			
 		
 			
@@ -941,7 +904,15 @@
 			
 		
 			
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -953,27 +924,15 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
 			
 		
 			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 			
@@ -982,6 +941,10 @@
 		
 			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -1052,7 +1015,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
 		
 		<a href="/about" target="_blank" title="R_Richie">R_Richie</a>
 		

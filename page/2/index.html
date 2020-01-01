@@ -79,6 +79,258 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/11/24/arts-2019-11-24-algorithm/" title="67. 二进制求和" itemprop="url">67. 二进制求和</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-11-24T08:09:00.000Z" itemprop="datePublished"> Published 2019-11-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定两个二进制字符串，返回他们的和（用二进制表示）。</p>
+<p>输入为非空字符串且只包含数字 1 和 0。</p>
+<p>示例 1:</p>
+<p>输入: a = “11”, b = “1”<br>输出: “100”<br>示例 2:</p>
+<p>输入: a = “1010”, b = “1011”<br>输出: “10101”</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/add-binary" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-binary</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>第一次写这道题，怎么感觉之前做过，字符串二进制进位<br>使用简单的字符串一个个比较，<br>第一次问题在字符串拼接，使用insert但没有插入到头部<br>效率比较低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String addBinary(String a, String b) &#123;</span><br><span class="line">        boolean up = false;</span><br><span class="line">        int aLength = a.length();</span><br><span class="line">        int bLength = b.length();</span><br><span class="line">        int strLength = aLength &gt;= bLength ? aLength : bLength;</span><br><span class="line">        if(aLength &gt; bLength)&#123;</span><br><span class="line">            b = String.join(&quot;&quot;, Collections.nCopies(strLength - bLength, &quot;0&quot;)) + b;  </span><br><span class="line">        &#125;else if(bLength &gt; aLength)&#123;</span><br><span class="line">            a = String.join(&quot;&quot;, Collections.nCopies(strLength - aLength, &quot;0&quot;)) + a;  </span><br><span class="line">        &#125;</span><br><span class="line">        char[] aArray = a.toCharArray();</span><br><span class="line">        char[] bArray = b.toCharArray();</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        for(int i = strLength -1 ; i &gt;= 0 ; i--)&#123;</span><br><span class="line">            char aChar = aArray[i];</span><br><span class="line">            char bChar = bArray[i];</span><br><span class="line">            if(aChar == &apos;1&apos; &amp;&amp; bChar == &apos;1&apos;)&#123;</span><br><span class="line">                if(up)&#123;</span><br><span class="line">                    sb.insert(0,&quot;1&quot;);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    sb.insert(0,&quot;0&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                up = true;</span><br><span class="line">            &#125;else if(aChar == &apos;0&apos; &amp;&amp; bChar == &apos;0&apos;)&#123;</span><br><span class="line">                if(up)&#123;</span><br><span class="line">                    sb.insert(0,&quot;1&quot;);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    sb.insert(0,&quot;0&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                up = false;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(up)&#123;</span><br><span class="line">                    sb.insert(0,&quot;0&quot;);</span><br><span class="line">                    up = true;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    sb.insert(0,&quot;1&quot;);</span><br><span class="line">                    up = false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(up)&#123;</span><br><span class="line">            sb.insert(0,&quot;1&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>第二种算法，看别人的答案，思路跟之前相似，但实现不同，不用一堆id判断，用字符与‘0’相减直接得数字<br>自己写得时候，等于0没有想到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String addBinary(String a, String b) &#123;</span><br><span class="line">        int ans = 0;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        for(int i = a.length()-1 ,j = b.length()-1 ; i&gt;=0 || j&gt;=0 ; i-- ,j--)&#123;</span><br><span class="line">            int sum = ans;</span><br><span class="line">            sum += (i &gt;= 0 ? a.charAt(i)- &apos;0&apos; : 0);</span><br><span class="line">            sum += (j &gt;= 0 ? b.charAt(j) - &apos;0&apos;: 0);</span><br><span class="line">            sb.append(sum % 2);</span><br><span class="line">            ans = sum /2;</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(ans == 1? ans : &quot;&quot;);</span><br><span class="line">        return sb.reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/字符串/">字符串</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/11/24/arts-2019-11-24-tip/" title="c语言学习1" itemprop="url">c语言学习1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-11-24T08:08:00.000Z" itemprop="datePublished"> Published 2019-11-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近在学习c语言，本以为有了java的基础，以前在学校还学习过，c语言应该很简单，但我发现不是，还是有一些陌生的概念没有理解。<br>C语言的本身很精炼，与java相比，java有些臃肿，什么都包括。<br>基础的概念比如，类型、运算符，表达式，控制流。<br>比较特殊的，函数与程序结构，指针与数组，结构。<br>剩余是输入与输出和一些系统接口。<br>都通用的就不提了，主要是一些特殊的概念，比如函数中的头文件，C预处理器等。<br>指针是c语言特点所在，也是难点所在，灵活但容易出错。<br>结构类似面向对象的功能，将一些属性包装在一起。</p>
+<p>学习一个东西，不能想着一下全学会，先快速入门，然后不断登台阶，与实际结合，解决问题，这样才是关键。不能单学理论，也不能直接实践，但学理论容易陷入无用的境地，单单实践，容易浪费时间不断试错，不同阶段，两个结合起来效果最佳。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/编程语言/">编程语言</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/11/24/arts-2019-11-24-share/" title="关于达成目标的一些思考" itemprop="url">关于达成目标的一些思考</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-11-24T07:47:00.000Z" itemprop="datePublished"> Published 2019-11-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>人的成长从吴军老师那学来的方法，三板斧破四困境，四困境是简单重复，习惯性失败，林黛玉式困境和狗熊掰棒子。<br>第一板斧，愿景-目标-道路。从战略到战术，都要具体到细节，才能实施。平时我们每年都会有些计划，但很多计划没有落实到细节，虽然知道很重要但一直都没有做，因为没有道路，生活还是照旧，目标永远达不成。这个最近体会很深，比如我认为C语言很重要，也制定了目标，就是学会c语言，这是通向底层的必经之路，但我们目标不够明确，怎么算学会c语言，c语言有哪些部分，都是什么，有哪些不同的等级，当时都完全不清楚。等我开始执行的时候，发现c语言不会的东西很多，短时间完全执行不完，再有挫折一打击，这个目标可能就被搁置，然后不了了之。还有一点就是没有具体道路到每天，可能一有紧急的事情就把原来的时间占用，最后都只做紧急的事情，很多重要的事情都被搁置。<br>这一点我是体会越来越深，所以从战略到战术，都要具体，愿景的不能等级，具体的目标，每天如何安排时间去完成都要细化，这样具体的目标才能执行，笼统的概念没办法达成，生活中很多事情都是同样的道理。</p>
+<p>比如我想改掉每晚去看视频的习惯，视频没什么营养，我也认识到这样是浪费时间的，但我没有安排具体的替换习惯，所以，即使知道这样不对，我没有其他选择，那有了时间照旧，还是看视频，那会给我放松，所以道路就是具体的方法。安排越细节，成功可能性越高。</p>
+<p>学习目标要等级，如何算晋级，不能简单的重复，要不断升级，我经常碰见学不下去的情况，那最好的方法就是从起点重现开始，这也是我发现的最好的学习方式，不能一遍一遍的重复不会的东西，确实能理解提高，尤其是学习困难的东西，效果更是明显，从第一次的一脸懵逼，到有点明白，真的很振奋。所以这是不是就是学习的真谛，不断重复，失败了从起点重新来过。学习如此生活亦如此，就是个不断从起点出发，经历挫折，不断成长的过程，所以失败不可怕，这是常态。</p>
+<p>最近对于年龄的危机，越来越明显了，之前认为自己还小，还有时间，但最近年过30，而且马上就过了互联网的最佳年龄了，体力大不如前，如果没有什么特殊的能力，那肯定不如年轻人。年龄与能力不是必然挂钩，年龄不能控制，能力可以培养。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/学习方法/">学习方法</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/09/15/arts-2019-09-15-share/" title="关于碎片化学习的思考2" itemprop="url">关于碎片化学习的思考2</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-09-15T11:02:00.000Z" itemprop="datePublished"> Published 2019-09-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>现在社会节奏越来越快，人们好像没有时间，一步不停的加紧追赶，我也是自认为很努力的人，总怕浪费时间，周末早早醒来，想看看书，但实际呢，没有什么进步，时间虽然抓的很紧，但都是花在无关紧要的事情上，或者当时看来紧急的事情上，随着时间的流逝，没有什么东西剩下，所以随着时间一场空。<br>人对于长期的目标，很难很好的记住，时间的流逝，慢慢的人就淡忘了，被生活的琐事冲刷，突然有了新的目标，这些都会不断冲击原来的长期目标。淡忘就是长期目标最大的敌人，但对于短平快的刺激，人们就很适应，时间短快速开始快速结束，不会用很多时间，快速反馈，很快就有结果。目标快速达成不断刺激的人们进入，抖音代表的短视频，微博代表的短新闻，得到的听别人解读书，B站上的电影快速介绍，都搓中人性的弱点，我也是这样一路走来，我特别喜欢看电影快速介绍，既花很少的时间，又看过很多电影，虽然每次时间很多，但让人上瘾，一下就花了2，3个小时不自知。但想想有什么都没留下来，我基本记不住讲了什么。<br>但时间短并不是碎片化学习的主要问题，在人们习惯于容易获得的快乐后，是否还能吃苦去获取真正重要的东西。比如一个人吸毒很难戒掉，如果可以轻易体会极致的快乐，为什么要花时间去体验人生。要明白什么才是事实，很多知识不是短时间就能学会的，要花长时间去不断学习，但如果你养成了快速获取知识，只有这一种方式你能接受，那深度的知识你没有获取的方式，任何东西都是分层的，不同层次对应不同的方法。比如从简到奢易，从奢到简难就是这个道理。只是需要深度连接，互相关联，才能形成自己的体系、积累。这样的学习方式，让人们不得不花大量时间去链接，形成体系，也是这种学习方式造成了，时间短的碎片化学习，不能完全替代系统学习。这两种有不同的应用场景。碎片化学习，适用于短暂的了解，扩大知识面。深度系统学习，适合积累知识，符合收益最大的原则。<br>尽量拒绝短平快的方式，除非必须需要，省下来时间给深度学习。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/学习方法/">学习方法</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/09/08/arts-2019-09-08-share/" title="碎片化学习与系统学习的分析" itemprop="url">碎片化学习与系统学习的分析</a>
   </h1>
   <p class="article-author">By
@@ -439,257 +691,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/25/arts-2019-08-25-share/" title="上海城市规划馆参观有感" itemprop="url">上海城市规划馆参观有感</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-25T05:15:00.000Z" itemprop="datePublished"> Published 2019-08-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>本来抱着了解上海未来规划去参考城市规划馆，也知道可能并得不到答案，但参观后还是有不少惊喜的。<br>首先的感受就是变幻的惊喜，虽然都是将过去的照片，资料与现在进行对比，但却采用了不同的形式，有的用的是影片视觉，有的用的抽拉式的卡片，有的用的是大型的图书翻页，有的是用的实物，虽然都可以用相同的形式，本质上没有什么差别，但用了不同形式表达出来，让人有了新鲜感，有了兴趣。这个方法可以参考学习， 同一个东西反复出现，就没了兴趣，但变幻一个花样，就不同了，既能从不同角度去思考，有能记忆深刻，但缺点就是要花费很多精力去构建其他东西。<br>二层是一个巨型的上海微缩地图，很震撼，将那么多的信息进行复刻，需要花很多精力，这也是他震撼的地方，信息量巨大，细节多。地图我们平时也精彩用，两个都是微缩为什么这个这么震撼，真实感与细节，地图上没有那么多细节的描摹，这个将每个建筑，每个河流都描绘了出来，地图是简略的，目的不同，信息量不同，比如清明上河图，就有很多细节，所以称为经典。<br>接着有点收获的就是上海的2017-2035年规划，我想要的就是这个，城市的大致规划，虽然我想知道城市哪块买房子更值钱，对这个帮助可能不大，但能获得这个信息，也是有个大致的指导方向，就是城市的发展目标，继续研究一下看看是不是会有什么收获。<br>还是那个用不同的表现形式，比如用游戏的方式，讲解生活垃圾，如果简单的展示哪些是哪些，人们记忆不清，但如果玩一个大富翁游戏，不断答题，这个效果就很好，它吸引你不断学习，停不下来。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/旅游/">旅游</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/18/arts-2019-08-18-tip/" title="《深入理解计算机系统》6" itemprop="url">《深入理解计算机系统》6</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-18T03:15:00.000Z" itemprop="datePublished"> Published 2019-08-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="第三章-剩余部分"><a href="#第三章-剩余部分" class="headerlink" title="第三章 剩余部分"></a>第三章 剩余部分</h1><p>这次将第三章剩余的部分看完了，但有一部分没有看懂，可能是前面基础没有打好</p>
-<h2 id="数组分配和访问"><a href="#数组分配和访问" class="headerlink" title="数组分配和访问"></a>数组分配和访问</h2><p>基本原则<br>指针运算<br>嵌套的数组<br>定长数组<br>变长数组</p>
-<h2 id="异质的数据结构"><a href="#异质的数据结构" class="headerlink" title="异质的数据结构"></a>异质的数据结构</h2><p>结构<br>联合<br>数据对齐</p>
-<h2 id="浮点代码"><a href="#浮点代码" class="headerlink" title="浮点代码"></a>浮点代码</h2><p>浮点传送和转换操作<br>过程中的浮点代码<br>浮点运算代码<br>定义和使用的浮点常数<br>在浮点代码中使用位级操作<br>浮点比较操作</p>
-<p>整体又看完一遍，这是二刷，但还是有部分没有完成看懂，这次开始做习题，之前就是简单浏览，这次二刷比前一次好很多，但还是没有完全懂，然后我有进行了第三次了，从第三章开始，做题我发现基本都能做对的，把之前没有迷糊的地方都再一次看懂，多次学习还是有好处的，确实越学越明白，一遍不行就两遍，直到自己明白。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/17/arts-2019-08-18-algorithm/" title="120. 三角形最小路径和" itemprop="url">120. 三角形最小路径和</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-17T07:12:00.000Z" itemprop="datePublished"> Published 2019-08-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。<br>例如，给定三角形：<br>[<br>     [2],<br>    [3,4],<br>   [6,5,7],<br>  [4,1,8,3]<br>]<br>自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。<br>说明：<br>如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/triangle" target="_blank" rel="noopener">https://leetcode-cn.com/problems/triangle</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>使用2个数组，以最后一行为长度限制，每次上一行到下一个，下一行除了首尾，只有访问数组前一个和当前<br>动态规划<br><code>执行用时 :5 ms, 在所有 Java 提交中击败了64.61%的用户
-内存消耗 :37.7 MB, 在所有 Java 提交中击败了60.44%的用户</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) &#123;</span><br><span class="line">        int height = triangle.size();</span><br><span class="line">        int weight = triangle.get(height-1).size();</span><br><span class="line">        int[] first = new int[weight];</span><br><span class="line">        int[] second = new int[weight];</span><br><span class="line">        for(int i = 0 ; i &lt; height ; i++)&#123;</span><br><span class="line">            List&lt;Integer&gt; list = triangle.get(i);</span><br><span class="line">            int size = list.size();</span><br><span class="line">            for(int j = 0 ;j&lt; size; j++)&#123;</span><br><span class="line">                if(j == 0)&#123;</span><br><span class="line">                    second[j] = first[j]+list.get(j);</span><br><span class="line">                &#125;else if(j == size-1)&#123;</span><br><span class="line">                    second[j] = first[j-1]+list.get(j);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    second[j] = Math.min(first[j-1]+list.get(j),first[j]+list.get(j));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            int[] tmp = first;</span><br><span class="line">            first = second;</span><br><span class="line">            second = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for(int m = 0 ; m &lt; weight ; m++)&#123;</span><br><span class="line">            min = Math.min(first[m],min);</span><br><span class="line">        &#125;</span><br><span class="line">        return min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/动态规划/">动态规划</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/17/arts-2019-08-18-share/" title="《火线第五季》观感1" itemprop="url">《火线第五季》观感1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-17T06:40:00.000Z" itemprop="datePublished"> Published 2019-08-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="第五季剧情"><a href="#第五季剧情" class="headerlink" title="第五季剧情"></a>第五季剧情</h1><p>这一季添加了报纸编辑部的故事，情节紧接上季，还是马洛团伙。市长这边因为教育资金缺乏几千万，只能紧缩财政，警察加班津贴全部没有了，空屋案也没有资金继续调查了。吉米因为跟博迪谈话，导致博迪被杀，他想借着警局新气象彻底收拾马洛团伙。但没过多久，案件就不能继续调查，他又回到从前，出轨，酗酒。甚至想着编出一个假案，去骗资源。煞费苦心地编一个杀流浪汉的故事，报社这边有一个记者斯卡特，一直想出头，就跟着编了故事，他和吉米两个人，你轮流编织这个故事，事情闹大，给了吉米这个案件很多资源，吉米将这些给了福瑞门，去查马洛，也给了其他没有资源破案的警察。最终破解了马洛的密码，在进货的时候，将马洛团伙全部抓住。但假案也让上层知道了，因为市长也因为这个竞选，所以冷处理了这个事件，但吉米和福瑞门离开警局。最后一个镜头，预览了城市的继续，马洛团伙倒台，其他人继续。生活依旧，没有什么变化，有些人变好了，有些人走了其他人的老路，不断循环。<br>毒贩这边，奥马尔因为乔之前阴了他，让他与马洛结仇，奥马尔直接抢劫了刚进货的乔，让所有人都没了货，赚了一大笔钱，然后隐退了。马洛一直再找奥马尔，手下干掉了奥马尔的瞎子亲戚，奥马尔回来复仇了。开始复仇被设立圈套，同伙死了，他被射伤了腿，侥幸逃脱。后面他就一个个干掉他的打手，去街头抢毒品，放话马洛没胆子上街头，但这些马洛都不知道。但不幸的是，奥马尔买东西不留神被一个小孩射死，结束了一生。<br>马洛跟着乔学会了洗钱，进货等手段，就将乔干掉了。马洛统一了整个巴尔的摩的毒品界，比其他人都厉害，但转瞬即逝，因为利维自己买通法院的人获取文件，只能与检察官和解，检察官这边因为假案非法窃听，获取证据不能证明，为了掩盖假案也不能进行，只能选择线下和解。马洛无罪，保留资产，但不能再犯毒，打手承担所有罪责，马洛团伙整体覆灭。<br>巴布斯戒毒成功，还担任志愿者，一个记者写了一篇他的报道，他算是成功证明自己，走出来阴影，最后也上楼与姐姐一起吃饭。大部分孩子走上了老路，只有跟着警长的孩子，去参与演讲，算是有一个好的结局。<br>我看腾讯视频上有人评价，电视剧版的红楼梦，想想还真是贴切，虽然我没有看过红楼梦，但听别人评价，红楼梦发射出当时的社会背景，让你能身临其境。我看过火线后，我感觉我都在巴尔的摩生活过一样，“看就是那样，没错”，这种错觉，里面人物鲜活，场景还原度高，各个细节表现着当时的生活的人们，比如冰与火之歌，细节丰富，每个势力有自己的标志，族训，艺术源于生活，只有充分了解生活的人，才能写出如此真实的细节。<br>最后一季探讨了过程正确的重要性，吉米的目标是正确的，打击毒贩，查大案，但手段无所不用其极，没有底线，虽然最终目标达成，但已经超出了底线，丢了西瓜捡芝麻。报社记者斯卡特，为了出头，编人们喜欢的新闻，突破了新闻的底线。</p>
-<h1 id="剧终总结"><a href="#剧终总结" class="headerlink" title="剧终总结"></a>剧终总结</h1><p>第二遍看这部剧，已经记不清第一遍看完是什么感受了，巴尔的摩栩栩如生地展现在眼前，那些人物自己活跃在生活中，那样鲜活就像我的朋友一样。希望不想第一次看那样，没有任何收获，看看有什么能在生活中用到的启迪。<br>吉米，从开始的为了查大毒贩，破坏指挥链，藐视权威，具有反抗精神，为了当警探，生活上酗酒，出轨。目标是正确的，但手段没有下限，一次次让自己跌入谷底，第四季去做了巡警，逐渐变好，但最后一季，又回到凶杀案组，因为事情不顺，又回到原来。他喜欢用错误去惩罚别人的错误。<br>吉米的凶案组的搭档邦克，与吉米相反，在相同情况下，不会像吉米一样突破底线，虽然曲折，但也破了案。<br>奥马尔虽然抢劫毒贩，但有自己的底线，有什么能做，什么不能做，但街头游戏逃脱不了最后的命运，死在小孩的枪口下。<br>丹尼斯有自己的原则，虽然一度想真的改善警局，但最终不想突破原则，被迫辞职，去做了律师，有多条路，在一个循环不行了，起码饿不死，多个技能很重要。<br>卡凯蒂竞选市长的时候，确实想改善警局，但当上市长上，一直不断填其他坑，反而比以前更差了，又落入只是不断为了政绩进行数字游戏。<br>毒贩团伙，一个不断替换，犯毒在巴尔的摩不断上演，这是一个系统问题，不是打击一两个团伙就能实质解决，大家都是进行数字游戏，大家在怪圈中不断循环</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/电视剧/">电视剧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -716,11 +720,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>25</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>26</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>29</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>30</sup></a></li>
 		  
 		
 		  
@@ -728,7 +732,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>25</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>26</sup></a></li>
 		  
 		
 		  
@@ -744,7 +748,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>11</sup></a></li>
+			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>12</sup></a></li>
 		  
 		
 		  
@@ -761,27 +765,27 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>29</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>30</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>27</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>28</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>25</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>26</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>15</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/架构/" title="架构">架构<sup>13</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/架构/" title="架构">架构<sup>12</sup></a></li>
 			
 		
 			
@@ -797,7 +801,15 @@
 			
 		
 			
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -809,27 +821,15 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
 			
 		
 			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 			
@@ -838,6 +838,10 @@
 		
 			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -908,7 +912,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
 		
 		<a href="/about" target="_blank" title="R_Richie">R_Richie</a>
 		
