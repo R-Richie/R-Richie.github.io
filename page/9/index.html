@@ -79,6 +79,78 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/04/21/arts-2019-04-21-algorithm/" title="删除二叉搜索树中的节点" itemprop="url">删除二叉搜索树中的节点</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-21T05:13:07.000Z" itemprop="datePublished"> Published 2019-04-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。<br>一般来说，删除节点可分为两个步骤：</p>
+<ol>
+<li>首先找到需要删除的节点；</li>
+<li>如果找到了，删除它。<br>说明： 要求算法时间复杂度为 O(h)，h 为树的高度。<br>示例:<br>root = [5,3,6,2,4,null,7]<br>key = 3<br> 5<br>/ \<br>3   6<br>/ \   \<br>2   4   7<br>给定需要删除的节点值是 3，所以我们首先找到 3 这个节点，然后删除它。<br>一个正确的答案是 [5,4,6,2,null,null,7], 如下图所示。<br> 5<br>/ \<br>4   6<br>/     \<br>2       7<br>另一个正确答案是 [5,2,6,null,4,null,7]。<br> 5<br>/ \<br>2   6<br>\   \<br> 4   7</li>
+</ol>
+<h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>分几种情况<br>1.没有左右子树，直接删除<br>2.只有一个子树，将父指向子，直接删除<br>3.如果是有父子节点，找到右子树最小的节点，替换</p>
+<h3 id="犯错点"><a href="#犯错点" class="headerlink" title="犯错点"></a>犯错点</h3><p>1.只有一个元素的时候，删除没考虑好<br>2.删除根节点没有处理好</p>
+<h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p>参考别人的算法，自己在后面处理没写好，别人的算法是通过递归的，主要好处就不用找父节点了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode deleteNode(TreeNode root, int key) &#123;</span><br><span class="line">        if(root == null)return null;</span><br><span class="line">        if(root.val &gt; key)&#123;</span><br><span class="line">            root.left =  deleteNode(root.left, key);</span><br><span class="line">            return root;</span><br><span class="line">        &#125;else if(root.val &lt; key)&#123;</span><br><span class="line">            root.right = deleteNode(root.right, key);</span><br><span class="line">            return root;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            if(root.left == null)&#123;</span><br><span class="line">                return root.right;</span><br><span class="line">            &#125;else if(root.right == null)&#123;</span><br><span class="line">                return root.left;</span><br><span class="line">            &#125;else&#123;           </span><br><span class="line">                TreeNode successor = minNode(root.right);   </span><br><span class="line">                successor.right = deleteMin(root.right);</span><br><span class="line">                successor.left = root.left;</span><br><span class="line">                return successor;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private TreeNode minNode(TreeNode node)&#123;</span><br><span class="line">        if(node.left == null)&#123;          </span><br><span class="line">            return node;</span><br><span class="line">        &#125;</span><br><span class="line">        return minNode(node.left);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    private TreeNode deleteMin(TreeNode node)&#123;</span><br><span class="line">        if(node.left == null)&#123;</span><br><span class="line">            return node.right;</span><br><span class="line">        &#125;</span><br><span class="line">        node.left =  deleteMin(node.left);   </span><br><span class="line">        return node;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过递归的方式<br>1.如果node值大于 key，则递归左子树，返回值覆给左子树<br>2.如果node值小于key，则递归右子树，返回值覆给右子树<br>3.相等情况比较复杂<br>3.1 如果node值等于key，并且左子树为空，那么直接返回右子树，这样就删除了该node。<br>3.2 如果node值等于key，并且右子树为空，那么直接返回右子树，这样就删除了该node。<br>3.3 如果node等于key，同时左右都不为空<br>3.3.1 获取该子树最小的node，命名为successor<br>3.3.2 将右子树删除最小值，并且将最新的右子树赋值给successor的右子树<br>3.3.3 将之前节点的左子树赋值给successor的左子树<br>3.3.4 返回新构建的节点</p>
+<p>minNode是返回某个子树的最小值，也就是找最左节点</p>
+<p>deleteMin是删除子树的最小值，递归的方式<br>退出条件是某个节点的左节点是空，则返回右节点，其他情况递归左子树</p>
+<p>主要使用了递归的手段， 这种手段可以避免找父节点，但我还不是很熟悉，需要继续熟悉递归的思维方式。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/二叉树/">二叉树</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/04/19/arts-2019-4-21-tip/" title="java集合-CopyOnWriteArrayList" itemprop="url">java集合-CopyOnWriteArrayList</a>
   </h1>
   <p class="article-author">By
@@ -726,86 +798,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/31/arts-2019-02-31-review/" title="scalability availability &amp; stability patterns 学习笔记" itemprop="url">scalability availability &amp; stability patterns 学习笔记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-31T10:49:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>原文地址 <a href="https://www.slideshare.net/jboner/scalability-availability-stability-patterns" target="_blank" rel="noopener">https://www.slideshare.net/jboner/scalability-availability-stability-patterns</a></p>
-<p>这个ppt总结真的很全面，从可扩展性，可用性，稳定性，3个方面分别讲了达到每个目的，以及有什么手段，什么方法来解决这个问题。<br>没看文章前，我是有一些零碎的概念的，但看了文章后，我突然有一些理解分布式了，架构的目的是达到现实目标，要达到哪方面目的，就用哪些技术。（第一遍读还有很多，不懂的地方，先做一个粗略的总结）</p>
-<h2 id="可用性（availability）"><a href="#可用性（availability）" class="headerlink" title="可用性（availability）"></a>可用性（availability）</h2><p>达到可用性，有2种手段，故障转移（Fail-over）和冗余备份（Replication）</p>
-<h3 id="Fail-over"><a href="#Fail-over" class="headerlink" title="Fail-over"></a>Fail-over</h3><p>故障转移，表面上看是只要有失败就转移到其他正常的服务上去，然后再回写同步数据。但实际情况要复杂的多，可能出现各种失败的情况。</p>
-<h3 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h3><p>备份分为几种：master-slave，tree-replication，master-master，Buddy replication</p>
-<p>同步方式：<br>active replication：push<br>passive replication： pull</p>
-<h2 id="稳定性（stability）"><a href="#稳定性（stability）" class="headerlink" title="稳定性（stability）"></a>稳定性（stability）</h2><h3 id="Timeouts"><a href="#Timeouts" class="headerlink" title="Timeouts"></a>Timeouts</h3><p>保证每个调用都有超时时间，不会无限期假死。</p>
-<h3 id="Circuit-Breaker"><a href="#Circuit-Breaker" class="headerlink" title="Circuit Breaker"></a>Circuit Breaker</h3><p>将失败作为一种正常的状态，而不是维护正常的状态。出现异常，尽早发现，采取其他处理。</p>
-<h3 id="Let-it-crash"><a href="#Let-it-crash" class="headerlink" title="Let-it-crash"></a>Let-it-crash</h3><p>如果服务出现异常，不用尽力恢复，尽早发现，及时止损。</p>
-<h3 id="Fail-fast"><a href="#Fail-fast" class="headerlink" title="Fail-fast"></a>Fail-fast</h3><p>跟上一个有点像</p>
-<h3 id="Bulkheads"><a href="#Bulkheads" class="headerlink" title="Bulkheads"></a>Bulkheads</h3><p>有点像线程池，将一些资源放在一个池子里，与其他进行隔离，即使出问题，也不会导致全局卡死，也保护了资源。</p>
-<h3 id="Steady-State"><a href="#Steady-State" class="headerlink" title="Steady State"></a>Steady State</h3><p>清理状态，时刻保持可用。</p>
-<h3 id="Throttling"><a href="#Throttling" class="headerlink" title="Throttling"></a>Throttling</h3><p>限流，比如控制请求的数量</p>
-<h2 id="可扩展性（scalability）"><a href="#可扩展性（scalability）" class="headerlink" title="可扩展性（scalability）"></a>可扩展性（scalability）</h2><p>可扩展性主要是为了管理过载，分两种内容：状态与行为。<br>状态：分布式缓存，数据网格，服务状态，HTTP缓存，CAP，同步，分区，备份<br>行为：计算网格，事件驱动架构，负载均衡，并行计算</p>
-<p>对于可扩展的一般的建议<br><strong>默认不可变<br>引用透明（函数式编程）<br>懒加载<br>考虑数据存储</strong></p>
-<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><h3 id="性能-vs-可扩展"><a href="#性能-vs-可扩展" class="headerlink" title="性能 vs 可扩展"></a>性能 vs 可扩展</h3><p><strong>如何确定性能问题</strong><br>单用户很慢，<br><strong>如何确定可扩展问题</strong><br>单用户很快，压力大就慢</p>
-<h3 id="延迟-vs-吞吐"><a href="#延迟-vs-吞吐" class="headerlink" title="延迟 vs 吞吐"></a>延迟 vs 吞吐</h3><p>最大的吞吐量，加上可接受的延迟</p>
-<h3 id="可用性-vs-一致性"><a href="#可用性-vs-一致性" class="headerlink" title="可用性 vs 一致性"></a>可用性 vs 一致性</h3><p><strong>CAP</strong><br>consistency<br>availability<br>Partition<br><strong>ACID</strong><br>Atomic<br>Consistency<br>Isolated<br>Durable</p>
-<p>什么时候需要强一致性，什么时候需要最终一致性</p>
-<h2 id="Status（状态管理）"><a href="#Status（状态管理）" class="headerlink" title="Status（状态管理）"></a>Status（状态管理）</h2><p>Partitioning，<br>HTTP caching：reverse proxy，cdn，<br>，Data Grids，<br>Service of record:RDBMS sharing，NOSQL(key-value,Column,document,graph,datastructure)<br>Distrbuted caching:write-through,write-behind,eviction policites,replication,peer to peer<br>Concurrency:Shared-state, message-passing,dataflow,software transactional memory</p>
-<h2 id="behavior（行为管理）"><a href="#behavior（行为管理）" class="headerlink" title="behavior（行为管理）"></a>behavior（行为管理）</h2><p>Event-Driven Archietecture（<br>Domian events，Event sourcing, command and Query Responsiblity Segregation(CQRS)pattern,<br>Event Stream Processing,Messaging(Publish-Subscribe,Point-to-point,Store-forward,Request-Reply),Enterprice Service Bus ,Actors,Enterprice Integration Architecture(EIA)<br>）<br>Compute Grids<br>Load-balancing<br>Parallel computing</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/8/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">Next<span></span></a>
@@ -839,7 +831,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>30</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>31</sup></a></li>
 		  
 		
 		  
@@ -847,7 +839,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>26</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>27</sup></a></li>
 		  
 		
 		  
@@ -880,11 +872,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>30</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>31</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>28</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>29</sup></a></li>
 			
 		
 			
@@ -892,7 +884,7 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>16</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>17</sup></a></li>
 			
 		
 			
@@ -916,15 +908,11 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
@@ -936,11 +924,7 @@
 			
 		
 			
-				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -948,7 +932,15 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 			
@@ -956,7 +948,7 @@
 			
 		
 			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 		</ul>

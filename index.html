@@ -79,6 +79,72 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2020/01/11/arts-2020-01-11-tip/" title="返回值校验与异常抛出" itemprop="url">返回值校验与异常抛出</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2020-01-11T10:25:00.000Z" itemprop="datePublished"> Published 2020-01-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>起因是因为，最近在做公司的项目，我做的是前端系统，取数据需要调用后端系统，我能做的事情不多，所以对于返回值校验这块起来兴趣，而且我们调用后端接口，是内部的一个服务平台。我们前端的微服务，有一个微服务作为统一的调用内部服务平台的入口，所以先通过feign调用到这个组件，再通过这个组件去调用内部服务平台。这样做的好处是，只需要配置一个地方的服务平台参数，就能所有服务公用。但用的不舒服的地方就是返回值是一个map，没有类型信息，不清楚里面有什么值，好处是通用。所以我还是想用bean去接收返回值，然后去校验字段，处理这些异常。</p>
+<p>提取出问题的几个关键点，内部服务平台因为所以服务都需要用，但每个微服务都配置麻烦，所以就集中一个微服务配置，其他服务通过feign调用，该组件集中调用内部服务平台，然后透传给每个微服务。我们将该调用内部服务平台的微服务定义为A服务，A服务与其他微服务为了通用，就使用map作为返回值，因为不想每次都开发新接口给每个微服务，因为A服务没有每个接口类型信息，所以也就不能给每个调用者转类型，这也是一种处理方式。然后每个微服务自己从map里取值，通过map在业务里传递，完成处理。这也是一种行得通的设计。</p>
+<p>但这种设计的缺陷就是，后面的人不好维护，非开发的人找不到接口里到底有什么值，map没有任何类型信息，字段意义，开发方面，但维护成本高。所以我倾向于使用bean去作为接收对象，在业务中传递，既可以校验，也有字段信息，缺点就是可能bean会很多，膨胀的很厉害。这是以编译期类型信息代替运行时类型信息。这就是第一个分歧点，使用编译器校验还是运行期，表面上的争议是bean还是map。</p>
+<p>我要实现的功能是返回值字段校验与统一校验异常处理，<br>思路1，如果返回值是map，那就一个个字段取出，校验，然后处理异常。缺点：人工做，容易错误，繁琐。好处：效率高。<br>思路2，返回值还是map，map转bean，然后bean做校验处理。后面的bean的校验统一用hibernate validator处理。缺点：map转bean，多种方法实现，反射等方法有性能较低，高性能转换需要引入其他框架。<br>思路3，返回是bean，在使用其他方面，单独校验处理异常。<br>这里有一个重要的点，就是调用使用的feign调用，业务B服务，调用A服务，A服务会进行json转换，再调用内部服务平台，返回值，再json序列号，发给B服务，B服务的feign再反序列化。<br>思路3.1，A服务要有B服务的返回值类型，然后在内部平台返回时，先反序列化成B服务的类型，再返回给B，这样A服务，要有所有服务的类型信息，不太合适，A服务应该不频繁改动。<br>思路3.2，A服务，既然不能有类型信息，那就不解析，直接透传呢？好像问题解决了。因为内部平台正好也是json类型的返回值，直接在A服务，不解析json，直接返回给B，B用类型信息去解析，这是透传还不能消耗json解析的时间。这个地方，返回值使用string，然后produces使用json，spring mvc可以直接返回json。返回bean的第一个问题，解决了，可以不用map，直接在B服务用Bean去接收。</p>
+<p>然后是校验的部分，<br>思路1，独立的部分去校验bean，返回值校验失败返回值，但不抛异常，单独一个方法再包装抛异常<br>思路2，在feign的decode的时候，去解析bean，校验字段，抛异常<br>这两个思路应该都支持，第一种更通用，第二种更简单。</p>
+<p>在feign的前后做好校验与异常，相当于定了接口，对于不同系统的管理也更方便。</p>
+<p>总结：通过不解析json进行透传，省略中间服务类型转换。通过feign前后encode与decode的重写，来处理bean的校验和异常的处理，bean的校验框架使用hibernate validator进行。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2020/01/01/arts-2020-01-01-review/" title="Mocks Aren&#39;t Stubs" itemprop="url">Mocks Aren&#39;t Stubs</a>
   </h1>
   <p class="article-author">By
@@ -426,68 +492,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2019/12/22/arts-2019-12-22-review/" title="On java8 学习笔记 validating your code章节" itemprop="url">On java8 学习笔记 validating your code章节</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-12-22T05:44:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>你不能保证你代码是正确的，只能证明他是错的。<br>如果没有测试，它就是坏的。<br>因为java是静态语言，程序员对于语言的安全性太多舒服，想“编译通过了，那没问题了”。但是静态类型校验，有很大的限制。它只代表满足语法和基本类型规则。不意味着到达你编程的目的。</p>
-<p>单元测试<br>这个在你创造的代码中建立集成测试的过程，每次构建系统的时候运行他们。这样构建过程不仅仅检查语法错误。你教它检查语义上的错误。<br>“单元”涉及最小块代码测试的想法。每个类都测试方法的行为。“系统”测试不同，检查完成的程序是否满足要求。<br>C风格语言，尤其c++，注重性能甚于安全编程。开发java比c++更快的原因是因为java更安全。特性比如：垃圾收集，类型校验。集成单元测试在编译的时候，将扩展你的安全网，结果是更快的开发。你可以更简单和健壮的重构你的代码，当你发现设计和实现的缺陷时，一般情况下会生产更好的产品，更快。<br>我的测试经验开始于，保证书中代码的正确性，书中的每个程序必须能自动提取，和编译在一个合适的构建系统。这本书的构建系统是gradle，你安装jdk后， 简单的gradlew compilejava，来编译整本书的所有代码。。。。<br>JUnit<br>最初的junit发布于2000年，基于java1.0，没用到java反射机制，所以写单元测试是一个很麻烦和啰嗦的活动。我发现了设计的缺陷，写了自己的单元测试框架，这个框架走向了另一个极端，“尝试可能可行的最简单的方法”。自此Junit使用发射和注解提升了很多。最新版本添加了lambda的支持，在junit5中。<br>在最简单的junit使用中，每个方法代表一个测试，使用@Test注解。Junit确定这些方法为分立的测试，设定和运行一次只有一个，采取措施避免测试间的副作用。</p>
-<p>覆盖率的错觉<br>测试覆盖率，或者叫代码覆盖率。更改的百分比，更好测试覆盖率。很多方法去计算覆盖率，一个有用的文章描述是java code coverage tools<br>太容易决定100%覆盖率是可接受的值。数值不太是测试有效性的一个好的测量值。你可能测试了所有，只有65%的覆盖率。为了100%你可能要浪费很多时间保证其他。<br>测试覆盖率是一个初略的数据是有效的，当你分析一个未知的代码。如果测试工具报告很低的数值，比如40%，告诉你覆盖率可能是无效。然后一个非常高数值也是可疑的，可能是一个知识不足的人下团队决定。<br>最好的覆盖率工具是发现未测试的代码库。但不依赖它告诉你测试的质量。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/架构/">架构</a><a href="/tags/单元测试/">单元测试</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2019/12/22/arts_2019-12-22-tip/" title="spring项目单元测试初探1" itemprop="url">spring项目单元测试初探1</a>
   </h1>
   <p class="article-author">By
@@ -523,6 +527,68 @@
   <div class="article-tags">
   
   <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/单元测试/">单元测试</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/22/arts-2019-12-22-review/" title="On java8 学习笔记 validating your code章节" itemprop="url">On java8 学习笔记 validating your code章节</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T05:44:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>你不能保证你代码是正确的，只能证明他是错的。<br>如果没有测试，它就是坏的。<br>因为java是静态语言，程序员对于语言的安全性太多舒服，想“编译通过了，那没问题了”。但是静态类型校验，有很大的限制。它只代表满足语法和基本类型规则。不意味着到达你编程的目的。</p>
+<p>单元测试<br>这个在你创造的代码中建立集成测试的过程，每次构建系统的时候运行他们。这样构建过程不仅仅检查语法错误。你教它检查语义上的错误。<br>“单元”涉及最小块代码测试的想法。每个类都测试方法的行为。“系统”测试不同，检查完成的程序是否满足要求。<br>C风格语言，尤其c++，注重性能甚于安全编程。开发java比c++更快的原因是因为java更安全。特性比如：垃圾收集，类型校验。集成单元测试在编译的时候，将扩展你的安全网，结果是更快的开发。你可以更简单和健壮的重构你的代码，当你发现设计和实现的缺陷时，一般情况下会生产更好的产品，更快。<br>我的测试经验开始于，保证书中代码的正确性，书中的每个程序必须能自动提取，和编译在一个合适的构建系统。这本书的构建系统是gradle，你安装jdk后， 简单的gradlew compilejava，来编译整本书的所有代码。。。。<br>JUnit<br>最初的junit发布于2000年，基于java1.0，没用到java反射机制，所以写单元测试是一个很麻烦和啰嗦的活动。我发现了设计的缺陷，写了自己的单元测试框架，这个框架走向了另一个极端，“尝试可能可行的最简单的方法”。自此Junit使用发射和注解提升了很多。最新版本添加了lambda的支持，在junit5中。<br>在最简单的junit使用中，每个方法代表一个测试，使用@Test注解。Junit确定这些方法为分立的测试，设定和运行一次只有一个，采取措施避免测试间的副作用。</p>
+<p>覆盖率的错觉<br>测试覆盖率，或者叫代码覆盖率。更改的百分比，更好测试覆盖率。很多方法去计算覆盖率，一个有用的文章描述是java code coverage tools<br>太容易决定100%覆盖率是可接受的值。数值不太是测试有效性的一个好的测量值。你可能测试了所有，只有65%的覆盖率。为了100%你可能要浪费很多时间保证其他。<br>测试覆盖率是一个初略的数据是有效的，当你分析一个未知的代码。如果测试工具报告很低的数值，比如40%，告诉你覆盖率可能是无效。然后一个非常高数值也是可疑的，可能是一个知识不足的人下团队决定。<br>最好的覆盖率工具是发现未测试的代码库。但不依赖它告诉你测试的质量。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/架构/">架构</a><a href="/tags/单元测试/">单元测试</a>
   </div>
 
 </div>
@@ -668,69 +734,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/12/15/arts-2019-12-15-tip/" title="spring mvc全局异常处理源码分析1" itemprop="url">spring mvc全局异常处理源码分析1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-12-15T02:29:00.000Z" itemprop="datePublished"> Published 2019-12-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>第一遍看源码分析流程</p>
-<p>入口时dispatchServlet的doDispatch方法，processDispatchResult是请求结束的统一处理，不管是不是异常。<br>如果传入exception是不是空，说明发生了异常，判断是不是网页的异常。调用processHandlerException处理异常。</p>
-<p>其中有一个handlerExceptionResolvers数组，是initStrategies方法在dodispatch初始化的时候初始化的。<br>找到可以处理这个异常的HandlerExceptionResolver，调用resolveException方法去处理异常，<br>首先shouldApplyTo方法，resolver是不是支持这个handler，如果支持调用doResolveException，然后调用doResolveHandlerMethodException<br>getExceptionHandlerMethod获取具体的调用方法，然后invokeAndHandle去实际调用异常处理方法。</p>
-<p>只能说过了一个大致的流程，不能说完全懂了，里面很多细节还不清楚，我准备看一遍文档，梳理一下mvc的大致组件结构来再过一遍，看看会不会更清晰。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/spring-mvc/">spring mvc</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -764,7 +767,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>30</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>31</sup></a></li>
 		  
 		
 		  
@@ -772,7 +775,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>26</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>27</sup></a></li>
 		  
 		
 		  
@@ -805,11 +808,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>30</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>31</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>28</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>29</sup></a></li>
 			
 		
 			
@@ -817,7 +820,7 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>16</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>17</sup></a></li>
 			
 		
 			
@@ -841,15 +844,11 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
@@ -861,11 +860,7 @@
 			
 		
 			
-				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -873,7 +868,15 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 			
@@ -881,7 +884,7 @@
 			
 		
 			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 		</ul>

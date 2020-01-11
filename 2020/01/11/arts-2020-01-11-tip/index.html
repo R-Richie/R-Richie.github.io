@@ -1,0 +1,588 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>返回值校验与异常抛出 | 演练场</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="R_Richie">
+    
+
+    
+    <meta name="description" content="起因是因为，最近在做公司的项目，我做的是前端系统，取数据需要调用后端系统，我能做的事情不多，所以对于返回值校验这块起来兴趣，而且我们调用后端接口，是内部的一个服务平台。我们前端的微服务，有一个微服务作为统一的调用内部服务平台的入口，所以先通过feign调用到这个组件，再通过这个组件去调用内部服务平台。这样做的好处是，只需要配置一个地方的服务平台参数，就能所有服务公用。但用的不舒服的地方就是返回值是">
+<meta name="keywords" content="编程技巧,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="返回值校验与异常抛出">
+<meta property="og:url" content="http://yoursite.com/2020/01/11/arts-2020-01-11-tip/index.html">
+<meta property="og:site_name" content="演练场">
+<meta property="og:description" content="起因是因为，最近在做公司的项目，我做的是前端系统，取数据需要调用后端系统，我能做的事情不多，所以对于返回值校验这块起来兴趣，而且我们调用后端接口，是内部的一个服务平台。我们前端的微服务，有一个微服务作为统一的调用内部服务平台的入口，所以先通过feign调用到这个组件，再通过这个组件去调用内部服务平台。这样做的好处是，只需要配置一个地方的服务平台参数，就能所有服务公用。但用的不舒服的地方就是返回值是">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-11T10:33:38.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="返回值校验与异常抛出">
+<meta name="twitter:description" content="起因是因为，最近在做公司的项目，我做的是前端系统，取数据需要调用后端系统，我能做的事情不多，所以对于返回值校验这块起来兴趣，而且我们调用后端接口，是内部的一个服务平台。我们前端的微服务，有一个微服务作为统一的调用内部服务平台的入口，所以先通过feign调用到这个组件，再通过这个组件去调用内部服务平台。这样做的好处是，只需要配置一个地方的服务平台参数，就能所有服务公用。但用的不舒服的地方就是返回值是">
+
+    
+    <link rel="alternative" href="/atom.xml" title="演练场" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="演练场" title="演练场"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="演练场">演练场</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2020/01/11/arts-2020-01-11-tip/" title="返回值校验与异常抛出" itemprop="url">返回值校验与异常抛出</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2020-01-11T10:25:00.000Z" itemprop="datePublished"> Published 2020-01-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			
+		
+		</div>
+		
+		<p>起因是因为，最近在做公司的项目，我做的是前端系统，取数据需要调用后端系统，我能做的事情不多，所以对于返回值校验这块起来兴趣，而且我们调用后端接口，是内部的一个服务平台。我们前端的微服务，有一个微服务作为统一的调用内部服务平台的入口，所以先通过feign调用到这个组件，再通过这个组件去调用内部服务平台。这样做的好处是，只需要配置一个地方的服务平台参数，就能所有服务公用。但用的不舒服的地方就是返回值是一个map，没有类型信息，不清楚里面有什么值，好处是通用。所以我还是想用bean去接收返回值，然后去校验字段，处理这些异常。</p>
+<p>提取出问题的几个关键点，内部服务平台因为所以服务都需要用，但每个微服务都配置麻烦，所以就集中一个微服务配置，其他服务通过feign调用，该组件集中调用内部服务平台，然后透传给每个微服务。我们将该调用内部服务平台的微服务定义为A服务，A服务与其他微服务为了通用，就使用map作为返回值，因为不想每次都开发新接口给每个微服务，因为A服务没有每个接口类型信息，所以也就不能给每个调用者转类型，这也是一种处理方式。然后每个微服务自己从map里取值，通过map在业务里传递，完成处理。这也是一种行得通的设计。</p>
+<p>但这种设计的缺陷就是，后面的人不好维护，非开发的人找不到接口里到底有什么值，map没有任何类型信息，字段意义，开发方面，但维护成本高。所以我倾向于使用bean去作为接收对象，在业务中传递，既可以校验，也有字段信息，缺点就是可能bean会很多，膨胀的很厉害。这是以编译期类型信息代替运行时类型信息。这就是第一个分歧点，使用编译器校验还是运行期，表面上的争议是bean还是map。</p>
+<p>我要实现的功能是返回值字段校验与统一校验异常处理，<br>思路1，如果返回值是map，那就一个个字段取出，校验，然后处理异常。缺点：人工做，容易错误，繁琐。好处：效率高。<br>思路2，返回值还是map，map转bean，然后bean做校验处理。后面的bean的校验统一用hibernate validator处理。缺点：map转bean，多种方法实现，反射等方法有性能较低，高性能转换需要引入其他框架。<br>思路3，返回是bean，在使用其他方面，单独校验处理异常。<br>这里有一个重要的点，就是调用使用的feign调用，业务B服务，调用A服务，A服务会进行json转换，再调用内部服务平台，返回值，再json序列号，发给B服务，B服务的feign再反序列化。<br>思路3.1，A服务要有B服务的返回值类型，然后在内部平台返回时，先反序列化成B服务的类型，再返回给B，这样A服务，要有所有服务的类型信息，不太合适，A服务应该不频繁改动。<br>思路3.2，A服务，既然不能有类型信息，那就不解析，直接透传呢？好像问题解决了。因为内部平台正好也是json类型的返回值，直接在A服务，不解析json，直接返回给B，B用类型信息去解析，这是透传还不能消耗json解析的时间。这个地方，返回值使用string，然后produces使用json，spring mvc可以直接返回json。返回bean的第一个问题，解决了，可以不用map，直接在B服务用Bean去接收。</p>
+<p>然后是校验的部分，<br>思路1，独立的部分去校验bean，返回值校验失败返回值，但不抛异常，单独一个方法再包装抛异常<br>思路2，在feign的decode的时候，去解析bean，校验字段，抛异常<br>这两个思路应该都支持，第一种更通用，第二种更简单。</p>
+<p>在feign的前后做好校验与异常，相当于定了接口，对于不同系统的管理也更方便。</p>
+<p>总结：通过不解析json进行透传，省略中间服务类型转换。通过feign前后encode与decode的重写，来处理bean的校验和异常的处理，bean的校验框架使用hibernate validator进行。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2020/01/11/arts-2020-01-11-tip/" data-title="返回值校验与异常抛出 | 演练场" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2020/01/01/arts-2020-01-01-review/"  title="Mocks Aren&#39;t Stubs">
+ <strong>下一篇：</strong><br/> 
+ <span>Mocks Aren&#39;t Stubs
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Java语言基础/" title="Java语言基础">Java语言基础<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>26</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/人文/" title="人文">人文<sup>31</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/前端/" title="前端">前端<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/后端/" title="后端">后端<sup>27</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/成长/" title="成长">成长<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/树莓派/" title="树莓派">树莓派<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/监控/" title="监控">监控<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/英语原文/" title="英语原文">英语原文<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/闲谈/" title="闲谈">闲谈<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>31</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>29</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>26</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/架构/" title="架构">架构<sup>13</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/纪录片/" title="纪录片">纪录片<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		
+		<a href="/about" target="_blank" title="R_Richie">R_Richie</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

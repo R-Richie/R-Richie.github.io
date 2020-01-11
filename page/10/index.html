@@ -79,6 +79,86 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/03/31/arts-2019-02-31-review/" title="scalability availability &amp; stability patterns 学习笔记" itemprop="url">scalability availability &amp; stability patterns 学习笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-03-31T10:49:07.000Z" itemprop="datePublished"> Published 2019-03-31</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>原文地址 <a href="https://www.slideshare.net/jboner/scalability-availability-stability-patterns" target="_blank" rel="noopener">https://www.slideshare.net/jboner/scalability-availability-stability-patterns</a></p>
+<p>这个ppt总结真的很全面，从可扩展性，可用性，稳定性，3个方面分别讲了达到每个目的，以及有什么手段，什么方法来解决这个问题。<br>没看文章前，我是有一些零碎的概念的，但看了文章后，我突然有一些理解分布式了，架构的目的是达到现实目标，要达到哪方面目的，就用哪些技术。（第一遍读还有很多，不懂的地方，先做一个粗略的总结）</p>
+<h2 id="可用性（availability）"><a href="#可用性（availability）" class="headerlink" title="可用性（availability）"></a>可用性（availability）</h2><p>达到可用性，有2种手段，故障转移（Fail-over）和冗余备份（Replication）</p>
+<h3 id="Fail-over"><a href="#Fail-over" class="headerlink" title="Fail-over"></a>Fail-over</h3><p>故障转移，表面上看是只要有失败就转移到其他正常的服务上去，然后再回写同步数据。但实际情况要复杂的多，可能出现各种失败的情况。</p>
+<h3 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h3><p>备份分为几种：master-slave，tree-replication，master-master，Buddy replication</p>
+<p>同步方式：<br>active replication：push<br>passive replication： pull</p>
+<h2 id="稳定性（stability）"><a href="#稳定性（stability）" class="headerlink" title="稳定性（stability）"></a>稳定性（stability）</h2><h3 id="Timeouts"><a href="#Timeouts" class="headerlink" title="Timeouts"></a>Timeouts</h3><p>保证每个调用都有超时时间，不会无限期假死。</p>
+<h3 id="Circuit-Breaker"><a href="#Circuit-Breaker" class="headerlink" title="Circuit Breaker"></a>Circuit Breaker</h3><p>将失败作为一种正常的状态，而不是维护正常的状态。出现异常，尽早发现，采取其他处理。</p>
+<h3 id="Let-it-crash"><a href="#Let-it-crash" class="headerlink" title="Let-it-crash"></a>Let-it-crash</h3><p>如果服务出现异常，不用尽力恢复，尽早发现，及时止损。</p>
+<h3 id="Fail-fast"><a href="#Fail-fast" class="headerlink" title="Fail-fast"></a>Fail-fast</h3><p>跟上一个有点像</p>
+<h3 id="Bulkheads"><a href="#Bulkheads" class="headerlink" title="Bulkheads"></a>Bulkheads</h3><p>有点像线程池，将一些资源放在一个池子里，与其他进行隔离，即使出问题，也不会导致全局卡死，也保护了资源。</p>
+<h3 id="Steady-State"><a href="#Steady-State" class="headerlink" title="Steady State"></a>Steady State</h3><p>清理状态，时刻保持可用。</p>
+<h3 id="Throttling"><a href="#Throttling" class="headerlink" title="Throttling"></a>Throttling</h3><p>限流，比如控制请求的数量</p>
+<h2 id="可扩展性（scalability）"><a href="#可扩展性（scalability）" class="headerlink" title="可扩展性（scalability）"></a>可扩展性（scalability）</h2><p>可扩展性主要是为了管理过载，分两种内容：状态与行为。<br>状态：分布式缓存，数据网格，服务状态，HTTP缓存，CAP，同步，分区，备份<br>行为：计算网格，事件驱动架构，负载均衡，并行计算</p>
+<p>对于可扩展的一般的建议<br><strong>默认不可变<br>引用透明（函数式编程）<br>懒加载<br>考虑数据存储</strong></p>
+<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><h3 id="性能-vs-可扩展"><a href="#性能-vs-可扩展" class="headerlink" title="性能 vs 可扩展"></a>性能 vs 可扩展</h3><p><strong>如何确定性能问题</strong><br>单用户很慢，<br><strong>如何确定可扩展问题</strong><br>单用户很快，压力大就慢</p>
+<h3 id="延迟-vs-吞吐"><a href="#延迟-vs-吞吐" class="headerlink" title="延迟 vs 吞吐"></a>延迟 vs 吞吐</h3><p>最大的吞吐量，加上可接受的延迟</p>
+<h3 id="可用性-vs-一致性"><a href="#可用性-vs-一致性" class="headerlink" title="可用性 vs 一致性"></a>可用性 vs 一致性</h3><p><strong>CAP</strong><br>consistency<br>availability<br>Partition<br><strong>ACID</strong><br>Atomic<br>Consistency<br>Isolated<br>Durable</p>
+<p>什么时候需要强一致性，什么时候需要最终一致性</p>
+<h2 id="Status（状态管理）"><a href="#Status（状态管理）" class="headerlink" title="Status（状态管理）"></a>Status（状态管理）</h2><p>Partitioning，<br>HTTP caching：reverse proxy，cdn，<br>，Data Grids，<br>Service of record:RDBMS sharing，NOSQL(key-value,Column,document,graph,datastructure)<br>Distrbuted caching:write-through,write-behind,eviction policites,replication,peer to peer<br>Concurrency:Shared-state, message-passing,dataflow,software transactional memory</p>
+<h2 id="behavior（行为管理）"><a href="#behavior（行为管理）" class="headerlink" title="behavior（行为管理）"></a>behavior（行为管理）</h2><p>Event-Driven Archietecture（<br>Domian events，Event sourcing, command and Query Responsiblity Segregation(CQRS)pattern,<br>Event Stream Processing,Messaging(Publish-Subscribe,Point-to-point,Store-forward,Request-Reply),Enterprice Service Bus ,Actors,Enterprice Integration Architecture(EIA)<br>）<br>Compute Grids<br>Load-balancing<br>Parallel computing</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/03/31/arts-2019-02-31-tip/" title="Vue 学习笔记1" itemprop="url">Vue 学习笔记1</a>
   </h1>
   <p class="article-author">By
@@ -532,6 +612,84 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/01/11/arts-2020-01-11-share/" title="批判性思考的详细目录的自我回答" itemprop="url">批判性思考的详细目录的自我回答</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-01-11T10:30:00.000Z" itemprop="datePublished"> Published 2019-01-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>批判性思考的详细目录<br>1.究竟是哪些因素塑造了我的个性？它们是如何实现这一点的？我的自我形象如何受到了影响？由于这些影响，我在哪些情况下比较缺少个体性？<br>答：我的父母，父亲的胆小节俭，母亲的品质，整体父母的认知高度，家境一般，对钱比较吝啬，独生子女，对关系处理没有经验，喜欢逃避，父母经常吵架，喜欢逃避到学习里，后面远离家，主动逃离家庭。</p>
+<p>恋爱让我对于亲密关系，有了更好的理解。<br>教育塑造了我的性格，只追求学习</p>
+<p>2.我在哪些方面像是一个好的思考者（如第二章所概述的）？我在哪些方面像个拙劣的思考者？哪些类型的情形看起来显示出我最好和最坏的品质？<br>答：对于自己熟悉的内容，比如软件方面，但对于自己完全不了的东西，几乎只能用直觉去思考</p>
+<p>3.在多大程度上我对真实情况的观察是合理的？（如有必要，再看一下第三章）<br>答：反观之前的观察，很多可能都是不合理的，对于自己不涉及其中的，很多都是客观的合理的，涉及自己的不由自主的会双重标准，默认模式一下接管，对事物的观察也不那么合理，之前从来没想过这些问题，也没反观过思考过程，以为想一下就算思考了，现在看来有些幼稚。</p>
+<p>4.我是如何仔细地把传闻、谣言和事实分开的？如何把已知的与假定或猜测如何区分？对我而言，说“我不知道”有多难？<br>答：传闻、谣言和事实，现在我也不能很好的分清楚，没有办法去考察，就都不当成事实去认为，只有仔细搜索，多个地方作证，才算事实。<br>已知、假定、猜想。三者很难区分，已知的可能是不对的，假定的时间一长没有验证，可能就认为是事实了，猜想也一样，很多时候没有经历去验证，就认为是事实，</p>
+<p>5.我在设法把我的观点有事实根据时时如何前后一致的？<br>答：我也是经常颠倒顺序，一般是先提出自己的观点，再去寻找能支持自己观点的证据，因为没有观点被认为是无能的，所以我们会先有一个观点，然后再去找支持观点的证据，但这个时候，你已经有了结论，就没办法客观的面对事实了。</p>
+<p>6.我在多大程度上认为“我的更好”（不仅是个人的“我的”，而且也是族群中心主义的“我的”）？这种思维在哪些方面影响我对个人问题和公众议题的看法？它在多大程度上影响了我倾听那些不同意我观点的人的能力、我控制自己情感的能力、和我改变自己的想法并修改一个判断的意愿？<br>答：大部分情况，我都会持有我的更好的观点，而且拿自己长处比别人的短处，以获得优越感，然后放弃对别人长处的学习，心安理得。继续生活。而且对于族群也是持有我的最好，而且没有想过这有什么不对。对于别人的问题，我只认为别人蛋疼，自己的问题却很重要，认为自己比别人优秀，果断。但其实没有，只是没有去思考过这些问题。</p>
+<p>7.在哪些事情上，我倾向于假定得太多，把太多的东西当作理所当然的？<br>答：对于不熟悉的事情都有很美好的假定，比如大公司肯定更美好，各方面都很优秀，不会有这么差的恶人，但其实人都一样，不能排除任何情况。不能想当然，别人应该怎么做。</p>
+<p>8.我在多大程度上倾向于要么/要么观念，期望正确的答案总是极端的而绝不是中庸的？<br>答：很多时候会这样，尤其冲动的时候，要么能去大公司，其他拒绝你的公司，我自己都看不上，别人的努力在我眼里一文不值。期望别人能解决问题，如果给出了模棱两可的回答，就觉得跟没说一样，别人没有给出简单的解决方法，觉得别人不行，傻逼，自己做的时候没做好就是条件导致。</p>
+<p>9.我对什么或谁感到最强烈的遵从的冲动？在哪些情况下，这种遵从习俗冲动的倾向干扰了我的判断？<br>答：对于权威，比如领导的话， 习惯于准从，然后放弃思考的，放弃去管这些事情，不能完全相信警察，等公职人员，他们也是人，会受上面的压迫，受个人思维的影响，导致出错，对于一些崇拜的人话，也是不加思索，比如当时确信李笑来的话都是对的，但也没多方面去思考，各种情况，就使用，觉得自己很厉害还高人一等，其实只是听了别人的结论，瞎用。</p>
+<p>10.我倾向于世一个要求真理是整洁和简单的绝对主义者，还是一名声称每个人创造他或她自己真理的相对主义？我的性格倾向于在哪些方面妨碍我发展成批判的思考者？<br>答：我更倾向于要求世界是简单和整洁的绝对主义，如果别人没这么做，就是他们没做好，我要是做不会这样。性格中的妥协，如果有些困难可能很容易就放弃。</p>
+<p>11.在哪些问题上我对变化的偏见最大？我过分地接受改变还是过分地抵制它？这种倾向的原因是什么，我如何最好地控制它？<br>答：对于我熟悉的东西，对于变化偏见很大，可能会影响到自己，如果跟我没关系，倾向于变化，反正对我没有影响。而且对于不了解的变化，比较抵制，因为这些自动不懂，很恼怒，不如自己懂得，显得自己厉害。对变化，要看本质，找因果。</p>
+<p>12.在哪些情况下，我试图证明自己的偏见而不是控制它们？在哪些情况下我以逢迎自己偏见的方式去解释证据？<br>答：别人挑衅自己的时候，我总是证明自己，为了给自己找面子，显得自己强一些。为了表现自己的时候，都是这样，汇报工作，等期待结果的时候。</p>
+<p>13.我如何经常地使用双重标准地解决问题，忽视赞同我观点的论证中的缺点，而挑剔那些反对我观点的论证？<br>答：当你花很多时间，去给出一个解决方案，你就很难理智的判断的，你花了时间，不想浪费，所以千方百计去维护，尽量不显得自己像白痴，浪费了很多时间，又一事无成。</p>
+<p>14.我在多大程度上倾向于跳跃到结论？我在某些领域更倾向于如此？如果有，那是哪个领域？我完全为了方便而草率得出结论吗？我受到听起来有权威性和令人印象深刻的欲望所驱使吗？<br>答：当会花很多时间或精力的情况下，我倾向于直接寻找别人的答案，而不去证明，节省时间，赶紧解决这一个，进入下一个。</p>
+<p>15.我过度概括到什么程度？我最容易接受哪些类型的刻板成见？种族的？宗教的？族群的？<br>答：最典型的刻板成见就是来自我爸，什么南方人精明，哪个地方的人怎么样，用一个地方代表一个地方人的所有特性，我在上海看到对上海人的刻板印象是很明显的。</p>
+<p>16.我在多大程度上过度简化复杂的事情？我只是不愿费力从复杂性上了解真理，抑或我感觉受到不整洁、不简明的答案所威胁？是什么使我这样？<br>答：过度简化有的时候是懒惰，截止时间的压力，等，赶紧解决手头的工作，对于能交代即可。</p>
+<p>17.我经常犯哪些表达的错误？我推论如果B跟随在A之后，那A必定是B的原因吗？我为了避免困难或尴尬的讨论而转移议题吗？我自相矛盾，作循环论证，作出无意义的陈述吗？我把真实的权威与虚假的权威相混淆吗？我作出错误类比吗？我运行非理性的诉求吗？<br>答：我有的时候喜欢强行解释，自己还感觉自己在搞笑，但实际可能在别人看来就是胡扯。抬杠。</p>
+<p>18.下列哪些错误最能体现我对质疑和批评自己观点的说法作出反应的特征：自动拒绝？转移举证责任？“稻草人”做法？攻击批评者而不是讨论问题？<br>答：攻击批评者，说你也怎么怎么做，我也就这样了，既然你也不行，你凭什么提出这样的要求，大家都这样。不自觉的转移话题，听成别的问题，没有完全听明白的情况下，就说了自己熟悉的内容。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/思维/">思维</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2018/09/02/telegraf-jvm/" title="telegraf 采集项分析【JVM】" itemprop="url">telegraf 采集项分析【JVM】</a>
   </h1>
   <p class="article-author">By
@@ -650,150 +808,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/08/05/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2018-08-05T06:10:15.613Z" itemprop="datePublished"> Published 2018-08-05</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/02/07/学习方法/" title="理解费曼技术与整体学习法" itemprop="url">理解费曼技术与整体学习法</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2017-02-07T12:33:07.000Z" itemprop="datePublished"> Published 2017-02-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近在反思自己的学习方法，总感觉自己好像缺少一些东西，虽然表面上一直自认为很努力的样子，但没有什么效果，表面上用了很多时间，但并没有什么实际产出，想回头看看之前斯考特·杨写得《如何高效学习》，看着看着又想起之前自己看过的在缓慢思考公众号里戴汩提到的费曼方法。</p>
-<h2 id="费曼技术"><a href="#费曼技术" class="headerlink" title="费曼技术"></a>费曼技术</h2><p>费曼方法很简单，总共3步，</p>
-<ol>
-<li>教给孩子<br> 先用一张纸，写下你要讲解的概念，然后试图讲给一个8岁的孩子，而不是一个成年人，不要用术语，而是用简单朴素的语言。人们经常被复杂的术语和概念迷惑，使用术语而忽视实际是否已经掌握。</li>
-<li>回顾<br> 看看哪个地方没有讲通，那个就是你知识的边界，回到原始资料，重新学习你不会的概念</li>
-<li>组织和简化<br> 重新梳理成一个连贯的故事</li>
-<li>发送（可选）<br>费曼技术是费曼学习的方法，让你比别人更快更深刻的理解概念和事物，从根本上讲费曼方法是认为智力是可以增长的，这是成长型思维和表现型思维的差异。如何才能比别人了解的都深刻呢，就是放弃复杂的术语和概念，让自己从更基础的方式去思考，复杂的术语和概念容易让人迷糊，以为自己已经懂得了。<br>另外还隐藏一个内容就是教是最好的学习，通过教别人，让自己也理清关系。</li>
-</ol>
-<p>总结起来包括两个，一：教是最好的学习方法，二：通过降低对方的知识水平倒逼自己理解清楚整个概念，从最基础的概念入手，弄清楚所有的知识脉络。</p>
-<p>费曼技术有点像一种检验的方法，从反面去检查自己是否把知识学明白，还能找到自己哪个点没有学明白，这个很厉害。</p>
-<h2 id="整体性学习法"><a href="#整体性学习法" class="headerlink" title="整体性学习法"></a>整体性学习法</h2><p>这个分为获取，理解，拓展，修正，应用，测试。整体性学习方法基础是认为大脑更好的记忆方式是通过知识的连接，而不是像计算机一样的复制就能处理信息。这一点可能还不能用科学方式完全证明，所以这套理论还停留在理论阶段，但这个就像冥想一样虽然早些时候还没有科学的方法证明，但它的方法却实实在在的有效，所以大家都在实践。这套理论也是作者根据自身的作为总结的。</p>
-<p>既然大脑记忆知识的方法通过不断连接更有效的记忆，那我们就要从这个角度下手去梳理知识，让记忆的存储更高效的提取，如果提取的方式都是混乱的，那很难提取就不是没有道理的。整体学习法的存储方式是通过方式</p>
-<ol>
-<li>结构：知识的大厦<br> 结构是知识的全部，你不断的建立大楼来整合知识。</li>
-<li>模型：结构的种子<br> 模型是结构的缩影，归根结底是信息的压缩，将核心的概念进行缩减，构建一个小型结构，对于学习新的概念作用很大。</li>
-<li>高速公路：连接结构和模型<br> 哪种知识更容易提取，是四通八达的大楼还是只有一条泥泞小路的喽，连通越多，知识的提取越方便越快捷<br>通过以上结构来完善你的知识存储，知识的存储是理解和应用的基础。</li>
-</ol>
-<p>理解了存储，那整体学习的框架是什么，整体的流程是怎么样的呢？</p>
-<ol>
-<li>获取：通过各种渠道获得知识</li>
-<li>理解：了解内容的意思</li>
-<li>拓展：扩展知识的内涵和外延</li>
-<li>纠错：修正错误的高速公路</li>
-<li>应用：将知识使用到实际中去</li>
-<li>测试：检验知识的正确性<br>作者将整个学习过程，分解成具体的几个步骤，然后每个步骤击破，用具体的技术完善每一个步骤，提高效率，这里先不讲具体的方法，先分清楚每个步骤的意义。<br>获取：输入，输入的目标包括：简化，速度，容量。优化输入，让你获取更多的知识，更高效。<br>理解：就是明白表面的意义，更快的抓住重点。<br>拓展：是处理信息最难的一步，包括深度拓展：背景知识的了解，有助于记忆内容。横向拓展：相关内容的了解，周边知识的理解让你扩展知识面。纵向拓展：这个最具创造性，通过相似性，找到不同大厦之间的高速通道，打破知识的边界，真正连通不同的模型、结构。<br>纠错：如果高速公路的连接错误，就纠正错误，让知识间的连接更正确的连接<br>应用：信息处理包含3个层次：理解，拓展和应用。到了应用是最好层次，让它在实际生活中有用处，改变生活。<br>测试：可以融合在每一步中，检验知识的正确性。我个人认为费曼技巧就是一种相当棒的测试方法，测试你的知识是否理解正确，还能找到哪个地方不足。</li>
-</ol>
-<p>实际使用中，一整套框架的顺序是不定的，顺序是可以颠倒的，但要理解整体的流程，每个部分的意义都要体现。整套框架配合费曼技巧，从正反两个方面对知识进行学习、校验，十分实用。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/成长/">成长</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/成长/">成长</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/9/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">Next<span></span></a>
@@ -827,7 +841,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>30</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>31</sup></a></li>
 		  
 		
 		  
@@ -835,7 +849,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>26</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>27</sup></a></li>
 		  
 		
 		  
@@ -868,11 +882,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>30</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>31</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>28</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>29</sup></a></li>
 			
 		
 			
@@ -880,7 +894,7 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>16</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>17</sup></a></li>
 			
 		
 			
@@ -904,15 +918,11 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
@@ -924,11 +934,7 @@
 			
 		
 			
-				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -936,7 +942,15 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 			
@@ -944,7 +958,7 @@
 			
 		
 			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 		</ul>
