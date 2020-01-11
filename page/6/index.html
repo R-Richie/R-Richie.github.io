@@ -79,6 +79,72 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/06/20/arts-2019-06-22.review/" title="Implementing Remote Procedure Calls学习笔记2" itemprop="url">Implementing Remote Procedure Calls学习笔记2</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-06-20T09:58:00.000Z" itemprop="datePublished"> Published 2019-06-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>第二遍阅读，能从更高层次去看这篇文章。<br>首先学习如何写论文，要把前因后果写清楚，先写出目前的背景，再提出目标，定义功能，实现结构，最后结论。</p>
+<p>该文章很清楚的写出来RPC诞生的背景，就是分布式系统，方法调用不像原来单机那么简单，多进程间调用，而且不在一台机器上，很复杂，想隔离这部分复杂度，简化这部分的难度。让方法间调用像单机一个方便。</p>
+<p>目标有几点，<br>第一，希望像本地访问，移除不必要的困难，只留下构建分布式系统的基本困难：时序，组件的独立故障以及独立执行环境的共存。<br>第二，RPC沟通是高效的<br>第三，RPC 包的语义尽可能强大，不失简单和高效<br>第四，建立安全的连接。<br>这部分定义清楚，哪些是RPC该做的，哪些不是他该做的，划分边界。</p>
+<p>实现结构上采用user，user-stub，RPCRuntime，server-stub，server的结构，server端写导出接口，自动生成server-stub，RPCRuntime是一个单独的包，用来连接client-server，user导入server接口，生成user-stub，用户只需要调用user-stub即可。</p>
+<p>其中有几部分工作需要做，<br>1.server自动生成stub，以及user端的导入<br>2.RPCRuntime连接user和server，如何binding，以及多个server的Naming<br>3.网络传输，如何高效的传输数据，超时、异常等处理。</p>
+<p>第一个问题比较好实现，第二个问题，作者的实现在user和server之间使用一个分布式数据库做连接，去查询这个数据库，server注册，user查询server地址，去实现binding和Naming，这个部分可以对比现在的实现。<br>第三个问题，也很重要，作者当时应该没有TCP/IP协议，所以是自实现协议的，现在看来都是基于TCP/IP的，然后就是使用在此之上的自定义协议，还是使用现有协议。而且还需要考虑BIO、NIO、AIO等网络传输的效率，现在基本都是使用Netty。</p>
+<p>确实认识到实际上升到理论的重要性，可以一通百通，叠加式的进步，而不是一个个知识点的叠加。<br>后面再写一个文章分析一个binding和Naming，网络这块要继续学习Netty。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/06/16/arts-2019-06-16-algorithm/" title="743. 网络延迟时间" itemprop="url">743. 网络延迟时间</a>
   </h1>
   <p class="article-author">By
@@ -647,71 +713,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/05/26/arts-2019-05-26-algorithm/" title="39. 组合总和" itemprop="url">39. 组合总和</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-05-26T08:51:00.000Z" itemprop="datePublished"> Published 2019-05-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>candidates 中的数字可以无限制重复被选取。<br>说明：</p>
-<ul>
-<li>所有数字（包括 target）都是正整数。</li>
-<li>解集不能包含重复的组合。<br>示例 1:<br>输入: candidates = [2,3,6,7], target = 7,<br>所求解集为:<br>[<br>[7],<br>[2,2,3]<br>]<br>示例 2:<br>输入: candidates = [2,3,5], target = 8,<br>所求解集为:<br>[<br>[2,2,2,2],<br>[2,3,3],<br>[3,5]<br>]</li>
-</ul>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>关键是结束条件，每次遍历target-candidates[I]，传入下一个递归，如何等于0 ，结束，如果小于最小值也结束<br>深度遍历，可以重复，如果返回，则删除最后一位添加的，继续下一个的计算</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List list;</span><br><span class="line">    List item;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) &#123;</span><br><span class="line">        list = new ArrayList&lt;&gt;();</span><br><span class="line">        item = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        if(candidates == null || candidates.length == 0)&#123;</span><br><span class="line">            return list;</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        backTracing(0,candidates,target);      </span><br><span class="line">        return list;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    private void backTracing(int index ,int[] candidates , int target)&#123;</span><br><span class="line">        if(target == 0)&#123;</span><br><span class="line">            list.add(new ArrayList&lt;&gt;(item));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(target &lt; candidates[0])&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        for(int i = index ; i&lt; candidates.length ; i++)&#123;</span><br><span class="line">            int targetDelete = target - candidates[i];</span><br><span class="line">            item.add(candidates[i]);</span><br><span class="line">            backTracing(i, candidates, targetDelete);</span><br><span class="line">            item.remove(item.size()-1);</span><br><span class="line">        &#125;</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/回溯思维/">回溯思维</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
@@ -822,19 +823,11 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
@@ -842,11 +835,15 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			
@@ -854,11 +851,15 @@
 			
 		
 			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			

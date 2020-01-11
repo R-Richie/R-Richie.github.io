@@ -79,6 +79,71 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/05/26/arts-2019-05-26-algorithm/" title="39. 组合总和" itemprop="url">39. 组合总和</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-05-26T08:51:00.000Z" itemprop="datePublished"> Published 2019-05-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>candidates 中的数字可以无限制重复被选取。<br>说明：</p>
+<ul>
+<li>所有数字（包括 target）都是正整数。</li>
+<li>解集不能包含重复的组合。<br>示例 1:<br>输入: candidates = [2,3,6,7], target = 7,<br>所求解集为:<br>[<br>[7],<br>[2,2,3]<br>]<br>示例 2:<br>输入: candidates = [2,3,5], target = 8,<br>所求解集为:<br>[<br>[2,2,2,2],<br>[2,3,3],<br>[3,5]<br>]</li>
+</ul>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>关键是结束条件，每次遍历target-candidates[I]，传入下一个递归，如何等于0 ，结束，如果小于最小值也结束<br>深度遍历，可以重复，如果返回，则删除最后一位添加的，继续下一个的计算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    List list;</span><br><span class="line">    List item;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) &#123;</span><br><span class="line">        list = new ArrayList&lt;&gt;();</span><br><span class="line">        item = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        if(candidates == null || candidates.length == 0)&#123;</span><br><span class="line">            return list;</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        backTracing(0,candidates,target);      </span><br><span class="line">        return list;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    private void backTracing(int index ,int[] candidates , int target)&#123;</span><br><span class="line">        if(target == 0)&#123;</span><br><span class="line">            list.add(new ArrayList&lt;&gt;(item));</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if(target &lt; candidates[0])&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        for(int i = index ; i&lt; candidates.length ; i++)&#123;</span><br><span class="line">            int targetDelete = target - candidates[i];</span><br><span class="line">            item.add(candidates[i]);</span><br><span class="line">            backTracing(i, candidates, targetDelete);</span><br><span class="line">            item.remove(item.size()-1);</span><br><span class="line">        &#125;</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/回溯思维/">回溯思维</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/05/26/arts-2019-05-26-tip/" title="线程池-ThreadPoolExecutor初探1" itemprop="url">线程池-ThreadPoolExecutor初探1</a>
   </h1>
   <p class="article-author">By
@@ -664,72 +729,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/05/11/arts-2019-05-12-tip/" title="java锁-CountDownLatch" itemprop="url">java锁-CountDownLatch</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-05-11T14:31:00.000Z" itemprop="datePublished"> Published 2019-05-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>内部类Sync继承AbstractQueuedSynchronizer<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Synchronization control For CountDownLatch.</span><br><span class="line"> * Uses AQS state to represent count.</span><br><span class="line"> */</span><br><span class="line">private static final class Sync extends AbstractQueuedSynchronizer &#123;</span><br><span class="line">    private static final long serialVersionUID = 4982264981922014374L;</span><br><span class="line"></span><br><span class="line">    Sync(int count) &#123;</span><br><span class="line">        setState(count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int getCount() &#123;</span><br><span class="line">        return getState();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected int tryAcquireShared(int acquires) &#123;</span><br><span class="line">        return (getState() == 0) ? 1 : -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected boolean tryReleaseShared(int releases) &#123;</span><br><span class="line">        // Decrement count; signal when transition to zero</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            int c = getState();</span><br><span class="line">            if (c == 0)</span><br><span class="line">                return false;</span><br><span class="line">            int nextc = c-1;</span><br><span class="line">            if (compareAndSetState(c, nextc))</span><br><span class="line">                return nextc == 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通过构造器传入state的数值。<br>tryAcquireShared 非独占加锁，实现如果state不是0，就返回-1，小于0。等于0，就返回1，大于0<br>tryReleaseShare 非独占解锁，自旋，如果状态等于0，就是解锁失败。每次解锁大小减1，如果等于0，则解锁成功，其他则失败</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public CountDownLatch(int count) &#123;</span><br><span class="line">    if (count &lt; 0) throw new IllegalArgumentException(&quot;count &lt; 0&quot;);</span><br><span class="line">    this.sync = new Sync(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>构造器传入count，赋值给state<br>添加await方法，用于加锁<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public void await() throws InterruptedException &#123;</span><br><span class="line">    sync.acquireSharedInterruptibly(1);</span><br><span class="line">&#125;</span><br><span class="line">public final void acquireSharedInterruptibly(int arg)</span><br><span class="line">        throws InterruptedException &#123;</span><br><span class="line">    if (Thread.interrupted())</span><br><span class="line">        throw new InterruptedException();</span><br><span class="line">    if (tryAcquireShared(arg) &lt; 0)</span><br><span class="line">        doAcquireSharedInterruptibly(arg);</span><br><span class="line">&#125;</span><br><span class="line">private void doAcquireSharedInterruptibly(int arg)</span><br><span class="line">    throws InterruptedException &#123;</span><br><span class="line">    final Node node = addWaiter(Node.SHARED);</span><br><span class="line">    boolean failed = true;</span><br><span class="line">    try &#123;</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            final Node p = node.predecessor();</span><br><span class="line">            if (p == head) &#123;</span><br><span class="line">                int r = tryAcquireShared(arg);</span><br><span class="line">                if (r &gt;= 0) &#123;</span><br><span class="line">                    setHeadAndPropagate(node, r);</span><br><span class="line">                    p.next = null; // help GC</span><br><span class="line">                    failed = false;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;</span><br><span class="line">                parkAndCheckInterrupt())</span><br><span class="line">                throw new InterruptedException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (failed)</span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>除非state减为0，其他情况，tryAcquireShared都小于0，要进doAcquireSharedInterruptibly方法<br>doAcquireSharedInterruptibly方法，先非独占的加入队列，然后判断前序节点是不是头节点，<br>如果是前序节点是头节点，判断tryAcquireShared结果，在state减为0前，这个都是不进入r》=0的条件里，后面就会wait等待 前面执行完，后唤醒。<br>不断自旋，只有在前序是头节点，同时state是0 时，才会继续执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public void countDown() &#123;</span><br><span class="line">    sync.releaseShared(1);</span><br><span class="line">&#125;</span><br><span class="line">public final boolean releaseShared(int arg) &#123;</span><br><span class="line">    if (tryReleaseShared(arg)) &#123;</span><br><span class="line">        doReleaseShared();</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>countDown，每次减1，在每到0，之前返回都是false。</p>
-<p>总结：基于模版AbstractQueuedSynchronizer，通过tryAcquireShared 加锁，countDown 不断减少state，直到等于0，再解锁，可以实现，单个线程等待其他多个线程的功能。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/锁/">锁</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
@@ -840,19 +839,11 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
@@ -860,11 +851,15 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			
@@ -872,11 +867,15 @@
 			
 		
 			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
