@@ -79,6 +79,68 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/12/22/arts_2019-12-22-tip/" title="spring项目单元测试初探1" itemprop="url">spring项目单元测试初探1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T05:44:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>之前在hcrm就专门花了很多时间去看如何写单元测试，但当时想通过他解决所有问题，直接保证质量。但单元测试并不能完全解决问题，可以解决一部分问题，而且受限于当时的场景，发现单元测试不解决不了太多问题，就没实际尝试。时隔3-4年又重新拿起来这个问题，但场景变了，环境变了，一些又那么理所当然，正好有人写了单元测试，我就趁机入门一下，发现原来也不难。</p>
+<p>项目使用的是spring cloud这套东西，但首先要先弄清楚什么是单元测试，什么是集成测试，什么是端到端测试。单元测试应该不依赖其他系统，自己就可以快速的执行，马上得到结果。如果与数据库关联，与其他系统关联就是集成测试，需要准备其他的环境。第一个条件是定义，那第二个条件就是弄清楚项目的情况，比如我的项目都是spring boot的，那spring 的依赖注入如何解决，servlet容器如何解决，这是第二步看关联。<br>比如我之前就很迷惑，Aservice里注入Bservice，Bservice注入Cservice，Cservice里注入Dservice，那我要使用Aservice，要不断new B、C、Dservice这个好麻烦，如果有一些不熟悉的复杂的service那就头大了。一种方式就是将整个spring容器启动起来，这样就是所有bean都有，直接取注入或者取都行，但这样就不算单元测试了，启动容器要加载所有bean，可能会很慢，而且很多我并不需要，之前就是卡在这里没过去。最近看了别人写的代码，发现通过代理的方式很好的实现了，先将要代理的对象注入，启动的时候自动代理这些对象，将要执行的方法的返回值，提前输入，等到触发代理条件，自动返回，这样就不用去实际创建这些对象，理解了这个用途，突然觉得代理强大，这个地方用的恰如其分。</p>
+<p>然后我写了一些业务代码，去stub这些service也有些烦，mockito不支持私有方法stub，需要找到公开的方法一点带你的mock，这点有点烦，也许是我用法不对，而且一些看起来很简单的判断逻辑要想每种条件都测试，也是很麻烦的事情。<br>这次算是单元测试入门，什么事情都是入门难，先快速入门，其他都好办了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/单元测试/">单元测试</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/12/22/arts-2019-12-22-review/" title="On java8 学习笔记 validating your code章节" itemprop="url">On java8 学习笔记 validating your code章节</a>
   </h1>
   <p class="article-author">By
@@ -634,67 +696,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/09/07/arts-2019-09-08-tip/" title="《深入理解计算机系统》7" itemprop="url">《深入理解计算机系统》7</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-09-07T07:57:00.000Z" itemprop="datePublished"> Published 2019-09-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="第2章-信息的表示和处理"><a href="#第2章-信息的表示和处理" class="headerlink" title="第2章 信息的表示和处理"></a>第2章 信息的表示和处理</h2><p>这周完成一遍阅读，但很多地方不懂，原来有些底子，但书中很多东西与原来的学习的不太一样，将了很多数学原理的部分。<br>信息的存储<br>讲解十六进制的表示法，寻址与字节顺序，怎么表示字符串，代码与布尔代数，同时介绍位级运算，逻辑运算和移位运算。<br>整数的表示<br>整形数据类型，无符号数的编码，补码编码，有符号和无符号的转换，扩展一个数字的位表示，截断数字<br>整数运算<br>无符号加分，补码加法，补码的非，无符号乘法，补码乘法，乘以常数，除以2的幂<br>浮点数<br>二进制的小数，IEEE浮点表示，数字示例，舍入，浮点运算，<br>可能会有第二遍阅读，虽然还有很多数学原理部分不懂，但原来有些底子，如果后面用到，再重新读一遍。</p>
-<p>这一章讲的信息是如何在计算机上表示的，2进制与16进制的转换，整数，浮点数，字符串等信息的表示，运算方法</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -728,7 +729,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>33</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>34</sup></a></li>
 		  
 		
 		  
@@ -769,7 +770,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>33</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>34</sup></a></li>
 			
 		
 			
@@ -813,11 +814,11 @@
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
@@ -825,11 +826,11 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			
@@ -837,15 +838,15 @@
 			
 		
 			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 		</ul>

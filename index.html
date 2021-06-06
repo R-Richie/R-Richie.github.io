@@ -79,6 +79,70 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2021/06/06/arts-2021-06-06-share/" title="习惯" itemprop="url">习惯</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2021-06-06T02:18:00.000Z" itemprop="datePublished"> Published 2021-06-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>我对一个事物，从陌生到熟悉，开始会不断找这件事的不同之处，明白或熟悉之后，就会进入自动模式，按照之前的既定模式去行动，减少思考，这样，相当于更省力，效率也更高。但并不是所有情况下，按照习惯都是好事。</p>
+<p>就比如我的一个习惯，就是回家放松就是看视频。这个是放松杀时间的习惯，时间不知不觉就过去了。如果这个习惯经常被触发，就会导致我不知不觉时间就没了。</p>
+<p>让我想起原则这本书，人面对不断变化的生活，要做各种决策，怎么做的又快又好，看来最好的方法不是当时去想对策，而且提前做好思考，不同场景提前想好，那到了做决策的时候，就能很好的下判断。</p>
+<p>习惯就是我们对日常的情况，养成的一种处理方式，比如放松，我就选择看视频解说，既满足了我内心看多个电影的需求，又节省了时间，也不花精力，看起来是个双赢的选择。但演变到现在，不管什么时候有了空闲时间就刷视频，即使有了大段的时间，可以攻坚一些事情，也还是刷视频。<br>表面上在一个场景下适合的习惯，如果不能控制使用场景，就会演变成一个坏习惯。</p>
+<p>习惯的力量又是强大的，很容易让人进入自动模式，不受控制的做。所以能主动意识到什么情况下该做什么很重要，能反思什么情况下自己进入了自动模式，什么情况自己该进入什么自动模式，极其重要，每个人的时间差不多，不走弯路，可以节省很多时间。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2021/05/30/arts-2021-05-30-share/" title="预期管理" itemprop="url">预期管理</a>
   </h1>
   <p class="article-author">By
@@ -694,68 +758,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/12/22/arts_2019-12-22-tip/" title="spring项目单元测试初探1" itemprop="url">spring项目单元测试初探1</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-12-22T05:44:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>之前在hcrm就专门花了很多时间去看如何写单元测试，但当时想通过他解决所有问题，直接保证质量。但单元测试并不能完全解决问题，可以解决一部分问题，而且受限于当时的场景，发现单元测试不解决不了太多问题，就没实际尝试。时隔3-4年又重新拿起来这个问题，但场景变了，环境变了，一些又那么理所当然，正好有人写了单元测试，我就趁机入门一下，发现原来也不难。</p>
-<p>项目使用的是spring cloud这套东西，但首先要先弄清楚什么是单元测试，什么是集成测试，什么是端到端测试。单元测试应该不依赖其他系统，自己就可以快速的执行，马上得到结果。如果与数据库关联，与其他系统关联就是集成测试，需要准备其他的环境。第一个条件是定义，那第二个条件就是弄清楚项目的情况，比如我的项目都是spring boot的，那spring 的依赖注入如何解决，servlet容器如何解决，这是第二步看关联。<br>比如我之前就很迷惑，Aservice里注入Bservice，Bservice注入Cservice，Cservice里注入Dservice，那我要使用Aservice，要不断new B、C、Dservice这个好麻烦，如果有一些不熟悉的复杂的service那就头大了。一种方式就是将整个spring容器启动起来，这样就是所有bean都有，直接取注入或者取都行，但这样就不算单元测试了，启动容器要加载所有bean，可能会很慢，而且很多我并不需要，之前就是卡在这里没过去。最近看了别人写的代码，发现通过代理的方式很好的实现了，先将要代理的对象注入，启动的时候自动代理这些对象，将要执行的方法的返回值，提前输入，等到触发代理条件，自动返回，这样就不用去实际创建这些对象，理解了这个用途，突然觉得代理强大，这个地方用的恰如其分。</p>
-<p>然后我写了一些业务代码，去stub这些service也有些烦，mockito不支持私有方法stub，需要找到公开的方法一点带你的mock，这点有点烦，也许是我用法不对，而且一些看起来很简单的判断逻辑要想每种条件都测试，也是很麻烦的事情。<br>这次算是单元测试入门，什么事情都是入门难，先快速入门，其他都好办了。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/单元测试/">单元测试</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -789,7 +791,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>33</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>34</sup></a></li>
 		  
 		
 		  
@@ -830,7 +832,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>33</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>34</sup></a></li>
 			
 		
 			
@@ -874,11 +876,11 @@
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
@@ -886,11 +888,11 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			
@@ -898,15 +900,15 @@
 			
 		
 			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 		</ul>

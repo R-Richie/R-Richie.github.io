@@ -79,6 +79,76 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/04/06/arts-2019-04-14-tips/" title="java集合-ArrayList" itemprop="url">java集合-ArrayList</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-06T07:13:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>ArryList实现接口List<e>, RandomAccess, Cloneable, java.io.Serializable<br>基础的数据结构是数组，根据存储数据的多少动态扩容。</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Default initial capacity.</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 10;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shared empty array instance used for empty instances.</span><br><span class="line"> */</span><br><span class="line">private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shared empty array instance used for default sized empty instances. We</span><br><span class="line"> * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when</span><br><span class="line"> * first element is added.</span><br><span class="line"> */</span><br><span class="line">private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The array buffer into which the elements of the ArrayList are stored.</span><br><span class="line"> * The capacity of the ArrayList is the length of this array buffer. Any</span><br><span class="line"> * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><br><span class="line"> * will be expanded to DEFAULT_CAPACITY when the first element is added.</span><br><span class="line"> */</span><br><span class="line">transient Object[] elementData</span><br><span class="line">/**</span><br><span class="line"> * The size of the ArrayList (the number of elements it contains).</span><br><span class="line"> *</span><br><span class="line"> * @serial</span><br><span class="line"> */</span><br><span class="line">private int size;</span><br></pre></td></tr></table></figure>
+<p>elementData是实际存储数据的数组。DEFAULT_CAPACITY是默认的容量，如果没有指定数组的大小。DEFAULTCAPACITY_EMPTY_ELEMENTDATA 与EMPTY_ELEMENTDATA都是 空的初始数组，DEFAULTCAPACITY_EMPTY_ELEMENTDATA是用来判断是不是通过默认方法创建的空数组，而不是删除后才空的。如果指定了数组大小，就用EMPTY_ELEMENTDATA作为默认空数组。</p>
+<p>扩容是在添加元素的时候进行，这样不会初始化没有数据的情况下就占据空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加方法很简单，先去内部扩容，然后在最后一个添加值，看扩容的内部实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ensureExplicitCapacity(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureExplicitCapacity(int minCapacity) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * Increases the capacity to ensure that it can hold at least the</span><br><span class="line"> * number of elements specified by the minimum capacity argument.</span><br><span class="line"> *</span><br><span class="line"> * @param minCapacity the desired minimum capacity</span><br><span class="line"> */</span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ensureCapacityInternal 先是一个判断数组是怎么创建，如果是默认空参数的构造器创建，就使用默认的初始大小10作为最小容量，这样就能避免不能手动创建更小数组的问题。<br>主要扩容是grow方法，可以看出 newCapacity是扩容0.5倍大小，到原来的1.5倍。<br>还有就是容器上下限的判断。扩容就是迁移数组newCapacity的大小的数组里。<br>归根到底，就是将数组扩容1.5倍，旧数组搬迁到新数组。<br>里面还有几个内部类，一个Itr，实现了Iterator接口，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private class Itr implements Iterator&lt;E&gt; &#123;</span><br><span class="line">    int cursor;       // index of next element to return</span><br><span class="line">    int lastRet = -1; // index of last element returned; -1 if no such</span><br><span class="line">    int expectedModCount = modCount;</span><br></pre></td></tr></table></figure></p>
+<p>ListItr 实现了 ListIterator，可以前后访问遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private class ListItr extends Itr implements ListIterator&lt;E&gt; &#123;</span><br><span class="line">    ListItr(int index) &#123;</span><br><span class="line">        super();</span><br><span class="line">        cursor = index;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>ArrayList使用遍历接口，都是使用内部类实现的，重新记录状态，这部分还有些不太懂的，后面继续补充。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/04/06/arts-2019-4-5-share/" title="《7up》第二遍观后感1" itemprop="url">《7up》第二遍观后感1</a>
   </h1>
   <p class="article-author">By
@@ -738,68 +808,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/22/arts-2019-02-22-share/" title="从理发想到的一些思考" itemprop="url">从理发想到的一些思考</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-22T03:37:07.000Z" itemprop="datePublished"> Published 2019-03-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="生活中谈反馈延迟"><a href="#生活中谈反馈延迟" class="headerlink" title="生活中谈反馈延迟"></a>生活中谈反馈延迟</h2><p>  昨天去经常去的，之前储值的理发店，本来是十分不想去的，但想到还有20元在里面，正好这次剪完就不去了，经过一番斗争还是去了。<br>  进去之后，先是干洗，一个小哥，看起来挺年轻的，不紧不慢，不知道是不是新手，最后水洗的时候，说要帮我冲一下眼睛，冲眼睛确实挺舒服的，我想着也别全程不说话，以前我尽量不跟他们搭话，搞的比较熟了，就跟你推销没完没了。我站在他们的角度想想，如果每个顾客都没有反馈，即使做的比较好，也不知道自己做的怎么样，多做还比较累，也没有任何收获，那就糊弄糊弄就好了。所以逐渐越来越消极。有点像平时的生活工作。<br>反过来一对比，也许生活就是这样的，对于你的努力，收益本身就是有延迟的，大家都努力过，但没有任何反馈，逐渐大家放弃了，得过且过吧。还有一点，你只比别人好一点点，是没有效果的，大家很难发现，你要好就好一大块。<br><strong>总结来说，就是生活中延迟反馈，加上长板优势。</strong></p>
-<p>后面发型师来剪头发，女发型师，没戴眼镜没看出是谁。问了我想要什么发型，我说剪短一点，两边打薄，不要推上去。但她好像没怎么听我的意见，只是跟我确认了一下上边要不要剪短，就开始剪，上来就把两边推了，电推子贴到头皮上，我就感觉她没理解我什么意思。剪的过程确实很认真，技术我也不否定，但给我一种迷之自信，你要求什么不重要，我觉得这样最好了。我突然觉得，这有点像演员，有些演员演什么都像他自己，有些演员演什么像什么。 我不想剪两边的原因是之前剪过，会显得脸特别胖，但她迷之自信，没有理会我的要求，觉得这样更好看，更适合我。<br>如果她能问问原因，再跟我讨论一下，她想那么剪的原因，我也不是不能接受，但剪完，她觉得自己很优秀，作品很完美。但在我这开头就错了，虽然她在那个理发店已经是总监了，我下次可能再也不会找她剪了。我回来跟女朋友聊了这个事，她也说了这个理发师的事，之前就推荐我女朋友剪空气刘海，然后我女朋友反对后，她还是给剪了空气刘海，真的是醉醉的，我们对她的迷之自信都是佩服。<br>生活中这样的事情很多，尤其是在专业人士身上。那天去看病，排队在自动挂号收费机，前一个人，缴费之后，界面直接弹框提示一个数据的报错，然后没有打印凭条，问了旁边的工作人员，她一口咬定是刚才那个人直接点返回了，没有打印，这个估计是数据的报错导致的异常，但顾客看不懂那个提示，无法清楚的描述过程和无法及时保留证据，工作人员只能用一个最简单的方式推测他的行为，怪在提出问的人身上，解决不了问题，解决提问题的人。我生活中遇到过很多次这样的问题，现场报上来错误，但是没有证据，我们也不能推测错误原因，那就都怪在提出问题的人，瞎操作。<br>这个可能的原因之一，太多无法跟踪的问题，你的时间有限，没法一条条都查清楚，找一个简单的理由推脱掉。这样确实会隐藏大问题。</p>
-<p><strong>一个人在生活中要自驱动，有目标，有进阶意识，也能开放心态，听进去别人的建议</strong></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/9/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">Next<span></span></a>
@@ -833,7 +841,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>33</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>34</sup></a></li>
 		  
 		
 		  
@@ -874,7 +882,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>33</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>34</sup></a></li>
 			
 		
 			
@@ -918,11 +926,11 @@
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
@@ -930,11 +938,11 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			
@@ -942,15 +950,15 @@
 			
 		
 			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 		</ul>
