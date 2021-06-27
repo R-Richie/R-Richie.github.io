@@ -79,6 +79,72 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/08/11/arts-2019-08-11-tip/" title="《深入理解计算机系统》5" itemprop="url">《深入理解计算机系统》5</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-08-11T04:38:00.000Z" itemprop="datePublished"> Published 2019-08-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="第3章-程序的机器级表示"><a href="#第3章-程序的机器级表示" class="headerlink" title="第3章 程序的机器级表示"></a>第3章 程序的机器级表示</h1><p>这章主要是讲程序编译成汇编是什么样的，各种不同指令是如何对应的，如何与硬件交互的<br>掌握汇编就是掌握了C语言的底层能力，是c语言如何操作底层硬件的基础，可以很好的理解c语言的行为，从根源上理解不同的操作，如果遇到不能理解的C语言行为，可以检查汇编，从底层去解释，这个也是唯一能从更深层次了解C语言的方法。<br>了解汇编也是了解计算机组成的开端<br>汇编指令分为几种</p>
+<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><em>操作数指示符</em><br><em>数据传送指令</em><br><em>压入和弹出栈数据</em></p>
+<p>一共16个存储64位值的通用目的寄存器<br>63            31        15        7        0<br>%rax    %eax    %ax    %al               返回值<br>%rbx    %ebx   %bx    %bl              被调用者保存<br>%rcx    %ecx    %cx    %cl               第4个参数<br>%rdx    %edx    %dx    %dl              第3个参数<br>%rsi     %esi      %si     %sil              第2个参数<br>%rdi     %edi      %di    %dil             第1个参数<br>%rbp    %ebp    %bp   %bpl            被调用者保存<br>%rsp    %esp    %sp    %spl            栈指针<br>%r8      %r8d     %r8w  %r8b           第5个参数<br>%r9      %r9d    %r9w   %r9b            第6个参数<br>%r10    %r10d   %r10w  %r10b       调用者保存<br>%r11    %r11d    %r11w    %r11b    调用者保存<br>%r12    %r12d    %r12w    %r12b    被调用者保存<br>%r13    %r13d    %r13w    %r13b    被调用者保存<br>%r14    %r14d    %r14w    %r14b    被调用者保存<br>%r15     %r15d    %r15w   %r15b   被调用者保存<br>操作数被分为3种，立即数（immediate），寄存器（register），内存引用<br>内存引用，又有绝对寻址、间接寻址、变址寻址，基址寻址，比例变址寻址<br>传送指令：movb，movw，movl，movq，movabsq<br>零扩展：movzbw，movzbl，movzwl，movzbq，movzwq<br>符号扩展：movsbw，movsbl，movswl，movsbq，movswq，movslq，cltq<br>压入和弹出栈：pushq，popq<br>算术和逻辑操作<br>加载有效地址<br>一元和二元操作<br>移位操作<br>特殊的算术操作<br>加载有效地址：leaq S，D<br>一元：INC D，DEC D，NEG D，NOT D<br>二元：ADD S,D       SUB S,D    IMUL S,D     XOR S,D  OR S,D  AND S,D<br>移位：SAL k,D       SHL k,D   SAR k,D       SHR k,D</p>
+<h2 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h2><p><strong>条件码<br>访问条件码<br>跳转指令<br>用条件控制来实现条件分支<br>用条件传送实现条件分支<br>循环<br>switch语言</strong></p>
+<p>条件码<br>CF：进位标志<br>ZF：零标志<br>SF：符号标志<br>OF：溢出标志<br>CMP S1, S2<br>cmpb,cmpw,cmpl,cmpq<br>TEST S1,S2<br>testb,testw,testl,testq<br>访问条件码<br>sete D，setne D，sets D，setns D，setg D，setge D，setl D，setle D，seta，setae，setb，setbe<br>跳转指令<br>jmp，je，jne，js，jns，jg，jge，jl，jle，ja，jae，jb，jbe<br>条件控制实现条件分支：goto风格<br>条件传送实现条件分支：计算各个分支结构，根据数据返回结果，有限制，但效率高<br>循环<br>do-while：条件+goto<br>while：jump to middle，guarded-do<br>for：同while<br>switch：跳转表（jump table）</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p><strong>运行时栈<br>转移控制<br>数据传送<br>栈上的局部存储<br>寄存器中的局部存储空间<br>递归过程<br>转移控制</strong></p>
+<p>call Label，call * Operand ，ret<br>数据传送，最大6个，使用寄存器，其他使用栈帧</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/08/09/arts-2019-08-11-algorithm/" title="46. 全排列" itemprop="url">46. 全排列</a>
   </h1>
   <p class="article-author">By
@@ -646,67 +712,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/07/21/arts-2019-07-21-share/" title="《火线》观感2" itemprop="url">《火线》观感2</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-07-21T06:49:00.000Z" itemprop="datePublished"> Published 2019-07-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>这一季从迪奥的杀人审判案说起，讲警方与艾文贩毒团伙的周旋，不算一个新故事，但故事却很吸引人。出场人物众多，但都有不同的性格，在整体的大环境下，各自发展，先有人物后有剧情，不按观众喜好安排剧情。每个角色都有自己的性格，大部分人随着大势走，部分人制造混乱，逆势而行，这样既有序，又有惊喜。<br>这一季出现几个团体的人员，<br>警察组，警察作为公务人员，很多人都是一心向上攀，副局长想从政，怕得罪参议员，主动结束案件的深入调查，很多人不出力，只上班打卡，整体颓废，这是警察的大势。其中的个例，主角麦克纳提，是一个好警察，但生活一团糟，为了达到目的不择手段，他将艾文集团越级上报给法官，才引发了对这个大毒枭的调查，但也得罪很多人。缉毒组，丹尼斯督查及其组员，因此牵涉其中，开始他也只想应付，但后年看清楚案件的性质，逐渐负责，主动替下属担下责任。这一小撮人是警察届的清流，负责认真的查案。<br>毒贩组，艾文集团，老大艾文多疑，心狠手辣，但重视家人，帮侄子迪奥，买通证人，翻案。老二，斯丁格，智囊团，读着大学，融入到正常社会里，在团里很特别。老大的侄子迪奥是一个正直的人，但被迫卷入家族产业中，经历了几次团伙残忍杀入行为后，想要脱离那里，但被迫进监狱顶罪。底层毒贩，平房区的人，都一些未成年人，有些也是生活所迫，卷入这场洪流中。<br>奥马尔算是毒贩里的奇葩，专门打劫毒贩，凭借智慧，有点罗宾汉的意思，有原则，不恃强凌弱。因为抢劫艾文的货，与艾文结仇，手下相继被杀，单人与艾文集团周旋。<br>警察的线人，巴布斯，靠小偷小摸换毒品，看到伙伴被毒贩打伤，做了线人，帮警察掌握毒贩信息。想戒毒，但因为格雷斯被枪击，又重入。</p>
-<p>整个事件从麦克纳提向法官告状开始，他也许只想调查这个隐秘的毒贩，但他越级报告，触犯了上级，上级不关心毒贩，只想做做样子，前期一直阻挠，不给资源，不让多调查。经过重案组的不懈努力，发现重大线索，他们监视平房区的迪奥，监听电话，弄清楚了毒贩的行动，毒贩与政客勾结，再度阻挠调查，最终艾文被抓，迪奥厌倦了这样的生活，供出整个团伙，但最终因为家庭的考虑，顶了罪。罪犯虽然被抓，但罪很轻。麦克纳提被调到水警组，丹尼尔斯被调到证物组，正义没有成功，反而收到了打击。生活是关联的，剧集深入探讨社会问题，很多问题没有那么简单明了，很多因素纠缠在一起，毒贩与参议员，参议员与局长，局长与警长，一环扣一环。毒贩也不是一无是处，甚至比警察看起来更像好人，警察腐败。 就像迪奥，开始很想参与家族业务，但看到因为自己，证人被杀，只因为看见了他，他没有做假证。很多人因为一点事就被杀，他的小弟是他崩溃的最后一根稻草，他不想参与其中，但逃不掉还是被卷入其中。麦克纳提做事没有底线，得罪上司，与其他人偷情，为了查案不择手段，是一个好警察，但生活一塌糊涂。相反奥马尔，虽然是毒贩，但却又底线，反而被大家认可。做人做事要有底线，它让你不会错得太离谱。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/电视剧/">电视剧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
@@ -740,7 +745,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>34</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>35</sup></a></li>
 		  
 		
 		  
@@ -781,7 +786,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>34</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>35</sup></a></li>
 			
 		
 			
@@ -817,19 +822,11 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
@@ -837,7 +834,11 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
@@ -849,15 +850,19 @@
 			
 		
 			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 		</ul>

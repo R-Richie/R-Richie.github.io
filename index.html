@@ -79,6 +79,74 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2021/06/27/arts-2021-06-27-share/" title="回顾做公共框架" itemprop="url">回顾做公共框架</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2021-06-27T12:19:00.000Z" itemprop="datePublished"> Published 2021-06-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>回顾如何开发一款给别人使用的公共框架</p>
+<p>开端：趟了无数的坑，初步感觉有一些公共的功能可以提炼。<br>像我们这个前端系统，转发是关键，接口处理很简单，调用其他系统多，数据库处理少，字段透传，不知道有什么字段。有隐私字段透传出去<br>字段映射就是想知道字段以及裁剪数据，后端结构烂七八糟。<br>请求其他系统很多，逻辑一大段耦合在一起。</p>
+<p>过程：想道要划分小模块，减少耦合。产生做流程编排的想法。</p>
+<p>找相似功能，云函数，亚马逊的lamadb表达式。但没找到开源实现。</p>
+<p>分离变与不变<br>做了状态容器，启动去初始化</p>
+<p>上下文数据是基于原来的入出参对象比较大的问题，从登录实践来</p>
+<p>流程与线程进行绑定隔离，是壁仓的想法</p>
+<p>第一次做这个事情，依赖不太会注意，以前各种三方jar包各种依赖，现在看来还是少依赖好。</p>
+<p>初始功能完成就要进入实战阶段，来检验以前的想法</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2021/06/06/arts-2021-06-06-share/" title="习惯" itemprop="url">习惯</a>
   </h1>
   <p class="article-author">By
@@ -690,74 +758,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/12/22/arts-2019-12-22-algorithm/" title="344. 反转字符串" itemprop="url">344. 反转字符串</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-12-22T06:03:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p>
-<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
-<p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
-<p>示例 1：</p>
-<p>输入：[“h”,”e”,”l”,”l”,”o”]<br>输出：[“o”,”l”,”l”,”e”,”h”]<br>示例 2：</p>
-<p>输入：[“H”,”a”,”n”,”n”,”a”,”h”]<br>输出：[“h”,”a”,”n”,”n”,”a”,”H”]</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-string" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>方法1<br>双指针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void reverseString(char[] s) &#123;</span><br><span class="line">        int first = 0;</span><br><span class="line">        if(s.length &lt;= 1)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        int last = s.length-1;</span><br><span class="line">        while(first &lt; last)&#123;</span><br><span class="line">            char temp = s[first];</span><br><span class="line">            s[first] = s[last];</span><br><span class="line">            s[last] = temp;</span><br><span class="line">            first++;</span><br><span class="line">            last--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>执行用时 :1 ms, 在所有 java 提交中击败了100.00%的用户<br>内存消耗 :51.6 MB, 在所有 java 提交中击败了80.05%的用户</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/字符串/">字符串</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -791,7 +791,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>34</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>35</sup></a></li>
 		  
 		
 		  
@@ -832,7 +832,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>34</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>35</sup></a></li>
 			
 		
 			
@@ -868,19 +868,11 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
@@ -888,7 +880,11 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
@@ -900,15 +896,19 @@
 			
 		
 			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 		</ul>
