@@ -79,6 +79,79 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/04/28/arts-2019-04-28-tip/" title="java集合-PriorityQueue" itemprop="url">java集合-PriorityQueue</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-28T02:48:07.000Z" itemprop="datePublished"> Published 2019-04-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>实现数据结构是堆，堆底层实现结构是数组，堆是完全二叉树。<br>主要的成员变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Priority queue represented as a balanced binary heap: the two</span><br><span class="line"> * children of queue[n] are queue[2*n+1] and queue[2*(n+1)].  The</span><br><span class="line"> * priority queue is ordered by comparator, or by the elements&apos;</span><br><span class="line"> * natural ordering, if comparator is null: For each node n in the</span><br><span class="line"> * heap and each descendant d of n, n &lt;= d.  The element with the</span><br><span class="line"> * lowest value is in queue[0], assuming the queue is nonempty.</span><br><span class="line"> */</span><br><span class="line">transient Object[] queue; // non-private to simplify nested class access</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The number of elements in the priority queue.</span><br><span class="line"> */</span><br><span class="line">private int size = 0;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The comparator, or null if priority queue uses elements&apos;</span><br><span class="line"> * natural ordering.</span><br><span class="line"> */</span><br><span class="line">private final Comparator&lt;? super E&gt; comparator;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The number of times this priority queue has been</span><br><span class="line"> * &lt;i&gt;structurally modified&lt;/i&gt;.  See AbstractList for gory details.</span><br><span class="line"> */</span><br><span class="line">transient int modCount = 0; // non-private to simplify nested class access</span><br></pre></td></tr></table></figure>
+<p>queue是堆的底层实现，size是记录堆的大小的，comparator是自己实现比较方法的，可以实现大顶堆和小顶堆，mouCount用于控制并发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Creates a &#123;@code PriorityQueue&#125; with the specified initial capacity</span><br><span class="line"> * that orders its elements according to the specified comparator.</span><br><span class="line"> *</span><br><span class="line"> * @param  initialCapacity the initial capacity for this priority queue</span><br><span class="line"> * @param  comparator the comparator that will be used to order this</span><br><span class="line"> *         priority queue.  If &#123;@code null&#125;, the &#123;@linkplain Comparable</span><br><span class="line"> *         natural ordering&#125; of the elements will be used.</span><br><span class="line"> * @throws IllegalArgumentException if &#123;@code initialCapacity&#125; is</span><br><span class="line"> *         less than 1</span><br><span class="line"> */</span><br><span class="line">public PriorityQueue(int initialCapacity,</span><br><span class="line">                     Comparator&lt;? super E&gt; comparator) &#123;</span><br><span class="line">    // Note: This restriction of at least one is not actually needed,</span><br><span class="line">    // but continues for 1.5 compatibility</span><br><span class="line">    if (initialCapacity &lt; 1)</span><br><span class="line">        throw new IllegalArgumentException();</span><br><span class="line">    this.queue = new Object[initialCapacity];</span><br><span class="line">    this.comparator = comparator;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>初始化的时候，可以自定义比较器和容器大小，默认是11<br>主要方法<br>添加数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Inserts the specified element into this priority queue.</span><br><span class="line"> *</span><br><span class="line"> * @return &#123;@code true&#125; (as specified by &#123;@link Queue#offer&#125;)</span><br><span class="line"> * @throws ClassCastException if the specified element cannot be</span><br><span class="line"> *         compared with elements currently in this priority queue</span><br><span class="line"> *         according to the priority queue&apos;s ordering</span><br><span class="line"> * @throws NullPointerException if the specified element is null</span><br><span class="line"> */</span><br><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    if (e == null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    modCount++;</span><br><span class="line">    int i = size;</span><br><span class="line">    if (i &gt;= queue.length)</span><br><span class="line">        grow(i + 1);</span><br><span class="line">    size = i + 1;</span><br><span class="line">    if (i == 0)</span><br><span class="line">        queue[0] = e;</span><br><span class="line">    else</span><br><span class="line">        siftUp(i, e);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果队列大小与容量上限一直，就去扩容，从最后一位去向上堆化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Increases the capacity of the array.</span><br><span class="line"> *</span><br><span class="line"> * @param minCapacity the desired minimum capacity</span><br><span class="line"> */</span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    int oldCapacity = queue.length;</span><br><span class="line">    // Double size if small; else grow by 50%</span><br><span class="line">    int newCapacity = oldCapacity + ((oldCapacity &lt; 64) ?</span><br><span class="line">                                     (oldCapacity + 2) :</span><br><span class="line">                                     (oldCapacity &gt;&gt; 1));</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    queue = Arrays.copyOf(queue, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>扩容方法，如果容量小于64 ，则一次扩容 2n+2，大于则 扩容1.5n，最后复制原来数组到新数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">* Inserts item x at position k, maintaining heap invariant by</span><br><span class="line"> * promoting x up the tree until it is greater than or equal to</span><br><span class="line"> * its parent, or is the root.</span><br><span class="line"> *</span><br><span class="line"> * To simplify and speed up coercions and comparisons. the</span><br><span class="line"> * Comparable and Comparator versions are separated into different</span><br><span class="line"> * methods that are otherwise identical. (Similarly for siftDown.)</span><br><span class="line"> *</span><br><span class="line"> * @param k the position to fill</span><br><span class="line"> * @param x the item to insert</span><br><span class="line"> */</span><br><span class="line">private void siftUp(int k, E x) &#123;</span><br><span class="line">    if (comparator != null)</span><br><span class="line">        siftUpUsingComparator(k, x);</span><br><span class="line">    else</span><br><span class="line">        siftUpComparable(k, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">private void siftUpComparable(int k, E x) &#123;</span><br><span class="line">    Comparable&lt;? super E&gt; key = (Comparable&lt;? super E&gt;) x;</span><br><span class="line">    while (k &gt; 0) &#123;</span><br><span class="line">        int parent = (k - 1) &gt;&gt;&gt; 1;</span><br><span class="line">        Object e = queue[parent];</span><br><span class="line">        if (key.compareTo((E) e) &gt;= 0)</span><br><span class="line">            break;</span><br><span class="line">        queue[k] = e;</span><br><span class="line">        k = parent;</span><br><span class="line">    &#125;</span><br><span class="line">    queue[k] = key;</span><br><span class="line">&#125;</span><br><span class="line">private void siftUpUsingComparator(int k, E x) &#123;</span><br><span class="line">    while (k &gt; 0) &#123;</span><br><span class="line">        int parent = (k - 1) &gt;&gt;&gt; 1;</span><br><span class="line">        Object e = queue[parent];</span><br><span class="line">        if (comparator.compare(x, (E) e) &gt;= 0)</span><br><span class="line">            break;</span><br><span class="line">        queue[k] = e;</span><br><span class="line">        k = parent;</span><br><span class="line">    &#125;</span><br><span class="line">    queue[k] = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>向上堆化，如果自定义了比较器 就用siftUpUsingComparator，其他就用默认的比较器，按字母顺序排序，两个方法实现基本相同<br>K是新插入的节点的索引，它的父是（ k-1）/2，这个地方跟一般的堆有些区别，是从0开始算的，父是n，左子树是2n+1，右子树是2（n+1）<br>优先级小的在上面，如果遇到子比父优先级大，结束，将x赋值给k位。如果父优先级更大，将父的值赋给子节点，继续比较父的父级，知道k=0.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">public E poll() &#123;</span><br><span class="line">    if (size == 0)</span><br><span class="line">        return null;</span><br><span class="line">    int s = --size;</span><br><span class="line">    modCount++;</span><br><span class="line">    E result = (E) queue[0];</span><br><span class="line">    E x = (E) queue[s];</span><br><span class="line">    queue[s] = null;</span><br><span class="line">    if (s != 0)</span><br><span class="line">        siftDown(0, x);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>弹出堆顶值，queue[0]是优先级最小的，要弹出的值，sfitDown是从堆顶向堆底堆化，从最后一位取一个值，放到堆顶，然后从顶开始堆化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Inserts item x at position k, maintaining heap invariant by</span><br><span class="line"> * demoting x down the tree repeatedly until it is less than or</span><br><span class="line"> * equal to its children or is a leaf.</span><br><span class="line"> *</span><br><span class="line"> * @param k the position to fill</span><br><span class="line"> * @param x the item to insert</span><br><span class="line"> */</span><br><span class="line">private void siftDown(int k, E x) &#123;</span><br><span class="line">    if (comparator != null)</span><br><span class="line">        siftDownUsingComparator(k, x);</span><br><span class="line">    else</span><br><span class="line">        siftDownComparable(k, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">private void siftDownComparable(int k, E x) &#123;</span><br><span class="line">    Comparable&lt;? super E&gt; key = (Comparable&lt;? super E&gt;)x;</span><br><span class="line">    int half = size &gt;&gt;&gt; 1;        // loop while a non-leaf</span><br><span class="line">    while (k &lt; half) &#123;</span><br><span class="line">        int child = (k &lt;&lt; 1) + 1; // assume left child is least</span><br><span class="line">        Object c = queue[child];</span><br><span class="line">        int right = child + 1;</span><br><span class="line">        if (right &lt; size &amp;&amp;</span><br><span class="line">            ((Comparable&lt;? super E&gt;) c).compareTo((E) queue[right]) &gt; 0)</span><br><span class="line">            c = queue[child = right];</span><br><span class="line">        if (key.compareTo((E) c) &lt;= 0)</span><br><span class="line">            break;</span><br><span class="line">        queue[k] = c;</span><br><span class="line">        k = child;</span><br><span class="line">    &#125;</span><br><span class="line">    queue[k] = key;</span><br><span class="line">&#125;</span><br><span class="line">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">private void siftDownUsingComparator(int k, E x) &#123;</span><br><span class="line">    int half = size &gt;&gt;&gt; 1;</span><br><span class="line">    while (k &lt; half) &#123;</span><br><span class="line">        int child = (k &lt;&lt; 1) + 1;</span><br><span class="line">        Object c = queue[child];</span><br><span class="line">        int right = child + 1;</span><br><span class="line">        if (right &lt; size &amp;&amp;</span><br><span class="line">            comparator.compare((E) c, (E) queue[right]) &gt; 0)</span><br><span class="line">            c = queue[child = right];</span><br><span class="line">        if (comparator.compare(x, (E) c) &lt;= 0)</span><br><span class="line">            break;</span><br><span class="line">        queue[k] = c;</span><br><span class="line">        k = child;</span><br><span class="line">    &#125;</span><br><span class="line">    queue[k] = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>跟从下到上结构相似，看是否有自实现的比较器。<br>size/2 是差不多最后一个非叶子节点，最后到这个节点去堆化，从k=0 开始，其次与左右子树比，谁优先级更小，不断循环，直到x的优先级，小于某个的节点，然后放置到k处</p>
+<p>总结<br>优先级队列，底层数据结构是堆，堆的底层数据结构是数组，每次插入和删除，都要堆化，有2种堆化方式，一种是从上到下，一种是从下到上。从数组角度去理解还是有点难度的，需要想象成树的结构，然后根据序号存储在数组内。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/04/28/arts-2019-04-28-review/" title="Distributed Systems for fun and profit Explained 学习笔记" itemprop="url">Distributed Systems for fun and profit Explained 学习笔记</a>
   </h1>
   <p class="article-author">By
@@ -272,69 +345,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2019/04/21/arts-2019-04-21-share/" title="关于这段时间学习的分析" itemprop="url">关于这段时间学习的分析</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-21T07:49:07.000Z" itemprop="datePublished"> Published 2019-04-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>这段时间在以阿里的标准去复习，发现自己之前真的很多不会的。基础的集合类从来没想过要了解它的实现，不知道实现就不知道它的限制，这样是不可能使用好的。虚拟机没有看过，当时觉得虚拟机太复杂，还没腾出时间去看。并发没有好好研究，它和虚拟机一样也是认为它太难了。算法，数据结构也是，一直认为它很重要，但遇到点困难就退缩了，回到舒适区。这些困难可能暂时不会影响到那时的我，所以我也没有太在意，虽然他们都在，也都知道，但重要性没有那么高。</p>
-<p>最近再把这些知识作为必须要学会的内容去学习，开头很难，制定计划内心都是拒绝的，开始1-2个星期，1天只能坐1-2道算法题，那个时候内心是崩溃的，但过了1-2个月，发现情况出现好转，每天做题的速度慢慢上来了。虽然并发还是不怎么会，但通过订阅别人的专栏，我发现，一开始不会的时候，知识的凌乱的，但通过师傅寻找内在的逻辑，精心编怕，你可以找到秩序，把混乱变成有序，需要付出努力，自然界是熵增的。<strong>学习就是这样一个过程， 把无序变成有序。</strong></p>
-<p>从我女朋友学编程这件事来说，我一直想教她，但我理不出头绪，一般就是扔一本书给她，或者开头热教她一下，但过不了1个星期就不继续了，这是我没有吃透的表现，没有从混乱转变成有序，也不能将这种有序传授给别人。李笑来之前就说他口头教会别人游泳，说明功力很深厚，我也尝试教女朋友，模仿我学习的过程，但效果一般，我没有掌握好各种过渡的阶段，无法有效的表达。很多时候就是这样，明明自己会，但你不敢说会，因为你不能教会别人。<strong>以教为学</strong>很重要。</p>
-<p>最近也体会到一个人意志坚定的重要性，认准一个道理，身边的不同人会给你不同的压力，顶住压力，你就能突破自我，完成进化。屈从压力，你可能会继续随波逐流，活在别人的阴影中，别人的意志里。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2019/04/21/arts-2019-04-21-review/" title="Fallacies of Distributed Computing Explained 学习笔记" itemprop="url">Fallacies of Distributed Computing Explained 学习笔记</a>
   </h1>
   <p class="article-author">By
@@ -380,6 +390,69 @@
   <div class="article-tags">
   
   <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/21/arts-2019-04-21-share/" title="关于这段时间学习的分析" itemprop="url">关于这段时间学习的分析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-21T07:49:07.000Z" itemprop="datePublished"> Published 2019-04-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>这段时间在以阿里的标准去复习，发现自己之前真的很多不会的。基础的集合类从来没想过要了解它的实现，不知道实现就不知道它的限制，这样是不可能使用好的。虚拟机没有看过，当时觉得虚拟机太复杂，还没腾出时间去看。并发没有好好研究，它和虚拟机一样也是认为它太难了。算法，数据结构也是，一直认为它很重要，但遇到点困难就退缩了，回到舒适区。这些困难可能暂时不会影响到那时的我，所以我也没有太在意，虽然他们都在，也都知道，但重要性没有那么高。</p>
+<p>最近再把这些知识作为必须要学会的内容去学习，开头很难，制定计划内心都是拒绝的，开始1-2个星期，1天只能坐1-2道算法题，那个时候内心是崩溃的，但过了1-2个月，发现情况出现好转，每天做题的速度慢慢上来了。虽然并发还是不怎么会，但通过订阅别人的专栏，我发现，一开始不会的时候，知识的凌乱的，但通过师傅寻找内在的逻辑，精心编怕，你可以找到秩序，把混乱变成有序，需要付出努力，自然界是熵增的。<strong>学习就是这样一个过程， 把无序变成有序。</strong></p>
+<p>从我女朋友学编程这件事来说，我一直想教她，但我理不出头绪，一般就是扔一本书给她，或者开头热教她一下，但过不了1个星期就不继续了，这是我没有吃透的表现，没有从混乱转变成有序，也不能将这种有序传授给别人。李笑来之前就说他口头教会别人游泳，说明功力很深厚，我也尝试教女朋友，模仿我学习的过程，但效果一般，我没有掌握好各种过渡的阶段，无法有效的表达。很多时候就是这样，明明自己会，但你不敢说会，因为你不能教会别人。<strong>以教为学</strong>很重要。</p>
+<p>最近也体会到一个人意志坚定的重要性，认准一个道理，身边的不同人会给你不同的压力，顶住压力，你就能突破自我，完成进化。屈从压力，你可能会继续随波逐流，活在别人的阴影中，别人的意志里。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
   </div>
 
 </div>
@@ -663,81 +736,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/04/14/arts-2019-04-14-algorithm/" title="找到 K 个最接近的元素" itemprop="url">找到 K 个最接近的元素</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-14T05:13:07.000Z" itemprop="datePublished"> Published 2019-04-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个排序好的数组，两个整数 k 和 x，从数组中找到最靠近 x（两数之差最小）的 k 个数。返回的结果必须要是按升序排好的。如果有两个数与 x 的差值一样，优先选择数值较小的那个数。<br>示例 1:<br>输入: [1,2,3,4,5], k=4, x=3<br>输出: [1,2,3,4]</p>
-<p>示例 2:<br>输入: [1,2,3,4,5], k=4, x=-1<br>输出: [1,2,3,4]</p>
-<p>说明:</p>
-<ol>
-<li>k 的值为正数，且总是小于给定排序数组的长度。</li>
-<li>数组不为空，且长度不超过 104</li>
-<li>数组里的每个元素与 x 的绝对值不超过 104</li>
-</ol>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先这是一个有序的数组，那就可以先二分法查找x，然后返回对于的索引，这个分几种情况<br>1）找到等于x的值，直接返回索引<br>2）找不到具体等于x的值，就只能找到离x最近且最小的索引值</p>
-<p>根据上面返回的索引值，作为第二步的初始索引。分别判断前后的是不是到上下边界了，<br>1）没到边界，分别找前后离x最近的边界，左或右移一位<br>2）到边界，只能反向移动，左移或右移动一位</p>
-<p>结束条件是k，每次移动边界，k递减</p>
-<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"> public int binarySearch(int[] arr,int x)&#123;</span><br><span class="line">        int left = 0;</span><br><span class="line">        int right = arr.length -1;</span><br><span class="line">        while(left &lt;= right)&#123;</span><br><span class="line">            int index = (right -left)/2+left;</span><br><span class="line">            int value = arr[index];</span><br><span class="line">            </span><br><span class="line">            if(value == x)&#123;</span><br><span class="line">                return index;</span><br><span class="line">            &#125;else if(value &gt; x)&#123;</span><br><span class="line">                right = index - 1;</span><br><span class="line">            &#125;else if(value &lt; x)&#123;</span><br><span class="line">                if(index + 1 &lt; (arr.length -1))&#123;</span><br><span class="line">                    int next = arr[index+1];</span><br><span class="line">                    if(next &lt; x)&#123;</span><br><span class="line">                        left = index + 1;</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125;</span><br><span class="line">                    int comp = (next - x) - (x - value);</span><br><span class="line">                    if(comp &gt;= 0)&#123;</span><br><span class="line">                        return index;</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        return index+1;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    return index;</span><br><span class="line">                &#125;</span><br><span class="line">                  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    public List&lt;Integer&gt; findClosestElements(int[] arr, int k, int x) &#123;</span><br><span class="line">        int flag = binarySearch(arr,x);</span><br><span class="line">        if(flag == -1)&#123;</span><br><span class="line">            List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">            for(int i = 0 ; i&lt;k;i++)&#123;</span><br><span class="line">                list.add(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            return list;</span><br><span class="line">        &#125;</span><br><span class="line">        int nums = k-1;</span><br><span class="line">        int left = flag;</span><br><span class="line">        int right = flag;</span><br><span class="line">        int size = arr.length;</span><br><span class="line">        while(nums != 0)&#123;</span><br><span class="line">            int innerLeft = left;</span><br><span class="line">            int innerRight = right;</span><br><span class="line">            if(right + 1 &gt; size -1)&#123;</span><br><span class="line">                left = innerLeft -1;</span><br><span class="line">                nums--;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;else if(left -1 &lt; 0)&#123;</span><br><span class="line">                right = innerRight + 1;</span><br><span class="line">                nums--;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if( right + 1 &lt;= size - 1 )&#123;</span><br><span class="line">                    innerRight = innerRight + 1;</span><br><span class="line">                &#125;</span><br><span class="line">                if(left -1 &gt;= 0)&#123;</span><br><span class="line">                    innerLeft = innerLeft -1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;        </span><br><span class="line">            int leftValue = arr[innerLeft];</span><br><span class="line">            int rightValue = arr[innerRight];</span><br><span class="line">            int leftDiv = x - leftValue;</span><br><span class="line">            int rightDiv = rightValue - x;</span><br><span class="line">            if(leftDiv &lt;= rightDiv)&#123;</span><br><span class="line">                left = innerLeft;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                right = innerRight;</span><br><span class="line">            &#125;           </span><br><span class="line">            nums--;       </span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        for(int i = left ; i&lt;= right;i++)&#123;</span><br><span class="line">            list2.add(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return list2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>比较容易出错的有几点<br>1.二分查找不光要找出等于的值，也要查找离的最近最小的值<br>2.第二次进行查询的时候，可能会有相等数字重复多次的情况，也要考虑<br>3.第二次查找，比较大小左右边界移动的判断条件很复杂，很容易出错。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/二分查找/">二分查找</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/8/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/">Next<span></span></a>
   </nav>
 
 </div>
@@ -768,7 +769,7 @@
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>35</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>36</sup></a></li>
 		  
 		
 		  
@@ -809,7 +810,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>35</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>36</sup></a></li>
 			
 		
 			
@@ -845,11 +846,11 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
 			
