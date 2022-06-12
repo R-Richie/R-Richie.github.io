@@ -79,6 +79,324 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/12/15/arts-2019-12-15-share/" title="人的认知" itemprop="url">人的认知</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-15T02:31:00.000Z" itemprop="datePublished"> Published 2019-12-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近在看批判性思维，第一遍看有一些收获，但已经记不清了，第二遍看，越发惊奇，原来事实竟然是这样。<br>之前从来没有思考过如何思考，虽然听过笑来老师的元认知，是思考思考的过程，感觉也是对的。也没有实际操作过，很久就忘记。这可能就是我们知道了那么多道理还是过不好一生的原因，很多事情都是停留在虚幻的概念的层次上，没有到实际的生活层面，没有可以操作的地方，所以没有内化，很快就忘了，道路都是对的，但没有知行合一。所以一个道理如果懂了，马上落实到生活中如何去做。然后不断检查，养成习惯。</p>
+<p>人的感知是有屏蔽性的，对于自己认为不对的东西进行屏蔽。这样有一些好处，就是过滤有效信息，防止信息过载。但坏处就是我们要主动去调整这种天生的行为。直觉是千万年形成的，可能与现在的环境不符合，所以要做一些违背直觉的行为，每一次大脑进入默认模式，要提醒自己多审视自己的思考过程。说到这里，我想到了古人每日三省吾身。当时觉得很有道理，但这都是古人的事，我天生就比你们强，然后就过去了。一个人的思维模式，决定他见到的世界是什么样的。我们经常有这样的感觉，原来这个竟然是这样的，原来我虽然“看到”，但却一点意识都没有。那个东西好像在你的世界里压根没存在过，但当你思维扩展之后，好像生活处处都是。</p>
+<p>人的默认行为被科学不断研究，有一定原因，但不那么符合现在的社会，可能被很多人利用，所以我们要克服直觉，默认行为，多思考我们为什么那么做。一方面要思考自己思考的过程，一方面要思考别人的思考过程，这也是了解世界的一种方式。比如最近我做签名合成单证的逻辑，开始看代码觉得就是一坨屎，这里面逻辑好乱，好像封装了一些方法，但也不那么顺畅。后面跟他一点点的询问，发现他的封装也有他固有的逻辑，在他的逻辑里，那种方式也是很合理的，只是他知道的我不知道，所以我开始不理解，甚至误解。虽然他做的不能算好，但绝不是我开始看的一无是处。我突然眼界开阔了，从原有的思维中成长了。不能有拒绝的态度，拒绝得知别人的思考，注定缩小你的视野，看不到一些事实。</p>
+<p>以事实为基础，《原则》中的精准事实，最近也听到好多人这么说，想要获得事实也不那么容易，人的感知会蒙蔽你获得事实的途径。要不断反思。<br>以后每天反思一个自己的思考行为看是否合理。每天记录反思日记。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/15/arts-2019-12-15-tip/" title="spring mvc全局异常处理源码分析1" itemprop="url">spring mvc全局异常处理源码分析1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-15T02:29:00.000Z" itemprop="datePublished"> Published 2019-12-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>第一遍看源码分析流程</p>
+<p>入口时dispatchServlet的doDispatch方法，processDispatchResult是请求结束的统一处理，不管是不是异常。<br>如果传入exception是不是空，说明发生了异常，判断是不是网页的异常。调用processHandlerException处理异常。</p>
+<p>其中有一个handlerExceptionResolvers数组，是initStrategies方法在dodispatch初始化的时候初始化的。<br>找到可以处理这个异常的HandlerExceptionResolver，调用resolveException方法去处理异常，<br>首先shouldApplyTo方法，resolver是不是支持这个handler，如果支持调用doResolveException，然后调用doResolveHandlerMethodException<br>getExceptionHandlerMethod获取具体的调用方法，然后invokeAndHandle去实际调用异常处理方法。</p>
+<p>只能说过了一个大致的流程，不能说完全懂了，里面很多细节还不清楚，我准备看一遍文档，梳理一下mvc的大致组件结构来再过一遍，看看会不会更清晰。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/spring-mvc/">spring mvc</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/11/24/arts-2019-11-24-algorithm/" title="67. 二进制求和" itemprop="url">67. 二进制求和</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-11-24T08:09:00.000Z" itemprop="datePublished"> Published 2019-11-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定两个二进制字符串，返回他们的和（用二进制表示）。</p>
+<p>输入为非空字符串且只包含数字 1 和 0。</p>
+<p>示例 1:</p>
+<p>输入: a = “11”, b = “1”<br>输出: “100”<br>示例 2:</p>
+<p>输入: a = “1010”, b = “1011”<br>输出: “10101”</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/add-binary" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-binary</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>第一次写这道题，怎么感觉之前做过，字符串二进制进位<br>使用简单的字符串一个个比较，<br>第一次问题在字符串拼接，使用insert但没有插入到头部<br>效率比较低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String addBinary(String a, String b) &#123;</span><br><span class="line">        boolean up = false;</span><br><span class="line">        int aLength = a.length();</span><br><span class="line">        int bLength = b.length();</span><br><span class="line">        int strLength = aLength &gt;= bLength ? aLength : bLength;</span><br><span class="line">        if(aLength &gt; bLength)&#123;</span><br><span class="line">            b = String.join(&quot;&quot;, Collections.nCopies(strLength - bLength, &quot;0&quot;)) + b;  </span><br><span class="line">        &#125;else if(bLength &gt; aLength)&#123;</span><br><span class="line">            a = String.join(&quot;&quot;, Collections.nCopies(strLength - aLength, &quot;0&quot;)) + a;  </span><br><span class="line">        &#125;</span><br><span class="line">        char[] aArray = a.toCharArray();</span><br><span class="line">        char[] bArray = b.toCharArray();</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        for(int i = strLength -1 ; i &gt;= 0 ; i--)&#123;</span><br><span class="line">            char aChar = aArray[i];</span><br><span class="line">            char bChar = bArray[i];</span><br><span class="line">            if(aChar == &apos;1&apos; &amp;&amp; bChar == &apos;1&apos;)&#123;</span><br><span class="line">                if(up)&#123;</span><br><span class="line">                    sb.insert(0,&quot;1&quot;);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    sb.insert(0,&quot;0&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                up = true;</span><br><span class="line">            &#125;else if(aChar == &apos;0&apos; &amp;&amp; bChar == &apos;0&apos;)&#123;</span><br><span class="line">                if(up)&#123;</span><br><span class="line">                    sb.insert(0,&quot;1&quot;);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    sb.insert(0,&quot;0&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                up = false;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(up)&#123;</span><br><span class="line">                    sb.insert(0,&quot;0&quot;);</span><br><span class="line">                    up = true;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    sb.insert(0,&quot;1&quot;);</span><br><span class="line">                    up = false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(up)&#123;</span><br><span class="line">            sb.insert(0,&quot;1&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>第二种算法，看别人的答案，思路跟之前相似，但实现不同，不用一堆id判断，用字符与‘0’相减直接得数字<br>自己写得时候，等于0没有想到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String addBinary(String a, String b) &#123;</span><br><span class="line">        int ans = 0;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        for(int i = a.length()-1 ,j = b.length()-1 ; i&gt;=0 || j&gt;=0 ; i-- ,j--)&#123;</span><br><span class="line">            int sum = ans;</span><br><span class="line">            sum += (i &gt;= 0 ? a.charAt(i)- &apos;0&apos; : 0);</span><br><span class="line">            sum += (j &gt;= 0 ? b.charAt(j) - &apos;0&apos;: 0);</span><br><span class="line">            sb.append(sum % 2);</span><br><span class="line">            ans = sum /2;</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(ans == 1? ans : &quot;&quot;);</span><br><span class="line">        return sb.reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/字符串/">字符串</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/11/24/arts-2019-11-24-tip/" title="c语言学习1" itemprop="url">c语言学习1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-11-24T08:08:00.000Z" itemprop="datePublished"> Published 2019-11-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近在学习c语言，本以为有了java的基础，以前在学校还学习过，c语言应该很简单，但我发现不是，还是有一些陌生的概念没有理解。<br>C语言的本身很精炼，与java相比，java有些臃肿，什么都包括。<br>基础的概念比如，类型、运算符，表达式，控制流。<br>比较特殊的，函数与程序结构，指针与数组，结构。<br>剩余是输入与输出和一些系统接口。<br>都通用的就不提了，主要是一些特殊的概念，比如函数中的头文件，C预处理器等。<br>指针是c语言特点所在，也是难点所在，灵活但容易出错。<br>结构类似面向对象的功能，将一些属性包装在一起。</p>
+<p>学习一个东西，不能想着一下全学会，先快速入门，然后不断登台阶，与实际结合，解决问题，这样才是关键。不能单学理论，也不能直接实践，但学理论容易陷入无用的境地，单单实践，容易浪费时间不断试错，不同阶段，两个结合起来效果最佳。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/编程语言/">编程语言</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/11/24/arts-2019-11-24-share/" title="关于达成目标的一些思考" itemprop="url">关于达成目标的一些思考</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-11-24T07:47:00.000Z" itemprop="datePublished"> Published 2019-11-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>人的成长从吴军老师那学来的方法，三板斧破四困境，四困境是简单重复，习惯性失败，林黛玉式困境和狗熊掰棒子。<br>第一板斧，愿景-目标-道路。从战略到战术，都要具体到细节，才能实施。平时我们每年都会有些计划，但很多计划没有落实到细节，虽然知道很重要但一直都没有做，因为没有道路，生活还是照旧，目标永远达不成。这个最近体会很深，比如我认为C语言很重要，也制定了目标，就是学会c语言，这是通向底层的必经之路，但我们目标不够明确，怎么算学会c语言，c语言有哪些部分，都是什么，有哪些不同的等级，当时都完全不清楚。等我开始执行的时候，发现c语言不会的东西很多，短时间完全执行不完，再有挫折一打击，这个目标可能就被搁置，然后不了了之。还有一点就是没有具体道路到每天，可能一有紧急的事情就把原来的时间占用，最后都只做紧急的事情，很多重要的事情都被搁置。<br>这一点我是体会越来越深，所以从战略到战术，都要具体，愿景的不能等级，具体的目标，每天如何安排时间去完成都要细化，这样具体的目标才能执行，笼统的概念没办法达成，生活中很多事情都是同样的道理。</p>
+<p>比如我想改掉每晚去看视频的习惯，视频没什么营养，我也认识到这样是浪费时间的，但我没有安排具体的替换习惯，所以，即使知道这样不对，我没有其他选择，那有了时间照旧，还是看视频，那会给我放松，所以道路就是具体的方法。安排越细节，成功可能性越高。</p>
+<p>学习目标要等级，如何算晋级，不能简单的重复，要不断升级，我经常碰见学不下去的情况，那最好的方法就是从起点重现开始，这也是我发现的最好的学习方式，不能一遍一遍的重复不会的东西，确实能理解提高，尤其是学习困难的东西，效果更是明显，从第一次的一脸懵逼，到有点明白，真的很振奋。所以这是不是就是学习的真谛，不断重复，失败了从起点重新来过。学习如此生活亦如此，就是个不断从起点出发，经历挫折，不断成长的过程，所以失败不可怕，这是常态。</p>
+<p>最近对于年龄的危机，越来越明显了，之前认为自己还小，还有时间，但最近年过30，而且马上就过了互联网的最佳年龄了，体力大不如前，如果没有什么特殊的能力，那肯定不如年轻人。年龄与能力不是必然挂钩，年龄不能控制，能力可以培养。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/学习方法/">学习方法</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/09/15/arts-2019-09-15-share/" title="关于碎片化学习的思考2" itemprop="url">关于碎片化学习的思考2</a>
   </h1>
   <p class="article-author">By
@@ -374,318 +692,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/25/arts-2019-08-25-algorithm/" title="12. 整数转罗马数字" itemprop="url">12. 整数转罗马数字</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-25T05:18:00.000Z" itemprop="datePublished"> Published 2019-08-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。<br>字符          数值<br>I             1<br>V             5<br>X             10<br>L             50<br>C             100<br>D             500<br>M             1000<br>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。<br>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：<br>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。<br>示例 1:<br>输入: 3<br>输出: “III”<br>示例 2:<br>输入: 4<br>输出: “IV”<br>示例 3:<br>输入: 9<br>输出: “IX”<br>示例 4:<br>输入: 58<br>输出: “LVIII”<br>解释: L = 50, V = 5, III = 3.<br>示例 5:<br>输入: 1994<br>输出: “MCMXCIV”<br>解释: M = 1000, CM = 900, XC = 90, IV = 4.<br>有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>思路1， 看别人思路<br>将 数字与字母对应存储在数组中，然后要求的数字，依次从最大的开始减，最后就得到结果<br><code>执行用时 :32 ms, 在所有 Java 提交中击败了11.85%的用户
-内存消耗 :42 MB, 在所有 Java 提交中击败了74.61%的用户</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String intToRoman(int num) &#123;</span><br><span class="line">        int[] rome = new int[]&#123;1000,900,500,400,100,90,50,40,10,9,5,4,1&#125;;</span><br><span class="line">        Map&lt;Integer,String&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(1000,&quot;M&quot;);map.put(900,&quot;CM&quot;);map.put(500,&quot;D&quot;);</span><br><span class="line">        map.put(400,&quot;CD&quot;);map.put(100,&quot;C&quot;);map.put(90,&quot;XC&quot;);</span><br><span class="line">        map.put(50,&quot;L&quot;);map.put(40,&quot;XL&quot;);map.put(10,&quot;X&quot;);</span><br><span class="line">        map.put(9,&quot;IX&quot;);map.put(5,&quot;V&quot;);map.put(4,&quot;IV&quot;);map.put(1,&quot;I&quot;);</span><br><span class="line">        int i = 0;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        while(num &gt; 0)&#123;</span><br><span class="line">            if(num &gt;= rome[i])&#123;</span><br><span class="line">                num = num - rome[i];</span><br><span class="line">                sb.append(map.get(rome[i]));</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/字符串/">字符串</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/25/arts-2019-08-25-tip/" title="Servlet简单实现" itemprop="url">Servlet简单实现</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-25T05:16:00.000Z" itemprop="datePublished"> Published 2019-08-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>servlet简单说就是处理网络请求的接口，java将处理网络请求的过程抽象处理，将复杂的网络处理交给servlet容器，程序员只需要实现接口就能简单的实现处理请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void init(ServletConfig config) throws ServletException;</span><br><span class="line">    public ServletConfig getServletConfig();</span><br><span class="line">    </span><br><span class="line">    public void service(ServletRequest req, ServletResponse res)</span><br><span class="line">   throws ServletException, IOException;</span><br><span class="line">   </span><br><span class="line">    public String getServletInfo();</span><br><span class="line">    </span><br><span class="line">    public void destroy();</span><br></pre></td></tr></table></figure></p>
-<p>一个有5个接口，一个初始化init，一个结束销毁destroy，getServletConfig 获取配置，getServletInfo获取servlet信息，真正处理网络请求的就是service。<br>要实现http请求，可以继承HttpServlet，他是http协议的一个实现，然后覆盖doGet与doPost方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class XmlServlet extends HttpServlet &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException &#123;</span><br><span class="line">        System.out.println(&quot;XmlServlet 在处理 get() 请求....&quot;);</span><br><span class="line">        PrintWriter out = resp.getWriter();</span><br><span class="line">        resp.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">        out.println(&quot;&lt;strong&gt;My Servlet!&lt;/strong&gt;</span><br><span class="line">&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException &#123;</span><br><span class="line">        System.out.println(&quot;MyServlet在处理 post（）请求...&quot;);</span><br><span class="line">        PrintWriter out = resp.getWriter();</span><br><span class="line">        resp.setContentType(&quot;text/html;charaset=utf-8&quot;);</span><br><span class="line">        out.println(&quot;&lt;strong&gt;My Servlet&lt;/strong&gt;</span><br><span class="line">&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>写2个servlet标签，servlet-name相同，一个引入刚才写的class，一个匹配访问地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;xmlServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;servlet.XmlServlet&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line"></span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;xmlServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/xmlservlet&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure></p>
-<p>一个简单的servlet就完成了，然后放入到tomcat对应文件的位置<br>XmlServlet放在tomcat的目录下，webapps/{you apps name}/WEB-INF/classes/{package path} 路径下，web.xml 放在与WEB-INF同级目录内</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/架构/">架构</a><a href="/tags/编程技巧/">编程技巧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/25/arts-2019-08-25-share/" title="上海城市规划馆参观有感" itemprop="url">上海城市规划馆参观有感</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-25T05:15:00.000Z" itemprop="datePublished"> Published 2019-08-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>本来抱着了解上海未来规划去参考城市规划馆，也知道可能并得不到答案，但参观后还是有不少惊喜的。<br>首先的感受就是变幻的惊喜，虽然都是将过去的照片，资料与现在进行对比，但却采用了不同的形式，有的用的是影片视觉，有的用的抽拉式的卡片，有的用的是大型的图书翻页，有的是用的实物，虽然都可以用相同的形式，本质上没有什么差别，但用了不同形式表达出来，让人有了新鲜感，有了兴趣。这个方法可以参考学习， 同一个东西反复出现，就没了兴趣，但变幻一个花样，就不同了，既能从不同角度去思考，有能记忆深刻，但缺点就是要花费很多精力去构建其他东西。<br>二层是一个巨型的上海微缩地图，很震撼，将那么多的信息进行复刻，需要花很多精力，这也是他震撼的地方，信息量巨大，细节多。地图我们平时也精彩用，两个都是微缩为什么这个这么震撼，真实感与细节，地图上没有那么多细节的描摹，这个将每个建筑，每个河流都描绘了出来，地图是简略的，目的不同，信息量不同，比如清明上河图，就有很多细节，所以称为经典。<br>接着有点收获的就是上海的2017-2035年规划，我想要的就是这个，城市的大致规划，虽然我想知道城市哪块买房子更值钱，对这个帮助可能不大，但能获得这个信息，也是有个大致的指导方向，就是城市的发展目标，继续研究一下看看是不是会有什么收获。<br>还是那个用不同的表现形式，比如用游戏的方式，讲解生活垃圾，如果简单的展示哪些是哪些，人们记忆不清，但如果玩一个大富翁游戏，不断答题，这个效果就很好，它吸引你不断学习，停不下来。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/旅游/">旅游</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/18/arts-2019-08-18-tip/" title="《深入理解计算机系统》6" itemprop="url">《深入理解计算机系统》6</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-18T03:15:00.000Z" itemprop="datePublished"> Published 2019-08-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="第三章-剩余部分"><a href="#第三章-剩余部分" class="headerlink" title="第三章 剩余部分"></a>第三章 剩余部分</h1><p>这次将第三章剩余的部分看完了，但有一部分没有看懂，可能是前面基础没有打好</p>
-<h2 id="数组分配和访问"><a href="#数组分配和访问" class="headerlink" title="数组分配和访问"></a>数组分配和访问</h2><p>基本原则<br>指针运算<br>嵌套的数组<br>定长数组<br>变长数组</p>
-<h2 id="异质的数据结构"><a href="#异质的数据结构" class="headerlink" title="异质的数据结构"></a>异质的数据结构</h2><p>结构<br>联合<br>数据对齐</p>
-<h2 id="浮点代码"><a href="#浮点代码" class="headerlink" title="浮点代码"></a>浮点代码</h2><p>浮点传送和转换操作<br>过程中的浮点代码<br>浮点运算代码<br>定义和使用的浮点常数<br>在浮点代码中使用位级操作<br>浮点比较操作</p>
-<p>整体又看完一遍，这是二刷，但还是有部分没有完成看懂，这次开始做习题，之前就是简单浏览，这次二刷比前一次好很多，但还是没有完全懂，然后我有进行了第三次了，从第三章开始，做题我发现基本都能做对的，把之前没有迷糊的地方都再一次看懂，多次学习还是有好处的，确实越学越明白，一遍不行就两遍，直到自己明白。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/17/arts-2019-08-18-algorithm/" title="120. 三角形最小路径和" itemprop="url">120. 三角形最小路径和</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-17T07:12:00.000Z" itemprop="datePublished"> Published 2019-08-17</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。<br>例如，给定三角形：<br>[<br>     [2],<br>    [3,4],<br>   [6,5,7],<br>  [4,1,8,3]<br>]<br>自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。<br>说明：<br>如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/triangle" target="_blank" rel="noopener">https://leetcode-cn.com/problems/triangle</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>使用2个数组，以最后一行为长度限制，每次上一行到下一个，下一行除了首尾，只有访问数组前一个和当前<br>动态规划<br><code>执行用时 :5 ms, 在所有 Java 提交中击败了64.61%的用户
-内存消耗 :37.7 MB, 在所有 Java 提交中击败了60.44%的用户</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) &#123;</span><br><span class="line">        int height = triangle.size();</span><br><span class="line">        int weight = triangle.get(height-1).size();</span><br><span class="line">        int[] first = new int[weight];</span><br><span class="line">        int[] second = new int[weight];</span><br><span class="line">        for(int i = 0 ; i &lt; height ; i++)&#123;</span><br><span class="line">            List&lt;Integer&gt; list = triangle.get(i);</span><br><span class="line">            int size = list.size();</span><br><span class="line">            for(int j = 0 ;j&lt; size; j++)&#123;</span><br><span class="line">                if(j == 0)&#123;</span><br><span class="line">                    second[j] = first[j]+list.get(j);</span><br><span class="line">                &#125;else if(j == size-1)&#123;</span><br><span class="line">                    second[j] = first[j-1]+list.get(j);</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    second[j] = Math.min(first[j-1]+list.get(j),first[j]+list.get(j));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            int[] tmp = first;</span><br><span class="line">            first = second;</span><br><span class="line">            second = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for(int m = 0 ; m &lt; weight ; m++)&#123;</span><br><span class="line">            min = Math.min(first[m],min);</span><br><span class="line">        &#125;</span><br><span class="line">        return min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/动态规划/">动态规划</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -715,11 +721,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>26</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>27</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>36</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>38</sup></a></li>
 		  
 		
 		  
@@ -747,6 +753,10 @@
 		  
 		
 		  
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>2</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/闲谈/" title="闲谈">闲谈<sup>1</sup></a></li>
 		  
 		
@@ -760,7 +770,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>36</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>38</sup></a></li>
 			
 		
 			
@@ -768,7 +778,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>26</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>27</sup></a></li>
 			
 		
 			
@@ -804,7 +814,7 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>5</sup></a></li>
 			
 		
 			
@@ -816,6 +826,10 @@
 			
 		
 			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
@@ -824,19 +838,15 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/二分法/" title="二分法">二分法<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -907,7 +917,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2021 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2022 
 		
 		<a href="/about" target="_blank" title="R_Richie">R_Richie</a>
 		

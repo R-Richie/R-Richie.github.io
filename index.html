@@ -79,6 +79,327 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/06/12/arts-2022-06-12-review/" title="Junit5 之 Timeouts" itemprop="url">Junit5 之 Timeouts</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-12T07:41:00.000Z" itemprop="datePublished"> Published 2022-06-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>@Timeouts 注解允许 定义 test，test factory，test template或lifeCycle method 在给定的时间内没执行晚，测试用例就失败。时间长度默认是秒但可以配置。<br>与assertTimeoutPreemptively()相反，注解方法的执行在主线程。如果执行超时，主线程会被其他线程中断。这样做是为了保证诸如spring利用对当前线程敏感。例如threadlocal事务管理。<br>也可以应用在类上的所有方法或者是@Nested方法，在类上定义@Timeout注解。主要注意@Timeout定义在类上不能应用在lifecycle method<br>定义@Timeout在@TestFactory 方法上检查工厂方法是否在特定时间内返回，但是不能校验在每次独立的Dynamic Test<br>的执行时间。请使用assertTimeout() 或assertTimeoutPreemptively()。<br>如果@Timeout在@TestTemplate上，例如@RepeatedTest，@ParameterizedTest每次调用都会校验时间。<br>不同分类的测试方法，都有默认配置，可以自定义修改。</p>
+<p>如果需要更多控制异步执行，可考虑Awaitility库。<br>为了不影响debug，可以全局关闭timeout</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/06/12/arts-2022-06-12-share/" title="如何管理、如何带人" itemprop="url">如何管理、如何带人</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-12T07:38:00.000Z" itemprop="datePublished"> Published 2022-06-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>想想最近做的最多的事情，就是带外包。觉得自己要有思考的做这些事情，就总结一下思考。<br>首先要在关键的事情上问几个好问题。不一定都能解答，但一定要看到关键的问题。你不一定也不应该解决所有问题，但一定要看到所有问题。<br>比如我在之前工作新空降的领导，首先做的就是梳理流程，工作的主要流程，都是怎么做的，都是谁在做。遇到问题如何处理。<br>要转变一些看法，你没法做所有事情，要克服自己做所有事情的冲突，你会有一种完美冲动要做所有事情，但事实上，这只会增加你的工作内容，又跟下级争抢成长空间，你要带头突破一些你不会的，同时也要教会你下级该怎么做，怎么自我突破，自我学习，不然你会很累，下级也觉得自己没有成长。<br>把大家凝聚在一起的是收益，可能是物质收益，比如金钱，可能是能力上的收益比如成长，只有大家在这些方面长期看都是正收益的，才能长时间在一起，不然可能短期利益让大家在一起，但长期会变。<br>我们被雇佣，最大的目标应该是公司的目标，然后是上级的目标，再然后是自己的目标，再然后是下级的目标。大家目标不同，但要争取自己最大的利益，哪些目标是对上级的，对公司，这些对自己有什么收益，如何达成自己的目标。如果达成下级的目标，对这些进行调和。</p>
+<p>将流程落到具体可执行的条款，同时进行检查，用不同视角，审视是否合理。<br>至于具体如何实施，可以慢慢摸索，要有一定的适应度，对不合理的理解，以及容忍，等你可以有指导方案，再逐渐完善。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/06/12/arts-2022-06-12-algorithm/" title="704. 二分查找" itemprop="url">704. 二分查找</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-12T07:25:00.000Z" itemprop="datePublished"> Published 2022-06-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<p>示例 1:<br>输入: nums = [-1,0,3,5,9,12], target = 9<br>输出: 4<br>解释: 9 出现在 nums 中并且下标为 4</p>
+<p>示例 2:<br>输入: nums = [-1,0,3,5,9,12], target = 2<br>输出: -1<br>解释: 2 不存在 nums 中因此返回 -1</p>
+<p>提示：</p>
+<ol>
+<li>你可以假设 nums 中的所有元素是不重复的。</li>
+<li>n 将在 [1, 10000]之间。</li>
+<li>nums 的每个元素都将在 [-9999, 9999]之间。</li>
+</ol>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/multiply-strings" target="_blank" rel="noopener">https://leetcode-cn.com/problems/multiply-strings</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h1><p>数组，二分法</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>方法1<br>递归二分查找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int search(int[] nums, int target) &#123;</span><br><span class="line">        int begin = 0;</span><br><span class="line">        int end = nums.length - 1;</span><br><span class="line">        if(nums[0] &gt; target || nums[end] &lt; target)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(nums[0] == target )&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(nums[end] == target)&#123;</span><br><span class="line">            return end;</span><br><span class="line">        &#125;</span><br><span class="line">        return binarySearch(0, end, nums, target);</span><br><span class="line">    &#125;</span><br><span class="line">public int binarySearch(int start, int end, int[] nums, int target)&#123;</span><br><span class="line"></span><br><span class="line">    if(nums[start] == target )&#123;</span><br><span class="line">        return nums[start];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    if(nums[end] == target)&#123;</span><br><span class="line">        return nums[end];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    int half = (end - start) / 2 ;</span><br><span class="line">    if(half == 0)&#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    int halfnum = nums[half + start];</span><br><span class="line">    if(halfnum == target)&#123;</span><br><span class="line">        return half + start;</span><br><span class="line">    &#125;else if(halfnum &lt; target)&#123;</span><br><span class="line">        return binarySearch(half + start, end , nums, target);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return binarySearch(start , half + start, nums, target);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路2<br>看了题解，理解了二分法，又重新实现，关键在于边界的选择，开闭，通过理论的分析，比自己写的要很很多。<br>二分法的适用条件，1.没有重复数据，2.有序数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">public int search(int[] nums, int target) &#123;</span><br><span class="line"></span><br><span class="line">    int left = 0;</span><br><span class="line">    int right = nums.length - 1;</span><br><span class="line">    if(nums[0] &gt; target || nums[right]&lt; target)&#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;    </span><br><span class="line">    while(left &lt;= right)&#123;</span><br><span class="line">        int middle = left + (right - left) / 2;</span><br><span class="line">        if(nums[middle] &gt; target)&#123;</span><br><span class="line">            right = middle -1;</span><br><span class="line">        &#125;else if(nums[middle] &lt; target)&#123;</span><br><span class="line">            left = middle + 1;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return middle;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">       return -1;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/二分法/">二分法</a><a href="/tags/数组/">数组</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/06/05/arts-2022-06-05-review/" title="Junit5 之Dynamic Test初探" itemprop="url">Junit5 之Dynamic Test初探</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-05T07:24:00.000Z" itemprop="datePublished"> Published 2022-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>之前的@Test注解跟之前junit4的差别不大，都是编译期就确定的，运行期不能改变。<br>Junit5添加的Dynamic test就是为了弥补这一不足。Assumptions提供了比较基础的方式提供的动态行为。</p>
+<p>Junit Jupiter引入的全新的编程模型，使用@TestFactory 在运行期生成工厂方法，来实现动态行为。<br>@TestFactory与@Test 比本身不是测试用例，是测试用例的工厂，一个dynamic test是共产的产品。<br>@TestFactory必须返回，一个单独的 DynamicNode 或 一个 Stream, Collection, Iterable, Iterator, 或 DynamicNode 实例数组。<br>DynamicContainer和DynamicTest是DynamicNode的子类。DynamicContainer是一个显示的名字和动态节点的集合。<br>DynamicTest 实例会延迟执行，即使没有明确的用例，也会动态化。是显示名字和Executable组合，Executable是@FunctionalInterface接口可执行lambda表达式。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/06/05/arts-2022-06-05-share/" title="2022上海新冠疫情解封" itemprop="url">2022上海新冠疫情解封</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-05T07:22:00.000Z" itemprop="datePublished"> Published 2022-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>6月1号前，小区就全解封了，封闭的铁皮都拆掉，还没等1号的到来，已经全解封了。<br>今天是3号，出去坐了地铁，逛了商场，堂食还没开，本来大吃一顿，但看来吃不成，买了个烤肠和烤猪蹄，商场外面啃了啃就回家了。<br>从4月10多号封闭到6月份，2个多月了。<br>想起刚封闭的时候，当天我刚从单位的封闭3天解封出来，但过了多久有点记不清了。在单位隔离的几天真的难受，还要上班，还要发版，晚上也睡不好，凳子上躺着腰很难受，一会一醒，周围鼾声也很大，睡的很难受。<br>封闭前一天，新闻里听了上海疫情有点严重，但看我小区还没封闭，只有几个楼栋口封闭，本来想老小区，老年人多，疫情肯定严重，但没想到，还行，还挺乐观，当晚我们跟我在路上视频，问候情况，我还大大咧咧说没事，都挺好的。但听到不远处就有警车声，看到警车，感觉就不太好。晚上还特意出去逛逛，但也没买啥。没想到这是最后一次出去了，第二天我居家办公，欣欣出门上班，不一会就回来了，说小区封闭了，出不去了。当时还觉得挺高兴，不用通勤上班了，但没想到再出去都过去2个月了。</p>
+<p>虽然我们被隔离在小区，但还好可以远程上班，工作不耽误，工资照发。开始高兴，每天省2个小时的通勤时间，爽。但慢慢变得每天24小时工作，没有了下班时间，以前还可以说，下班了，没带电脑，明天再说。但现在24小时都在，每天醒了就上班，一直工作到10点多，然后睡觉。最终两点一线，省去通勤时间，全是上班，完全没有下班了。<br>加班我觉得跟我自己有关系，白天工作，经常有人找，都是帮别人解决问题，自己想干的问题，只能在别人完成后，晚上或周末抽空做，完成你自己的事情，才能完成你的绩效，对自己工作安排的还不太到位。</p>
+<p>之前一户可以出去一个，我就出去了，第一次出去，除了保供的商店，其他都还用铁皮拦着，但第一次出去的时候街上人也挺多了，我就去联华排队买东西。我们这个老小区的超市很奇怪，之前我是比较适应大超市，比如家乐福、沃尔玛的，但这些大超市距离都有点远，反正是国内的联华超市，基本能买到生活必须品，价格也还可以，虽然小一点，装修、东西差一点，但该有的都有。满足需求，反而大家都去，更实在。当时8点多出门，去了就先排队超市，队伍特别长，8点半开门，差不多排了1个小时，9点半进去了，里面人还可以，东西还会挺多，但酸奶啥的没有了，调料也不全了。买了必需的东西，出门继续逛逛其他地方，去了肯德基那边，茶百道开了，人有点多，就没排队，肯德基什么都没开，后面去了侧门逛逛，但铁皮基本没拆，就回去了，东西很沉，也走了很远，很累。</p>
+<p>后面第二次出去，基本拦商家的铁皮都拆了，但就10点多出去，也没想多逛，如海超市逛逛，就回去了。再后面就全面解封了，上海这次解封，真的太快了，封闭磨磨叽叽，导致扩散严重，小区内疯狂传染，开始感觉没怎么出去，但小区内突然一栋栋封闭，后面又更魔幻的，突然没有新增了，再后来就是突然全面解封，感觉还没都清零，但说解封就全放开，自由出入。然后上海严重的时候，中风险一个没有，现在全面放开了，又开始有中风险了，都清零了，又开始有确诊了，离谱的是还确定了中风险，我们隔离2个月，本来应该有赔偿的，但现在啥都没有，就因为不是中风险。</p>
+<p>这段封闭对我们来说，还算舒服，吃穿不愁，就是每天上班有点累，不能出门有点烦，对于某些人来说就是生离死别， 有基础病的老年人，不会用智能机，不知道怎么抢菜。 有重病要看医生的，出不去。</p>
+<p>不管怎么说，多面手是必要的，生活各种方面都要重视，才能在恶劣的环境中生存。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2021/07/10/arts-2021-07-10-share/" title="工作上如何提升自己的重要性" itemprop="url">工作上如何提升自己的重要性</a>
   </h1>
   <p class="article-author">By
@@ -397,367 +718,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/01/11/arts-2020-01-11-share/" title="批判性思考的详细目录的自我回答" itemprop="url">批判性思考的详细目录的自我回答</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2020-01-11T10:30:00.000Z" itemprop="datePublished"> Published 2020-01-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>批判性思考的详细目录<br>1.究竟是哪些因素塑造了我的个性？它们是如何实现这一点的？我的自我形象如何受到了影响？由于这些影响，我在哪些情况下比较缺少个体性？<br>答：我的父母，父亲的胆小节俭，母亲的品质，整体父母的认知高度，家境一般，对钱比较吝啬，独生子女，对关系处理没有经验，喜欢逃避，父母经常吵架，喜欢逃避到学习里，后面远离家，主动逃离家庭。</p>
-<p>恋爱让我对于亲密关系，有了更好的理解。<br>教育塑造了我的性格，只追求学习</p>
-<p>2.我在哪些方面像是一个好的思考者（如第二章所概述的）？我在哪些方面像个拙劣的思考者？哪些类型的情形看起来显示出我最好和最坏的品质？<br>答：对于自己熟悉的内容，比如软件方面，但对于自己完全不了的东西，几乎只能用直觉去思考</p>
-<p>3.在多大程度上我对真实情况的观察是合理的？（如有必要，再看一下第三章）<br>答：反观之前的观察，很多可能都是不合理的，对于自己不涉及其中的，很多都是客观的合理的，涉及自己的不由自主的会双重标准，默认模式一下接管，对事物的观察也不那么合理，之前从来没想过这些问题，也没反观过思考过程，以为想一下就算思考了，现在看来有些幼稚。</p>
-<p>4.我是如何仔细地把传闻、谣言和事实分开的？如何把已知的与假定或猜测如何区分？对我而言，说“我不知道”有多难？<br>答：传闻、谣言和事实，现在我也不能很好的分清楚，没有办法去考察，就都不当成事实去认为，只有仔细搜索，多个地方作证，才算事实。<br>已知、假定、猜想。三者很难区分，已知的可能是不对的，假定的时间一长没有验证，可能就认为是事实了，猜想也一样，很多时候没有经历去验证，就认为是事实，</p>
-<p>5.我在设法把我的观点有事实根据时时如何前后一致的？<br>答：我也是经常颠倒顺序，一般是先提出自己的观点，再去寻找能支持自己观点的证据，因为没有观点被认为是无能的，所以我们会先有一个观点，然后再去找支持观点的证据，但这个时候，你已经有了结论，就没办法客观的面对事实了。</p>
-<p>6.我在多大程度上认为“我的更好”（不仅是个人的“我的”，而且也是族群中心主义的“我的”）？这种思维在哪些方面影响我对个人问题和公众议题的看法？它在多大程度上影响了我倾听那些不同意我观点的人的能力、我控制自己情感的能力、和我改变自己的想法并修改一个判断的意愿？<br>答：大部分情况，我都会持有我的更好的观点，而且拿自己长处比别人的短处，以获得优越感，然后放弃对别人长处的学习，心安理得。继续生活。而且对于族群也是持有我的最好，而且没有想过这有什么不对。对于别人的问题，我只认为别人蛋疼，自己的问题却很重要，认为自己比别人优秀，果断。但其实没有，只是没有去思考过这些问题。</p>
-<p>7.在哪些事情上，我倾向于假定得太多，把太多的东西当作理所当然的？<br>答：对于不熟悉的事情都有很美好的假定，比如大公司肯定更美好，各方面都很优秀，不会有这么差的恶人，但其实人都一样，不能排除任何情况。不能想当然，别人应该怎么做。</p>
-<p>8.我在多大程度上倾向于要么/要么观念，期望正确的答案总是极端的而绝不是中庸的？<br>答：很多时候会这样，尤其冲动的时候，要么能去大公司，其他拒绝你的公司，我自己都看不上，别人的努力在我眼里一文不值。期望别人能解决问题，如果给出了模棱两可的回答，就觉得跟没说一样，别人没有给出简单的解决方法，觉得别人不行，傻逼，自己做的时候没做好就是条件导致。</p>
-<p>9.我对什么或谁感到最强烈的遵从的冲动？在哪些情况下，这种遵从习俗冲动的倾向干扰了我的判断？<br>答：对于权威，比如领导的话， 习惯于准从，然后放弃思考的，放弃去管这些事情，不能完全相信警察，等公职人员，他们也是人，会受上面的压迫，受个人思维的影响，导致出错，对于一些崇拜的人话，也是不加思索，比如当时确信李笑来的话都是对的，但也没多方面去思考，各种情况，就使用，觉得自己很厉害还高人一等，其实只是听了别人的结论，瞎用。</p>
-<p>10.我倾向于世一个要求真理是整洁和简单的绝对主义者，还是一名声称每个人创造他或她自己真理的相对主义？我的性格倾向于在哪些方面妨碍我发展成批判的思考者？<br>答：我更倾向于要求世界是简单和整洁的绝对主义，如果别人没这么做，就是他们没做好，我要是做不会这样。性格中的妥协，如果有些困难可能很容易就放弃。</p>
-<p>11.在哪些问题上我对变化的偏见最大？我过分地接受改变还是过分地抵制它？这种倾向的原因是什么，我如何最好地控制它？<br>答：对于我熟悉的东西，对于变化偏见很大，可能会影响到自己，如果跟我没关系，倾向于变化，反正对我没有影响。而且对于不了解的变化，比较抵制，因为这些自动不懂，很恼怒，不如自己懂得，显得自己厉害。对变化，要看本质，找因果。</p>
-<p>12.在哪些情况下，我试图证明自己的偏见而不是控制它们？在哪些情况下我以逢迎自己偏见的方式去解释证据？<br>答：别人挑衅自己的时候，我总是证明自己，为了给自己找面子，显得自己强一些。为了表现自己的时候，都是这样，汇报工作，等期待结果的时候。</p>
-<p>13.我如何经常地使用双重标准地解决问题，忽视赞同我观点的论证中的缺点，而挑剔那些反对我观点的论证？<br>答：当你花很多时间，去给出一个解决方案，你就很难理智的判断的，你花了时间，不想浪费，所以千方百计去维护，尽量不显得自己像白痴，浪费了很多时间，又一事无成。</p>
-<p>14.我在多大程度上倾向于跳跃到结论？我在某些领域更倾向于如此？如果有，那是哪个领域？我完全为了方便而草率得出结论吗？我受到听起来有权威性和令人印象深刻的欲望所驱使吗？<br>答：当会花很多时间或精力的情况下，我倾向于直接寻找别人的答案，而不去证明，节省时间，赶紧解决这一个，进入下一个。</p>
-<p>15.我过度概括到什么程度？我最容易接受哪些类型的刻板成见？种族的？宗教的？族群的？<br>答：最典型的刻板成见就是来自我爸，什么南方人精明，哪个地方的人怎么样，用一个地方代表一个地方人的所有特性，我在上海看到对上海人的刻板印象是很明显的。</p>
-<p>16.我在多大程度上过度简化复杂的事情？我只是不愿费力从复杂性上了解真理，抑或我感觉受到不整洁、不简明的答案所威胁？是什么使我这样？<br>答：过度简化有的时候是懒惰，截止时间的压力，等，赶紧解决手头的工作，对于能交代即可。</p>
-<p>17.我经常犯哪些表达的错误？我推论如果B跟随在A之后，那A必定是B的原因吗？我为了避免困难或尴尬的讨论而转移议题吗？我自相矛盾，作循环论证，作出无意义的陈述吗？我把真实的权威与虚假的权威相混淆吗？我作出错误类比吗？我运行非理性的诉求吗？<br>答：我有的时候喜欢强行解释，自己还感觉自己在搞笑，但实际可能在别人看来就是胡扯。抬杠。</p>
-<p>18.下列哪些错误最能体现我对质疑和批评自己观点的说法作出反应的特征：自动拒绝？转移举证责任？“稻草人”做法？攻击批评者而不是讨论问题？<br>答：攻击批评者，说你也怎么怎么做，我也就这样了，既然你也不行，你凭什么提出这样的要求，大家都这样。不自觉的转移话题，听成别的问题，没有完全听明白的情况下，就说了自己熟悉的内容。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/思维/">思维</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/01/11/arts-2020-01-11-tip/" title="返回值校验与异常抛出" itemprop="url">返回值校验与异常抛出</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2020-01-11T10:25:00.000Z" itemprop="datePublished"> Published 2020-01-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>起因是因为，最近在做公司的项目，我做的是前端系统，取数据需要调用后端系统，我能做的事情不多，所以对于返回值校验这块起来兴趣，而且我们调用后端接口，是内部的一个服务平台。我们前端的微服务，有一个微服务作为统一的调用内部服务平台的入口，所以先通过feign调用到这个组件，再通过这个组件去调用内部服务平台。这样做的好处是，只需要配置一个地方的服务平台参数，就能所有服务公用。但用的不舒服的地方就是返回值是一个map，没有类型信息，不清楚里面有什么值，好处是通用。所以我还是想用bean去接收返回值，然后去校验字段，处理这些异常。</p>
-<p>提取出问题的几个关键点，内部服务平台因为所以服务都需要用，但每个微服务都配置麻烦，所以就集中一个微服务配置，其他服务通过feign调用，该组件集中调用内部服务平台，然后透传给每个微服务。我们将该调用内部服务平台的微服务定义为A服务，A服务与其他微服务为了通用，就使用map作为返回值，因为不想每次都开发新接口给每个微服务，因为A服务没有每个接口类型信息，所以也就不能给每个调用者转类型，这也是一种处理方式。然后每个微服务自己从map里取值，通过map在业务里传递，完成处理。这也是一种行得通的设计。</p>
-<p>但这种设计的缺陷就是，后面的人不好维护，非开发的人找不到接口里到底有什么值，map没有任何类型信息，字段意义，开发方面，但维护成本高。所以我倾向于使用bean去作为接收对象，在业务中传递，既可以校验，也有字段信息，缺点就是可能bean会很多，膨胀的很厉害。这是以编译期类型信息代替运行时类型信息。这就是第一个分歧点，使用编译器校验还是运行期，表面上的争议是bean还是map。</p>
-<p>我要实现的功能是返回值字段校验与统一校验异常处理，<br>思路1，如果返回值是map，那就一个个字段取出，校验，然后处理异常。缺点：人工做，容易错误，繁琐。好处：效率高。<br>思路2，返回值还是map，map转bean，然后bean做校验处理。后面的bean的校验统一用hibernate validator处理。缺点：map转bean，多种方法实现，反射等方法有性能较低，高性能转换需要引入其他框架。<br>思路3，返回是bean，在使用其他方面，单独校验处理异常。<br>这里有一个重要的点，就是调用使用的feign调用，业务B服务，调用A服务，A服务会进行json转换，再调用内部服务平台，返回值，再json序列号，发给B服务，B服务的feign再反序列化。<br>思路3.1，A服务要有B服务的返回值类型，然后在内部平台返回时，先反序列化成B服务的类型，再返回给B，这样A服务，要有所有服务的类型信息，不太合适，A服务应该不频繁改动。<br>思路3.2，A服务，既然不能有类型信息，那就不解析，直接透传呢？好像问题解决了。因为内部平台正好也是json类型的返回值，直接在A服务，不解析json，直接返回给B，B用类型信息去解析，这是透传还不能消耗json解析的时间。这个地方，返回值使用string，然后produces使用json，spring mvc可以直接返回json。返回bean的第一个问题，解决了，可以不用map，直接在B服务用Bean去接收。</p>
-<p>然后是校验的部分，<br>思路1，独立的部分去校验bean，返回值校验失败返回值，但不抛异常，单独一个方法再包装抛异常<br>思路2，在feign的decode的时候，去解析bean，校验字段，抛异常<br>这两个思路应该都支持，第一种更通用，第二种更简单。</p>
-<p>在feign的前后做好校验与异常，相当于定了接口，对于不同系统的管理也更方便。</p>
-<p>总结：通过不解析json进行透传，省略中间服务类型转换。通过feign前后encode与decode的重写，来处理bean的校验和异常的处理，bean的校验框架使用hibernate validator进行。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/01/01/arts-2020-01-01-review/" title="Mocks Aren&#39;t Stubs" itemprop="url">Mocks Aren&#39;t Stubs</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2020-01-01T14:30:00.000Z" itemprop="datePublished"> Published 2020-01-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="原文：https-martinfowler-com-articles-mocksArentStubs-html"><a href="#原文：https-martinfowler-com-articles-mocksArentStubs-html" class="headerlink" title="原文：https://martinfowler.com/articles/mocksArentStubs.html"></a>原文：<a href="https://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="noopener">https://martinfowler.com/articles/mocksArentStubs.html</a></h2><p>这篇是Martin Fowler 大神对于单元测试的概念的分析，收获颇多。</p>
-<p>该篇文章解释mock对象如何工作，如何鼓励基于行为的测试，社区如何围绕他们发展出不同风格的测试。</p>
-<p>第一次听说术语“mock object” 是一些年前在极限编程社区，但人们没有很好的描述它，而且经常与stub混淆，差异主要在两方面，一方面是测试结果的教研不同：状态校验和行为校验。另一方面，与测试和设计共同发挥作用的方式截然不同，这里我描述为classical和mockist TDD风格。</p>
-<h2 id="常规测试"><a href="#常规测试" class="headerlink" title="常规测试"></a>常规测试</h2><p>订单包含商品和数量，仓库保存不同的商品和数量，然后用仓库填充订单，2种不同的响应，商品足够填充订单，订单填充，仓库商品减少，商品不足，订单失败，仓库不变。XUnit 测试遵循典型4个阶段顺序，setup，exercise，verify，teardown。例子中订单是测试对象，我使用System Under Test，仓库是一个配合对象。这个风格是状态校验（state verification）</p>
-<h2 id="Mock对象的测试"><a href="#Mock对象的测试" class="headerlink" title="Mock对象的测试"></a>Mock对象的测试</h2><p>setup阶段有些不同，分成2部分，data和expectations<br>关键不同点是我们通过订单的反馈来校验它是否做了对的事情，状态校验通过仓库的状态判断。Mock使用行为校验。</p>
-<h2 id="使用EasyMock"><a href="#使用EasyMock" class="headerlink" title="使用EasyMock"></a>使用EasyMock</h2><p>EasyMock使用 记录/回放 （record/replay）隐喻去设置期望。每一个对象创建一个control和mock对象。可以添加额外的特性，可以调用实际的方法，不用传方法名。</p>
-<h2 id="Mocks与Stubs的不同"><a href="#Mocks与Stubs的不同" class="headerlink" title="Mocks与Stubs的不同"></a>Mocks与Stubs的不同</h2><p>当你专注于一个软件元素时，也就是我们通常的单元测试，做一个单一的单元测试的问题时，我们经常需要其他的单元，因此我们的例子中需要仓库。</p>
-<p>在之前我们展示的2种测试风格中，第一个例子使用真实的仓库对象，第二个使用模拟的仓库对象，使用mocks是一种不适用真实仓库的方法，但还有其他形式不使用真实对象的方法。<br>在讨论这些的时候词汇容易混乱，stub，mock，fake，dummy。这里我们使用Gerard Meszaros的书。Mezaros使用术语Test Double代表任何类型的假装对象，来替换真实对象。<br>Dummy对象是传递，但不会实际使用。通常他们知识填充参数列表。<br>Fake对象实际工作与实现，但通常使用一些捷径，不满足生产（比如内存数据库）<br>Stubs提供一个调用的罐头类回答，通常不回答任何外界的要求。<br>Spies当他们被调用的记录一些信息，一种形式是email服务记录有多少消息发送<br>Mocks编程前给予期望，特定调用的响应。</p>
-<h2 id="差异的选择"><a href="#差异的选择" class="headerlink" title="差异的选择"></a>差异的选择</h2><p>文章中已经讨论了不同：/状态或行为校验 /classic or mockist TDD。选择行为状态 vs 行为呢？<br>第一个是考虑上下文。如果时间简单的配合，没有什么选择。mockist就是mock对象，行为校验。classicist确实需要做选择，但不是特别大，通常是一个个的解决。<br>cache是一个比较难classical的方式去解决，mocj是一个好方式。</p>
-<h2 id="Driving-TDD"><a href="#Driving-TDD" class="headerlink" title="Driving TDD"></a>Driving TDD</h2><p>Mock对象是从XP社区出来的，而且重点发展TDD是XP的特性原则之一，那里系统设计通过写测试迭代发展。<br>因此不用惊讶mockists，尤其是mockist testing 在设计上的效果的谈论，尤其他们贡献了一个叫need-driven development 的方式。通过这种方式，你通过写一个测试开始你的用户故事，给你的SUT制定一些接口，通过合作者的一些期望，你开放SUT与关联对象的关系-有效设计SUT的关联接口。</p>
-<p>一旦你有了一个测试在运行，在mocks对象上的期望提供下一步的规范和测试的起点。你一个添加测试上的期望在合作者上，然后重复过程在SUT上，这种方式在分层系统中工作得很好。你第一步写UImock，然后写耕更低层次的测试用例，逐渐写每一层，这是一种结构化和可控的。很多人相信对于新的面相对象和TDD新人是有帮助的。</p>
-<p>Classic TDD没有提供这种指导，你可以做相似的步骤，使用stub方法替代mocks。当你需要合作者的时候，你写死代码来响应SUT的工作。</p>
-<p>但是classic TDD可以做另外的事情，一种通常的风格是middle-out。在这种风格，你做一个特性，决定你需要在domain中。<br>我应该强调mockists和classicists做了同一件事情，有这么一个学校教大家，一层层去构建系统，不是开始一层指导另外一层完成。classicist和mockist都趋向于敏捷背景和更容易获得的迭代循环，结果他们逐个特性地工作而不是逐层工作。</p>
-<h2 id="夹具设置"><a href="#夹具设置" class="headerlink" title="夹具设置"></a>夹具设置</h2><p>Classic TDD 你需要创建的不仅仅是SUT，同时也要创建所有的合作者来响应SUT测试，测试通常会调用一大堆合作对象，通常这些对象每次测试被创建和销毁。<br>Mockistest只要创建SUT和模拟相关的邻居，者可以避免创建复杂的夹具。<br>实际中，classic测试者趋向于重用复杂的夹具。最简单的方式是将夹具放在xUnit setup方法中，更复杂的夹具，几个测试类都需要用的，需要生成类，我通常称他们是Object Mother<br>结果我听到双方都控诉对方做了太多的工作，mockists说创建夹具做了太多的努力，但classicist说这个可以重用，但你不得不每次都创建mocks。</p>
-<h2 id="测试隔离"><a href="#测试隔离" class="headerlink" title="测试隔离"></a>测试隔离</h2><p>如果你通过mockist测试引入一个bug，它通常只引起SUT包含bug的失败。通过classic的方式，很多相关的可能都失败，如果一个重用的对象，那会导致很多的失败。<br>Mockist测试者因为这是一个主要的问题，它导致很多debugging，为了发现错误的根源与修复它。但classicist看起来不是什么问题，因为一般是最后编辑的代码有问题，你很快会发现。</p>
-<p>测试粒度是一个重要的因素。因为classic测试执行多个真实对象，你经常会发现单个测试有一簇对象，很难发现真实bug的源码，测试粒度太粗会发生。<br>本质上xunit测试不仅仅是单元测试，也包括最小化的集成测试。</p>
-<h2 id="实现与测试耦合"><a href="#实现与测试耦合" class="headerlink" title="实现与测试耦合"></a>实现与测试耦合</h2><p>当你写mockist测试，你需要调用SUT，确保它提供的正确的，classic测试只关心最终状态，不关心状态如何传递，Mockist测试更多与实现耦合，改变合作方法会导致mockist测试损坏。<br>这些耦合导致一些关注，最重要的是对TDD的影响。mockist测试，书写测试要确保实现的行为，相反mockist测试者把这个看成优点。Classicists，认为只关心外部的接口，留下所有实现关联直到测试写完。</p>
-<h2 id="设计方式"><a href="#设计方式" class="headerlink" title="设计方式"></a>设计方式</h2><p>这些测试方式最让我着迷的方面是他们如何影响设计决定。<br>我已经提到一些不同层面的踪迹。Mockist测试者支持从外到内的实现，classic测试更倾向于domain model的方法。</p>
-<h2 id="该选择classicist或mockist-，我发现这是一个难回答的问题。"><a href="#该选择classicist或mockist-，我发现这是一个难回答的问题。" class="headerlink" title="该选择classicist或mockist ，我发现这是一个难回答的问题。"></a>该选择classicist或mockist ，我发现这是一个难回答的问题。</h2>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/架构/">架构</a><a href="/tags/单元测试/">单元测试</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/01/01/arts-2020-01-01-tip/" title="java动态代理" itemprop="url">java动态代理</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2020-01-01T08:42:00.000Z" itemprop="datePublished"> Published 2020-01-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        InvocationHandler handler = new InvocationHandler() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">                System.out.println(method);</span><br><span class="line">                if (method.getName().equals(&quot;morning&quot;)) &#123;</span><br><span class="line">                    System.out.println(&quot;Good morning, &quot; + args[0]);</span><br><span class="line">                &#125;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Hello hello = (Hello) Proxy.newProxyInstance(</span><br><span class="line">            Hello.class.getClassLoader(), // 传入ClassLoader</span><br><span class="line">            new Class[] &#123; Hello.class &#125;, // 传入要实现的接口</span><br><span class="line">            handler); // 传入处理调用方法的InvocationHandler</span><br><span class="line">        hello.morning(&quot;Bob&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">interface Hello &#123;</span><br><span class="line">    void morning(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在运行期动态创建一个interface实例的方法如下：</p>
-<ol>
-<li>定义一个InvocationHandler实例，它负责实现接口的方法调用；</li>
-<li>通过Proxy.newProxyInstance()创建interface实例，它需要3个参数：<ol>
-<li>使用的ClassLoader，通常就是接口类的ClassLoader；</li>
-<li>需要实现的接口数组，至少需要传入一个接口进去；</li>
-<li>用来处理接口方法调用的InvocationHandler实例。</li>
-</ol>
-</li>
-<li>将返回的Object强制转型为接口。</li>
-</ol>
-<p>本质上运行期创建字节码并加载</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/代理/">代理</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/12/30/arts-2020-01-01-algorithm/" title="43. 字符串相乘" itemprop="url">43. 字符串相乘</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-12-30T14:15:00.000Z" itemprop="datePublished"> Published 2019-12-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。</p>
-<p>示例 1:</p>
-<p>输入: num1 = “2”, num2 = “3”<br>输出: “6”<br>示例 2:</p>
-<p>输入: num1 = “123”, num2 = “456”<br>输出: “56088”<br>说明：</p>
-<p>num1 和 num2 的长度小于110。<br>num1 和 num2 只包含数字 0-9。<br>num1 和 num2 均不以零开头，除非是数字 0 本身。<br>不能使用任何标准库的大数类型（比如 BigInteger）或直接将输入转换为整数来处理。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/multiply-strings" target="_blank" rel="noopener">https://leetcode-cn.com/problems/multiply-strings</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h1><p>不能直接转整数，那就需要去模拟乘法，<br>然后就是容易超出整数的范围<br>我只想到了一位数字乘以被乘数，但还是会超出位数限制，long也没有110位</p>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>看到一个评论，一位一位计算，放入数组</p>
-<p>错误1 要添加以前位，不光是最后一位<br>0 * 0 返回 “”，因为去0导致</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String multiply(String num1, String num2) &#123;</span><br><span class="line">        int n1 = num1.length();</span><br><span class="line">        int n2 = num2.length();</span><br><span class="line">        if(n1 &lt; 0 || n2 &lt; 0)return &quot;&quot;;</span><br><span class="line">        int[] result = new int[n1 + n2];</span><br><span class="line">        for(int i = n2 -1; i &gt;= 0 ; i--)&#123;</span><br><span class="line">            for(int j = n1-1; j &gt;=0 ; j--)&#123;</span><br><span class="line">                int one = num2.charAt(i) - &apos;0&apos;;</span><br><span class="line">                int two = num1.charAt(j) - &apos;0&apos;;</span><br><span class="line">                int sum = one * two + result[i+j+1];</span><br><span class="line">                result[i+j] += sum/10;</span><br><span class="line">                result[i+j+1] = sum%10;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        boolean zero = true;</span><br><span class="line">        for(int k = 0 ; k &lt; n1+n2 ; k++)&#123;</span><br><span class="line">             if(result[k]!=0)&#123;</span><br><span class="line">                zero = false;</span><br><span class="line">            &#125;</span><br><span class="line">            if(!zero)&#123;</span><br><span class="line">                sb.append(String.valueOf(result[k]));</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        return sb.toString().equals(&quot;&quot;)?&quot;0&quot;:sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/字符串/">字符串</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -787,11 +747,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>26</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>27</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>36</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>38</sup></a></li>
 		  
 		
 		  
@@ -819,6 +779,10 @@
 		  
 		
 		  
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>2</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/闲谈/" title="闲谈">闲谈<sup>1</sup></a></li>
 		  
 		
@@ -832,7 +796,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>36</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>38</sup></a></li>
 			
 		
 			
@@ -840,7 +804,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>26</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>27</sup></a></li>
 			
 		
 			
@@ -876,7 +840,7 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>5</sup></a></li>
 			
 		
 			
@@ -888,6 +852,10 @@
 			
 		
 			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
@@ -896,19 +864,15 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java/" title="Java">Java<sup>2</sup></a></li>
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/二分法/" title="二分法">二分法<sup>2</sup></a></li>
 			
 		
 		</ul>
@@ -979,7 +943,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2021 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2022 
 		
 		<a href="/about" target="_blank" title="R_Richie">R_Richie</a>
 		
