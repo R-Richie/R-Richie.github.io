@@ -79,6 +79,264 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/06/19/arts-2022-06-19-tip/" title="Junit5如何实现元注解初探" itemprop="url">Junit5如何实现元注解初探</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-19T02:45:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Junit5的注解有个比较有意思的特点就是都是meta-annotation 元注解，感觉比较有趣。<br>但经过搜索，没看到直接的分析是如何实现的，看到一篇Dzone的分析，但貌似跟现有junit实现不太一致，但也是一种思路。<br>注解本身是不会影响运行时的程序，需要在处理类里面去根据注解信息判断，Dzone的分析大致过程应该是对的，就是具体实现有各种情况。<br>我看到一个junit5的注解读取工具类，里面就一个读取元注解的，仔细看了一下，就是递归遍历，当前注解以及直接下级注解，然后再遍历递归，就能找到要找的元注解。<br>其他我还没完全弄懂，只是一个自认为可以的思路，junit加载的机制还没弄清楚，还需要继续深入理解。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/06/19/arts-2022-06-19-algorithm/" title="27. 移除元素" itemprop="url">27. 移除元素</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-19T02:43:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h1><p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<p>// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝<br>int len = removeElement(nums, val);</p>
+<p>// 在函数里修改输入数组对于调用者是可见的。<br>// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。<br>for (int i = 0; i &lt; len; i++) {<br>    print(nums[i]);<br>}</p>
+<p>示例 1：</p>
+<p>输入：nums = [3,2,2,3], val = 3<br>输出：2, nums = [2,2]<br>解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。<br>示例 2：</p>
+<p>输入：nums = [0,1,2,2,3,0,4,2], val = 2<br>输出：5, nums = [0,1,4,0,3]<br>解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。</p>
+<p>提示：</p>
+<p>0 &lt;= nums.length &lt;= 100<br>0 &lt;= nums[i] &lt;= 50<br>0 &lt;= val &lt;= 100</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/remove-element" target="_blank" rel="noopener">https://leetcode.cn/problems/remove-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>思路1<br>将跟值一样的，跟最后一位进行交换，这样就能保证原地查找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">        int last = nums.length -1;</span><br><span class="line">        int begin = 0;</span><br><span class="line">        while(begin &lt;= last)&#123;</span><br><span class="line">            if(nums[begin] == val)&#123;</span><br><span class="line">                int temp = nums[begin];</span><br><span class="line">                nums[begin] = nums[last];</span><br><span class="line">                nums[last] = temp;</span><br><span class="line">                last--;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                begin++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return last+1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路2<br>快慢指针法，快指针循环遍历，慢指针停留在需要替换的问题，当快指针走的时候，如果值不等val，就替换慢指针，直到循环结束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">        int slow = 0;</span><br><span class="line">        for(int fast = 0 ; fast &lt; nums.length ; fast++)&#123;</span><br><span class="line">            if(nums[fast] != val)&#123;</span><br><span class="line">                nums[slow++] = nums[fast];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/数组/">数组</a><a href="/tags/快慢指针/">快慢指针</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/06/19/arts-2022-06-19-share/" title="居家办公时间反思" itemprop="url">居家办公时间反思</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-19T02:42:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>居家办公3个月，发现一个其他的现象，通勤时间每天节约2个小时，但每天工作的时间反而增多了。<br>原来每天6点45闹钟，7点20出门，到公司8点20左右，稍微晚点会迟到。<br>现在每天7点45闹钟，洗漱，打开电脑发上班打卡邮件，8点半左右吃早饭。<br>时间看起是多了一个小时睡觉。</p>
+<p>原来晚上早的话7点多下班，地铁1个小时，到家也要8点左右。晚一点就8点半打车回家，到家9点左右。<br>现在6点左右开完夕会，开始做饭吃饭，饭后休息到7，8点，继续干活。9点多打卡下班，晚到10，11点。<br>每天路上的时间少了，但其他的事情却没干，还是干了工作，工作有的时候效率比较低，沟通不顺畅。</p>
+<p>所以只是客观条件变化，不会改变你个人的实际情况，要改变你的习惯，才能真实改变你的现状。从自己的习惯，改变做起，才能改变你的现状。不能把自己的改变依托于环境，环境会改变人，是改变了人的习惯。但环境不一定能改变你的习惯，所以要主动改变习惯。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/06/19/arts-2022-06-19-review/" title="Junit5 之 Test Instance Lifecycle 初探" itemprop="url">Junit5 之 Test Instance Lifecycle 初探</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-19T02:40:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>为了每个test方法独立的执行和避免不可变单元测试非预期的副作用，junit在每个方法执行前创建一个测试实例。<br>如果你想jupiter执行所有方法在相同的测试实例，在你的测试类上添加注解 @TestInstance(Lifecycle.PER_CLASS)。如果使用这种模式，每个测试类将生成一个测试实例。因此如果你的测试方法依赖实例状态，你可能需要在@BeforeEach @AfterEach重置状态。<br>“per-class“ 模式有一些额外的好处对比默认的“per-method”模式。尤其，“per-class”通过接口模式方法可以使用非静态方法实现@BeforeAll @AfterAll。“per-class在@Nested测试类里也可以实现@BeforeAll 和@AfterAll</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2022/06/12/arts-2022-06-12-review/" title="Junit5 之 Timeouts" itemprop="url">Junit5 之 Timeouts</a>
   </h1>
   <p class="article-author">By
@@ -456,268 +714,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2021/06/27/arts-2021-06-27-share/" title="回顾做公共框架" itemprop="url">回顾做公共框架</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2021-06-27T12:19:00.000Z" itemprop="datePublished"> Published 2021-06-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>回顾如何开发一款给别人使用的公共框架</p>
-<p>开端：趟了无数的坑，初步感觉有一些公共的功能可以提炼。<br>像我们这个前端系统，转发是关键，接口处理很简单，调用其他系统多，数据库处理少，字段透传，不知道有什么字段。有隐私字段透传出去<br>字段映射就是想知道字段以及裁剪数据，后端结构烂七八糟。<br>请求其他系统很多，逻辑一大段耦合在一起。</p>
-<p>过程：想道要划分小模块，减少耦合。产生做流程编排的想法。</p>
-<p>找相似功能，云函数，亚马逊的lamadb表达式。但没找到开源实现。</p>
-<p>分离变与不变<br>做了状态容器，启动去初始化</p>
-<p>上下文数据是基于原来的入出参对象比较大的问题，从登录实践来</p>
-<p>流程与线程进行绑定隔离，是壁仓的想法</p>
-<p>第一次做这个事情，依赖不太会注意，以前各种三方jar包各种依赖，现在看来还是少依赖好。</p>
-<p>初始功能完成就要进入实战阶段，来检验以前的想法</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2021/06/06/arts-2021-06-06-share/" title="习惯" itemprop="url">习惯</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2021-06-06T02:18:00.000Z" itemprop="datePublished"> Published 2021-06-06</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>我对一个事物，从陌生到熟悉，开始会不断找这件事的不同之处，明白或熟悉之后，就会进入自动模式，按照之前的既定模式去行动，减少思考，这样，相当于更省力，效率也更高。但并不是所有情况下，按照习惯都是好事。</p>
-<p>就比如我的一个习惯，就是回家放松就是看视频。这个是放松杀时间的习惯，时间不知不觉就过去了。如果这个习惯经常被触发，就会导致我不知不觉时间就没了。</p>
-<p>让我想起原则这本书，人面对不断变化的生活，要做各种决策，怎么做的又快又好，看来最好的方法不是当时去想对策，而且提前做好思考，不同场景提前想好，那到了做决策的时候，就能很好的下判断。</p>
-<p>习惯就是我们对日常的情况，养成的一种处理方式，比如放松，我就选择看视频解说，既满足了我内心看多个电影的需求，又节省了时间，也不花精力，看起来是个双赢的选择。但演变到现在，不管什么时候有了空闲时间就刷视频，即使有了大段的时间，可以攻坚一些事情，也还是刷视频。<br>表面上在一个场景下适合的习惯，如果不能控制使用场景，就会演变成一个坏习惯。</p>
-<p>习惯的力量又是强大的，很容易让人进入自动模式，不受控制的做。所以能主动意识到什么情况下该做什么很重要，能反思什么情况下自己进入了自动模式，什么情况自己该进入什么自动模式，极其重要，每个人的时间差不多，不走弯路，可以节省很多时间。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2021/05/30/arts-2021-05-30-share/" title="预期管理" itemprop="url">预期管理</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2021-05-30T08:38:00.000Z" itemprop="datePublished"> Published 2021-05-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最早听到这个是在上一家公司，当时公司做的一款产品是走高端路线，但实际水平并没达到，但概念吹得足够响。但有的时候吹的太高，导致很多客户付款后到实际上线，心里落差很大，尾款结算不顺利。或者是预期太高，结果实际差距导致没有购买。我就听我们当时总经理提到预期管理，不能给客户太高的预期，预期是150，即使你现在已经不错了，到了90分了，客户也会觉得不好，但如果开始给客户的预期事80分，你到90分已经很好了，即使东西没变，客户的体验会好很多。</p>
-<p>想想这个结合最近部门来了一个职位更高的技术专家，我们本能的对他的预期更高，我们做不到的，做不好的都给他，让他去做，心理上也心安理得，毕竟人家职位更高，按理应该能力更强，对他的预期很高，如果他跟我们完成一样的东西，我们就会觉得不行，虽然东西一样，但是评判标准就会变化，会自然的提高。</p>
-<p>所以对于领导的预期也要有管理，最近部门长给我们定目标，想做一个引擎，解决所有问题，虽然理论上可性，但实际上没有用的地方。如果这个时候，答应下来领导，领导的预期很高。最后我们做出来的东西很难，给领导留一个好印象。<br>预期、实际结果与体验有几种关系，</p>
-<p>实际结果远低于预期，体验最差。<br>实际结果达到预期的最低标准，体验差，但勉强过得去。<br>实际结果达到预期，体验一般，勉强可以。<br>实际结果超过预期一点，体验良，不错，会越来越好。<br>实际结果超过预期很多，体验优，真不错，比我想还要好，有前途。<br>事件结果超过预期，有我都没想到的点，体验超凡，非常好，比我都强。</p>
-<p>从上面几种关系上看，第一给领导预期不能太高，如果太高，不管你实际结果是什么水平，只要没达到预期，都会很差，即使你做的不错。不管怎么说，职场上下级，始终是人的关系，最终结果是一回事，给人的感觉是另外一回事。<br>我们要做的第一件事，是降低实际预期。让目标更容易达到，第二个是到达目标。第三个是能超出预期，做一些意想不到的。这样你的上下级关系会更容易维护好。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2021/05/23/arts-2021-05-23-share/" title="大企业的推锅文化" itemprop="url">大企业的推锅文化</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2021-05-23T03:30:00.000Z" itemprop="datePublished"> Published 2021-05-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>之前都在小企业，虽然也很忙，但大家顶多是多做点，不致于互相推卸责任。但到了大企业，互相推卸责任反而是一个必备技能，小企业需求没那么多，提要求的人也没那么多，所以能做或想做的事情也不会太多，但到了大企业，你都说不好有多少人对你提要求，过程管理，安全，集团要求，A、B、C领导对你期待不同。所以你想做一些自己觉得重要的事情，就要尽量避免帮别人做一些不重要的事情，而且有些事情做了还不如不做，收益不大，风险极高，做了之后可能后面这些事情就都要你做，因为你做过。从自身经验这就是推锅的起源。</p>
-<p>我就是这么学会推锅的，开始觉得领导重用我了，就开始大包大揽做所有事情，正逢当时手下也没几个人，就全自己动手，然后一号技术负责人再是一个会推锅的人，他也会源源不断推给你一堆事情，然后你手头工作不断挤压，加班不断，因为加班强度大，犯错也增加，恶性循环，这个时候你醒悟做了这么多，不会有人说你好，反而当你出错，一堆人会批评你，这就是费力不讨好，然后我也学会了推锅，能推给别人的尽量不自己做，少做不加班，错的也少，何乐而不为。效果明显，简直就是必备技能，技能越强，受益越明显。</p>
-<p>想想之前曾经推锅的人都是吃了被推锅的亏，吃一堑长一智，才不断推锅，然后现实就演变成了一场推锅大会，大家会花很多时间去推锅，大家都知道这样不好，但不这么做，自己明显吃亏，肯定屁股决定脑袋。</p>
-<p>对于推锅，领导肯定明白，但这就会导致他想做的事情，大家推来推去，没人去做，这样他的目标就达成不了，这样在他的角度必然讨厌推锅的人，认为这样是不负责任的，严厉打击，所以大家把推锅用其他语言包装一下，领域划分，架构划分，用机制解决冲突，既要表达不该自己做，又不能表现出什么都不愿意做，绞尽脑汁用其他理由去包装，推锅变成一场博弈。</p>
-<p>有了推锅，大家学会了反推锅，你提出问题，你提解决方案，给提出问题的人反抛出一个难题。你让我难受，我也不让你好受。解决不了问题，就解决提出问题的人。</p>
-<p>接了锅有没有好处，做得越多，你对系统，业务越了解，你未来走的越远。<br>这是一个短期与长期的收益的关系，长期收益不明显，短期受损很明确。</p>
-<p>解决方法？<br>大家职责范围清晰，没有交叉，临时工作依次承接。但职责清晰有点难，总有些临时的，不确定范围的东西，不能避免。大家偶尔接触别人领域，大部分在自己领域。<br>推锅实际上是博弈，人与人的，最好一整块都是一部分人的，减少交叉，但交叉不可避免，还需要有机制处理这些博弈的问题。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -747,11 +743,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>27</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>28</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>38</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>39</sup></a></li>
 		  
 		
 		  
@@ -759,7 +755,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>27</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>28</sup></a></li>
 		  
 		
 		  
@@ -779,7 +775,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>2</sup></a></li>
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>3</sup></a></li>
 		  
 		
 		  
@@ -796,19 +792,19 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>38</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>39</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>29</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>30</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>27</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>28</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>17</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>18</sup></a></li>
 			
 		
 			
@@ -828,11 +824,11 @@
 			
 		
 			
-				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
 			
 		
 			
@@ -840,7 +836,11 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>5</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -852,10 +852,6 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
@@ -864,15 +860,15 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>3</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/二分法/" title="二分法">二分法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 		</ul>

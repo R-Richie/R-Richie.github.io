@@ -79,6 +79,259 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/12/22/arts-2019-12-22-algorithm/" title="344. 反转字符串" itemprop="url">344. 反转字符串</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T06:03:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p>
+<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
+<p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<p>示例 1：</p>
+<p>输入：[“h”,”e”,”l”,”l”,”o”]<br>输出：[“o”,”l”,”l”,”e”,”h”]<br>示例 2：</p>
+<p>输入：[“H”,”a”,”n”,”n”,”a”,”h”]<br>输出：[“h”,”a”,”n”,”n”,”a”,”H”]</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-string" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>方法1<br>双指针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void reverseString(char[] s) &#123;</span><br><span class="line">        int first = 0;</span><br><span class="line">        if(s.length &lt;= 1)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        int last = s.length-1;</span><br><span class="line">        while(first &lt; last)&#123;</span><br><span class="line">            char temp = s[first];</span><br><span class="line">            s[first] = s[last];</span><br><span class="line">            s[last] = temp;</span><br><span class="line">            first++;</span><br><span class="line">            last--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行用时 :1 ms, 在所有 java 提交中击败了100.00%的用户<br>内存消耗 :51.6 MB, 在所有 java 提交中击败了80.05%的用户</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/字符串/">字符串</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/22/arts_2019-12-22-tip/" title="spring项目单元测试初探1" itemprop="url">spring项目单元测试初探1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T05:44:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>之前在hcrm就专门花了很多时间去看如何写单元测试，但当时想通过他解决所有问题，直接保证质量。但单元测试并不能完全解决问题，可以解决一部分问题，而且受限于当时的场景，发现单元测试不解决不了太多问题，就没实际尝试。时隔3-4年又重新拿起来这个问题，但场景变了，环境变了，一些又那么理所当然，正好有人写了单元测试，我就趁机入门一下，发现原来也不难。</p>
+<p>项目使用的是spring cloud这套东西，但首先要先弄清楚什么是单元测试，什么是集成测试，什么是端到端测试。单元测试应该不依赖其他系统，自己就可以快速的执行，马上得到结果。如果与数据库关联，与其他系统关联就是集成测试，需要准备其他的环境。第一个条件是定义，那第二个条件就是弄清楚项目的情况，比如我的项目都是spring boot的，那spring 的依赖注入如何解决，servlet容器如何解决，这是第二步看关联。<br>比如我之前就很迷惑，Aservice里注入Bservice，Bservice注入Cservice，Cservice里注入Dservice，那我要使用Aservice，要不断new B、C、Dservice这个好麻烦，如果有一些不熟悉的复杂的service那就头大了。一种方式就是将整个spring容器启动起来，这样就是所有bean都有，直接取注入或者取都行，但这样就不算单元测试了，启动容器要加载所有bean，可能会很慢，而且很多我并不需要，之前就是卡在这里没过去。最近看了别人写的代码，发现通过代理的方式很好的实现了，先将要代理的对象注入，启动的时候自动代理这些对象，将要执行的方法的返回值，提前输入，等到触发代理条件，自动返回，这样就不用去实际创建这些对象，理解了这个用途，突然觉得代理强大，这个地方用的恰如其分。</p>
+<p>然后我写了一些业务代码，去stub这些service也有些烦，mockito不支持私有方法stub，需要找到公开的方法一点带你的mock，这点有点烦，也许是我用法不对，而且一些看起来很简单的判断逻辑要想每种条件都测试，也是很麻烦的事情。<br>这次算是单元测试入门，什么事情都是入门难，先快速入门，其他都好办了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/单元测试/">单元测试</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/22/arts-2019-12-22-review/" title="On java8 学习笔记 validating your code章节" itemprop="url">On java8 学习笔记 validating your code章节</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T05:44:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>你不能保证你代码是正确的，只能证明他是错的。<br>如果没有测试，它就是坏的。<br>因为java是静态语言，程序员对于语言的安全性太多舒服，想“编译通过了，那没问题了”。但是静态类型校验，有很大的限制。它只代表满足语法和基本类型规则。不意味着到达你编程的目的。</p>
+<p>单元测试<br>这个在你创造的代码中建立集成测试的过程，每次构建系统的时候运行他们。这样构建过程不仅仅检查语法错误。你教它检查语义上的错误。<br>“单元”涉及最小块代码测试的想法。每个类都测试方法的行为。“系统”测试不同，检查完成的程序是否满足要求。<br>C风格语言，尤其c++，注重性能甚于安全编程。开发java比c++更快的原因是因为java更安全。特性比如：垃圾收集，类型校验。集成单元测试在编译的时候，将扩展你的安全网，结果是更快的开发。你可以更简单和健壮的重构你的代码，当你发现设计和实现的缺陷时，一般情况下会生产更好的产品，更快。<br>我的测试经验开始于，保证书中代码的正确性，书中的每个程序必须能自动提取，和编译在一个合适的构建系统。这本书的构建系统是gradle，你安装jdk后， 简单的gradlew compilejava，来编译整本书的所有代码。。。。<br>JUnit<br>最初的junit发布于2000年，基于java1.0，没用到java反射机制，所以写单元测试是一个很麻烦和啰嗦的活动。我发现了设计的缺陷，写了自己的单元测试框架，这个框架走向了另一个极端，“尝试可能可行的最简单的方法”。自此Junit使用发射和注解提升了很多。最新版本添加了lambda的支持，在junit5中。<br>在最简单的junit使用中，每个方法代表一个测试，使用@Test注解。Junit确定这些方法为分立的测试，设定和运行一次只有一个，采取措施避免测试间的副作用。</p>
+<p>覆盖率的错觉<br>测试覆盖率，或者叫代码覆盖率。更改的百分比，更好测试覆盖率。很多方法去计算覆盖率，一个有用的文章描述是java code coverage tools<br>太容易决定100%覆盖率是可接受的值。数值不太是测试有效性的一个好的测量值。你可能测试了所有，只有65%的覆盖率。为了100%你可能要浪费很多时间保证其他。<br>测试覆盖率是一个初略的数据是有效的，当你分析一个未知的代码。如果测试工具报告很低的数值，比如40%，告诉你覆盖率可能是无效。然后一个非常高数值也是可疑的，可能是一个知识不足的人下团队决定。<br>最好的覆盖率工具是发现未测试的代码库。但不依赖它告诉你测试的质量。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/架构/">架构</a><a href="/tags/单元测试/">单元测试</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/22/arts-2019-12-22-share/" title="知骗才能防骗" itemprop="url">知骗才能防骗</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T05:42:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>今天从地铁里听到一句话开始，地铁里的安全防范教育中的一句话，引起了我的注意，当时的情景是宾馆里一个妇女给前台递上一个字条求助报警，后面一个好心人发现这是一个骗局，警察到了也一下就醒悟的，原来是这样。然后节目点题，知骗才能防骗。</p>
+<p>这让我回想中，确实是这样， 如果一点概念都没有很容易陷入骗子的陷阱，这些陷阱都是利用人性的弱点，所以你没有防备就会入坑。但你如果有个意识，哪里不太对，这样就很大概率不会受骗。这一点跟犯错有点像，比如芒格就收集别人的错误，好让自己不犯大错误。我觉得这个也可以说成知错才能防错，放在任何事情上好像都合理，你只有了解它才能会使用它。<br>对于领会了这个道理，你要怎么在日常去做呢？<br>1.去关注一些教人防骗的公众号和微博，比如警察的微博，但不是推送，要我有时间才去看，比如rss方式<br>2.收集人犯错的方式，比如批判性思维里就有总结，平常把这些犯错归总，自己犯的，别人犯的，都要去总结，之前看的搞笑新闻也可以去关注，但不能简单的总结，要想明白合理处。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/12/15/arts-2019-12-15-share/" title="人的认知" itemprop="url">人的认知</a>
   </h1>
   <p class="article-author">By
@@ -451,247 +704,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/09/08/arts-2019-09-08-share/" title="碎片化学习与系统学习的分析" itemprop="url">碎片化学习与系统学习的分析</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-09-08T10:04:00.000Z" itemprop="datePublished"> Published 2019-09-08</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>今天下午体会了一把，快节奏游戏的快感，消消乐玩了2个小时，一局3分钟，节奏很快，失败重新来过的成本很小，导致一直想着反正时间短，下一局就不玩了，但就这么一局一局2个小时过去了，昨天我女朋友玩了一下午我还感觉不可思议，今天自己也这样，利用了人性的弱点，喜欢短平快的快感，昨天看了耗子叔对于学习的态度，对于现在世界的发展看法印象很深刻，快餐文化，追求短平快，给人一种虚假的满足感。对于李笑来之前说的，观点不光正确，还要与别人不同，差异越大，对于你越重要。因为这是你的成功点，但要保证是正确的，不能追求不同，那样是本末倒置。<br>因为人性的弱点，追求短平快的快感，所以社会越来越流行这样的文化，大家越来越浮躁，希望快速成名，快速成功，所以很多人贩卖成功，贩卖知识，但正确的事情确实反人性的，需要花很多时间，很多精力去钻研知识。快餐文化经常让人感觉空虚，因为根基是空的，只是表面繁荣<br>历史有一些趋势不可逆转，知识越来越多，生活节奏越来越快。<br>对于信息的处理越来越影响大，人的生命有限，不可能会所有知识，但人又很贪心，不想放弃，所以通过一些快节奏的方式，听书，短视频，微博，朋友圈来快速获取信息，来给自己一种满足感。但因为时间短，信息量少，所以会有很多前提条件和解释过程省略了，让你只能从中学习结论。<br>当前社会人性的弱点会被利用，反人性可以让你不被操纵，收获不同的能力。<br>学习不光学知识，还学习方法，学习体系，知识无限，掌握方法就能从一点迁移到另外一点，学深可以理解本质，然后迁移，看到不同的风景。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/学习方法/">学习方法</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/09/07/arts-2019-09-08-tip/" title="《深入理解计算机系统》7" itemprop="url">《深入理解计算机系统》7</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-09-07T07:57:00.000Z" itemprop="datePublished"> Published 2019-09-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="第2章-信息的表示和处理"><a href="#第2章-信息的表示和处理" class="headerlink" title="第2章 信息的表示和处理"></a>第2章 信息的表示和处理</h2><p>这周完成一遍阅读，但很多地方不懂，原来有些底子，但书中很多东西与原来的学习的不太一样，将了很多数学原理的部分。<br>信息的存储<br>讲解十六进制的表示法，寻址与字节顺序，怎么表示字符串，代码与布尔代数，同时介绍位级运算，逻辑运算和移位运算。<br>整数的表示<br>整形数据类型，无符号数的编码，补码编码，有符号和无符号的转换，扩展一个数字的位表示，截断数字<br>整数运算<br>无符号加分，补码加法，补码的非，无符号乘法，补码乘法，乘以常数，除以2的幂<br>浮点数<br>二进制的小数，IEEE浮点表示，数字示例，舍入，浮点运算，<br>可能会有第二遍阅读，虽然还有很多数学原理部分不懂，但原来有些底子，如果后面用到，再重新读一遍。</p>
-<p>这一章讲的信息是如何在计算机上表示的，2进制与16进制的转换，整数，浮点数，字符串等信息的表示，运算方法</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/09/01/arts-2019-09-01-share/" title="开发感悟" itemprop="url">开发感悟</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-09-01T08:57:00.000Z" itemprop="datePublished"> Published 2019-09-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近基于jhipster脚手架开发spring cloud的项目，突然感觉软件工程真的是很复杂的东西，从上倒下都要了解一点，如果那部分一点不懂，出了问题就不能搞定，要花很多时间试错，无法思考解决方法，只能简单的试错，这次就是gradle拉包有问题，有一个同事搞了一个星期，还有些没搞定，看着他一点点从边缘摸索试错，这就是编译工具不了解，导致遇到这部分一点都没法思考，连找问题都不知道怎么找。<br>最近也再思考职业规划，发现真的到了瓶颈了，虽然也有很多东西可以继续学习，但如果再找不到真正缺失的东西，会再多也不能突破瓶颈，原来以为自己已经不错了，框架上的东西自己也能做，但这么长时间看来，还是井底之蛙了，与那些在大公司起点就很高的人，有着天壤之别。之前以为自己基础好了就可以了，所以一点点开始复习基础，但现实一次次打脸，基础是内功，让你成长很快，走的很深很远，但公司是要生产力，你用时间换钱，工作这么长时间来了还不能干活，很多东西不会用，你都工作这么长时间，也没什么突出项，连常用工具都不会，我还会找你？要看清本质，大公司想要能干活的人太多了，所以才要求基础，起码招来的人更好，后面能走的更远。<br>但从另外一个角度看，不能市面上出了一个新技术你就去学习，那样也是很低效的，新东西层出不穷，你的时间有限，还是要从底层从抽象学起，这样才高效，不会被时间淘汰。即使有了新技术有以前的抽象基础，不会过时，只要对比学习差异就行。现在我太多分布式的基础不会，不说原理不会，连用都没用过，这也是我总结之前失败的原因。<br>要有自己的作品，开源的项目，或者能参与过开源的项目。<br>要知识体系全面，会流行的技术，同时懂得基础。既能干活，又能分析问题。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/软件工程/">软件工程</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/09/01/arts-2019-09-01-review/" title="《深入理解计算机系统》7" itemprop="url">《深入理解计算机系统》7</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-09-01T08:55:00.000Z" itemprop="datePublished"> Published 2019-09-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>总结第三章，程序的机器级表示<br>介绍了C语言抽象层下面的机器级结构<br>主要分为几部分，数据分为整数与浮点数，两者分别有不同的寄存器，原理相同<br>以整数介绍为主<br>数据的格式，字节，字，双字，四字<br>然后是访问信息，对于数据的访问与加载，有操作数指示符，寄存器，内存，直接数的表示方法<br>传送指令 mov，压入和弹出栈指令pop，push（这个为后面过程铺垫）<br>接着是算术与逻辑，一元，二元操作，移位等。<br>接着是控制，几个条件判断的寄存器，命令访问条件码，跳转命令jump，2种实现条件分支的方法，一种是条件控制，类似jump，goto，一种是用条件传送，第二种更符合现在处理器高效的风格，因为不需要跳转，局部性原理，效率更高，但只有部分符合条件，不是所有情况都能适用。<br>然后就是控制的实现，一种是do-while，while，for等循环，1个是switch的实现。<br>下一部分是过程，如果寄存器不够或者的方法间互相调用，就会用到过程。主要分为三部分，传递控制，传递数据，和分配和释放内存。<br>使用%rsp栈指针，$rip来指示栈帧的位置，是用call和ret转移控制。<br>下一部分是数组，主要是指针的处理，嵌套数组，定长数组，变长数组<br>然后是异构数据结构，结构struct，联合Union<br>最后一部分是浮点数，与整数原理相通。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -721,11 +733,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>27</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>28</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>38</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>39</sup></a></li>
 		  
 		
 		  
@@ -733,7 +745,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>27</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>28</sup></a></li>
 		  
 		
 		  
@@ -753,7 +765,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>2</sup></a></li>
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>3</sup></a></li>
 		  
 		
 		  
@@ -770,19 +782,19 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>38</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>39</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>29</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>30</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>27</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>28</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>17</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>18</sup></a></li>
 			
 		
 			
@@ -802,11 +814,11 @@
 			
 		
 			
-				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
 			
 		
 			
@@ -814,7 +826,11 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>5</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -826,10 +842,6 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
@@ -838,15 +850,15 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>3</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/二分法/" title="二分法">二分法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 		</ul>

@@ -79,6 +79,310 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/04/06/arts-2019-4-5-tip/" title="Vue 学习笔记2" itemprop="url">Vue 学习笔记2</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-06T07:13:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近真的没有怎么实际写后端代码了，主要都是写一些简单的前端，而且不懂了也很少弄懂，真的很不好。<br>这周要分享的也很水，可以说算得上一个失败的经历。</p>
+<p>在实现导航栏跳转的时候，类似视频网站多个tab切换，使用父子路由实现，子路由的页面几乎一直，所以css也差不多，因为都是全局的css，所以有些css重复了，我想做一个互相不影响的，隔离的css作用域，发现vue有一个scoped的概念，在style标签里加上scoped，编译的时候就会加上唯一的编号类似 class-123132，这样，那么就是全局唯一的了。<br>但是我尝试加上postcss，就和bootstrap-vue起了冲突，解决了一阵未果，没有继续尝试了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/vue/">vue</a><a href="/tags/编程技巧/">编程技巧</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/06/arts-2019-04-14-tips/" title="java集合-ArrayList" itemprop="url">java集合-ArrayList</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-06T07:13:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>ArryList实现接口List<e>, RandomAccess, Cloneable, java.io.Serializable<br>基础的数据结构是数组，根据存储数据的多少动态扩容。</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Default initial capacity.</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 10;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shared empty array instance used for empty instances.</span><br><span class="line"> */</span><br><span class="line">private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shared empty array instance used for default sized empty instances. We</span><br><span class="line"> * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when</span><br><span class="line"> * first element is added.</span><br><span class="line"> */</span><br><span class="line">private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The array buffer into which the elements of the ArrayList are stored.</span><br><span class="line"> * The capacity of the ArrayList is the length of this array buffer. Any</span><br><span class="line"> * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><br><span class="line"> * will be expanded to DEFAULT_CAPACITY when the first element is added.</span><br><span class="line"> */</span><br><span class="line">transient Object[] elementData</span><br><span class="line">/**</span><br><span class="line"> * The size of the ArrayList (the number of elements it contains).</span><br><span class="line"> *</span><br><span class="line"> * @serial</span><br><span class="line"> */</span><br><span class="line">private int size;</span><br></pre></td></tr></table></figure>
+<p>elementData是实际存储数据的数组。DEFAULT_CAPACITY是默认的容量，如果没有指定数组的大小。DEFAULTCAPACITY_EMPTY_ELEMENTDATA 与EMPTY_ELEMENTDATA都是 空的初始数组，DEFAULTCAPACITY_EMPTY_ELEMENTDATA是用来判断是不是通过默认方法创建的空数组，而不是删除后才空的。如果指定了数组大小，就用EMPTY_ELEMENTDATA作为默认空数组。</p>
+<p>扩容是在添加元素的时候进行，这样不会初始化没有数据的情况下就占据空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加方法很简单，先去内部扩容，然后在最后一个添加值，看扩容的内部实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ensureExplicitCapacity(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureExplicitCapacity(int minCapacity) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * Increases the capacity to ensure that it can hold at least the</span><br><span class="line"> * number of elements specified by the minimum capacity argument.</span><br><span class="line"> *</span><br><span class="line"> * @param minCapacity the desired minimum capacity</span><br><span class="line"> */</span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ensureCapacityInternal 先是一个判断数组是怎么创建，如果是默认空参数的构造器创建，就使用默认的初始大小10作为最小容量，这样就能避免不能手动创建更小数组的问题。<br>主要扩容是grow方法，可以看出 newCapacity是扩容0.5倍大小，到原来的1.5倍。<br>还有就是容器上下限的判断。扩容就是迁移数组newCapacity的大小的数组里。<br>归根到底，就是将数组扩容1.5倍，旧数组搬迁到新数组。<br>里面还有几个内部类，一个Itr，实现了Iterator接口，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private class Itr implements Iterator&lt;E&gt; &#123;</span><br><span class="line">    int cursor;       // index of next element to return</span><br><span class="line">    int lastRet = -1; // index of last element returned; -1 if no such</span><br><span class="line">    int expectedModCount = modCount;</span><br></pre></td></tr></table></figure></p>
+<p>ListItr 实现了 ListIterator，可以前后访问遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private class ListItr extends Itr implements ListIterator&lt;E&gt; &#123;</span><br><span class="line">    ListItr(int index) &#123;</span><br><span class="line">        super();</span><br><span class="line">        cursor = index;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>ArrayList使用遍历接口，都是使用内部类实现的，重新记录状态，这部分还有些不太懂的，后面继续补充。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/06/arts-2019-4-5-share/" title="《7up》第二遍观后感1" itemprop="url">《7up》第二遍观后感1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-06T05:32:07.000Z" itemprop="datePublished"> Published 2019-04-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>第二遍重看这个纪录片，第一遍是初读的话，这一遍，我会比较细，记录记者的提问，不同人的不同答案。横向对比与之前7年的差别，以及为什么会有这样的变化。<br>这次只看了7岁和14岁的，第一次看感觉很粗略，有种震撼的感觉，但你不是能清楚说明白为什么。</p>
+<p>先从记者提问入手</p>
+<h2 id="旅游"><a href="#旅游" class="headerlink" title="旅游"></a>旅游</h2><p>穷人家的孩子没怎么出去过，富人家的孩子去过很多地方，这个确实是经济因素导致。穷人孩子连吃饭都不富足，想出去很难。开阔了眼界对于孩子认识世界很重要。</p>
+<h2 id="放学后空闲时间做什么"><a href="#放学后空闲时间做什么" class="headerlink" title="放学后空闲时间做什么"></a>放学后空闲时间做什么</h2><p>7岁时候的问题，空闲时间对性格形成有很大的影响。<br>富人家的孩子学校有很多时间可以做，可以学音乐等。到了14岁，也是一样，富人家的孩子有很多事情做，一般人家没什么做，去玩或者去俱乐部，或者去看电视，消磨时间。<br>在自己意识下能去做一些事情，时间上利用会多很多，不会去看电视等消磨时间，常年累月下来就是产生很大的不同。</p>
+<h2 id="怎么花钱，对于金钱的看法"><a href="#怎么花钱，对于金钱的看法" class="headerlink" title="怎么花钱，对于金钱的看法"></a>怎么花钱，对于金钱的看法</h2><p>John对于钱财的概念在14岁已经成熟了，不需要特别多的钱，但要足够能去做自己喜欢的事情，不能为了钱做无聊的工作。大部分人都表现不是很喜欢钱，认为钱够花就好了，这个时候他们还都没有赚钱，对于钱的需求感很弱，所以回答都很高尚，都没被贫穷困扰过。</p>
+<p>对于我来说，现在真的很缺钱，不是生活上的缺钱，衣食住行都没问题，但房子特别贵，贵到不能承受，可能要背起20-30年的房贷，才能勉强买个40-50平的小房子。选工作上，如果工资高也会很动心，即使工作可能很累，重复没成长。也想自己出去赚钱，但能力有限，不能独立去市场上赚钱，还需要给别人打工。所以要有能赚足够多的钱的能力还是很重要的，有了钱很多事情都会轻松很多。做真正想做的事情。<br>要在主能力足够优秀的情况下，发展其他能力，但主的本身就不强的话，很难把其他发展很强。</p>
+<h2 id="有男女朋友吗"><a href="#有男女朋友吗" class="headerlink" title="有男女朋友吗"></a>有男女朋友吗</h2><p>7岁的时候，大家都有男女朋友，但那个是很童真的。14岁的时候，大家都没有的真正的男女朋友，这个时候处于萌芽期。<br>多接触异性，对于后面的婚姻有帮助。</p>
+<h2 id="对于罢工的看法，对于政党的看法"><a href="#对于罢工的看法，对于政党的看法" class="headerlink" title="对于罢工的看法，对于政党的看法"></a>对于罢工的看法，对于政党的看法</h2><p>14岁的时候，只有Join表现出了，想要从政的想法，对这方面很有见解，其他人都处于漠不关心的状态。<br>上层阶级反对罢工，下层人民接受罢工，虽然也觉得有影响，但两个层级的人的看法角度不相同，都是符合自己利益的角度。查尔斯能从自由的角度去看，罢工的意义，人民有罢工的权利<br><strong>人很难跳出自己的层级，自己的角度去看问题， 所以对一个问题认识的全面，要么需要经历，要么需要看不同层级的人是什么观点，是什么行为。</strong></p>
+<h2 id="对于寄宿学校的看法"><a href="#对于寄宿学校的看法" class="headerlink" title="对于寄宿学校的看法"></a>对于寄宿学校的看法</h2><p>大部分人提到了会让人更独立，离开父母。但有人也提到了坏处，本应该跟父母相处，导致了部分的缺失。福利院的孩子在童年就缺失与父母的生活，整个人生中就缺少自信，在paul和symon身上体现很多。富人家的孩子更多的自信，穷人相对自卑。</p>
+<h2 id="对于有钱人的看法"><a href="#对于有钱人的看法" class="headerlink" title="对于有钱人的看法"></a>对于有钱人的看法</h2><p>大家对于有钱人更多的是不好的看法，有钱人会欺负穷人，穷人嫉妒有钱人，他们一出生什么也不用做，就能达到他们一辈子工作的水平，很不公平。</p>
+<h2 id="相信上帝吗"><a href="#相信上帝吗" class="headerlink" title="相信上帝吗"></a>相信上帝吗</h2><p>大部分人相信，但说不清楚原因，有的因为人总得有点信仰。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/纪录片/">纪录片</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/04/05/arts-2019-4-5-review/" title="An introduction to distributed systems 学习笔记1" itemprop="url">An introduction to distributed systems 学习笔记1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-05T13:06:07.000Z" itemprop="datePublished"> Published 2019-04-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>原文地址：<a href="https://github.com/aphyr/distsys-class" target="_blank" rel="noopener">https://github.com/aphyr/distsys-class</a></p>
+<p>这篇文章相当于一个分布式学习的大纲，以我的3遍学习发来看，我这周只是通读了2遍，只达到了第一层级，那这周的文章就当作一个阅读大纲的提炼，先理清楚知识架构。分布式内容本身就十分多，如果不理清结构，很容易混乱，今天就是一个入门的开始。</p>
+<ol>
+<li>What makes a thing distributed</li>
+<li>Nodes and networks</li>
+<li>When networks go wrong</li>
+<li>Low level protocols</li>
+<li>Clocks</li>
+</ol>
+<p>Review<br>We’ve covered the fundamental primitives of distributed systems. Nodes exchange messages through a network, and both nodes and networks can fail in various ways. Protocols like TCP and UDP give us primitive channels for processes to communicate, and we can order events using clocks. Now, we’ll discuss some high-level properties of distributed systems.</p>
+<hr>
+<ol>
+<li>Availability</li>
+<li>Consistency</li>
+<li>Tradeoffs</li>
+</ol>
+<p>Review<br>Availability is a measure of how often operations succeed. Consistency models are the rules that govern what operations can happen and when. Stronger consistency models generally come at the cost of performance and availability. Next, we’ll talk about different ways to build systems, from weak to strong consistency.</p>
+<hr>
+<ol>
+<li>Avoid Consensus Wherever Possible</li>
+<li>Fine, We Need Consensus, What Now?</li>
+</ol>
+<p>Review<br>Systems which only add facts, not retract them, require less coordination to build. We can use gossip systems to broadcast messages to other processes, CRDTs to merge updates from our peers, and HATs for weakly isolated transactions. Serializability and linearizability require consensus, which we can obtain through Paxos, ZAB, VR, or Raft. Now, we’ll talk about different scales of distributed systems.</p>
+<hr>
+<ol>
+<li>Characteristic latencies</li>
+</ol>
+<p>Review<br>We discussed three characteristic scales for distributed systems: multicore processors coupled with a synchronous network, computers linked by a LAN, and datacenters linked by the internet or dedicated fiber. CPU consequences are largely performance concerns: knowing how to minimize coordination. On LANs, latencies are short enough for many network hops before users take notice. In geographically replicated systems, high latencies drive eventually consistent and datacenter-pinned solutions.</p>
+<hr>
+<ol>
+<li>Common distributed systems</li>
+</ol>
+<p>Review<br>We use data structure stores as outsourced heaps: they’re the duct tape of distributed systems. KV stores and relational databases are commonly deployed as systems of record; KV stores use independent keys and are not well-suited to relational data, but offer improved scalability and partial failure vs SQL stores, which offer rich queries and strong transactional guarantees. Distributed search and coordination services round out our basic toolkit for building applications. Streaming systems are applied for continuous, low-latency processing of datasets, and tend to look more like frameworks than databases. Their dual, distributed queues, focus on the messages rather than the transformations.</p>
+<hr>
+<ol>
+<li>A Pattern Language</li>
+</ol>
+<p>Review<br>When possible, try to use a single node instead of a distributed system. Accept that some failures are unavoidable: SLAs and apologies can be cost-effective. To handle catastrophic failure, we use backups. To improve reliability, we introduce redundancy. To scale to large problems, we divide the problem into shards. Immutable values are easy to store and cache, and can be referenced by mutable identities, allowing us to build strongly consistent systems at large scale. As software grows, different components must scale independently, and we break out libraries into distinct services. Service structure goes hand-in-hand with teams.</p>
+<hr>
+<ol>
+<li>Production Concerns</li>
+</ol>
+<p>Review<br>Running distributed systems requires cooperation between developers, QA, and operations engineers. Static analysis, and a test suite including example- and property-based tests, can help ensure program correctness, but understanding production behavior requires comprehensive instrumentation and alerting. Mature distributed systems teams often invest in tooling: traffic shadowing, versioning, incremental deploys, and feature flags. Finally, queues require special care.</p>
+<hr>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/04/05/arts-2019-4-5-algorithm/" title="LRU缓存机制" itemprop="url">LRU缓存机制</a>
   </h1>
   <p class="article-author">By
@@ -501,322 +805,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/22/arts-2019-02-22-review/" title="Scalable Web Architecture and Distributed Systems 学习笔记" itemprop="url">Scalable Web Architecture and Distributed Systems 学习笔记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-22T06:49:07.000Z" itemprop="datePublished"> Published 2019-03-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>原版文章 [<a href="https://www.aosabook.org/en/distsys.html]" target="_blank" rel="noopener">https://www.aosabook.org/en/distsys.html]</a></p>
-<p>文章主要分为3个部分，讲了可扩展的分布式系统的设计方法。</p>
-<h2 id="网络分布式系统的设计原则"><a href="#网络分布式系统的设计原则" class="headerlink" title="网络分布式系统的设计原则"></a>网络分布式系统的设计原则</h2><p>6个提到的主要原则<br>availablity，（可用性）：对于一些电商等网站，只要有一阵不能访问，就会损失很多收益，保证可用性很重要。<br>performance，（性能）：保证访问性能，让用户体验更好。<br>reliablity，（可靠性）：保证每个请求都有返回。<br>scalability，（可扩展性）：如果有大流量能保证可以方便的扩展性能。<br>managebility，（管理性）：要易于管理，不然这块成本也很高。<br>cost，（费用）：分布式本身需要很多机器，这块的成本也要考虑。</p>
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>基础的分布式设计方法，<br>services，（服务化）<br>redundancy，（冗余）<br>partitions，（分区）<br>handling failure，（处理错误）<br>举了一个例子，图片网盘，用户可以上传图片，然后读取图片。<br>首先服务化，将读与写的服务，分开单独优化，因为两边优化的方式不同。<br>然后冗余处理，将存储的数据，冗余备份，服务冗余。<br>然后将数据分区，读取不同分区的数据，减少单个的压力。</p>
-<h2 id="快速可扩展的数据访问块"><a href="#快速可扩展的数据访问块" class="headerlink" title="快速可扩展的数据访问块"></a>快速可扩展的数据访问块</h2><p>这块主要将如何加快数据的访问，5个方面<br>Caches，global cache，Distributed Cache，<br>proxies，<br>Indexes，<br>load balancers，<br>queues，<br>首先是缓存，这个还分为，本地缓存，全局缓存，分布式缓存。<br>第二部分是代理，这个可以重定向请求。<br>第三个是索引，类似数据库索引，可以加快数据的访问。<br>第四个是负载均衡，可以分散请求的压力<br>第五个是消息队列，可以异步处理，将每个单独调用的任务执行，解耦到消息队列里面，慢慢处理，压力不在后端。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/03/22/arts-2019-02-22-share/" title="从理发想到的一些思考" itemprop="url">从理发想到的一些思考</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-03-22T03:37:07.000Z" itemprop="datePublished"> Published 2019-03-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="生活中谈反馈延迟"><a href="#生活中谈反馈延迟" class="headerlink" title="生活中谈反馈延迟"></a>生活中谈反馈延迟</h2><p>  昨天去经常去的，之前储值的理发店，本来是十分不想去的，但想到还有20元在里面，正好这次剪完就不去了，经过一番斗争还是去了。<br>  进去之后，先是干洗，一个小哥，看起来挺年轻的，不紧不慢，不知道是不是新手，最后水洗的时候，说要帮我冲一下眼睛，冲眼睛确实挺舒服的，我想着也别全程不说话，以前我尽量不跟他们搭话，搞的比较熟了，就跟你推销没完没了。我站在他们的角度想想，如果每个顾客都没有反馈，即使做的比较好，也不知道自己做的怎么样，多做还比较累，也没有任何收获，那就糊弄糊弄就好了。所以逐渐越来越消极。有点像平时的生活工作。<br>反过来一对比，也许生活就是这样的，对于你的努力，收益本身就是有延迟的，大家都努力过，但没有任何反馈，逐渐大家放弃了，得过且过吧。还有一点，你只比别人好一点点，是没有效果的，大家很难发现，你要好就好一大块。<br><strong>总结来说，就是生活中延迟反馈，加上长板优势。</strong></p>
-<p>后面发型师来剪头发，女发型师，没戴眼镜没看出是谁。问了我想要什么发型，我说剪短一点，两边打薄，不要推上去。但她好像没怎么听我的意见，只是跟我确认了一下上边要不要剪短，就开始剪，上来就把两边推了，电推子贴到头皮上，我就感觉她没理解我什么意思。剪的过程确实很认真，技术我也不否定，但给我一种迷之自信，你要求什么不重要，我觉得这样最好了。我突然觉得，这有点像演员，有些演员演什么都像他自己，有些演员演什么像什么。 我不想剪两边的原因是之前剪过，会显得脸特别胖，但她迷之自信，没有理会我的要求，觉得这样更好看，更适合我。<br>如果她能问问原因，再跟我讨论一下，她想那么剪的原因，我也不是不能接受，但剪完，她觉得自己很优秀，作品很完美。但在我这开头就错了，虽然她在那个理发店已经是总监了，我下次可能再也不会找她剪了。我回来跟女朋友聊了这个事，她也说了这个理发师的事，之前就推荐我女朋友剪空气刘海，然后我女朋友反对后，她还是给剪了空气刘海，真的是醉醉的，我们对她的迷之自信都是佩服。<br>生活中这样的事情很多，尤其是在专业人士身上。那天去看病，排队在自动挂号收费机，前一个人，缴费之后，界面直接弹框提示一个数据的报错，然后没有打印凭条，问了旁边的工作人员，她一口咬定是刚才那个人直接点返回了，没有打印，这个估计是数据的报错导致的异常，但顾客看不懂那个提示，无法清楚的描述过程和无法及时保留证据，工作人员只能用一个最简单的方式推测他的行为，怪在提出问的人身上，解决不了问题，解决提问题的人。我生活中遇到过很多次这样的问题，现场报上来错误，但是没有证据，我们也不能推测错误原因，那就都怪在提出问题的人，瞎操作。<br>这个可能的原因之一，太多无法跟踪的问题，你的时间有限，没法一条条都查清楚，找一个简单的理由推脱掉。这样确实会隐藏大问题。</p>
-<p><strong>一个人在生活中要自驱动，有目标，有进阶意识，也能开放心态，听进去别人的建议</strong></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/01/29/puppeteer之chromium版本问题/" title="puppeteer 之chromium版本问题" itemprop="url">puppeteer 之chromium版本问题</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-01-29T06:04:07.000Z" itemprop="datePublished"> Published 2019-01-29</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近使用puppeteer模拟用户操作，填了不少的坑，写出来分享一下。</p>
-<h2 id="puppeteer包"><a href="#puppeteer包" class="headerlink" title="puppeteer包"></a>puppeteer包</h2><p>使用<code>npm i puppeteer</code>来下载puppeteer的时候，会自动下载依赖的chromium，但因为众所周知的原因，很难下载，那能不能先下载好再直接引入呢，也可以移植使用。</p>
-<p>官方提供2个包一个puppeteer，另外一个是puppeteer-core。puppeteer-core不会自动下载chromium，以及PUPPETEER_* 环境变了都不起效。这个就是我们想要的包。官方提供两个包的差别<a href="https://pptr.dev/#?product=Puppeteer&amp;version=master&amp;show=api-puppeteer-vs-puppeteer-core" target="_blank" rel="noopener">puppeteer vs puppeteer-core</a>。</p>
-<p>执行<code>npm i puppeteer-core</code><br>下面是使用的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const puppeteer = require(&apos;puppeteer-core&apos;);</span><br><span class="line">async () =&gt; &#123;</span><br><span class="line">    const browserPath = &apos;../../../chrome-mac/Chromium.app/Contents/MacOS/Chromium&apos;</span><br><span class="line">    const browser = await puppeteer.launch(</span><br><span class="line">      &#123;    </span><br><span class="line">        headless: false,</span><br><span class="line">        slowMo: 250,</span><br><span class="line">        devtools: true,</span><br><span class="line">        executablePath: browserPath,</span><br><span class="line">        args: [&apos;--no-sandbox&apos;, &apos;--disable-setuid-sandbox&apos;]</span><br><span class="line">    &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>其中一个我遇到比较大的容易错的地方就是executablePath是一个相对地址，当时怎么执行都不行，因为写了一个绝对路径。<br>这里mac的Chromium要指向Chromium.app/Contents/MacOS/Chromium，也是很容易出错。</p>
-<h2 id="Chromium版本"><a href="#Chromium版本" class="headerlink" title="Chromium版本"></a>Chromium版本</h2><p>  我还遇到一个问题，如果不同操作系统的部署nodejs，网络情况不能自动下载chromium，我随便系统找个版本是不是就行了？<br>  我也试过了，我本来想在树莓派上部署，但树莓派的linux是32位的，上面的chromium也是很长时间之前的的，花了很长时间搞环境，发现不支持puppeteer，每个版本的puppeteer需要绑定版本的chromium，当时真的很崩溃，所以我决定提前下好chromium，按版本放到不同系统里，这样就统一的chromium版本，不会出现不见兼容的问题。<br>  chromium版本查看package.json里的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;puppeteer&quot;: &#123;</span><br><span class="line">    &quot;chromium_revision&quot;: &quot;609904&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
-<p>这个里面就是依赖的版本号。然后去<a href="https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html" target="_blank" rel="noopener">chromium发布库</a>，输入版本号‘609904’，去搜索，这个网站很慢，会从第一个版本一点点搜索，我看了一下请求，每个请求100个数组，一点点遍历数据。<br>下载好不同系统的同一个版本的chromium后，通过上面的executablePath参数来引入chromium运行。不同操作系统的运行程序不太一样，需要找到对应的执行文件。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/前端/">前端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/自动化测试/">自动化测试</a><a href="/tags/puppeteer/">puppeteer</a><a href="/tags/headless/">headless</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/09/02/telegraf-jvm/" title="telegraf 采集项分析【JVM】" itemprop="url">telegraf 采集项分析【JVM】</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2018-09-02T13:18:07.000Z" itemprop="datePublished"> Published 2018-09-02</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="采集参数范围"><a href="#采集参数范围" class="headerlink" title="采集参数范围"></a>采集参数范围</h2><ol>
-<li>java_buffer_pool </li>
-<li>java_class_loading </li>
-<li>java_garbage_collector </li>
-<li>java_memory </li>
-<li>java_runtime </li>
-<li>java_system </li>
-<li>java_thread </li>
-</ol>
-<h2 id="具体参数示意"><a href="#具体参数示意" class="headerlink" title="具体参数示意"></a>具体参数示意</h2><p>参数都是通过Mbean获取，可以根据java官方文档获取值，或者自定义。</p>
-<h3 id="name-java-buffer-pool"><a href="#name-java-buffer-pool" class="headerlink" title="name: java_buffer_pool"></a>name: java_buffer_pool</h3><p>fieldKey            | fieldType<br>Count               | float<br>MemoryUsed  |  float<br>TotalCapacity  |  float </p>
-<p>参数区别官方文档：[<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/BufferPoolMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/BufferPoolMXBean.html]</a></p>
-<p>MemoryUsed是返回虚拟机用于缓冲池用于内存的估计值。<br>Count是返回池中缓冲区数的估计值。<br>TotalCapacity是返回池中缓冲区总量的估计值。</p>
-<p>其中有2个tag的key，”mapped buffer pool” and “direct buffer pool”,<br>Stackoverflow的解释[<a href="https://stackoverflow.com/questions/15657837/what-is-mapped-buffer-pool-direct-buffer-pool-and-how-to-increase-their-size]" target="_blank" rel="noopener">https://stackoverflow.com/questions/15657837/what-is-mapped-buffer-pool-direct-buffer-pool-and-how-to-increase-their-size]</a><br>direct buffer pool是Java与系统io子系统交互的内存区，比如disk读写或者收到socket请求，直接用更快。<br>mapped buffer pool是java FileChannel 实例使用的。</p>
-<h3 id="name-java-class-loading"><a href="#name-java-class-loading" class="headerlink" title="name: java_class_loading"></a>name: java_class_loading</h3><p>fieldKey                              | fieldType<br>LoadedClassCount           |  float<br>TotalLoadedClassCount   | float<br>UnloadedClassCount       | float </p>
-<p>官方文档：[<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/ClassLoadingMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/ClassLoadingMXBean.html]</a></p>
-<p>LoadedClassCount返回当前虚拟机中加载类的数量。<br>TotalLoadedClassCount返回虚拟机开始执行以来已加载的类的数量。<br>UnloadedClassCount返回虚拟机开始执行以来卸载的类的数量。</p>
-<h3 id="name-java-garbage-collector"><a href="#name-java-garbage-collector" class="headerlink" title="name:java_garbage_collector"></a>name:java_garbage_collector</h3><p>fieldKey               | fieldType<br>CollectionCount | float<br>CollectionTime   | float<br>官方文档：[<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/GarbageCollectorMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/GarbageCollectorMXBean.html]</a><br>CollectionCount已经进行的垃圾回收的次数<br>CollectionTime返回累计的垃圾回收时间（以毫秒为单位）</p>
-<h3 id="name-java-memory"><a href="#name-java-memory" class="headerlink" title="name: java_memory"></a>name: java_memory</h3><p>fieldKey                                                 | fieldType<br>HeapMemoryUsage.committed         |  float<br>HeapMemoryUsage.init                      | float<br>HeapMemoryUsage.max                    | float<br>HeapMemoryUsage.used                    | float<br>NonHeapMemoryUsage.committed   |  float<br>NonHeapMemoryUsage.init                | float<br>NonHeapMemoryUsage.max              | float<br>NonHeapMemoryUsage.used             | float<br>ObjectPendingFinalizationCount         | float </p>
-<p>官方文档：[<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryMXBean.html]</a></p>
-<p>HeapMemory和NonHeapMemory的区别<br>1.堆<br>Java虚拟机有一个堆，它是运行时数据区，从中分配所有类实例和数组的内存。它是在Java虚拟机启动时创建的。对象的堆内存由自动内存管理系统回收，该系统 为垃圾收集器。<br>堆可以是固定大小的，也可以是扩展和收缩的。堆的内存不需要是连续的。</p>
-<p>2.非堆内存<br>Java虚拟机管理堆以外的内存（称为非堆内存）。<br>Java虚拟机具有在所有线程之间共享的方法区域。方法区域属于非堆内存。它存储每类结构，例如运行时常量池，字段和方法数据，以及方法和构造函数的代码。它是在Java虚拟机启动时创建的。</p>
-<p>方法区域在逻辑上是堆的一部分，但Java虚拟机实现可以选择不垃圾收集或压缩它。与堆类似，方法区域可以是固定大小的，也可以是扩展和收缩的。方法区域的内存不需要是连续的。</p>
-<p>除了方法区域之外，Java虚拟机实现可能需要用于内部处理或优化的存储器，其也属于非堆存储器。例如，JIT编译器需要用于存储从Java虚拟机代码转换的本机机器代码的存储器以获得高性能。</p>
-<p>MemoryUsage 官方文档[ <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryUsage.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/MemoryUsage.html</a> ]</p>
-<p>MemoryUsage对象包含四个值：</p>
-<ul>
-<li>init表示Java虚拟机在启动期间从操作系统请求内存管理的初始内存量（以字节为单位）。 Java虚拟机可以从操作系统请求额外的内存，并且还可以随时间向系统释放内存。 init的值可能未定义。</li>
-<li>used表示当前使用的内存量（以字节为单位）。</li>
-<li>committed表示保证可供Java虚拟机使用的内存量（以字节为单位）。提交的内存量可能会随着时间的推移而变化（增加或减少）。 Java虚拟机可能会向系统释放内存，并且已提交的内存可能少于init。已提交将始终大于或等于使用。</li>
-<li>max表示可用于内存管理的最大内存量（以字节为单位）。它的价值可能是不确定的。如果已定义，最大内存量可能会随时间而变化。如果定义了max，则使用和提交的内存量将始终小于或等于max。如果内存分配尝试增加已使用的内存，则可能会失败，即使已使用&gt;已提交&lt;= max仍然为真（例如，当系统虚拟内存不足时）。</li>
-</ul>
-<pre><code>+----------------------------------------------+
-+////////////////           |                  +
-+////////////////           |                  +
-+----------------------------------------------+
-
-|--------|
-   init
-|---------------|
-       used
-|---------------------------|
-          committed
-|----------------------------------------------|
-                    max
-</code></pre><h3 id="name-java-memory-pool"><a href="#name-java-memory-pool" class="headerlink" title="name: java_memory_pool"></a>name: java_memory_pool</h3><p>fieldKey                                   |  fieldType<br>CollectionUsage.committed | float<br>CollectionUsage.init              | float<br>CollectionUsage.max            | float<br>CollectionUsage.used           | float<br>PeakUsage.committed          | float<br>PeakUsage.init                       | float<br>PeakUsage.max                     | float<br>PeakUsage.used                    | float<br>Usage.committed                  | float<br>Usage.init                                | float<br>Usage.max                              | float<br>Usage.used                             | float </p>
-<ol>
-<li><p>Memory Usage<br>getUsage（）方法提供对内存池当前使用情况的估计。 对于垃圾收集的内存池，已用内存量包括池中所有对象占用的内存，包括可访问和不可访问的对象。<br>通常，此方法是一种轻量级操作，用于获取大致的内存使用量。 对于某些内存池，例如，当对象未连续打包时，此方法可能是一项昂贵的操作，需要一些计算来确定当前的内存使用情况。 在这种情况下，实现应该记录。</p>
-</li>
-<li><p>Peak Memory Usage<br>自虚拟机启动或重置峰值以来，Java虚拟机维护内存池的峰值内存使用量。 峰值内存使用量由getPeakUsage（）方法返回，并通过调用resetPeakUsage（）方法重置。</p>
-</li>
-<li><p>Usage Threshold<br>每个内存池都有一个称为使用阈值的可管理属性，该属性具有Java虚拟机提供的默认值。默认值取决于平台。可以通过setUsageThreshold方法设置使用率阈值。如果阈值设置为正值，则在此内存池中启用使用阈值交叉检查。如果使用阈值设置为零，则禁用对此内存池的使用率阈值交叉检查。 isUsageThresholdSupported（）方法可用于确定是否支持此功能。<br>Java虚拟机在其最佳适当时间（通常在垃圾收集时）执行基于内存池的使用阈值交叉检查。每个内存池都维护一个使用阈值计数，当Java虚拟机检测到内存池使用率超过阈值时，该计数将逐渐增加。</p>
-</li>
-</ol>
-<p>此可管理的使用阈值属性旨在以较低的开销监视内存使用量的增加趋势。使用率阈值可能不适合某些内存池。例如，世代垃圾收集器（在许多Java虚拟机实现中使用的常见垃圾收集算法）管理两个或更多代按年龄隔离对象。大多数对象都分配在最年轻的一代（比如一个托儿所内存池）。托儿所内存池旨在填充并收集托儿所内存池将释放其大部分内存空间，因为它预计包含大多数短期对象，并且大部分在垃圾收集时无法访问。在这种情况下，托儿所内存池更不适合不支持使用阈值。此外，如果一个内存池中的对象分配成本非常低（例如，只是原子指针交换），那么Java虚拟机可能不会支持该内存池的使用率阈值，因为在比较使用情况时的开销是阈值高于对象分配的成本。</p>
-<ol start="4">
-<li>Collection Usage Threshold<br>垃圾回收阈值是一个可管理的属性，仅适用于某些垃圾收集的内存池。在Java虚拟机通过在垃圾收集时回收内存池中的未使用对象来花费回收内存空间之后，收集的内存池中的一些字节仍将被使用。集合使用阈值允许为此字节数设置一个值，以便在超过阈值时，MemoryMXBean将发出超出集合使用阈值的通知。此外，收集使用阈值计数将增加。</li>
-</ol>
-<h3 id="name-java-runtime"><a href="#name-java-runtime" class="headerlink" title="name: java_runtime"></a>name: java_runtime</h3><p>fieldKey     | fieldType<br>StartTime  | float<br>Uptime       | float </p>
-<p>官方文档 [<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/RuntimeMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/RuntimeMXBean.html]</a></p>
-<p>Uptime是java虚拟机启动的时间（以毫秒为单位），StartTime是java虚拟机最开始开启的时间（以毫秒为单位）</p>
-<h3 id="name-java-system"><a href="#name-java-system" class="headerlink" title="name: java_system"></a>name: java_system</h3><p>fieldKey                                | fieldType<br>ProcessCpuLoad                | float<br>SystemCpuLoad                 | float<br>TotalPhysicalMemorySize  | float </p>
-<p>官方文档 [[]<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/OperatingSystemMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/OperatingSystemMXBean.html]</a><br>SystemCpuLoad返回系统每分钟的负载。系统负载平均值是排队到可用处理器的可运行实体数量与在一段时间内平均可用处理器上运行的可运行实体数量之和。 计算负载平均值的方式是特定于操作系统，但通常是与时间相关的阻尼。<br>其他参数未找到。</p>
-<h3 id="name-java-thread"><a href="#name-java-thread" class="headerlink" title="name: java_thread"></a>name: java_thread</h3><p>fieldKey                               |  fieldType<br>DaemonThreadCount        | float<br>PeakThreadCount              | float<br>ThreadCount                      | float<br>TotalStartedThreadCount | float<br>官方文档 [<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/management/ThreadMXBean.html]" target="_blank" rel="noopener">https://docs.oracle.com/javase/7/docs/api/java/lang/management/ThreadMXBean.html]</a></p>
-<p>DaemonThreadCount 返回当前活动守护程序线程的数量。<br>PeakThreadCount 返回自Java虚拟机启动或峰值重置以来的峰值活动线程数。<br>ThreadCount   返回当前活动线程数，包括守护程序和非守护程序线程。<br>TotalStartedThreadCount 返回自Java虚拟机启动以来创建和启动的线程总数。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/监控/">监控</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/telegraf/">telegraf</a><a href="/tags/jvm/">jvm</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/10/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/12/">Next<span></span></a>
@@ -846,11 +834,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>27</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>28</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>38</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>39</sup></a></li>
 		  
 		
 		  
@@ -858,7 +846,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>27</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>28</sup></a></li>
 		  
 		
 		  
@@ -878,7 +866,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>2</sup></a></li>
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>3</sup></a></li>
 		  
 		
 		  
@@ -895,19 +883,19 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>38</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>39</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>29</sup></a></li>
+				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>30</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>27</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>28</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>17</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>18</sup></a></li>
 			
 		
 			
@@ -927,11 +915,11 @@
 			
 		
 			
-				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
 			
 		
 			
@@ -939,7 +927,11 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>5</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -951,10 +943,6 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
@@ -963,15 +951,15 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>3</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/二分法/" title="二分法">二分法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>2</sup></a></li>
 			
 		
 		</ul>
