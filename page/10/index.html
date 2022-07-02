@@ -79,6 +79,66 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/05/12/arts-2019-05-12-share/" title="《全球科技史纲》吴军-读后感1" itemprop="url">《全球科技史纲》吴军-读后感1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-05-12T09:18:07.000Z" itemprop="datePublished"> Published 2019-05-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>之前在得到上听了一遍，今天又重新看书。书中使用2条线索穿起来整个科技史，能量与信息，真的很绝妙。相信没有理科思维的人是不会有这两种视角去看历史。从能量的角度看人类是怎么一步步进化，是不断获取更多的能量。信息的处理又能优化能量的使用。<br>之前的历史都是使用重大事件以及它产生的意义作为分割点，但这里从能量的角度去看，既新奇又合理，之前为什么没有想到。物理学是研究事物规律的，那里面的一些定律是不是会反映出一些，客观规律，也可以作为一些基础概念，理解其他事物。<br>还是比较好奇，吴军老师是怎么研究这些历史的，现在听得都是结果，如果我想自己去做研究，要从哪里获取资料，怎么去研究，怎么得到结论。吴军老师经常能拿一些我们之前熟悉的例子，通过一些不为人知的历史，来证明原来的是谣传。如何查看的资料，我很想知道。<br>很多史料都很有趣，比如人发明衣服的时间是通过体虱的进化时间的来，人类走出非洲的时间跟太阳的热量有关。人类从史前到定居，农耕，创建文明。<br><strong>分享一些基本方法论</strong><br>回望历史，把握历史进化的来龙去脉，可以清楚我们今天所处的位置；<br>俯瞰历史，把握所有要素之间的联系，可以看清世界变化的规律。<br>经典结论<br>历史总在重演，科技永远向前。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/吴军/">吴军</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/05/11/arts-2019-05-12-tip/" title="java锁-CountDownLatch" itemprop="url">java锁-CountDownLatch</a>
   </h1>
   <p class="article-author">By
@@ -534,6 +594,68 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/04/28/arts-2019-04-28-algorithm/" title="数组中的第K个最大元素" itemprop="url">数组中的第K个最大元素</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-04-28T02:28:07.000Z" itemprop="datePublished"> Published 2019-04-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。<br>示例 1:<br>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5<br>示例 2:<br>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4<br>说明:<br>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</p>
+<h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>插入一个k大小的最小堆，<br>满了之后，再最小值比较，然后从上到下堆化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findKthLargest(int[] nums, int k) &#123;</span><br><span class="line">        Heap heap = new Heap(k);</span><br><span class="line">        for(int i = 0; i&lt; nums.length ; i++)&#123;</span><br><span class="line">            heap.insert(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return heap.maxK();</span><br><span class="line">    &#125;</span><br><span class="line">    static class Heap&#123;</span><br><span class="line">        int[] nums;</span><br><span class="line">        int count;</span><br><span class="line">        int capacity;</span><br><span class="line">        public Heap(int capacity)&#123;</span><br><span class="line">            this.nums = new int[capacity+1];</span><br><span class="line">            this.count = 0;</span><br><span class="line">            this.capacity = capacity;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        public void insert(int num)&#123;</span><br><span class="line">            if( count &lt; capacity)&#123;</span><br><span class="line">                notFullInsert(num);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                fullInsert(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        public void fullInsert(int num)&#123;</span><br><span class="line">            int min = nums[1];</span><br><span class="line">            if(num &lt; min)&#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[1] = num;</span><br><span class="line">            int minPos = 1;</span><br><span class="line">            int i = 1;</span><br><span class="line">            while(true)&#123;</span><br><span class="line">                if(i*2 &lt;= capacity &amp;&amp; nums[i] &gt; nums[i*2])&#123;minPos = i*2;&#125;           </span><br><span class="line">                if(i*2+1 &lt;= capacity &amp;&amp; nums[minPos] &gt; nums[i*2+1])&#123;minPos = i*2+1;&#125;</span><br><span class="line">                if(i== minPos)break;</span><br><span class="line">                swap(nums,i,minPos);</span><br><span class="line">                i = minPos;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        public void notFullInsert(int num)&#123;</span><br><span class="line">            int index = count+1;</span><br><span class="line">            nums[index] = num;</span><br><span class="line">            count++;</span><br><span class="line">            while(index/2 &gt; 0 &amp;&amp; nums[index/2] &gt; nums[index])&#123;</span><br><span class="line">                swap(nums,index , index/2);</span><br><span class="line">                index = index/2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        public void swap(int[] array, int fromIndex ,int toIndex)&#123;</span><br><span class="line">            int tmp = array[toIndex];</span><br><span class="line">            array[toIndex] = array[fromIndex];</span><br><span class="line">            array[fromIndex] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        public int maxK()&#123;</span><br><span class="line">            return nums[1];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p>先填充 k个大小的数组，然后从下到上进行堆化，<br>满了之后，再最小值比较，然后从上到下堆化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findKthLargest(int[] nums, int k) &#123;</span><br><span class="line">        int[] arrays = new int[k+1];</span><br><span class="line">        </span><br><span class="line">        for(int i = 1 ; i&lt;= k ; i++ )&#123;</span><br><span class="line">            arrays[i] = nums[i-1];</span><br><span class="line">        &#125;</span><br><span class="line">        initTree(arrays);</span><br><span class="line">        </span><br><span class="line">        for(int i = k ; i&lt; nums.length ; i++)&#123;</span><br><span class="line">            int min = arrays[1];</span><br><span class="line">            if(min &lt; nums[i])&#123; </span><br><span class="line">                arrays[1] = nums[i];</span><br><span class="line">                heapify(arrays,1, k);</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return arrays[1];</span><br><span class="line">    &#125;</span><br><span class="line">    private void initTree(int[] array)&#123;</span><br><span class="line">        for(int i = array.length/2; i&gt;= 1;i--)&#123;</span><br><span class="line">            heapify(array, i, array.length -1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private void heapify(int[] array,int i, int n)&#123;</span><br><span class="line">        while(true)&#123;</span><br><span class="line">            int minPos = i;</span><br><span class="line">            if(i*2 &lt;= n &amp;&amp; array[i] &gt; array[i*2])&#123; </span><br><span class="line">                minPos = i*2;</span><br><span class="line">            &#125;</span><br><span class="line">            if(i*2+1 &lt;= n &amp;&amp; array[minPos] &gt; array[i*2+1])&#123;minPos = i*2+1;&#125;</span><br><span class="line">            if(minPos == i)break;</span><br><span class="line">            swap(array, i, minPos);</span><br><span class="line">            i = minPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    public void swap(int[] nums , int fromIndex , int toIndex)&#123;</span><br><span class="line">        int tmp = nums[toIndex];</span><br><span class="line">        nums[toIndex] = nums[fromIndex];</span><br><span class="line">        nums[fromIndex] = tmp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/堆/">堆</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/04/28/arts-2019-04-28-share/" title="《7up》第二遍观后感3" itemprop="url">《7up》第二遍观后感3</a>
   </h1>
   <p class="article-author">By
@@ -599,131 +721,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/04/28/arts-2019-04-28-algorithm/" title="数组中的第K个最大元素" itemprop="url">数组中的第K个最大元素</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-28T02:28:07.000Z" itemprop="datePublished"> Published 2019-04-28</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。<br>示例 1:<br>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5<br>示例 2:<br>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4<br>说明:<br>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</p>
-<h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>插入一个k大小的最小堆，<br>满了之后，再最小值比较，然后从上到下堆化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findKthLargest(int[] nums, int k) &#123;</span><br><span class="line">        Heap heap = new Heap(k);</span><br><span class="line">        for(int i = 0; i&lt; nums.length ; i++)&#123;</span><br><span class="line">            heap.insert(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        return heap.maxK();</span><br><span class="line">    &#125;</span><br><span class="line">    static class Heap&#123;</span><br><span class="line">        int[] nums;</span><br><span class="line">        int count;</span><br><span class="line">        int capacity;</span><br><span class="line">        public Heap(int capacity)&#123;</span><br><span class="line">            this.nums = new int[capacity+1];</span><br><span class="line">            this.count = 0;</span><br><span class="line">            this.capacity = capacity;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        public void insert(int num)&#123;</span><br><span class="line">            if( count &lt; capacity)&#123;</span><br><span class="line">                notFullInsert(num);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                fullInsert(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        public void fullInsert(int num)&#123;</span><br><span class="line">            int min = nums[1];</span><br><span class="line">            if(num &lt; min)&#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[1] = num;</span><br><span class="line">            int minPos = 1;</span><br><span class="line">            int i = 1;</span><br><span class="line">            while(true)&#123;</span><br><span class="line">                if(i*2 &lt;= capacity &amp;&amp; nums[i] &gt; nums[i*2])&#123;minPos = i*2;&#125;           </span><br><span class="line">                if(i*2+1 &lt;= capacity &amp;&amp; nums[minPos] &gt; nums[i*2+1])&#123;minPos = i*2+1;&#125;</span><br><span class="line">                if(i== minPos)break;</span><br><span class="line">                swap(nums,i,minPos);</span><br><span class="line">                i = minPos;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        public void notFullInsert(int num)&#123;</span><br><span class="line">            int index = count+1;</span><br><span class="line">            nums[index] = num;</span><br><span class="line">            count++;</span><br><span class="line">            while(index/2 &gt; 0 &amp;&amp; nums[index/2] &gt; nums[index])&#123;</span><br><span class="line">                swap(nums,index , index/2);</span><br><span class="line">                index = index/2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        public void swap(int[] array, int fromIndex ,int toIndex)&#123;</span><br><span class="line">            int tmp = array[toIndex];</span><br><span class="line">            array[toIndex] = array[fromIndex];</span><br><span class="line">            array[fromIndex] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        public int maxK()&#123;</span><br><span class="line">            return nums[1];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h2><p>先填充 k个大小的数组，然后从下到上进行堆化，<br>满了之后，再最小值比较，然后从上到下堆化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findKthLargest(int[] nums, int k) &#123;</span><br><span class="line">        int[] arrays = new int[k+1];</span><br><span class="line">        </span><br><span class="line">        for(int i = 1 ; i&lt;= k ; i++ )&#123;</span><br><span class="line">            arrays[i] = nums[i-1];</span><br><span class="line">        &#125;</span><br><span class="line">        initTree(arrays);</span><br><span class="line">        </span><br><span class="line">        for(int i = k ; i&lt; nums.length ; i++)&#123;</span><br><span class="line">            int min = arrays[1];</span><br><span class="line">            if(min &lt; nums[i])&#123; </span><br><span class="line">                arrays[1] = nums[i];</span><br><span class="line">                heapify(arrays,1, k);</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return arrays[1];</span><br><span class="line">    &#125;</span><br><span class="line">    private void initTree(int[] array)&#123;</span><br><span class="line">        for(int i = array.length/2; i&gt;= 1;i--)&#123;</span><br><span class="line">            heapify(array, i, array.length -1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private void heapify(int[] array,int i, int n)&#123;</span><br><span class="line">        while(true)&#123;</span><br><span class="line">            int minPos = i;</span><br><span class="line">            if(i*2 &lt;= n &amp;&amp; array[i] &gt; array[i*2])&#123; </span><br><span class="line">                minPos = i*2;</span><br><span class="line">            &#125;</span><br><span class="line">            if(i*2+1 &lt;= n &amp;&amp; array[minPos] &gt; array[i*2+1])&#123;minPos = i*2+1;&#125;</span><br><span class="line">            if(minPos == i)break;</span><br><span class="line">            swap(array, i, minPos);</span><br><span class="line">            i = minPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    public void swap(int[] nums , int fromIndex , int toIndex)&#123;</span><br><span class="line">        int tmp = nums[toIndex];</span><br><span class="line">        nums[toIndex] = nums[fromIndex];</span><br><span class="line">        nums[fromIndex] = tmp;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/堆/">堆</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/04/21/arts-2019-04-21-share/" title="关于这段时间学习的分析" itemprop="url">关于这段时间学习的分析</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-21T07:49:07.000Z" itemprop="datePublished"> Published 2019-04-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>这段时间在以阿里的标准去复习，发现自己之前真的很多不会的。基础的集合类从来没想过要了解它的实现，不知道实现就不知道它的限制，这样是不可能使用好的。虚拟机没有看过，当时觉得虚拟机太复杂，还没腾出时间去看。并发没有好好研究，它和虚拟机一样也是认为它太难了。算法，数据结构也是，一直认为它很重要，但遇到点困难就退缩了，回到舒适区。这些困难可能暂时不会影响到那时的我，所以我也没有太在意，虽然他们都在，也都知道，但重要性没有那么高。</p>
-<p>最近再把这些知识作为必须要学会的内容去学习，开头很难，制定计划内心都是拒绝的，开始1-2个星期，1天只能坐1-2道算法题，那个时候内心是崩溃的，但过了1-2个月，发现情况出现好转，每天做题的速度慢慢上来了。虽然并发还是不怎么会，但通过订阅别人的专栏，我发现，一开始不会的时候，知识的凌乱的，但通过师傅寻找内在的逻辑，精心编怕，你可以找到秩序，把混乱变成有序，需要付出努力，自然界是熵增的。<strong>学习就是这样一个过程， 把无序变成有序。</strong></p>
-<p>从我女朋友学编程这件事来说，我一直想教她，但我理不出头绪，一般就是扔一本书给她，或者开头热教她一下，但过不了1个星期就不继续了，这是我没有吃透的表现，没有从混乱转变成有序，也不能将这种有序传授给别人。李笑来之前就说他口头教会别人游泳，说明功力很深厚，我也尝试教女朋友，模仿我学习的过程，但效果一般，我没有掌握好各种过渡的阶段，无法有效的表达。很多时候就是这样，明明自己会，但你不敢说会，因为你不能教会别人。<strong>以教为学</strong>很重要。</p>
-<p>最近也体会到一个人意志坚定的重要性，认准一个道理，身边的不同人会给你不同的压力，顶住压力，你就能突破自我，完成进化。屈从压力，你可能会继续随波逐流，活在别人的阴影中，别人的意志里。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/9/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/11/">Next<span></span></a>
@@ -753,7 +750,7 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>29</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>30</sup></a></li>
 		  
 		
 		  
@@ -810,7 +807,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>29</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>30</sup></a></li>
 			
 		
 			
@@ -842,6 +839,10 @@
 			
 		
 			
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
@@ -850,7 +851,7 @@
 			
 		
 			
-				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>5</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
@@ -858,7 +859,7 @@
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/数组/" title="数组">数组<sup>4</sup></a></li>
 			
 		
 			
@@ -866,15 +867,11 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数组/" title="数组">数组<sup>3</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			

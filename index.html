@@ -79,6 +79,77 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/07/02/arts-2022-07-02-algorithm/" title="209. 长度最小的子数组" itemprop="url">209. 长度最小的子数组</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-02T00:15:00.000Z" itemprop="datePublished"> Published 2022-07-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个含有 n 个正整数的数组和一个正整数 target 。</p>
+<p>找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。</p>
+<p>示例 1：</p>
+<p>输入：target = 7, nums = [2,3,1,2,4,3]<br>输出：2<br>解释：子数组 [4,3] 是该条件下的长度最小的子数组。<br>示例 2：</p>
+<p>输入：target = 4, nums = [1,4,4]<br>输出：1<br>示例 3：</p>
+<p>输入：target = 11, nums = [1,1,1,1,1,1,1,1]<br>输出：0</p>
+<p>提示：</p>
+<p>1 &lt;= target &lt;= 109<br>1 &lt;= nums.length &lt;= 105<br>1 &lt;= nums[i] &lt;= 105</p>
+<p>进阶：</p>
+<p>如果你已经实现 O(n) 时间复杂度的解法, 请尝试设计一个 O(n log(n)) 时间复杂度的解法。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/minimum-size-subarray-sum" target="_blank" rel="noopener">https://leetcode.cn/problems/minimum-size-subarray-sum</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>解题：滑动窗口法<br>看别人的解法，自己写的超过时间限制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int minSubArrayLen(int target, int[] nums) &#123;</span><br><span class="line">        int i = 0;</span><br><span class="line">        int result = Integer.MAX_VALUE;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for(int j = 0; j &lt; nums.length ; j++)&#123;</span><br><span class="line">            sum += nums[j];</span><br><span class="line">            while(sum &gt;= target)&#123;</span><br><span class="line">                result = Math.min(result, j - i + 1);</span><br><span class="line">                sum -= nums[i++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result == Integer.MAX_VALUE ? 0 : result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/数组/">数组</a><a href="/tags/滑动窗口/">滑动窗口</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2022/06/30/arts-2022-06-30-tip/" title="webflux 添加header信息" itemprop="url">webflux 添加header信息</a>
   </h1>
   <p class="article-author">By
@@ -807,66 +878,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/06/19/arts-2022-06-19-review/" title="Junit5 之 Test Instance Lifecycle 初探" itemprop="url">Junit5 之 Test Instance Lifecycle 初探</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-06-19T02:40:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>为了每个test方法独立的执行和避免不可变单元测试非预期的副作用，junit在每个方法执行前创建一个测试实例。<br>如果你想jupiter执行所有方法在相同的测试实例，在你的测试类上添加注解 @TestInstance(Lifecycle.PER_CLASS)。如果使用这种模式，每个测试类将生成一个测试实例。因此如果你的测试方法依赖实例状态，你可能需要在@BeforeEach @AfterEach重置状态。<br>“per-class“ 模式有一些额外的好处对比默认的“per-method”模式。尤其，“per-class”通过接口模式方法可以使用非静态方法实现@BeforeAll @AfterAll。“per-class在@Nested测试类里也可以实现@BeforeAll 和@AfterAll</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -896,7 +907,7 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>29</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>30</sup></a></li>
 		  
 		
 		  
@@ -953,7 +964,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>29</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>30</sup></a></li>
 			
 		
 			
@@ -985,6 +996,10 @@
 			
 		
 			
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
@@ -993,7 +1008,7 @@
 			
 		
 			
-				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>5</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
@@ -1001,7 +1016,7 @@
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/数组/" title="数组">数组<sup>4</sup></a></li>
 			
 		
 			
@@ -1009,15 +1024,11 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数组/" title="数组">数组<sup>3</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			

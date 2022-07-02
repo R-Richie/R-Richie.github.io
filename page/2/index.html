@@ -79,6 +79,66 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/06/19/arts-2022-06-19-review/" title="Junit5 之 Test Instance Lifecycle 初探" itemprop="url">Junit5 之 Test Instance Lifecycle 初探</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-19T02:40:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>为了每个test方法独立的执行和避免不可变单元测试非预期的副作用，junit在每个方法执行前创建一个测试实例。<br>如果你想jupiter执行所有方法在相同的测试实例，在你的测试类上添加注解 @TestInstance(Lifecycle.PER_CLASS)。如果使用这种模式，每个测试类将生成一个测试实例。因此如果你的测试方法依赖实例状态，你可能需要在@BeforeEach @AfterEach重置状态。<br>“per-class“ 模式有一些额外的好处对比默认的“per-method”模式。尤其，“per-class”通过接口模式方法可以使用非静态方法实现@BeforeAll @AfterAll。“per-class在@Nested测试类里也可以实现@BeforeAll 和@AfterAll</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2022/06/12/arts-2022-06-12-review/" title="Junit5 之 Timeouts" itemprop="url">Junit5 之 Timeouts</a>
   </h1>
   <p class="article-author">By
@@ -652,72 +712,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2021/05/23/arts-2021-05-23-share/" title="大企业的推锅文化" itemprop="url">大企业的推锅文化</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2021-05-23T03:30:00.000Z" itemprop="datePublished"> Published 2021-05-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>之前都在小企业，虽然也很忙，但大家顶多是多做点，不致于互相推卸责任。但到了大企业，互相推卸责任反而是一个必备技能，小企业需求没那么多，提要求的人也没那么多，所以能做或想做的事情也不会太多，但到了大企业，你都说不好有多少人对你提要求，过程管理，安全，集团要求，A、B、C领导对你期待不同。所以你想做一些自己觉得重要的事情，就要尽量避免帮别人做一些不重要的事情，而且有些事情做了还不如不做，收益不大，风险极高，做了之后可能后面这些事情就都要你做，因为你做过。从自身经验这就是推锅的起源。</p>
-<p>我就是这么学会推锅的，开始觉得领导重用我了，就开始大包大揽做所有事情，正逢当时手下也没几个人，就全自己动手，然后一号技术负责人再是一个会推锅的人，他也会源源不断推给你一堆事情，然后你手头工作不断挤压，加班不断，因为加班强度大，犯错也增加，恶性循环，这个时候你醒悟做了这么多，不会有人说你好，反而当你出错，一堆人会批评你，这就是费力不讨好，然后我也学会了推锅，能推给别人的尽量不自己做，少做不加班，错的也少，何乐而不为。效果明显，简直就是必备技能，技能越强，受益越明显。</p>
-<p>想想之前曾经推锅的人都是吃了被推锅的亏，吃一堑长一智，才不断推锅，然后现实就演变成了一场推锅大会，大家会花很多时间去推锅，大家都知道这样不好，但不这么做，自己明显吃亏，肯定屁股决定脑袋。</p>
-<p>对于推锅，领导肯定明白，但这就会导致他想做的事情，大家推来推去，没人去做，这样他的目标就达成不了，这样在他的角度必然讨厌推锅的人，认为这样是不负责任的，严厉打击，所以大家把推锅用其他语言包装一下，领域划分，架构划分，用机制解决冲突，既要表达不该自己做，又不能表现出什么都不愿意做，绞尽脑汁用其他理由去包装，推锅变成一场博弈。</p>
-<p>有了推锅，大家学会了反推锅，你提出问题，你提解决方案，给提出问题的人反抛出一个难题。你让我难受，我也不让你好受。解决不了问题，就解决提出问题的人。</p>
-<p>接了锅有没有好处，做得越多，你对系统，业务越了解，你未来走的越远。<br>这是一个短期与长期的收益的关系，长期收益不明显，短期受损很明确。</p>
-<p>解决方法？<br>大家职责范围清晰，没有交叉，临时工作依次承接。但职责清晰有点难，总有些临时的，不确定范围的东西，不能避免。大家偶尔接触别人领域，大部分在自己领域。<br>推锅实际上是博弈，人与人的，最好一整块都是一部分人的，减少交叉，但交叉不可避免，还需要有机制处理这些博弈的问题。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -747,7 +741,7 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>29</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>30</sup></a></li>
 		  
 		
 		  
@@ -804,7 +798,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>29</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>30</sup></a></li>
 			
 		
 			
@@ -836,6 +830,10 @@
 			
 		
 			
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/链表/" title="链表">链表<sup>5</sup></a></li>
 			
 		
@@ -844,7 +842,7 @@
 			
 		
 			
-				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>5</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
@@ -852,7 +850,7 @@
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/数组/" title="数组">数组<sup>4</sup></a></li>
 			
 		
 			
@@ -860,15 +858,11 @@
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数组/" title="数组">数组<sup>3</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
 			
 		
 			
