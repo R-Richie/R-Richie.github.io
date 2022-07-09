@@ -79,6 +79,199 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/07/09/arts-2022-07-09-share/" title="独立开发者的几种可能性" itemprop="url">独立开发者的几种可能性</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-09T06:52:00.000Z" itemprop="datePublished"> Published 2022-07-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>到了30岁，发现自己离传统的去大公司往上走，可能性越来越低。留在上海，高额的房价，买了房子一辈子都套牢，以及父母的老去，都感觉自己被工作地点限制，可能未来越来越难。突然想一种能不受空间限制的工作，远离大城市高额的消费，也能有还可以的收入，能照顾老去的家人，不用为了钱一直为别人打工。<br>想到几种可能的方式。<br>一种是外企外包，相对轻松，生活工作平衡，但需要外语水平高。<br>一种就是独立开发者，自己开发东西自己有收入。<br>暂时我还没能力自己创建团队，开发的东西肯定也做不过大公司，只能找一些细分领域，做一些大公司看不上的，支撑不起一个团队的收入，但对一个人足够的收入。<br>跟着别人做，早晚有一天，你会被替代，不管多么不可替代，自己能摸索市场，看准需求，自己能挣钱，而不是负债，你才能不用担心被裁员。<br>独立开发者在中国可能还没有那么好的待遇，所以要先工作着，有着主要收入，再去探索哪种模式，这条路也可能失败，而且也不好走。<br>我搜索到的几种，<br>1.chrome插件开发赚钱<br>2.wordpress插件或主题<br>3.小程序、微信公众号<br>4.自己做网站</p>
+<p>但同时也看到很多悲观论调，广告收入很少，没有流量引入，没有知道要流量就要花钱。相对来说，国外的环境好一点，大家付费的情绪高一点。<br>我昨晚看了一下最常用的idea的插件，也有收费的，而且下载量很高的，一个6美元，100多万的采摘量，但这是最高的，其他的都很少了，付费下载量超过万的不多。<br>我想试试这条路，先从各种插件入手看看，开发一些成熟软件的插件，看试试能不能有一些收入。<br>因为最近想到部门再抓首移质量， 好多人提交代码前，一些基本的运行都不做，提交的代码都编译报错，想能不能本地开发个idea 插件，可以本地方便的执行这些操作，同时还可以开发了规范的检查，提交前先检查，这样提交代码的质量会提高很多。<br>用自己的手艺吃饭，不断增加自己手艺的数量，加大手艺融合碰撞。<br>这条路暂时没看到现成的道路，需要自己探索，更难，但可能竞争者更少。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/07/09/arts-2022-07-09-review/" title="JUnit5 之 测试类和方法" itemprop="url">JUnit5 之 测试类和方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-09T00:50:00.000Z" itemprop="datePublished"> Published 2022-07-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><strong>测试类</strong>：任何顶层类，静态成员类或@Nested 类，至少包含一个测试方法。必须不是抽象类，有单一的构造器</p>
+<p><strong>测试方法</strong>：被@Test，@RepeatedTest，@ParameterizedTest，@TestFactory，@TestTemplate 直接注解或元注解的实例方法</p>
+<p><strong>生命周期方法</strong>：被@BeforeAll，@AfterAll，@BeforeEach，@AfterEach 注解或元注解的实例方法。</p>
+<p>测试方法和生命周期方法可能在当前类定义，或从超类继承，或从接口继承。另外测试方法和生命周期方法不能是抽象，并且不能返回值（除了@TestFactory要求返回值）</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/07/09/arts-2022-07-08-algorithm/" title="59. 螺旋矩阵 II" itemprop="url">59. 螺旋矩阵 II</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-09T00:49:00.000Z" itemprop="datePublished"> Published 2022-07-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。</p>
+<p>|  1 |  2  |  3  |<br>|  8 |  9  |  4  |<br>|  7 |  6  |  5  |</p>
+<p>示例 1：</p>
+<p>输入：n = 3<br>输出：[[1,2,3],[8,9,4],[7,6,5]]<br>示例 2：</p>
+<p>输入：n = 1<br>输出：[[1]]</p>
+<p>提示：</p>
+<p>1 &lt;= n &lt;= 20</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/spiral-matrix-ii" target="_blank" rel="noopener">https://leetcode.cn/problems/spiral-matrix-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>自己没想出来，看着别人的做的，循环不变量原则<br>模拟顺时针画矩阵的过程:</p>
+<p>填充上行从左到右<br>填充右列从上到下<br>填充下行从右到左<br>填充左列从下到上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[][] generateMatrix(int n) &#123;</span><br><span class="line">        int loop = 0;</span><br><span class="line">        int start = 0;</span><br><span class="line">        int[][] res = new int[n][n];</span><br><span class="line">        int count = 1;</span><br><span class="line">        int i, j;</span><br><span class="line">        while(loop++ &lt; n/2)&#123;</span><br><span class="line">            for(j = start; j &lt; n - loop; j++)&#123;</span><br><span class="line">                res[start][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            for(i = start; i &lt; n - loop; i++)&#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            for(; j &gt; start; j--)&#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            for(; i &gt; start; i--)&#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            start++;</span><br><span class="line">        &#125;</span><br><span class="line">        if(n % 2 == 1)&#123;</span><br><span class="line">            res[start][start] = count;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/数组/">数组</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2022/07/02/arts-2022-07-02-algorithm/" title="209. 长度最小的子数组" itemprop="url">209. 长度最小的子数组</a>
   </h1>
   <p class="article-author">By
@@ -680,204 +873,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/06/19/arts-2022-06-19-tip/" title="Junit5如何实现元注解初探" itemprop="url">Junit5如何实现元注解初探</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-06-19T02:45:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Junit5的注解有个比较有意思的特点就是都是meta-annotation 元注解，感觉比较有趣。<br>但经过搜索，没看到直接的分析是如何实现的，看到一篇Dzone的分析，但貌似跟现有junit实现不太一致，但也是一种思路。<br>注解本身是不会影响运行时的程序，需要在处理类里面去根据注解信息判断，Dzone的分析大致过程应该是对的，就是具体实现有各种情况。<br>我看到一个junit5的注解读取工具类，里面就一个读取元注解的，仔细看了一下，就是递归遍历，当前注解以及直接下级注解，然后再遍历递归，就能找到要找的元注解。<br>其他我还没完全弄懂，只是一个自认为可以的思路，junit加载的机制还没弄清楚，还需要继续深入理解。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/06/19/arts-2022-06-19-algorithm/" title="27. 移除元素" itemprop="url">27. 移除元素</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-06-19T02:43:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
-<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
-<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h1><p>为什么返回数值是整数，但输出的答案是数组呢?</p>
-<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
-<p>你可以想象内部操作如下:</p>
-<p>// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝<br>int len = removeElement(nums, val);</p>
-<p>// 在函数里修改输入数组对于调用者是可见的。<br>// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。<br>for (int i = 0; i &lt; len; i++) {<br>    print(nums[i]);<br>}</p>
-<p>示例 1：</p>
-<p>输入：nums = [3,2,2,3], val = 3<br>输出：2, nums = [2,2]<br>解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。<br>示例 2：</p>
-<p>输入：nums = [0,1,2,2,3,0,4,2], val = 2<br>输出：5, nums = [0,1,4,0,3]<br>解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。</p>
-<p>提示：</p>
-<p>0 &lt;= nums.length &lt;= 100<br>0 &lt;= nums[i] &lt;= 50<br>0 &lt;= val &lt;= 100</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/remove-element" target="_blank" rel="noopener">https://leetcode.cn/problems/remove-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<p>思路1<br>将跟值一样的，跟最后一位进行交换，这样就能保证原地查找</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">        int last = nums.length -1;</span><br><span class="line">        int begin = 0;</span><br><span class="line">        while(begin &lt;= last)&#123;</span><br><span class="line">            if(nums[begin] == val)&#123;</span><br><span class="line">                int temp = nums[begin];</span><br><span class="line">                nums[begin] = nums[last];</span><br><span class="line">                nums[last] = temp;</span><br><span class="line">                last--;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                begin++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return last+1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>思路2<br>快慢指针法，快指针循环遍历，慢指针停留在需要替换的问题，当快指针走的时候，如果值不等val，就替换慢指针，直到循环结束</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">        int slow = 0;</span><br><span class="line">        for(int fast = 0 ; fast &lt; nums.length ; fast++)&#123;</span><br><span class="line">            if(nums[fast] != val)&#123;</span><br><span class="line">                nums[slow++] = nums[fast];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/数组/">数组</a><a href="/tags/快慢指针/">快慢指针</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/06/19/arts-2022-06-19-share/" title="居家办公时间反思" itemprop="url">居家办公时间反思</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-06-19T02:42:00.000Z" itemprop="datePublished"> Published 2022-06-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>居家办公3个月，发现一个其他的现象，通勤时间每天节约2个小时，但每天工作的时间反而增多了。<br>原来每天6点45闹钟，7点20出门，到公司8点20左右，稍微晚点会迟到。<br>现在每天7点45闹钟，洗漱，打开电脑发上班打卡邮件，8点半左右吃早饭。<br>时间看起是多了一个小时睡觉。</p>
-<p>原来晚上早的话7点多下班，地铁1个小时，到家也要8点左右。晚一点就8点半打车回家，到家9点左右。<br>现在6点左右开完夕会，开始做饭吃饭，饭后休息到7，8点，继续干活。9点多打卡下班，晚到10，11点。<br>每天路上的时间少了，但其他的事情却没干，还是干了工作，工作有的时候效率比较低，沟通不顺畅。</p>
-<p>所以只是客观条件变化，不会改变你个人的实际情况，要改变你的习惯，才能真实改变你的现状。从自己的习惯，改变做起，才能改变你的现状。不能把自己的改变依托于环境，环境会改变人，是改变了人的习惯。但环境不一定能改变你的习惯，所以要主动改变习惯。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -907,11 +902,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>30</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>31</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>41</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>42</sup></a></li>
 		  
 		
 		  
@@ -939,7 +934,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>5</sup></a></li>
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>6</sup></a></li>
 		  
 		
 		  
@@ -956,15 +951,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>41</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>42</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>31</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/编程技巧/" title="编程技巧">编程技巧<sup>31</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>30</sup></a></li>
 			
 		
 			
@@ -980,11 +975,11 @@
 			
 		
 			
-				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>8</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>8</sup></a></li>
+				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>8</sup></a></li>
 			
 		
 			
@@ -992,11 +987,15 @@
 			
 		
 			
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>6</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>5</sup></a></li>
+				<li><a href="/tags/数组/" title="数组">数组<sup>5</sup></a></li>
 			
 		
 			
@@ -1008,19 +1007,15 @@
 			
 		
 			
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/数组/" title="数组">数组<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
