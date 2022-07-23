@@ -79,6 +79,324 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/07/23/arts-2022-07-23-review/" title="Junit5 之 Dependency Injection for Constructors and Methods" itemprop="url">Junit5 之 Dependency Injection for Constructors and Methods</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-23T02:30:00.000Z" itemprop="datePublished"> Published 2022-07-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在之前版本的Junit，测试构造器和方法不被允许有参数（至少标准的Runner实现没有），Junit Jupiter主要的改变，测试构造器和方法都允许有参数。这样扩展性更强，可以依赖注入构造器和方法。<br>ParameterResolver定义了API，期望在测试用例执行时，运行期动态解决参数。如果一个测试类构造器，测试方法或生命周期方法，接受一个参数，参数必须运行期注册为ParameterResolver。</p>
+<p>有几个内建解析器会自动注册。<br><strong>TestInfoParameterResolver</strong>，如果一个构造器或方法参数类型是TestInfo。TestInfoParameterResolver会供给TestInfo实例，相当于当前容器或测试值当作参数。TestInfo用于从当前容器或测试检索信息，例如显示姓名，测试类，测试方法，有关联的标签等。显示的姓名是一个科技方法，例如测试类的名字或方法，或通过@DisplayName自定义的。</p>
+<p>TestInfo是替换junit4的TestName规则。下面例子的目的是测试构造器注入testInfo，@BeforeEach和测试方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import static org.junit.jupiter.api.Assertions.assertEquals;</span><br><span class="line">import static org.junit.jupiter.api.Assertions.assertTrue;</span><br><span class="line"></span><br><span class="line">import org.junit.jupiter.api.BeforeEach;</span><br><span class="line">import org.junit.jupiter.api.DisplayName;</span><br><span class="line">import org.junit.jupiter.api.Tag;</span><br><span class="line">import org.junit.jupiter.api.Test;</span><br><span class="line">import org.junit.jupiter.api.TestInfo;</span><br><span class="line"></span><br><span class="line">@DisplayName(&quot;TestInfo Demo&quot;)</span><br><span class="line">class TestInfoDemo &#123;</span><br><span class="line"></span><br><span class="line">    TestInfoDemo(TestInfo testInfo) &#123;</span><br><span class="line">        assertEquals(&quot;TestInfo Demo&quot;, testInfo.getDisplayName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @BeforeEach</span><br><span class="line">    void init(TestInfo testInfo) &#123;</span><br><span class="line">        String displayName = testInfo.getDisplayName();</span><br><span class="line">        assertTrue(displayName.equals(&quot;TEST 1&quot;) || displayName.equals(&quot;test2()&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    @DisplayName(&quot;TEST 1&quot;)</span><br><span class="line">    @Tag(&quot;my-tag&quot;)</span><br><span class="line">    void test1(TestInfo testInfo) &#123;</span><br><span class="line">        assertEquals(&quot;TEST 1&quot;, testInfo.getDisplayName());</span><br><span class="line">        assertTrue(testInfo.getTags().contains(&quot;my-tag&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void test2() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>RepetitionInfoParameterResolver</strong><br>如果一个方法参数在@RepeatedTest，@BeforeEach，@AfterEach是RepetitionInfo类型，RepetitionInfoParameterResolver将会接受一个RepetitionInfo实例。RepetitionInfo可以用来检索信息，包括当前重复信息和总的循环次数从@RepeatedTest。注意，RepetitionInfoParameterResolver在@RepeatedTest上下文外不会被注册。<br><strong>TestReporterParameterResolver</strong><br>如果一个构造器或方法参数的类型是TestReporter，TestReporterParameterResolver将会接受一个TestReporter实例。TestReporter可以发布当前测试运行的额外信息。在TestExecutionListener的reportingEntryPublished()来消耗数据，允许IDEs或报告查看。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class TestReporterDemo &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void reportSingleValue(TestReporter testReporter) &#123;</span><br><span class="line">        testReporter.publishEntry(&quot;a status message&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void reportKeyValuePair(TestReporter testReporter) &#123;</span><br><span class="line">        testReporter.publishEntry(&quot;a key&quot;, &quot;a value&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void reportMultipleKeyValuePairs(TestReporter testReporter) &#123;</span><br><span class="line">        Map&lt;String, String&gt; values = new HashMap&lt;&gt;();</span><br><span class="line">        values.put(&quot;user name&quot;, &quot;dk38&quot;);</span><br><span class="line">        values.put(&quot;award year&quot;, &quot;1974&quot;);</span><br><span class="line"></span><br><span class="line">        testReporter.publishEntry(values);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/07/23/arts-2022-07-23-share/" title="独立开发者需要哪些能力，以及路线图" itemprop="url">独立开发者需要哪些能力，以及路线图</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-23T02:29:00.000Z" itemprop="datePublished"> Published 2022-07-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>花了几个小时的时间，搜索了互联网的信息，中文的内容不太多，而且大多不成体系，看到一个最近的报告，其中这3种能力是独立开发者最缺少的。<br>Ui设计，产品设计，流量运营<br>可能大部分独立开发者，都是开发出身，这样才有独立开发的基础，但其他几项能力的缺少，让开发出来的东西，在市场上没有竞争力。</p>
+<p>而且现在看起来，这一行业在中国还不成气候，道路还不可复制。所以可能比较难，但机会还有有的，而且很少人能做。<br>首先是市场需求的分析能力，能找到受众，客户的需求，这个是产品经理的能力。<br>第二个是Ui设计能力，这个需要审美。<br>第三个是产品设计能力<br>第四个是开发能力<br>第五个是，运营能力，开发后，如何跟客户互动，赚钱。<br>没有成熟的路线，就要自己的分析，自己的脑子了，这个也是以后赚钱的根本，不能偷懒，一点点做。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/07/23/arts-2022-07-23-algorithm/" title="59. 707. 设计链表" itemprop="url">59. 707. 设计链表</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-23T02:28:00.000Z" itemprop="datePublished"> Published 2022-07-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。</p>
+<p>在链表类中实现这些功能：</p>
+<p>get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。<br>addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。<br>addAtTail(val)：将值为 val 的节点追加到链表的最后一个元素。<br>addAtIndex(index,val)：在链表中的第 index 个节点之前添加值为 val  的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。<br>deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。</p>
+<p>示例：</p>
+<p>MyLinkedList linkedList = new MyLinkedList();<br>linkedList.addAtHead(1);<br>linkedList.addAtTail(3);<br>linkedList.addAtIndex(1,2);   //链表变为1-&gt; 2-&gt; 3<br>linkedList.get(1);            //返回2<br>linkedList.deleteAtIndex(1);  //现在链表是1-&gt; 3<br>linkedList.get(1);            //返回3</p>
+<p>提示：</p>
+<p>所有val值都在 [1, 1000] 之内。<br>操作次数将在  [1, 1000] 之内。<br>请不要使用内置的 LinkedList 库。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/design-linked-list" target="_blank" rel="noopener">https://leetcode.cn/problems/design-linked-list</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>自己没写对，参考提示，用虚拟头节点，单链书写，通过size状态，有效控制，前后的结束的判断。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">class Node&#123;</span><br><span class="line">    Node next;</span><br><span class="line">    int val;</span><br><span class="line">    public Node(int value)&#123;</span><br><span class="line">        this.val = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class MyLinkedList &#123;</span><br><span class="line">    int size;</span><br><span class="line">    Node head;</span><br><span class="line"></span><br><span class="line">    public MyLinkedList() &#123;</span><br><span class="line">        this.size = 0;</span><br><span class="line">        head = new Node(0);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int get(int index) &#123;</span><br><span class="line">        if(index &lt; 0 || index &gt;= size)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        Node current = head;</span><br><span class="line">        for(int i = 0 ; i &lt; index + 1 ; i++)&#123;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return current.val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void addAtHead(int val) &#123;</span><br><span class="line">        addAtIndex(0, val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void addAtTail(int val) &#123;</span><br><span class="line">        addAtIndex(size, val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void addAtIndex(int index, int val) &#123;</span><br><span class="line">        if(index &lt; 0)&#123;</span><br><span class="line">            index = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(index &gt; size)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        size++;</span><br><span class="line">        Node pre = head;</span><br><span class="line">        for(int i = 0 ; i&lt; index ; i++)&#123;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        Node insertNode = new Node(val);</span><br><span class="line">        insertNode.next = pre.next;</span><br><span class="line">        pre.next = insertNode;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void deleteAtIndex(int index) &#123;</span><br><span class="line">        if(index &lt; 0 || index &gt;= size)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        size--;</span><br><span class="line">         Node pre = head;</span><br><span class="line">        for(int i = 0 ; i&lt; index ; i++)&#123;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        pre.next = pre.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MyLinkedList object will be instantiated and called as such:</span><br><span class="line"> * MyLinkedList obj = new MyLinkedList();</span><br><span class="line"> * int param_1 = obj.get(index);</span><br><span class="line"> * obj.addAtHead(val);</span><br><span class="line"> * obj.addAtTail(val);</span><br><span class="line"> * obj.addAtIndex(index,val);</span><br><span class="line"> * obj.deleteAtIndex(index);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/07/23/arts-2022-07-23-tip/" title="模版方法的继承" itemprop="url">模版方法的继承</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-23T02:27:00.000Z" itemprop="datePublished"> Published 2022-07-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近有个需求，就是我们列表是 从某个系统查询主数据源，分页20条，再从本地db，其他系统获取补充数据源，然后拼接这些副数据源到主数据源，再进行业务处理，返回给页面列表展示。<br>同时另外一个场景，是mq推送单条主数据源的变更数据，我们自己再拼接其他数据源，业务处理，同时推送这条变化到列表，告诉页面这条有变化。<br>两个场景除了数据源的获取方式有差异，业务处理最后要保持一致。但最开始，这两块是分开的。现在想共用数据处理逻辑，数据源本来就不一样。<br>我们后面使用模版方法，重构上面处理，分为，数据源+副作用处理+返参映射，这样列表给出的实现，只要推送的集成，重写数据源部分就行了，副作用和返参部分直接继承，修改也同时修改，一处改动就好了。<br>因为模版方法是基于继承的，所以想实现继承的就很方便，如果同样的需求，要用责任链，就要重新构建责任链，它是不能继承的。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java/">java</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/07/22/arts-2022-07-22-review/" title="Junit5 之Test Execution Order" itemprop="url">Junit5 之Test Execution Order</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-22T02:30:00.000Z" itemprop="datePublished"> Published 2022-07-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="测试执行顺序"><a href="#测试执行顺序" class="headerlink" title="测试执行顺序"></a>测试执行顺序</h2><p>默认，测试类或方法执行顺序由算法决定，但是可能不那么显而易见。这章确保随后执行的测试集合，测试类和测试方法以相同的顺序执行，所以允许重复编译。</p>
+<h3 id="方法顺序"><a href="#方法顺序" class="headerlink" title="方法顺序"></a>方法顺序</h3><p>即使真正的单元测试不应该依赖执行顺序，但还是有时必须要强制执行顺序——例如书写集成测试或函数式测试，执行顺序很重要<br>@TestInstance(Lifecycle.PER_CLASS)<br>为了控制测试方法的执行顺序，注解你的类或测试接口使用@TestMethodOrder或者重新定义需要的TestOrder实现。你可以实现你自己的TestOrder或使用内建的实现</p>
+<p>MethodOrderer.DisplayName 基于显示名称的字母数字顺序的排序。<br>MethodOrderer.MethodName 基于名字或参数列表<br>MethodOrderer.OrderAnnotation 通过@Order<br>MethodOrderer.Random 基于伪随机，支持自定义种子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;</span><br><span class="line">import org.junit.jupiter.api.Order;</span><br><span class="line">import org.junit.jupiter.api.Test;</span><br><span class="line">import org.junit.jupiter.api.TestMethodOrder;</span><br><span class="line"></span><br><span class="line">@TestMethodOrder(OrderAnnotation.class)</span><br><span class="line">class OrderedTestsDemo &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    @Order(1)</span><br><span class="line">    void nullValues() &#123;</span><br><span class="line">        // perform assertions against null values</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    @Order(2)</span><br><span class="line">    void emptyValues() &#123;</span><br><span class="line">        // perform assertions against empty values</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    @Order(3)</span><br><span class="line">    void validValues() &#123;</span><br><span class="line">        // perform assertions against valid values</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类的顺序"><a href="#类的顺序" class="headerlink" title="类的顺序"></a>类的顺序</h3><p>即使测试类典型不应该依赖执行的顺序，还有些场景需要强制执行特定的类的顺序。你可能希望随机执行确保没有意外依赖，你可能希望执行在这些场景：<br>快速失败模式<br>并行场景，执行更长先执行，最短的测试执行。跟方法一样的自定义ClassOrder<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import org.junit.jupiter.api.ClassOrderer;</span><br><span class="line">import org.junit.jupiter.api.Nested;</span><br><span class="line">import org.junit.jupiter.api.Order;</span><br><span class="line">import org.junit.jupiter.api.Test;</span><br><span class="line">import org.junit.jupiter.api.TestClassOrder;</span><br><span class="line"></span><br><span class="line">@TestClassOrder(ClassOrderer.OrderAnnotation.class)</span><br><span class="line">class OrderedNestedTestClassesDemo &#123;</span><br><span class="line"></span><br><span class="line">    @Nested</span><br><span class="line">    @Order(1)</span><br><span class="line">    class PrimaryTests &#123;</span><br><span class="line"></span><br><span class="line">        @Test</span><br><span class="line">        void test1() &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Nested</span><br><span class="line">    @Order(2)</span><br><span class="line">    class SecondaryTests &#123;</span><br><span class="line"></span><br><span class="line">        @Test</span><br><span class="line">        void test2() &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2022/07/16/arts-2022-07-16-tip/" title="模版方式，书写第一个idea插件" itemprop="url">模版方式，书写第一个idea插件</a>
   </h1>
   <p class="article-author">By
@@ -391,330 +709,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/07/09/arts-2022-07-09-review/" title="JUnit5 之 测试类和方法" itemprop="url">JUnit5 之 测试类和方法</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-07-09T00:50:00.000Z" itemprop="datePublished"> Published 2022-07-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><strong>测试类</strong>：任何顶层类，静态成员类或@Nested 类，至少包含一个测试方法。必须不是抽象类，有单一的构造器</p>
-<p><strong>测试方法</strong>：被@Test，@RepeatedTest，@ParameterizedTest，@TestFactory，@TestTemplate 直接注解或元注解的实例方法</p>
-<p><strong>生命周期方法</strong>：被@BeforeAll，@AfterAll，@BeforeEach，@AfterEach 注解或元注解的实例方法。</p>
-<p>测试方法和生命周期方法可能在当前类定义，或从超类继承，或从接口继承。另外测试方法和生命周期方法不能是抽象，并且不能返回值（除了@TestFactory要求返回值）</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/07/09/arts-2022-07-08-algorithm/" title="59. 螺旋矩阵 II" itemprop="url">59. 螺旋矩阵 II</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-07-09T00:49:00.000Z" itemprop="datePublished"> Published 2022-07-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。</p>
-<p>|  1 |  2  |  3  |<br>|  8 |  9  |  4  |<br>|  7 |  6  |  5  |</p>
-<p>示例 1：</p>
-<p>输入：n = 3<br>输出：[[1,2,3],[8,9,4],[7,6,5]]<br>示例 2：</p>
-<p>输入：n = 1<br>输出：[[1]]</p>
-<p>提示：</p>
-<p>1 &lt;= n &lt;= 20</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/spiral-matrix-ii" target="_blank" rel="noopener">https://leetcode.cn/problems/spiral-matrix-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>自己没想出来，看着别人的做的，循环不变量原则<br>模拟顺时针画矩阵的过程:</p>
-<p>填充上行从左到右<br>填充右列从上到下<br>填充下行从右到左<br>填充左列从下到上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[][] generateMatrix(int n) &#123;</span><br><span class="line">        int loop = 0;</span><br><span class="line">        int start = 0;</span><br><span class="line">        int[][] res = new int[n][n];</span><br><span class="line">        int count = 1;</span><br><span class="line">        int i, j;</span><br><span class="line">        while(loop++ &lt; n/2)&#123;</span><br><span class="line">            for(j = start; j &lt; n - loop; j++)&#123;</span><br><span class="line">                res[start][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            for(i = start; i &lt; n - loop; i++)&#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            for(; j &gt; start; j--)&#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            for(; i &gt; start; i--)&#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            start++;</span><br><span class="line">        &#125;</span><br><span class="line">        if(n % 2 == 1)&#123;</span><br><span class="line">            res[start][start] = count;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/数组/">数组</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/07/02/arts-2022-07-02-algorithm/" title="209. 长度最小的子数组" itemprop="url">209. 长度最小的子数组</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-07-02T00:15:00.000Z" itemprop="datePublished"> Published 2022-07-02</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个含有 n 个正整数的数组和一个正整数 target 。</p>
-<p>找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。</p>
-<p>示例 1：</p>
-<p>输入：target = 7, nums = [2,3,1,2,4,3]<br>输出：2<br>解释：子数组 [4,3] 是该条件下的长度最小的子数组。<br>示例 2：</p>
-<p>输入：target = 4, nums = [1,4,4]<br>输出：1<br>示例 3：</p>
-<p>输入：target = 11, nums = [1,1,1,1,1,1,1,1]<br>输出：0</p>
-<p>提示：</p>
-<p>1 &lt;= target &lt;= 109<br>1 &lt;= nums.length &lt;= 105<br>1 &lt;= nums[i] &lt;= 105</p>
-<p>进阶：</p>
-<p>如果你已经实现 O(n) 时间复杂度的解法, 请尝试设计一个 O(n log(n)) 时间复杂度的解法。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/minimum-size-subarray-sum" target="_blank" rel="noopener">https://leetcode.cn/problems/minimum-size-subarray-sum</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>解题：滑动窗口法<br>看别人的解法，自己写的超过时间限制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public int minSubArrayLen(int target, int[] nums) &#123;</span><br><span class="line">        int i = 0;</span><br><span class="line">        int result = Integer.MAX_VALUE;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for(int j = 0; j &lt; nums.length ; j++)&#123;</span><br><span class="line">            sum += nums[j];</span><br><span class="line">            while(sum &gt;= target)&#123;</span><br><span class="line">                result = Math.min(result, j - i + 1);</span><br><span class="line">                sum -= nums[i++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result == Integer.MAX_VALUE ? 0 : result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/数组/">数组</a><a href="/tags/滑动窗口/">滑动窗口</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/06/30/arts-2022-06-30-tip/" title="webflux 添加header信息" itemprop="url">webflux 添加header信息</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-06-30T14:09:00.000Z" itemprop="datePublished"> Published 2022-06-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近在给spring cloud gateway 添加header信息，想解析token 然后再塞到header传到后面微服务组件。但有的时候不起效，就研究为啥。</p>
-<p>通过继承 WebFilter，实现filter（ServerWebExchange exchage，WebFilterChain chain）<br>通过exchange.getRequest().mutate() 来构建ServerHttpRequest.Builder 正常这个应该是建造者模式，流式创建一个新的request对象，但其中有一个比较特别的就是header属性，headers方法，可以传入一个cunsumer对象，可以覆盖或删除对象，而且会直接影响到原来的request的header。这个可以理解为特意这么设计，可能为了改变header而不用每次都创建新的对象，其他属性的修改都符合建造者模式是复制一个对象，而不是直接修改原来对象。<br>这个比较特殊，允许header修改，且影响原来的对象。但不调用mutate方法却不能修改，因为原来对象是只读对象。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/webflux/">webflux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/06/30/arts-2022-06-30-share/" title="领导跟员工谁该干得多" itemprop="url">领导跟员工谁该干得多</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-06-30T14:08:00.000Z" itemprop="datePublished"> Published 2022-06-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>自己既干过员工，也当过一点小领导，脑海里出现过两个完全对立的观点，但貌似都有道理。<br>当自己是员工的时候，碰到一些麻烦，自己做了一些，但没做好。先跑了，把工作一半留给领导，想领导挣得多，自然干得多，没毛病。我就挣这点，就这样不错了。<br>当自己是领导，把任务分给下级，下级做的磕磕绊绊，最后留一个烂摊子给你，下级还觉得不错，你就想我招你们来是分担工作的，结果你们一个个都比我轻松，我是给你们服务的，请了大爷来。<br>两种对立的想法，在不同场景内看起来都是合理的。上级工作做不过来，需要招人来帮忙分担，而且觉得手下人都是给自己干活的，自然自己要比其他人权力更大，想让你们干什么就干什么，不然我要你有什么用，我自己都干了得了。下级如果只看薪水工作，那上级比我赚钱多，自然干的多，很正常。从单一角度看都没问题，但现实是多维度了，员工要看到自己的工作的内容和报酬的关系，更要看雇佣你的人，对你的期望，评价，以及目的。而且人容易看不清自己的评价，然后自我解释自我满足。<br>领导也不能只把员工看成给自己分担工作，不能有权力高于别人的错觉，你要别人帮你分担，你就需要更高维度去管理，我不是简单理解别人都会明白。上级明白下级容易，下级明白上级难。如果你不跟别人讲，明天听过你的想法，也就没人理解你，你不能只按自己想法去和别人合作。<br>之前我就明白要多维度，但没有什么途径去了解，就拿自己工作去揣测上下级，看看如果能使用多维度思考。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -744,11 +738,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>32</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>33</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>43</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>44</sup></a></li>
 		  
 		
 		  
@@ -756,7 +750,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>30</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>31</sup></a></li>
 		  
 		
 		  
@@ -776,7 +770,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>7</sup></a></li>
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>9</sup></a></li>
 		  
 		
 		  
@@ -793,11 +787,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>43</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>44</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>32</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>33</sup></a></li>
 			
 		
 			
@@ -805,7 +799,7 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>20</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>21</sup></a></li>
 			
 		
 			
@@ -817,7 +811,11 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>10</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>9</sup></a></li>
 			
 		
 			
@@ -825,19 +823,15 @@
 			
 		
 			
+				<li><a href="/tags/链表/" title="链表">链表<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/纪录片/" title="纪录片">纪录片<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>7</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/链表/" title="链表">链表<sup>6</sup></a></li>
 			
 		
 			
@@ -849,10 +843,6 @@
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
@@ -861,7 +851,7 @@
 			
 		
 			
-				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
@@ -869,7 +859,11 @@
 			
 		
 			
-				<li><a href="/tags/二分法/" title="二分法">二分法<sup>2</sup></a></li>
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 		</ul>

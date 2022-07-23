@@ -79,6 +79,317 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/12/22/arts-2019-12-22-review/" title="On java8 学习笔记 validating your code章节" itemprop="url">On java8 学习笔记 validating your code章节</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T05:44:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>你不能保证你代码是正确的，只能证明他是错的。<br>如果没有测试，它就是坏的。<br>因为java是静态语言，程序员对于语言的安全性太多舒服，想“编译通过了，那没问题了”。但是静态类型校验，有很大的限制。它只代表满足语法和基本类型规则。不意味着到达你编程的目的。</p>
+<p>单元测试<br>这个在你创造的代码中建立集成测试的过程，每次构建系统的时候运行他们。这样构建过程不仅仅检查语法错误。你教它检查语义上的错误。<br>“单元”涉及最小块代码测试的想法。每个类都测试方法的行为。“系统”测试不同，检查完成的程序是否满足要求。<br>C风格语言，尤其c++，注重性能甚于安全编程。开发java比c++更快的原因是因为java更安全。特性比如：垃圾收集，类型校验。集成单元测试在编译的时候，将扩展你的安全网，结果是更快的开发。你可以更简单和健壮的重构你的代码，当你发现设计和实现的缺陷时，一般情况下会生产更好的产品，更快。<br>我的测试经验开始于，保证书中代码的正确性，书中的每个程序必须能自动提取，和编译在一个合适的构建系统。这本书的构建系统是gradle，你安装jdk后， 简单的gradlew compilejava，来编译整本书的所有代码。。。。<br>JUnit<br>最初的junit发布于2000年，基于java1.0，没用到java反射机制，所以写单元测试是一个很麻烦和啰嗦的活动。我发现了设计的缺陷，写了自己的单元测试框架，这个框架走向了另一个极端，“尝试可能可行的最简单的方法”。自此Junit使用发射和注解提升了很多。最新版本添加了lambda的支持，在junit5中。<br>在最简单的junit使用中，每个方法代表一个测试，使用@Test注解。Junit确定这些方法为分立的测试，设定和运行一次只有一个，采取措施避免测试间的副作用。</p>
+<p>覆盖率的错觉<br>测试覆盖率，或者叫代码覆盖率。更改的百分比，更好测试覆盖率。很多方法去计算覆盖率，一个有用的文章描述是java code coverage tools<br>太容易决定100%覆盖率是可接受的值。数值不太是测试有效性的一个好的测量值。你可能测试了所有，只有65%的覆盖率。为了100%你可能要浪费很多时间保证其他。<br>测试覆盖率是一个初略的数据是有效的，当你分析一个未知的代码。如果测试工具报告很低的数值，比如40%，告诉你覆盖率可能是无效。然后一个非常高数值也是可疑的，可能是一个知识不足的人下团队决定。<br>最好的覆盖率工具是发现未测试的代码库。但不依赖它告诉你测试的质量。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/架构/">架构</a><a href="/tags/单元测试/">单元测试</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/22/arts_2019-12-22-tip/" title="spring项目单元测试初探1" itemprop="url">spring项目单元测试初探1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T05:44:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>之前在hcrm就专门花了很多时间去看如何写单元测试，但当时想通过他解决所有问题，直接保证质量。但单元测试并不能完全解决问题，可以解决一部分问题，而且受限于当时的场景，发现单元测试不解决不了太多问题，就没实际尝试。时隔3-4年又重新拿起来这个问题，但场景变了，环境变了，一些又那么理所当然，正好有人写了单元测试，我就趁机入门一下，发现原来也不难。</p>
+<p>项目使用的是spring cloud这套东西，但首先要先弄清楚什么是单元测试，什么是集成测试，什么是端到端测试。单元测试应该不依赖其他系统，自己就可以快速的执行，马上得到结果。如果与数据库关联，与其他系统关联就是集成测试，需要准备其他的环境。第一个条件是定义，那第二个条件就是弄清楚项目的情况，比如我的项目都是spring boot的，那spring 的依赖注入如何解决，servlet容器如何解决，这是第二步看关联。<br>比如我之前就很迷惑，Aservice里注入Bservice，Bservice注入Cservice，Cservice里注入Dservice，那我要使用Aservice，要不断new B、C、Dservice这个好麻烦，如果有一些不熟悉的复杂的service那就头大了。一种方式就是将整个spring容器启动起来，这样就是所有bean都有，直接取注入或者取都行，但这样就不算单元测试了，启动容器要加载所有bean，可能会很慢，而且很多我并不需要，之前就是卡在这里没过去。最近看了别人写的代码，发现通过代理的方式很好的实现了，先将要代理的对象注入，启动的时候自动代理这些对象，将要执行的方法的返回值，提前输入，等到触发代理条件，自动返回，这样就不用去实际创建这些对象，理解了这个用途，突然觉得代理强大，这个地方用的恰如其分。</p>
+<p>然后我写了一些业务代码，去stub这些service也有些烦，mockito不支持私有方法stub，需要找到公开的方法一点带你的mock，这点有点烦，也许是我用法不对，而且一些看起来很简单的判断逻辑要想每种条件都测试，也是很麻烦的事情。<br>这次算是单元测试入门，什么事情都是入门难，先快速入门，其他都好办了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/单元测试/">单元测试</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/22/arts-2019-12-22-share/" title="知骗才能防骗" itemprop="url">知骗才能防骗</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-22T05:42:00.000Z" itemprop="datePublished"> Published 2019-12-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>今天从地铁里听到一句话开始，地铁里的安全防范教育中的一句话，引起了我的注意，当时的情景是宾馆里一个妇女给前台递上一个字条求助报警，后面一个好心人发现这是一个骗局，警察到了也一下就醒悟的，原来是这样。然后节目点题，知骗才能防骗。</p>
+<p>这让我回想中，确实是这样， 如果一点概念都没有很容易陷入骗子的陷阱，这些陷阱都是利用人性的弱点，所以你没有防备就会入坑。但你如果有个意识，哪里不太对，这样就很大概率不会受骗。这一点跟犯错有点像，比如芒格就收集别人的错误，好让自己不犯大错误。我觉得这个也可以说成知错才能防错，放在任何事情上好像都合理，你只有了解它才能会使用它。<br>对于领会了这个道理，你要怎么在日常去做呢？<br>1.去关注一些教人防骗的公众号和微博，比如警察的微博，但不是推送，要我有时间才去看，比如rss方式<br>2.收集人犯错的方式，比如批判性思维里就有总结，平常把这些犯错归总，自己犯的，别人犯的，都要去总结，之前看的搞笑新闻也可以去关注，但不能简单的总结，要想明白合理处。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/15/arts-2019-12-15-share/" title="人的认知" itemprop="url">人的认知</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-15T02:31:00.000Z" itemprop="datePublished"> Published 2019-12-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近在看批判性思维，第一遍看有一些收获，但已经记不清了，第二遍看，越发惊奇，原来事实竟然是这样。<br>之前从来没有思考过如何思考，虽然听过笑来老师的元认知，是思考思考的过程，感觉也是对的。也没有实际操作过，很久就忘记。这可能就是我们知道了那么多道理还是过不好一生的原因，很多事情都是停留在虚幻的概念的层次上，没有到实际的生活层面，没有可以操作的地方，所以没有内化，很快就忘了，道路都是对的，但没有知行合一。所以一个道理如果懂了，马上落实到生活中如何去做。然后不断检查，养成习惯。</p>
+<p>人的感知是有屏蔽性的，对于自己认为不对的东西进行屏蔽。这样有一些好处，就是过滤有效信息，防止信息过载。但坏处就是我们要主动去调整这种天生的行为。直觉是千万年形成的，可能与现在的环境不符合，所以要做一些违背直觉的行为，每一次大脑进入默认模式，要提醒自己多审视自己的思考过程。说到这里，我想到了古人每日三省吾身。当时觉得很有道理，但这都是古人的事，我天生就比你们强，然后就过去了。一个人的思维模式，决定他见到的世界是什么样的。我们经常有这样的感觉，原来这个竟然是这样的，原来我虽然“看到”，但却一点意识都没有。那个东西好像在你的世界里压根没存在过，但当你思维扩展之后，好像生活处处都是。</p>
+<p>人的默认行为被科学不断研究，有一定原因，但不那么符合现在的社会，可能被很多人利用，所以我们要克服直觉，默认行为，多思考我们为什么那么做。一方面要思考自己思考的过程，一方面要思考别人的思考过程，这也是了解世界的一种方式。比如最近我做签名合成单证的逻辑，开始看代码觉得就是一坨屎，这里面逻辑好乱，好像封装了一些方法，但也不那么顺畅。后面跟他一点点的询问，发现他的封装也有他固有的逻辑，在他的逻辑里，那种方式也是很合理的，只是他知道的我不知道，所以我开始不理解，甚至误解。虽然他做的不能算好，但绝不是我开始看的一无是处。我突然眼界开阔了，从原有的思维中成长了。不能有拒绝的态度，拒绝得知别人的思考，注定缩小你的视野，看不到一些事实。</p>
+<p>以事实为基础，《原则》中的精准事实，最近也听到好多人这么说，想要获得事实也不那么容易，人的感知会蒙蔽你获得事实的途径。要不断反思。<br>以后每天反思一个自己的思考行为看是否合理。每天记录反思日记。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/12/15/arts-2019-12-15-tip/" title="spring mvc全局异常处理源码分析1" itemprop="url">spring mvc全局异常处理源码分析1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-12-15T02:29:00.000Z" itemprop="datePublished"> Published 2019-12-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>第一遍看源码分析流程</p>
+<p>入口时dispatchServlet的doDispatch方法，processDispatchResult是请求结束的统一处理，不管是不是异常。<br>如果传入exception是不是空，说明发生了异常，判断是不是网页的异常。调用processHandlerException处理异常。</p>
+<p>其中有一个handlerExceptionResolvers数组，是initStrategies方法在dodispatch初始化的时候初始化的。<br>找到可以处理这个异常的HandlerExceptionResolver，调用resolveException方法去处理异常，<br>首先shouldApplyTo方法，resolver是不是支持这个handler，如果支持调用doResolveException，然后调用doResolveHandlerMethodException<br>getExceptionHandlerMethod获取具体的调用方法，然后invokeAndHandle去实际调用异常处理方法。</p>
+<p>只能说过了一个大致的流程，不能说完全懂了，里面很多细节还不清楚，我准备看一遍文档，梳理一下mvc的大致组件结构来再过一遍，看看会不会更清晰。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/spring-mvc/">spring mvc</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/11/24/arts-2019-11-24-algorithm/" title="67. 二进制求和" itemprop="url">67. 二进制求和</a>
   </h1>
   <p class="article-author">By
@@ -385,312 +696,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/09/07/arts-2019-09-08-tip/" title="《深入理解计算机系统》7" itemprop="url">《深入理解计算机系统》7</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-09-07T07:57:00.000Z" itemprop="datePublished"> Published 2019-09-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="第2章-信息的表示和处理"><a href="#第2章-信息的表示和处理" class="headerlink" title="第2章 信息的表示和处理"></a>第2章 信息的表示和处理</h2><p>这周完成一遍阅读，但很多地方不懂，原来有些底子，但书中很多东西与原来的学习的不太一样，将了很多数学原理的部分。<br>信息的存储<br>讲解十六进制的表示法，寻址与字节顺序，怎么表示字符串，代码与布尔代数，同时介绍位级运算，逻辑运算和移位运算。<br>整数的表示<br>整形数据类型，无符号数的编码，补码编码，有符号和无符号的转换，扩展一个数字的位表示，截断数字<br>整数运算<br>无符号加分，补码加法，补码的非，无符号乘法，补码乘法，乘以常数，除以2的幂<br>浮点数<br>二进制的小数，IEEE浮点表示，数字示例，舍入，浮点运算，<br>可能会有第二遍阅读，虽然还有很多数学原理部分不懂，但原来有些底子，如果后面用到，再重新读一遍。</p>
-<p>这一章讲的信息是如何在计算机上表示的，2进制与16进制的转换，整数，浮点数，字符串等信息的表示，运算方法</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/09/01/arts-2019-09-01-share/" title="开发感悟" itemprop="url">开发感悟</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-09-01T08:57:00.000Z" itemprop="datePublished"> Published 2019-09-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近基于jhipster脚手架开发spring cloud的项目，突然感觉软件工程真的是很复杂的东西，从上倒下都要了解一点，如果那部分一点不懂，出了问题就不能搞定，要花很多时间试错，无法思考解决方法，只能简单的试错，这次就是gradle拉包有问题，有一个同事搞了一个星期，还有些没搞定，看着他一点点从边缘摸索试错，这就是编译工具不了解，导致遇到这部分一点都没法思考，连找问题都不知道怎么找。<br>最近也再思考职业规划，发现真的到了瓶颈了，虽然也有很多东西可以继续学习，但如果再找不到真正缺失的东西，会再多也不能突破瓶颈，原来以为自己已经不错了，框架上的东西自己也能做，但这么长时间看来，还是井底之蛙了，与那些在大公司起点就很高的人，有着天壤之别。之前以为自己基础好了就可以了，所以一点点开始复习基础，但现实一次次打脸，基础是内功，让你成长很快，走的很深很远，但公司是要生产力，你用时间换钱，工作这么长时间来了还不能干活，很多东西不会用，你都工作这么长时间，也没什么突出项，连常用工具都不会，我还会找你？要看清本质，大公司想要能干活的人太多了，所以才要求基础，起码招来的人更好，后面能走的更远。<br>但从另外一个角度看，不能市面上出了一个新技术你就去学习，那样也是很低效的，新东西层出不穷，你的时间有限，还是要从底层从抽象学起，这样才高效，不会被时间淘汰。即使有了新技术有以前的抽象基础，不会过时，只要对比学习差异就行。现在我太多分布式的基础不会，不说原理不会，连用都没用过，这也是我总结之前失败的原因。<br>要有自己的作品，开源的项目，或者能参与过开源的项目。<br>要知识体系全面，会流行的技术，同时懂得基础。既能干活，又能分析问题。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a><a href="/tags/软件工程/">软件工程</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/09/01/arts-2019-09-01-review/" title="《深入理解计算机系统》7" itemprop="url">《深入理解计算机系统》7</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-09-01T08:55:00.000Z" itemprop="datePublished"> Published 2019-09-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>总结第三章，程序的机器级表示<br>介绍了C语言抽象层下面的机器级结构<br>主要分为几部分，数据分为整数与浮点数，两者分别有不同的寄存器，原理相同<br>以整数介绍为主<br>数据的格式，字节，字，双字，四字<br>然后是访问信息，对于数据的访问与加载，有操作数指示符，寄存器，内存，直接数的表示方法<br>传送指令 mov，压入和弹出栈指令pop，push（这个为后面过程铺垫）<br>接着是算术与逻辑，一元，二元操作，移位等。<br>接着是控制，几个条件判断的寄存器，命令访问条件码，跳转命令jump，2种实现条件分支的方法，一种是条件控制，类似jump，goto，一种是用条件传送，第二种更符合现在处理器高效的风格，因为不需要跳转，局部性原理，效率更高，但只有部分符合条件，不是所有情况都能适用。<br>然后就是控制的实现，一种是do-while，while，for等循环，1个是switch的实现。<br>下一部分是过程，如果寄存器不够或者的方法间互相调用，就会用到过程。主要分为三部分，传递控制，传递数据，和分配和释放内存。<br>使用%rsp栈指针，$rip来指示栈帧的位置，是用call和ret转移控制。<br>下一部分是数组，主要是指针的处理，嵌套数组，定长数组，变长数组<br>然后是异构数据结构，结构struct，联合Union<br>最后一部分是浮点数，与整数原理相通。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/计算机组成/">计算机组成</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/25/arts-2019-08-25-algorithm/" title="12. 整数转罗马数字" itemprop="url">12. 整数转罗马数字</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-25T05:18:00.000Z" itemprop="datePublished"> Published 2019-08-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。<br>字符          数值<br>I             1<br>V             5<br>X             10<br>L             50<br>C             100<br>D             500<br>M             1000<br>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。<br>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：<br>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。<br>示例 1:<br>输入: 3<br>输出: “III”<br>示例 2:<br>输入: 4<br>输出: “IV”<br>示例 3:<br>输入: 9<br>输出: “IX”<br>示例 4:<br>输入: 58<br>输出: “LVIII”<br>解释: L = 50, V = 5, III = 3.<br>示例 5:<br>输入: 1994<br>输出: “MCMXCIV”<br>解释: M = 1000, CM = 900, XC = 90, IV = 4.<br>有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>思路1， 看别人思路<br>将 数字与字母对应存储在数组中，然后要求的数字，依次从最大的开始减，最后就得到结果<br><code>执行用时 :32 ms, 在所有 Java 提交中击败了11.85%的用户
-内存消耗 :42 MB, 在所有 Java 提交中击败了74.61%的用户</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String intToRoman(int num) &#123;</span><br><span class="line">        int[] rome = new int[]&#123;1000,900,500,400,100,90,50,40,10,9,5,4,1&#125;;</span><br><span class="line">        Map&lt;Integer,String&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(1000,&quot;M&quot;);map.put(900,&quot;CM&quot;);map.put(500,&quot;D&quot;);</span><br><span class="line">        map.put(400,&quot;CD&quot;);map.put(100,&quot;C&quot;);map.put(90,&quot;XC&quot;);</span><br><span class="line">        map.put(50,&quot;L&quot;);map.put(40,&quot;XL&quot;);map.put(10,&quot;X&quot;);</span><br><span class="line">        map.put(9,&quot;IX&quot;);map.put(5,&quot;V&quot;);map.put(4,&quot;IV&quot;);map.put(1,&quot;I&quot;);</span><br><span class="line">        int i = 0;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        while(num &gt; 0)&#123;</span><br><span class="line">            if(num &gt;= rome[i])&#123;</span><br><span class="line">                num = num - rome[i];</span><br><span class="line">                sb.append(map.get(rome[i]));</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/字符串/">字符串</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/08/25/arts-2019-08-25-tip/" title="Servlet简单实现" itemprop="url">Servlet简单实现</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-08-25T05:16:00.000Z" itemprop="datePublished"> Published 2019-08-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>servlet简单说就是处理网络请求的接口，java将处理网络请求的过程抽象处理，将复杂的网络处理交给servlet容器，程序员只需要实现接口就能简单的实现处理请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void init(ServletConfig config) throws ServletException;</span><br><span class="line">    public ServletConfig getServletConfig();</span><br><span class="line">    </span><br><span class="line">    public void service(ServletRequest req, ServletResponse res)</span><br><span class="line">   throws ServletException, IOException;</span><br><span class="line">   </span><br><span class="line">    public String getServletInfo();</span><br><span class="line">    </span><br><span class="line">    public void destroy();</span><br></pre></td></tr></table></figure></p>
-<p>一个有5个接口，一个初始化init，一个结束销毁destroy，getServletConfig 获取配置，getServletInfo获取servlet信息，真正处理网络请求的就是service。<br>要实现http请求，可以继承HttpServlet，他是http协议的一个实现，然后覆盖doGet与doPost方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class XmlServlet extends HttpServlet &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException &#123;</span><br><span class="line">        System.out.println(&quot;XmlServlet 在处理 get() 请求....&quot;);</span><br><span class="line">        PrintWriter out = resp.getWriter();</span><br><span class="line">        resp.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">        out.println(&quot;&lt;strong&gt;My Servlet!&lt;/strong&gt;</span><br><span class="line">&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException &#123;</span><br><span class="line">        System.out.println(&quot;MyServlet在处理 post（）请求...&quot;);</span><br><span class="line">        PrintWriter out = resp.getWriter();</span><br><span class="line">        resp.setContentType(&quot;text/html;charaset=utf-8&quot;);</span><br><span class="line">        out.println(&quot;&lt;strong&gt;My Servlet&lt;/strong&gt;</span><br><span class="line">&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>写2个servlet标签，servlet-name相同，一个引入刚才写的class，一个匹配访问地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;xmlServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;servlet.XmlServlet&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line"></span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;xmlServlet&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/xmlservlet&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure></p>
-<p>一个简单的servlet就完成了，然后放入到tomcat对应文件的位置<br>XmlServlet放在tomcat的目录下，webapps/{you apps name}/WEB-INF/classes/{package path} 路径下，web.xml 放在与WEB-INF同级目录内</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/架构/">架构</a><a href="/tags/编程技巧/">编程技巧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
@@ -720,11 +725,11 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>32</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>33</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/人文/" title="人文">人文<sup>43</sup></a></li>
+			<li><a href="/categories/人文/" title="人文">人文<sup>44</sup></a></li>
 		  
 		
 		  
@@ -732,7 +737,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>30</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>31</sup></a></li>
 		  
 		
 		  
@@ -752,7 +757,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>7</sup></a></li>
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>9</sup></a></li>
 		  
 		
 		  
@@ -769,11 +774,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/感悟/" title="感悟">感悟<sup>43</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>44</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>32</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>33</sup></a></li>
 			
 		
 			
@@ -781,7 +786,7 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>20</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>21</sup></a></li>
 			
 		
 			
@@ -793,7 +798,11 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>10</sup></a></li>
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>9</sup></a></li>
 			
 		
 			
@@ -801,19 +810,15 @@
 			
 		
 			
+				<li><a href="/tags/链表/" title="链表">链表<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/纪录片/" title="纪录片">纪录片<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>7</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/电视剧/" title="电视剧">电视剧<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/链表/" title="链表">链表<sup>6</sup></a></li>
 			
 		
 			
@@ -825,10 +830,6 @@
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
@@ -837,7 +838,7 @@
 			
 		
 			
-				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
@@ -845,7 +846,11 @@
 			
 		
 			
-				<li><a href="/tags/二分法/" title="二分法">二分法<sup>2</sup></a></li>
+				<li><a href="/tags/学习方法/" title="学习方法">学习方法<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
 			
 		
 		</ul>
