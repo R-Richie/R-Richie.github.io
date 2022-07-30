@@ -12,7 +12,7 @@
 
     
     <meta name="description" content="之前在hcrm就专门花了很多时间去看如何写单元测试，但当时想通过他解决所有问题，直接保证质量。但单元测试并不能完全解决问题，可以解决一部分问题，而且受限于当时的场景，发现单元测试不解决不了太多问题，就没实际尝试。时隔3-4年又重新拿起来这个问题，但场景变了，环境变了，一些又那么理所当然，正好有人写了单元测试，我就趁机入门一下，发现原来也不难。 项目使用的是spring cloud这套东西，但首先要">
-<meta name="keywords" content="java,编程技巧,单元测试">
+<meta name="keywords" content="编程技巧,java,单元测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring项目单元测试初探1">
 <meta property="og:url" content="http://yoursite.com/2019/12/22/arts_2019-12-22-tip/index.html">
@@ -118,7 +118,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/java/">java</a><a href="/tags/编程技巧/">编程技巧</a><a href="/tags/单元测试/">单元测试</a>
+  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/单元测试/">单元测试</a>
   </div>
 
 </div>
@@ -141,18 +141,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2019/12/22/arts-2019-12-22-review/" title="On java8 学习笔记 validating your code章节">
+ <a href="/2019/12/22/arts-2019-12-22-algorithm/" title="344. 反转字符串">
   <strong>上一篇：</strong><br/>
   <span>
-  On java8 学习笔记 validating your code章节</span>
+  344. 反转字符串</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2019/12/22/arts-2019-12-22-share/"  title="知骗才能防骗">
+<a href="/2019/12/22/arts-2019-12-22-review/"  title="On java8 学习笔记 validating your code章节">
  <strong>下一篇：</strong><br/> 
- <span>知骗才能防骗
+ <span>On java8 学习笔记 validating your code章节
 </span>
 </a>
 </div>
@@ -192,7 +192,7 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>33</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>34</sup></a></li>
 		  
 		
 		  
@@ -204,7 +204,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>31</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>32</sup></a></li>
 		  
 		
 		  
@@ -224,7 +224,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>9</sup></a></li>
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>10</sup></a></li>
 		  
 		
 		  
@@ -245,7 +245,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>33</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>34</sup></a></li>
 			
 		
 			
@@ -253,7 +253,11 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>21</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>22</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>13</sup></a></li>
 			
 		
 			
@@ -265,19 +269,15 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>12</sup></a></li>
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>10</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>9</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/链表/" title="链表">链表<sup>7</sup></a></li>
 			
 		
 			
@@ -289,11 +289,11 @@
 			
 		
 			
-				<li><a href="/tags/数组/" title="数组">数组<sup>5</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+				<li><a href="/tags/数组/" title="数组">数组<sup>5</sup></a></li>
 			
 		
 			
@@ -301,11 +301,11 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -317,7 +317,7 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
 			
 		
 		</ul>

@@ -79,6 +79,194 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/07/30/arts-2022-07-30-tip/" title="模版设计模式" itemprop="url">模版设计模式</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-30T01:28:00.000Z" itemprop="datePublished"> Published 2022-07-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>抽象公共的步骤、算法到公共类，子类可以复用公共的算法，再自己实现需要修改的部分。每个子类可以自定义具体实现，但公共部分应为抽象合理，所以直接复用，拆分整体算法，到具体步骤中，只实现规定步骤。</p>
+<p>这种是用在，算法明显相同的情景，不用每次都关心流程，只关心自己特殊步骤的实现即可，延迟实现到子类。</p>
+<p>基于类继承关系实现，面向对象思想。</p>
+<p>很多时候设计模式记不住，我理解是想反了，我们从设计模式特点反看设计模式，这个设计模式有这些这些特点，我们可以对比，熟记。但我们用的时候，却是从正面去思考，什么场景，什么特点的情景，用这个方式抽象。<br>从不同维度看同一件事情也很重要，是能更多角度了解同一件事情。</p>
+<p>模版模式跟策略模式，有些像。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/设计模式/">设计模式</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/07/30/arts-2022-07-30-algorithm/" title="206. 反转链表" itemprop="url">206. 反转链表</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-30T01:26:00.000Z" itemprop="datePublished"> Published 2022-07-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>题意：反转一个单链表。</p>
+<p>示例: 输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
+<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>思路1 通过虚拟头节点+头插法，便利链表，头插入就是倒序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode() &#123;&#125;</span><br><span class="line"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="line"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode reverseList(ListNode head) &#123;</span><br><span class="line">        if(head == null)&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode sentry = new ListNode(0);</span><br><span class="line">        while(head != null)&#123;</span><br><span class="line">            ListNode oneNode = new ListNode(head.val, sentry.next);</span><br><span class="line">            sentry.next = oneNode;</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return sentry.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>思路2<br>看解题思路，双指针反插法，更节省空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode reverseList(ListNode head) &#123;</span><br><span class="line">        ListNode pre = null;</span><br><span class="line">        ListNode cur = head;</span><br><span class="line">        ListNode temp = null;</span><br><span class="line">        while(cur!= null)&#123;</span><br><span class="line">            temp = cur.next;</span><br><span class="line">            cur.next = pre;</span><br><span class="line">            pre = cur;</span><br><span class="line">            cur = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        return pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/07/30/arts-2022-07-30-review/" title="JUnit5 之 Test Interfaces and Default Methods" itemprop="url">JUnit5 之 Test Interfaces and Default Methods</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-07-30T01:25:00.000Z" itemprop="datePublished"> Published 2022-07-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>JUnit Jupiter 允许 @Test，@RepeatedTest， @ParameterizedTest，@TestTemplate，@TestFactory，@BeforeEach，@AfterEach 在接口上定义default方法。@BeforeAll and @AfterAll也可以定义静态方法在测试接口或接口的默认方法，如果测试接口或测试类被@TestInstance(Lifecycle.PER_CLASS) 注解。</p>
+<p>@ExtendWith 和@Tag 也可以定义在测试接口上，实现类自定继承标签和扩展。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2022/07/23/arts-2022-07-23-review/" title="Junit5 之 Dependency Injection for Constructors and Methods" itemprop="url">Junit5 之 Dependency Injection for Constructors and Methods</a>
   </h1>
   <p class="article-author">By
@@ -205,7 +393,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2022/07/23/arts-2022-07-23-algorithm/" title="59. 707. 设计链表" itemprop="url">59. 707. 设计链表</a>
+      <a href="/2022/07/23/arts-2022-07-23-algorithm/" title="707. 设计链表" itemprop="url">707. 设计链表</a>
   </h1>
   <p class="article-author">By
        
@@ -459,74 +647,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2022/07/16/arts-2022-07-16-review/" title="JUnit5之Assertions，Assumptions" itemprop="url">JUnit5之Assertions，Assumptions</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-07-16T13:22:00.000Z" itemprop="datePublished"> Published 2022-07-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Assertions"><a href="#Assertions" class="headerlink" title="Assertions"></a>Assertions</h1><p>JUnit Jupiter 从Junit4 集成很多断言方法，还有新增一些java 8 lambda使用的。断言在静态方法 org.junit.jupiter.api.Assertions 类下面</p>
-<p>测试用例分为几种情况<br>标准断言</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line"> void standardAssertions() &#123;</span><br><span class="line">     assertEquals(2, calculator.add(1, 1));</span><br><span class="line">     assertEquals(4, calculator.multiply(2, 2),</span><br><span class="line">             &quot;The optional failure message is now the last parameter&quot;);</span><br><span class="line">     assertTrue(&apos;a&apos; &lt; &apos;b&apos;, () -&gt; &quot;Assertion messages can be lazily evaluated -- &quot;</span><br><span class="line">             + &quot;to avoid constructing complex messages unnecessarily.&quot;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>分组断言，所有断言都执行，所有失败一起报告，assertAll<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">void groupedAssertions() &#123;</span><br><span class="line">    // In a grouped assertion all assertions are executed, and all</span><br><span class="line">    // failures will be reported together.</span><br><span class="line">    assertAll(&quot;person&quot;,</span><br><span class="line">        () -&gt; assertEquals(&quot;Jane&quot;, person.getFirstName()),</span><br><span class="line">        () -&gt; assertEquals(&quot;Doe&quot;, person.getLastName())</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>依赖断言，一个断言失败了，子代码被跳过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">void dependentAssertions() &#123;</span><br><span class="line">    // Within a code block, if an assertion fails the</span><br><span class="line">    // subsequent code in the same block will be skipped.</span><br><span class="line">    assertAll(&quot;properties&quot;,</span><br><span class="line">        () -&gt; &#123;</span><br><span class="line">            String firstName = person.getFirstName();</span><br><span class="line">            assertNotNull(firstName);</span><br><span class="line"></span><br><span class="line">            // Executed only if the previous assertion is valid.</span><br><span class="line">            assertAll(&quot;first name&quot;,</span><br><span class="line">                () -&gt; assertTrue(firstName.startsWith(&quot;J&quot;)),</span><br><span class="line">                () -&gt; assertTrue(firstName.endsWith(&quot;e&quot;))</span><br><span class="line">            );</span><br><span class="line">        &#125;,</span><br><span class="line">        () -&gt; &#123;</span><br><span class="line">            // Grouped assertion, so processed independently</span><br><span class="line">            // of results of first name assertions.</span><br><span class="line">            String lastName = person.getLastName();</span><br><span class="line">            assertNotNull(lastName);</span><br><span class="line"></span><br><span class="line">            // Executed only if the previous assertion is valid.</span><br><span class="line">            assertAll(&quot;last name&quot;,</span><br><span class="line">                () -&gt; assertTrue(lastName.startsWith(&quot;D&quot;)),</span><br><span class="line">                () -&gt; assertTrue(lastName.endsWith(&quot;e&quot;))</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>assertThrows 异常断言<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">void exceptionTesting() &#123;</span><br><span class="line">    Exception exception = assertThrows(ArithmeticException.class, () -&gt;</span><br><span class="line">        calculator.divide(1, 0));</span><br><span class="line">    assertEquals(&quot;/ by zero&quot;, exception.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p> 超时断言<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Test</span><br><span class="line">void timeoutNotExceeded() &#123;</span><br><span class="line">    // The following assertion succeeds.</span><br><span class="line">    assertTimeout(ofMinutes(2), () -&gt; &#123;</span><br><span class="line">        // Perform task that takes less than 2 minutes.</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">void timeoutNotExceededWithResult() &#123;</span><br><span class="line">    // The following assertion succeeds, and returns the supplied object.</span><br><span class="line">    String actualResult = assertTimeout(ofMinutes(2), () -&gt; &#123;</span><br><span class="line">        return &quot;a result&quot;;</span><br><span class="line">    &#125;);</span><br><span class="line">    assertEquals(&quot;a result&quot;, actualResult);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">void timeoutNotExceededWithMethod() &#123;</span><br><span class="line">    // The following assertion invokes a method reference and returns an object.</span><br><span class="line">    String actualGreeting = assertTimeout(ofMinutes(2), AssertionsDemo::greeting);</span><br><span class="line">    assertEquals(&quot;Hello, World!&quot;, actualGreeting);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">void timeoutExceeded() &#123;</span><br><span class="line">    // The following assertion fails with an error message similar to:</span><br><span class="line">    // execution exceeded timeout of 10 ms by 91 ms</span><br><span class="line">    assertTimeout(ofMillis(10), () -&gt; &#123;</span><br><span class="line">        // Simulate task that takes more than 10 ms.</span><br><span class="line">        Thread.sleep(100);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">void timeoutExceededWithPreemptiveTermination() &#123;</span><br><span class="line">    // The following assertion fails with an error message similar to:</span><br><span class="line">    // execution timed out after 10 ms</span><br><span class="line">    assertTimeoutPreemptively(ofMillis(10), () -&gt; &#123;</span><br><span class="line">        // Simulate task that takes more than 10 ms.</span><br><span class="line">        new CountDownLatch(1).await();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>assertTimeoutPreemptively() 在不同的线程中计时，如果依赖ThreadLocal可能导致不可预期的副作用。</p>
-<h1 id="Assumptions"><a href="#Assumptions" class="headerlink" title="Assumptions"></a>Assumptions</h1><p>JUnit Jupiter 从Junit4 集成很多断言方法，还有新增一些java 8 lambda使用的。断言在静态方法 org.junit.jupiter.api.Assertions 类下面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class AssumptionsDemo &#123;</span><br><span class="line"></span><br><span class="line">    private final Calculator calculator = new Calculator();</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void testOnlyOnCiServer() &#123;</span><br><span class="line">        assumeTrue(&quot;CI&quot;.equals(System.getenv(&quot;ENV&quot;)));</span><br><span class="line">        // remainder of test</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void testOnlyOnDeveloperWorkstation() &#123;</span><br><span class="line">        assumeTrue(&quot;DEV&quot;.equals(System.getenv(&quot;ENV&quot;)),</span><br><span class="line">            () -&gt; &quot;Aborting test: not on developer workstation&quot;);</span><br><span class="line">        // remainder of test</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void testInAllEnvironments() &#123;</span><br><span class="line">        assumingThat(&quot;CI&quot;.equals(System.getenv(&quot;ENV&quot;)),</span><br><span class="line">            () -&gt; &#123;</span><br><span class="line">                // perform these assertions only on the CI server</span><br><span class="line">                assertEquals(2, calculator.divide(4, 2));</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        // perform these assertions in all environments</span><br><span class="line">        assertEquals(42, calculator.multiply(6, 7));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2022/07/16/arts-2022-07-16-algorithm/" title="59. 203. 移除链表元素" itemprop="url">59. 203. 移除链表元素</a>
   </h1>
   <p class="article-author">By
@@ -588,130 +708,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/07/16/arts-2022-07-16-share/" title="为啥每一个领导都逃不开，加班，人力、流程的问询" itemprop="url">为啥每一个领导都逃不开，加班，人力、流程的问询</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-07-16T13:21:00.000Z" itemprop="datePublished"> Published 2022-07-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>最近新领导开始搞人力检查，看起来多的人力都会被一个个问询。我们只能一个个编对应理由，很无聊。<br>我经历过的几个新领导到来，所谓新官上任三把火，总会弄的你难受。<br>领导来的第一步都是整顿流程，这个也很好理解，我自己也这样，如果下属干的不好，那就给他们设立一个流程，你们不用动脑子，按照我们的流程走就好了。人懒惰的，习惯性少做无用的事情，或省略其他。领导的精力是有限的，最好是能定一套流程， 下属自动完成，我不需要再耗费什么精力去管理，那流程就是最好的东西，完善一次就能节省很多精力，这也是大部分领导到来首先整顿流程。<br>然后就是人力，雇佣你就是要用你的时间换公司的收益，如果能用更少的复出，收获更多的收益，那是最好的，所以这一块，一定要在合理的范围内。<br>最后就是加班，如果没有法律的限制，当然是越剥削你越好了，花更少钱，收获更多的收益，为什么不这么做的呢？<br>每个领导，应该都是比你能力更强，经历更多，为什么都选择这样的方法，一种就是这种方法确实有效。另外一种就是我正受着不公正的待遇，我想偷懒，所以我觉得领导sb。领导看到我，每天清闲不干活，所以想出各种办法，让我加班，觉得我sb。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/07/09/arts-2022-07-09-share/" title="独立开发者的几种可能性" itemprop="url">独立开发者的几种可能性</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-07-09T06:52:00.000Z" itemprop="datePublished"> Published 2022-07-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>到了30岁，发现自己离传统的去大公司往上走，可能性越来越低。留在上海，高额的房价，买了房子一辈子都套牢，以及父母的老去，都感觉自己被工作地点限制，可能未来越来越难。突然想一种能不受空间限制的工作，远离大城市高额的消费，也能有还可以的收入，能照顾老去的家人，不用为了钱一直为别人打工。<br>想到几种可能的方式。<br>一种是外企外包，相对轻松，生活工作平衡，但需要外语水平高。<br>一种就是独立开发者，自己开发东西自己有收入。<br>暂时我还没能力自己创建团队，开发的东西肯定也做不过大公司，只能找一些细分领域，做一些大公司看不上的，支撑不起一个团队的收入，但对一个人足够的收入。<br>跟着别人做，早晚有一天，你会被替代，不管多么不可替代，自己能摸索市场，看准需求，自己能挣钱，而不是负债，你才能不用担心被裁员。<br>独立开发者在中国可能还没有那么好的待遇，所以要先工作着，有着主要收入，再去探索哪种模式，这条路也可能失败，而且也不好走。<br>我搜索到的几种，<br>1.chrome插件开发赚钱<br>2.wordpress插件或主题<br>3.小程序、微信公众号<br>4.自己做网站</p>
-<p>但同时也看到很多悲观论调，广告收入很少，没有流量引入，没有知道要流量就要花钱。相对来说，国外的环境好一点，大家付费的情绪高一点。<br>我昨晚看了一下最常用的idea的插件，也有收费的，而且下载量很高的，一个6美元，100多万的采摘量，但这是最高的，其他的都很少了，付费下载量超过万的不多。<br>我想试试这条路，先从各种插件入手看看，开发一些成熟软件的插件，看试试能不能有一些收入。<br>因为最近想到部门再抓首移质量， 好多人提交代码前，一些基本的运行都不做，提交的代码都编译报错，想能不能本地开发个idea 插件，可以本地方便的执行这些操作，同时还可以开发了规范的检查，提交前先检查，这样提交代码的质量会提高很多。<br>用自己的手艺吃饭，不断增加自己手艺的数量，加大手艺融合碰撞。<br>这条路暂时没看到现成的道路，需要自己探索，更难，但可能竞争者更少。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/人文/">人文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -738,7 +737,7 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>33</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>34</sup></a></li>
 		  
 		
 		  
@@ -750,7 +749,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>31</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>32</sup></a></li>
 		  
 		
 		  
@@ -770,7 +769,7 @@
 		  
 		
 		  
-			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>9</sup></a></li>
+			<li><a href="/categories/英语技术文档/" title="英语技术文档">英语技术文档<sup>10</sup></a></li>
 		  
 		
 		  
@@ -791,7 +790,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>33</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>34</sup></a></li>
 			
 		
 			
@@ -799,7 +798,11 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>21</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>22</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>13</sup></a></li>
 			
 		
 			
@@ -811,19 +814,15 @@
 			
 		
 			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>12</sup></a></li>
+				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>10</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Junit5/" title="Junit5">Junit5<sup>9</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/计算机组成/" title="计算机组成">计算机组成<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/链表/" title="链表">链表<sup>7</sup></a></li>
 			
 		
 			
@@ -835,11 +834,11 @@
 			
 		
 			
-				<li><a href="/tags/数组/" title="数组">数组<sup>5</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
+				<li><a href="/tags/数组/" title="数组">数组<sup>5</sup></a></li>
 			
 		
 			
@@ -847,11 +846,11 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/动态规划/" title="动态规划">动态规划<sup>4</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -863,7 +862,7 @@
 			
 		
 			
-				<li><a href="/tags/vue/" title="vue">vue<sup>2</sup></a></li>
+				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
 			
 		
 		</ul>
