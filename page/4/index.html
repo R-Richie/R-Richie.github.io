@@ -79,6 +79,140 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/06/12/arts-2022-06-12-algorithm/" title="704. 二分查找" itemprop="url">704. 二分查找</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-12T07:25:00.000Z" itemprop="datePublished"> Published 2022-06-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<p>示例 1:<br>输入: nums = [-1,0,3,5,9,12], target = 9<br>输出: 4<br>解释: 9 出现在 nums 中并且下标为 4</p>
+<p>示例 2:<br>输入: nums = [-1,0,3,5,9,12], target = 2<br>输出: -1<br>解释: 2 不存在 nums 中因此返回 -1</p>
+<p>提示：</p>
+<ol>
+<li>你可以假设 nums 中的所有元素是不重复的。</li>
+<li>n 将在 [1, 10000]之间。</li>
+<li>nums 的每个元素都将在 [-9999, 9999]之间。</li>
+</ol>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/multiply-strings" target="_blank" rel="noopener">https://leetcode-cn.com/problems/multiply-strings</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h1 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h1><p>数组，二分法</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>方法1<br>递归二分查找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int search(int[] nums, int target) &#123;</span><br><span class="line">        int begin = 0;</span><br><span class="line">        int end = nums.length - 1;</span><br><span class="line">        if(nums[0] &gt; target || nums[end] &lt; target)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        if(nums[0] == target )&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if(nums[end] == target)&#123;</span><br><span class="line">            return end;</span><br><span class="line">        &#125;</span><br><span class="line">        return binarySearch(0, end, nums, target);</span><br><span class="line">    &#125;</span><br><span class="line">public int binarySearch(int start, int end, int[] nums, int target)&#123;</span><br><span class="line"></span><br><span class="line">    if(nums[start] == target )&#123;</span><br><span class="line">        return nums[start];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    if(nums[end] == target)&#123;</span><br><span class="line">        return nums[end];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    int half = (end - start) / 2 ;</span><br><span class="line">    if(half == 0)&#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    int halfnum = nums[half + start];</span><br><span class="line">    if(halfnum == target)&#123;</span><br><span class="line">        return half + start;</span><br><span class="line">    &#125;else if(halfnum &lt; target)&#123;</span><br><span class="line">        return binarySearch(half + start, end , nums, target);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return binarySearch(start , half + start, nums, target);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路2<br>看了题解，理解了二分法，又重新实现，关键在于边界的选择，开闭，通过理论的分析，比自己写的要很很多。<br>二分法的适用条件，1.没有重复数据，2.有序数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">public int search(int[] nums, int target) &#123;</span><br><span class="line"></span><br><span class="line">    int left = 0;</span><br><span class="line">    int right = nums.length - 1;</span><br><span class="line">    if(nums[0] &gt; target || nums[right]&lt; target)&#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;    </span><br><span class="line">    while(left &lt;= right)&#123;</span><br><span class="line">        int middle = left + (right - left) / 2;</span><br><span class="line">        if(nums[middle] &gt; target)&#123;</span><br><span class="line">            right = middle -1;</span><br><span class="line">        &#125;else if(nums[middle] &lt; target)&#123;</span><br><span class="line">            left = middle + 1;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return middle;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">       return -1;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/二分法/">二分法</a><a href="/tags/数组/">数组</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/06/05/arts-2022-06-05-review/" title="Junit5 之Dynamic Test初探" itemprop="url">Junit5 之Dynamic Test初探</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-06-05T07:24:00.000Z" itemprop="datePublished"> Published 2022-06-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>之前的@Test注解跟之前junit4的差别不大，都是编译期就确定的，运行期不能改变。<br>Junit5添加的Dynamic test就是为了弥补这一不足。Assumptions提供了比较基础的方式提供的动态行为。</p>
+<p>Junit Jupiter引入的全新的编程模型，使用@TestFactory 在运行期生成工厂方法，来实现动态行为。<br>@TestFactory与@Test 比本身不是测试用例，是测试用例的工厂，一个dynamic test是共产的产品。<br>@TestFactory必须返回，一个单独的 DynamicNode 或 一个 Stream, Collection, Iterable, Iterator, 或 DynamicNode 实例数组。<br>DynamicContainer和DynamicTest是DynamicNode的子类。DynamicContainer是一个显示的名字和动态节点的集合。<br>DynamicTest 实例会延迟执行，即使没有明确的用例，也会动态化。是显示名字和Executable组合，Executable是@FunctionalInterface接口可执行lambda表达式。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/英语技术文档/">英语技术文档</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/单元测试/">单元测试</a><a href="/tags/Junit5/">Junit5</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2022/06/05/arts-2022-06-05-share/" title="2022上海新冠疫情解封" itemprop="url">2022上海新冠疫情解封</a>
   </h1>
   <p class="article-author">By
@@ -606,155 +740,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/01/01/arts-2020-01-01-review/" title="Mocks Aren&#39;t Stubs" itemprop="url">Mocks Aren&#39;t Stubs</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2020-01-01T14:30:00.000Z" itemprop="datePublished"> Published 2020-01-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="原文：https-martinfowler-com-articles-mocksArentStubs-html"><a href="#原文：https-martinfowler-com-articles-mocksArentStubs-html" class="headerlink" title="原文：https://martinfowler.com/articles/mocksArentStubs.html"></a>原文：<a href="https://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="noopener">https://martinfowler.com/articles/mocksArentStubs.html</a></h2><p>这篇是Martin Fowler 大神对于单元测试的概念的分析，收获颇多。</p>
-<p>该篇文章解释mock对象如何工作，如何鼓励基于行为的测试，社区如何围绕他们发展出不同风格的测试。</p>
-<p>第一次听说术语“mock object” 是一些年前在极限编程社区，但人们没有很好的描述它，而且经常与stub混淆，差异主要在两方面，一方面是测试结果的教研不同：状态校验和行为校验。另一方面，与测试和设计共同发挥作用的方式截然不同，这里我描述为classical和mockist TDD风格。</p>
-<h2 id="常规测试"><a href="#常规测试" class="headerlink" title="常规测试"></a>常规测试</h2><p>订单包含商品和数量，仓库保存不同的商品和数量，然后用仓库填充订单，2种不同的响应，商品足够填充订单，订单填充，仓库商品减少，商品不足，订单失败，仓库不变。XUnit 测试遵循典型4个阶段顺序，setup，exercise，verify，teardown。例子中订单是测试对象，我使用System Under Test，仓库是一个配合对象。这个风格是状态校验（state verification）</p>
-<h2 id="Mock对象的测试"><a href="#Mock对象的测试" class="headerlink" title="Mock对象的测试"></a>Mock对象的测试</h2><p>setup阶段有些不同，分成2部分，data和expectations<br>关键不同点是我们通过订单的反馈来校验它是否做了对的事情，状态校验通过仓库的状态判断。Mock使用行为校验。</p>
-<h2 id="使用EasyMock"><a href="#使用EasyMock" class="headerlink" title="使用EasyMock"></a>使用EasyMock</h2><p>EasyMock使用 记录/回放 （record/replay）隐喻去设置期望。每一个对象创建一个control和mock对象。可以添加额外的特性，可以调用实际的方法，不用传方法名。</p>
-<h2 id="Mocks与Stubs的不同"><a href="#Mocks与Stubs的不同" class="headerlink" title="Mocks与Stubs的不同"></a>Mocks与Stubs的不同</h2><p>当你专注于一个软件元素时，也就是我们通常的单元测试，做一个单一的单元测试的问题时，我们经常需要其他的单元，因此我们的例子中需要仓库。</p>
-<p>在之前我们展示的2种测试风格中，第一个例子使用真实的仓库对象，第二个使用模拟的仓库对象，使用mocks是一种不适用真实仓库的方法，但还有其他形式不使用真实对象的方法。<br>在讨论这些的时候词汇容易混乱，stub，mock，fake，dummy。这里我们使用Gerard Meszaros的书。Mezaros使用术语Test Double代表任何类型的假装对象，来替换真实对象。<br>Dummy对象是传递，但不会实际使用。通常他们知识填充参数列表。<br>Fake对象实际工作与实现，但通常使用一些捷径，不满足生产（比如内存数据库）<br>Stubs提供一个调用的罐头类回答，通常不回答任何外界的要求。<br>Spies当他们被调用的记录一些信息，一种形式是email服务记录有多少消息发送<br>Mocks编程前给予期望，特定调用的响应。</p>
-<h2 id="差异的选择"><a href="#差异的选择" class="headerlink" title="差异的选择"></a>差异的选择</h2><p>文章中已经讨论了不同：/状态或行为校验 /classic or mockist TDD。选择行为状态 vs 行为呢？<br>第一个是考虑上下文。如果时间简单的配合，没有什么选择。mockist就是mock对象，行为校验。classicist确实需要做选择，但不是特别大，通常是一个个的解决。<br>cache是一个比较难classical的方式去解决，mocj是一个好方式。</p>
-<h2 id="Driving-TDD"><a href="#Driving-TDD" class="headerlink" title="Driving TDD"></a>Driving TDD</h2><p>Mock对象是从XP社区出来的，而且重点发展TDD是XP的特性原则之一，那里系统设计通过写测试迭代发展。<br>因此不用惊讶mockists，尤其是mockist testing 在设计上的效果的谈论，尤其他们贡献了一个叫need-driven development 的方式。通过这种方式，你通过写一个测试开始你的用户故事，给你的SUT制定一些接口，通过合作者的一些期望，你开放SUT与关联对象的关系-有效设计SUT的关联接口。</p>
-<p>一旦你有了一个测试在运行，在mocks对象上的期望提供下一步的规范和测试的起点。你一个添加测试上的期望在合作者上，然后重复过程在SUT上，这种方式在分层系统中工作得很好。你第一步写UImock，然后写耕更低层次的测试用例，逐渐写每一层，这是一种结构化和可控的。很多人相信对于新的面相对象和TDD新人是有帮助的。</p>
-<p>Classic TDD没有提供这种指导，你可以做相似的步骤，使用stub方法替代mocks。当你需要合作者的时候，你写死代码来响应SUT的工作。</p>
-<p>但是classic TDD可以做另外的事情，一种通常的风格是middle-out。在这种风格，你做一个特性，决定你需要在domain中。<br>我应该强调mockists和classicists做了同一件事情，有这么一个学校教大家，一层层去构建系统，不是开始一层指导另外一层完成。classicist和mockist都趋向于敏捷背景和更容易获得的迭代循环，结果他们逐个特性地工作而不是逐层工作。</p>
-<h2 id="夹具设置"><a href="#夹具设置" class="headerlink" title="夹具设置"></a>夹具设置</h2><p>Classic TDD 你需要创建的不仅仅是SUT，同时也要创建所有的合作者来响应SUT测试，测试通常会调用一大堆合作对象，通常这些对象每次测试被创建和销毁。<br>Mockistest只要创建SUT和模拟相关的邻居，者可以避免创建复杂的夹具。<br>实际中，classic测试者趋向于重用复杂的夹具。最简单的方式是将夹具放在xUnit setup方法中，更复杂的夹具，几个测试类都需要用的，需要生成类，我通常称他们是Object Mother<br>结果我听到双方都控诉对方做了太多的工作，mockists说创建夹具做了太多的努力，但classicist说这个可以重用，但你不得不每次都创建mocks。</p>
-<h2 id="测试隔离"><a href="#测试隔离" class="headerlink" title="测试隔离"></a>测试隔离</h2><p>如果你通过mockist测试引入一个bug，它通常只引起SUT包含bug的失败。通过classic的方式，很多相关的可能都失败，如果一个重用的对象，那会导致很多的失败。<br>Mockist测试者因为这是一个主要的问题，它导致很多debugging，为了发现错误的根源与修复它。但classicist看起来不是什么问题，因为一般是最后编辑的代码有问题，你很快会发现。</p>
-<p>测试粒度是一个重要的因素。因为classic测试执行多个真实对象，你经常会发现单个测试有一簇对象，很难发现真实bug的源码，测试粒度太粗会发生。<br>本质上xunit测试不仅仅是单元测试，也包括最小化的集成测试。</p>
-<h2 id="实现与测试耦合"><a href="#实现与测试耦合" class="headerlink" title="实现与测试耦合"></a>实现与测试耦合</h2><p>当你写mockist测试，你需要调用SUT，确保它提供的正确的，classic测试只关心最终状态，不关心状态如何传递，Mockist测试更多与实现耦合，改变合作方法会导致mockist测试损坏。<br>这些耦合导致一些关注，最重要的是对TDD的影响。mockist测试，书写测试要确保实现的行为，相反mockist测试者把这个看成优点。Classicists，认为只关心外部的接口，留下所有实现关联直到测试写完。</p>
-<h2 id="设计方式"><a href="#设计方式" class="headerlink" title="设计方式"></a>设计方式</h2><p>这些测试方式最让我着迷的方面是他们如何影响设计决定。<br>我已经提到一些不同层面的踪迹。Mockist测试者支持从外到内的实现，classic测试更倾向于domain model的方法。</p>
-<h2 id="该选择classicist或mockist-，我发现这是一个难回答的问题。"><a href="#该选择classicist或mockist-，我发现这是一个难回答的问题。" class="headerlink" title="该选择classicist或mockist ，我发现这是一个难回答的问题。"></a>该选择classicist或mockist ，我发现这是一个难回答的问题。</h2>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/架构/">架构</a><a href="/tags/单元测试/">单元测试</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2020/01/01/arts-2020-01-01-tip/" title="java动态代理" itemprop="url">java动态代理</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2020-01-01T08:42:00.000Z" itemprop="datePublished"> Published 2020-01-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        InvocationHandler handler = new InvocationHandler() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">                System.out.println(method);</span><br><span class="line">                if (method.getName().equals(&quot;morning&quot;)) &#123;</span><br><span class="line">                    System.out.println(&quot;Good morning, &quot; + args[0]);</span><br><span class="line">                &#125;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Hello hello = (Hello) Proxy.newProxyInstance(</span><br><span class="line">            Hello.class.getClassLoader(), // 传入ClassLoader</span><br><span class="line">            new Class[] &#123; Hello.class &#125;, // 传入要实现的接口</span><br><span class="line">            handler); // 传入处理调用方法的InvocationHandler</span><br><span class="line">        hello.morning(&quot;Bob&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">interface Hello &#123;</span><br><span class="line">    void morning(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在运行期动态创建一个interface实例的方法如下：</p>
-<ol>
-<li>定义一个InvocationHandler实例，它负责实现接口的方法调用；</li>
-<li>通过Proxy.newProxyInstance()创建interface实例，它需要3个参数：<ol>
-<li>使用的ClassLoader，通常就是接口类的ClassLoader；</li>
-<li>需要实现的接口数组，至少需要传入一个接口进去；</li>
-<li>用来处理接口方法调用的InvocationHandler实例。</li>
-</ol>
-</li>
-<li>将返回的Object强制转型为接口。</li>
-</ol>
-<p>本质上运行期创建字节码并加载</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/代理/">代理</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
@@ -784,7 +769,7 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>34</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>35</sup></a></li>
 		  
 		
 		  
@@ -796,7 +781,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>32</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>33</sup></a></li>
 		  
 		
 		  
@@ -837,7 +822,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>34</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>35</sup></a></li>
 			
 		
 			
@@ -845,15 +830,15 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>22</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>13</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>23</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/架构/" title="架构">架构<sup>13</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>13</sup></a></li>
 			
 		
 			
@@ -865,7 +850,7 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>8</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>9</sup></a></li>
 			
 		
 			
@@ -881,15 +866,11 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数组/" title="数组">数组<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
@@ -897,11 +878,11 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -909,7 +890,11 @@
 			
 		
 			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 		</ul>

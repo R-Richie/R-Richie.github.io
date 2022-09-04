@@ -79,6 +79,137 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2022/09/04/arts-2022-09-04-algorithm/" title="19. 删除链表的倒数第 N 个结点" itemprop="url">19. 删除链表的倒数第 N 个结点</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-09-04T09:17:00.000Z" itemprop="datePublished"> Published 2022-09-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</p>
+<p>示例 1：</p>
+<p>输入：head = [1,2,3,4,5], n = 2<br>输出：[1,2,3,5]<br>示例 2：</p>
+<p>输入：head = [1], n = 1<br>输出：[]<br>示例 3：</p>
+<p>输入：head = [1,2], n = 1<br>输出：[1]</p>
+<p>提示：</p>
+<p>链表中结点的数目为 sz<br>1 &lt;= sz &lt;= 30<br>0 &lt;= Node.val &lt;= 100<br>1 &lt;= n &lt;= sz</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list" target="_blank" rel="noopener">https://leetcode.cn/problems/remove-nth-node-from-end-of-list</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>#解题<br>自己没解出来，看了提示，自己解的总是边界做不好<br>虚拟头，快慢指针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode() &#123;&#125;</span><br><span class="line"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="line"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">        ListNode pre = new ListNode(0,head);</span><br><span class="line">        ListNode slow = pre;</span><br><span class="line">        ListNode fast = pre;</span><br><span class="line">        while( n+1 != 0)&#123;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            n--;</span><br><span class="line">        &#125;</span><br><span class="line">        while(fast != null)&#123;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        slow.next = slow.next.next;</span><br><span class="line"></span><br><span class="line">        return pre.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/09/04/arts-2022-09-04-tip/" title="设计模式之解释器、状态、观察者" itemprop="url">设计模式之解释器、状态、观察者</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2022-09-04T09:15:00.000Z" itemprop="datePublished"> Published 2022-09-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>解释器模式（interpreter）<br>对象行为模式<br>给定一种语言，定义一种文法，定义一个解释器，解析语句。<br>复杂的语法容易不好维护。</p>
+<p>状态模式（status）<br>对象行为模式<br>改变对象的状态就会改变它的行为。<br>对象的状态影响它的行为，多个分支条件判断</p>
+<p>观察者模式（Observer）<br>对象行为模式<br>当多个对象依赖一个对象，被依赖对象更新，会通知所有依赖对象。<br>被观察者更新，通过所有观察者。<br>会有推、拉模型，推可能观察者的状态失效，拉可能调用过多<br>解耦被观察者，和观察者。</p>
+<p>解释器模式不太常用，观察者很常见，但实现起来不简单。状态也很常见，实现也不易。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/后端/">后端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/设计模式/">设计模式</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2022/07/30/arts-2022-07-30-tip/" title="模版设计模式" itemprop="url">模版设计模式</a>
   </h1>
   <p class="article-author">By
@@ -579,135 +710,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/07/16/arts-2022-07-16-tip/" title="模版方式，书写第一个idea插件" itemprop="url">模版方式，书写第一个idea插件</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-07-16T13:24:00.000Z" itemprop="datePublished"> Published 2022-07-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>使用idea的模版项目，<a href="https://github.com/JetBrains/intellij-platform-plugin-template" target="_blank" rel="noopener">模版项目</a>，use this template，clone到自己的仓库中，会生成一个干净的模版，默认使用kotlin生成的，src.main.kotlin 是kotlin代码，如果要使用java，要src.main.javam目录。<br>模版项目重要是plugin.xml,里面可以定义applicationService 实现类，projectService实现类和applicationListeners实现类。<br>用默认kotlin看起来都是好的，切换到java，弹出框不太行，找了一圈也没找到原因。放弃了。</p>
-<p>本来想是不是学学kotlin更好写，发现例子都是java的，还是java吧，理解插件机制，晚点再学习新语法。都一起学很慢。</p>
-<p>本来想一个周末搞出来了大概，但我自信了，不会的东西还是很多的。今年junt5是重点，而且经过反复查看，感觉已经快了，继续专攻一处，这个写插件急不得。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/java/">java</a><a href="/tags/插件/">插件</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2022/07/16/arts-2022-07-16-algorithm/" title="59. 203. 移除链表元素" itemprop="url">59. 203. 移除链表元素</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2022-07-16T13:22:00.000Z" itemprop="datePublished"> Published 2022-07-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点 。</p>
-<p>输入：head = [1,2,6,3,4,5,6], val = 6<br>输出：[1,2,3,4,5]<br>示例 2：</p>
-<p>输入：head = [], val = 1<br>输出：[]<br>示例 3：</p>
-<p>输入：head = [7,7,7,7], val = 7<br>输出：[]</p>
-<p>提示：</p>
-<p>列表中的节点数目在范围 [0, 104] 内<br>1 &lt;= Node.val &lt;= 50<br>0 &lt;= val &lt;= 50</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/remove-linked-list-elements" target="_blank" rel="noopener">https://leetcode.cn/problems/remove-linked-list-elements</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>自己没解出来，想起来虚拟头节点解决头部的处理，但只用一个指针，怎么都没处理明白，最后看解答，2个指针很简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode() &#123;&#125;</span><br><span class="line"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="line"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode removeElements(ListNode head, int val) &#123;</span><br><span class="line">        if(head == null)&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode dummy = new ListNode(-1, head);</span><br><span class="line">        ListNode pre = dummy;</span><br><span class="line">        ListNode cur = head;</span><br><span class="line">        </span><br><span class="line">        while(cur != null)&#123;</span><br><span class="line">            if(cur.val == val)&#123;</span><br><span class="line">                pre.next = cur.next;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                pre = cur;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/链表/">链表</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -737,7 +739,7 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>34</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>35</sup></a></li>
 		  
 		
 		  
@@ -749,7 +751,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>32</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>33</sup></a></li>
 		  
 		
 		  
@@ -790,7 +792,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>34</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>35</sup></a></li>
 			
 		
 			
@@ -798,15 +800,15 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>22</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>13</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>23</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/架构/" title="架构">架构<sup>13</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>13</sup></a></li>
 			
 		
 			
@@ -818,7 +820,7 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>8</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>9</sup></a></li>
 			
 		
 			
@@ -834,15 +836,11 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数组/" title="数组">数组<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
@@ -850,11 +848,11 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -862,7 +860,11 @@
 			
 		
 			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 		</ul>

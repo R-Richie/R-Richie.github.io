@@ -79,6 +79,127 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2019/05/05/arts-2019-05-05-algorithm/" title="克隆图" itemprop="url">克隆图</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-05-05T03:42:07.000Z" itemprop="datePublished"> Published 2019-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定无向连通图中一个节点的引用，返回该图的深拷贝（克隆）。图中的每个节点都包含它的值&nbsp;val（Int） 和其邻居的列表（list[Node]）。<br>示例：<img src="evernotecid://BA9A3242-C386-4E68-A9D1-1193A9AF4350/appyinxiangcom/11402844/ENResource/p911" alt="7b2bfd1590ab9401ab6d2eb6d985b68a.png"><br>输入：{“$id”:”1”,”neighbors”:[{“$id”:”2”,”neighbors”:[{“$ref”:”1”},{“$id”:”3”,”neighbors”:[{“$ref”:”2”},{“$id”:”4”,”neighbors”:[{“$ref”:”3”},{“$ref”:”1”}],”val”:4}],”val”:3}],”val”:2},{“$ref”:”4”}],”val”:1}解释：节点 1 的值是 1，它有两个邻居：节点 2 和 4 。节点 2 的值是 2，它有两个邻居：节点 1 和 3 。节点 3 的值是 3，它有两个邻居：节点 2 和 4 。节点 4 的值是 4，它有两个邻居：节点 1 和 3 。提示：节点数介于 1 到 100 之间。无向图是一个简单图，这意味着图中没有重复的边，也没有自环。由于图是无向的，如果节点&nbsp;p&nbsp;是节点&nbsp;q&nbsp;的邻居，那么节点&nbsp;q&nbsp;也必须是节点&nbsp;p&nbsp;的邻居。必须将给定节点的拷贝作为对克隆图的引用返回。</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>深度遍历+深浅克隆<br>Map用于存放访问过的点，如果访问过直接返回<br>递归遍历neighbors<br>结束条件是，所有节点都访问过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">// Definition for a Node.</span><br><span class="line">class Node &#123;</span><br><span class="line">    public int val;</span><br><span class="line">    public List&lt;Node&gt; neighbors;</span><br><span class="line"></span><br><span class="line">    public Node() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    public Node(int _val,List&lt;Node&gt; _neighbors) &#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        neighbors = _neighbors;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">*/</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public Node cloneGraph(Node node) &#123;</span><br><span class="line">        Map&lt;Integer,Node&gt; map = new HashMap&lt;Integer,Node&gt;();</span><br><span class="line">        return deepClone(node,map);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public Node deepClone(Node node,Map&lt;Integer,Node&gt; map)&#123;</span><br><span class="line">        Node newNode;</span><br><span class="line">        if(map.containsKey(node.val))&#123;</span><br><span class="line">            newNode = map.get(node.val);</span><br><span class="line">            return newNode;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            newNode = new Node(node.val,null);</span><br><span class="line">            map.put(node.val,newNode);</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Node&gt; nei = new ArrayList&lt;Node&gt;();</span><br><span class="line">        if(node.neighbors != null)&#123;</span><br><span class="line">            for(Node n : node.neighbors)&#123;</span><br><span class="line">                nei.add(deepClone(n,map));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        newNode.neighbors = nei;</span><br><span class="line">        return newNode;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a><a href="/tags/图/">图</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/05/05/arts-2019-05-05-share/" title="纪念高中同桌-张迪" itemprop="url">纪念高中同桌-张迪</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
+		
+  <p class="article-time">
+    <time datetime="2019-05-05T02:59:07.000Z" itemprop="datePublished"> Published 2019-05-05</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在我写这篇文章的时候，是五一假期，大部分人还在假期的欢乐中，或者旅游，或者休闲，但你却在跟病魔的斗争中走完人生的最后一段路，你的离去只是时间问题。死亡是每个人都必须面对的，最终的去处，但能无憾的离去，实在不容易。回顾我们一起的岁月，在我的心中，让你继续走下去。<br>    我们相识在高中，沈阳二中。经过了7中，每天不断的重复做卷子，我来到了二中，我记得中考前，我在一次升旗仪式上，默默的对自己说，我要考上二中对国旗发誓。二中在我心中是下午5点放学，学生自由学习素质教育，然后学习成绩很好。可惜到了发现并不是这样。在高二文理分班后，我们到了0913班，即使很久了我们了并不认识，一开始对你印象不是很深，我们属于不同的人，你篮球打的很好，我是一个几乎不运动的，所以也没什么交集。在一次考试分坐后，我们坐在了一起，我们当时学习成绩一般班级30-40名，中下等，在后3排徘徊。你初始不太友善，不太爱搭理人，我也是这样。但熟了之后，发现你是另外的性格，有点黏人，有点纠结。<br>    你给我印象最深的是，每次考试我们会有一些比较难的大题，老师每次讲解完，我一般会主动放弃，因为它太难，而且以我们现在的成绩，即使做不出来也是正常，你会花时间去扣这些难题，不放弃。我当时觉得你傻，有点不知量力，我自以为的我自己很理智。但我其实是畏惧了，退缩了。你是真的坚持，不退缩，遇到困难，迎难直上。回想起来很佩服，最终你的成绩也是比我好很多，去了东北大学，我因为分数低一些去了南京。<br>    还记得一些细节，高中你会在运动后，带洗面奶去洗脸。说来当时我家里算比较穷的，普通的上班族家庭吧，住在39平的房子里。我当时都没怎么用过洗面奶，第一次看到你用，感觉哇，他家好有钱，好不一样，讲究。后面我也跟你学习，买了洗面奶用，虽然东西不贵，但你身上有种很大方的气质，是我缺乏的，我是很吝啬的，不想与别人分享东西，怕别人抢走，你则不同，主动跟别人共享，境界全然不同，起码那个时候觉得你家里还挺有钱的，起码比我家里好多了。<br>    大学，我们联系得不多，每年过年回家，我们几个吃个饭，随便逛逛，大家一样的烦恼，恋爱，工作。你这个时候还经常去东大学习看书，感觉你还是经常学习。<br>    毕业后，我在上海工作，你也工作了。当时住在闵行，交大附近，突然你说要考上海交大的研究生。我想可以呀，这个很难考的，你都工作一年后，再来考能比得过那些一直学习的吗，我是比较消极的。但你用行动证明了自己，你考上了。不知道你经历了怎么样的痛苦，最终你还在我的小出租房里，跟我住了一个星期，你去复试。我估计当时态度不太好，那时的你有些敏感有些纠结，毕竟在人生转折点。就住了一周，你就走了。我以为你回去了，其实你去做宾馆了，后来知道，我真的很不好意思。我总是觉得别人，蛋疼，做决定纠结这纠结那，左右摇摆。我当时还是自以为理智，但如果我是当事人，估计也会这样。慢慢想来，纠结是人生选择的常态。想起大学毕业去面试的时候说过这么一句话，既然选定了这家企业，我就不会纠结。当时还是听到某个文章推荐这么回答。现在想想还真的是不太对，提前去调查，然后确定某家企业是对的，时间是变动的，企业也是会变的，当初的选择，不代表永恒，后面还是会需要不断的选择。我这个人怕与别人保持太近的距离，当别人靠近的时候，我会主动推开。后来你住进来了学校，我继续加班。<br>    时间过得很快，虽然我们都在上海，离得也不远，但很少相见，只见过1-2天，在交大的校园里。我们也是过年回家，偶尔也聊聊，怎么在上海定居，以后能挣多少钱，你总也是表达了对未来的担心，学的专业没什么发展潜力，不能赚大钱，你也考虑后面也快30了，怎么结婚生子，还没有女朋友，这个时候又觉得你家里没有钱，没法直接安排你后面怎么走，我们同样迷茫，我那时比你挣的多一点，但对未来也是没底。后面听说你要进事业单位了，你说先混了户口，你也觉得没什么发展，但起码有个户口，混1-2年，然后再出来。你也说你可能跟家里亲戚去创业等等。<br>    大概2017年底，2018年初，听说你得白血病了，在水滴凑。我是知道你突然回顾你朋友圈，发现你之前好像打篮球受伤了，伤病回家修养，那个时候还没体会到你发生了什么，以为你还是在矫揉造作。过年回家跟你见了一面，你说你化疗，除了全身没毛外，其他还好。你还是那么乐观。过年回去，跟你吃了顿饭，你虽然看病花了很多钱，但你还是那样的气质，抢着跟我花钱。我不知道怎么面对你，你看起来还不错，说自己不想治了，花那么多钱，想出去玩，但不能动治病的钱。我也在想你要是做骨髓移植，起码花百万，你有这么多钱吗？但你没提跟我借钱，你可能也知道我没什么钱吧，但我确实比你收入多。我当时也想给你多少钱的，我比较纠结，你在面临生命危机，我却在为我自己的未来是不是能买房担心，真的很吝啬，很自私，最终我只给3千，微不足道。<br>    2019年4月，朋友突然给我发你接受采访的报道，说你骨髓移植后，又复发了，时间剩余不多了，你放弃治疗，不想让父母生活品质降低，不想走的很低质量，可能一直插着管子，昏迷等，想安静的走，将遗体捐献给医院，希望给治疗这个病做出贡献。在上班途中，我几乎控制不住自己的苦出来，我不敢问你，不知道怎么跟你开口，一切来的太突然，我还不知道你骨髓移植。没想到这么快，最后的希望，骨髓移植也复发了。最后的手段也不见效了，那确实没有办法了。从你刚的病到现在也就1年多，实在太快了。好绝望，虽然知道很多人死于白血病，但没想到身边人经历后，才发现这个是多么的残酷，多么的无力。我更无法想象，他的父母是什么感受，白发人送黑发人。才刚刚研究生毕业，还是这么好的大学，人生应该是刚刚开始，之前很多都是身不由己，工作后其他自己决定后面的生活，就这样结束了不到30岁。翻看你之前的朋友圈，你18年12月份回了一次上海，发了说想不到外滩这么美。突然泪水控制不住，生命如此短暂，在你刚要开始真正的人生就结束了，你还没有女朋友，你还没有孩子……<br>    迟迟不敢联系你，不知道怎么跟你说，不知道说什么。在五一放假的前一天，跟你联系了，你说在老家往沈阳赶，说自己发烧感觉时间不多了，想回去拿点东西，在海边平静的离去。你他娘的太文艺了，即使走的时候也想文艺的走。看到你在海边的照片，那么美，反差让我控制不住情绪。我下楼走到了外面，不想让认识的人看见，我边走边哭，又尽力控制，我想在下班前跟你视频，找了一圈，在电影广场楼下的银行门前有一块可以坐的地方，在那里又哭了一阵。不甘、心酸，我们相处的总总，没有想到会这样，我的朋友不多，对你也是不太好，你是我不多朋友里经常联系的朋友，本就内向的我很难交朋友，我还以为我们还有大把的时间，不用在意现在，但……<br>    我在想要不要回去，很纠结，听你说，见你最后一面是实现我们一些小愿望，我突然就发现，对于见最后一面，真的是对其他的人的愿望的实现，对你来说，已经无所谓了，这个时候其他都不那么重要了，房子、车子、票子，不能带去，能做的是，为这个世界留下点什么，让其他人还能记得自己，这样也许就是生命的延续。人和人确实不一样，有些人死了，会在大家的思想里，不断延续，其实就是鲜活的生命，肉体死了，灵魂永存。<br>    走在大街上，看着其他人继续的日子，突然感觉不那么真实，有些人可能是以后几天，有些却在虚度、打发时间，有些人欢声笑语，有些人却没有希望。死亡是生命的一部分，一个必然的阶段。只是大家觉得自己不会那么快，还有很多时间，人生需要阶段规划，我想让我的人生不那么遗憾，能思前想后，发现想做的都做到了，没有什么遗憾了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/人文/">人文</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/感悟/">感悟</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2019/05/05/arts-2019-05-05-tip/" title="java集合-ArrayBlockingQueue" itemprop="url">java集合-ArrayBlockingQueue</a>
   </h1>
   <p class="article-author">By
@@ -612,134 +733,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/04/19/arts-2019-4-21-tip/" title="java集合-CopyOnWriteArrayList" itemprop="url">java集合-CopyOnWriteArrayList</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-19T01:56:07.000Z" itemprop="datePublished"> Published 2019-04-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>实现List<e>, RandomAccess, Cloneable, java.io.Serializable 接口</e></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/** The lock protecting all mutators */</span><br><span class="line"> final transient ReentrantLock lock = new ReentrantLock();</span><br><span class="line"></span><br><span class="line"> /** The array, accessed only via getArray/setArray. */</span><br><span class="line"> private transient volatile Object[] array;</span><br></pre></td></tr></table></figure>
-<p>主要的成员变量有2个，一个ReentrantLock，一个是内部存值的数组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Appends the specified element to the end of this list.</span><br><span class="line"> *</span><br><span class="line"> * @param e element to be appended to this list</span><br><span class="line"> * @return &#123;@code true&#125; (as specified by &#123;@link Collection#add&#125;)</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    final ReentrantLock lock = this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        int len = elements.length;</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + 1);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>Add方法，先是前后两个lock与unlock，保证安全性。<br>实现实际上是复制一个原来数组，将新值添加到新数组的最后一位，内部变量指向新的数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">static final class COWIterator&lt;E&gt; implements ListIterator&lt;E&gt; &#123;</span><br><span class="line">    /** Snapshot of the array */</span><br><span class="line">    private final Object[] snapshot;</span><br><span class="line">    /** Index of element to be returned by subsequent call to next.  */</span><br><span class="line">    private int cursor;</span><br><span class="line"></span><br><span class="line">    private COWIterator(Object[] elements, int initialCursor) &#123;</span><br><span class="line">        cursor = initialCursor;</span><br><span class="line">        snapshot = elements;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>内部的遍历，其实是将原来数组进行一个快照，这样即使数组变化了，不影响快照的遍历。</p>
-<p>CopyOnWriteArrayList 的添加元素很消耗资源，因为每次都要新建一个数组，然后复制所有数据，只适用于读远大于写的情况，如果写比较多，性能会很差。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/后端/">后端</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/编程技巧/">编程技巧</a><a href="/tags/java/">java</a><a href="/tags/集合/">集合</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2019/04/14/arts-2019-04-14-review/" title="An introduction to distributed systems 学习笔记2" itemprop="url">An introduction to distributed systems 学习笔记2</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="R_Richie" target="_blank" itemprop="author">R_Richie</a>
-		
-  <p class="article-time">
-    <time datetime="2019-04-14T08:30:07.000Z" itemprop="datePublished"> Published 2019-04-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>原文地址：<a href="https://github.com/aphyr/distsys-class" target="_blank" rel="noopener">https://github.com/aphyr/distsys-class</a></p>
-<p>这周没怎么看，周末临时抱佛脚看了看。<br>还是关注广度，跟其他的分布式介绍对比了一下。一部分是知道为什么会需要分布式，接着两个主要方面就是扩展性和可用性。<br>应该主要3方面，高可用，高性能，高扩展性。<br>理解清楚CAP，从理论上清楚。<br>然后就是具体的每个方面，不同的实际技术。东西很多，但要把握脉络。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/英语原文/">英语原文</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/分布式/">分布式</a><a href="/tags/架构/">架构</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/11/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/">Next<span></span></a>
@@ -769,7 +762,7 @@
 		  
 		
 		  
-			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>34</sup></a></li>
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>35</sup></a></li>
 		  
 		
 		  
@@ -781,7 +774,7 @@
 		  
 		
 		  
-			<li><a href="/categories/后端/" title="后端">后端<sup>32</sup></a></li>
+			<li><a href="/categories/后端/" title="后端">后端<sup>33</sup></a></li>
 		  
 		
 		  
@@ -822,7 +815,7 @@
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>34</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>35</sup></a></li>
 			
 		
 			
@@ -830,15 +823,15 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>22</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>13</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>23</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/架构/" title="架构">架构<sup>13</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/单元测试/" title="单元测试">单元测试<sup>13</sup></a></li>
 			
 		
 			
@@ -850,7 +843,7 @@
 			
 		
 			
-				<li><a href="/tags/链表/" title="链表">链表<sup>8</sup></a></li>
+				<li><a href="/tags/链表/" title="链表">链表<sup>9</sup></a></li>
 			
 		
 			
@@ -866,15 +859,11 @@
 			
 		
 			
-				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数组/" title="数组">数组<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
+				<li><a href="/tags/字符串/" title="字符串">字符串<sup>5</sup></a></li>
 			
 		
 			
@@ -882,11 +871,11 @@
 			
 		
 			
-				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
+				<li><a href="/tags/并发集合/" title="并发集合">并发集合<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+				<li><a href="/tags/集合/" title="集合">集合<sup>4</sup></a></li>
 			
 		
 			
@@ -894,7 +883,11 @@
 			
 		
 			
-				<li><a href="/tags/Trie树/" title="Trie树">Trie树<sup>2</sup></a></li>
+				<li><a href="/tags/历史/" title="历史">历史<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/spring-cloud/" title="spring cloud">spring cloud<sup>2</sup></a></li>
 			
 		
 		</ul>
